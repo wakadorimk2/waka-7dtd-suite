@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+	<!--
+		Waka Body Layer の栄養 CVar ($wakaProtein/Carb/Fat) を
+		CATUI HUD に「閾値ゾーン色帯」型の横バーで表示する。
+
+		デザイン: 0-80 緑（安全域）/ 80-100 赤（過剰閾値域）の固定色帯を背景に置き、
+		         黒 mask で右側を隠して「現在値の量」を可視化する。
+
+		配置: HUDCenterBottomStat の hud rect 内、Stamina bar (520-873) の右、x=880 から縦3本。
+
+		buffWakaCATUIBridge が $wakaProteinInvFill 等 (0.0-1.0) を維持しているので、
+		それを mask の fill 属性に渡し、fillInvert=true で右から塗りつぶし。
+
+		常時更新: 各 rect 内に CATUI_playerCurrentLife dummy label を仕込んで毎秒 dirty 化。
+
+		ローカライズ: ラベルは Localization.txt の xuiWakaCATUIProtein/Carb/Fat key を
+		             {# localization('...')} で動的取得。日本語切替で「タンパク質/炭水化物/脂質」表示。
+	-->
+	<append xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']">
+
+		<rect name="WakaNutrition" pos="870, 12" width="170" height="64">
+
+			<!-- Protein -->
+			<rect name="WakaProtein" pos="0, 0" width="170" height="20" controller="HUDStatBar" tooltip_key="statWakaProtein" visible="{statvisible}">
+				<!-- 生存時間 binding を invisible で仕込んで毎秒 dirty 化、cvar binding を再評価させる -->
+				<label depth="0" pos="0,0" width="1" height="1" font_size="1" color="0,0,0,0" text="{CATUI_playerCurrentLife}" />
+				<label depth="3" pos="0,-3" width="60" height="16" font_size="12" color="220,180,80,255" text="{# localization('xuiWakaCATUIProtein')}" justify="left" style="CATUI.text.outline.black.1px" />
+				<!-- 黒い枠 -->
+				<sprite depth="2" pos="60,-3" width="62" height="14" color="0,0,0,200" type="sliced" />
+				<!-- 0-80 緑帯 (48px) -->
+				<sprite depth="3" pos="61,-4" width="48" height="12" color="80,200,120,225" type="sliced" />
+				<!-- 80-100 赤帯 (12px) -->
+				<sprite depth="3" pos="109,-4" width="12" height="12" color="220,80,80,225" type="sliced" />
+				<!-- 黒 mask (右から InvFill 分塗りつぶし) -->
+				<sprite depth="4" type="filled" pos="61,-4" width="60" height="12" color="0,0,0,255" fill="{cvar($wakaProteinInvFill)}" filldirection="Horizontal" fillInvert="true" />
+				<!-- 数値 -->
+				<label depth="5" pos="124,-3" width="40" height="16" font_size="12" color="[white]" text="{cvar($wakaProtein)}" justify="left" style="CATUI.text.outline.black.1px" />
+			</rect>
+
+			<!-- Carb -->
+			<rect name="WakaCarb" pos="0, -21" width="170" height="20" controller="HUDStatBar" tooltip_key="statWakaCarb" visible="{statvisible}">
+				<label depth="0" pos="0,0" width="1" height="1" font_size="1" color="0,0,0,0" text="{CATUI_playerCurrentLife}" />
+				<label depth="3" pos="0,-3" width="60" height="16" font_size="12" color="180,200,255,255" text="{# localization('xuiWakaCATUICarb')}" justify="left" style="CATUI.text.outline.black.1px" />
+				<sprite depth="2" pos="60,-3" width="62" height="14" color="0,0,0,200" type="sliced" />
+				<sprite depth="3" pos="61,-4" width="48" height="12" color="80,200,120,225" type="sliced" />
+				<sprite depth="3" pos="109,-4" width="12" height="12" color="220,80,80,225" type="sliced" />
+				<sprite depth="4" type="filled" pos="61,-4" width="60" height="12" color="0,0,0,255" fill="{cvar($wakaCarbInvFill)}" filldirection="Horizontal" fillInvert="true" />
+				<label depth="5" pos="124,-3" width="40" height="16" font_size="12" color="[white]" text="{cvar($wakaCarb)}" justify="left" style="CATUI.text.outline.black.1px" />
+			</rect>
+
+			<!-- Fat -->
+			<rect name="WakaFat" pos="0, -42" width="170" height="20" controller="HUDStatBar" tooltip_key="statWakaFat" visible="{statvisible}">
+				<label depth="0" pos="0,0" width="1" height="1" font_size="1" color="0,0,0,0" text="{CATUI_playerCurrentLife}" />
+				<label depth="3" pos="0,-3" width="60" height="16" font_size="12" color="255,210,140,255" text="{# localization('xuiWakaCATUIFat')}" justify="left" style="CATUI.text.outline.black.1px" />
+				<sprite depth="2" pos="60,-3" width="62" height="14" color="0,0,0,200" type="sliced" />
+				<sprite depth="3" pos="61,-4" width="48" height="12" color="80,200,120,225" type="sliced" />
+				<sprite depth="3" pos="109,-4" width="12" height="12" color="220,80,80,225" type="sliced" />
+				<sprite depth="4" type="filled" pos="61,-4" width="60" height="12" color="0,0,0,255" fill="{cvar($wakaFatInvFill)}" filldirection="Horizontal" fillInvert="true" />
+				<label depth="5" pos="124,-3" width="40" height="16" font_size="12" color="[white]" text="{cvar($wakaFat)}" justify="left" style="CATUI.text.outline.black.1px" />
+			</rect>
+
+		</rect>
+
+	</append>
+</configs>

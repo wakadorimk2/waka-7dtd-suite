@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Waka Body Layer v0.2 - food tooltip display
+
+  Adds Protein/Carb/Fat display entries to all consumable items.
+  display_group="groupConsumables" を持つ全 item_display_info に display_entry を追加。
+  items.xml で対応する display_value が無いアイテムには tooltip に表示されない（vanilla動作）。
+-->
+<configs>
+    <!--
+      v0.6: append → insertBefore に変更
+      groupConsumables tooltip の display_entry の先頭に Protein/Carb/Fat を挿入する。
+      append だと末尾配置で、Medical conditions の vitamin 系エントリ群の後ろに来て
+      tooltip overflow で「脂質が見えない」現象が発生していたため、最上段に固定する。
+    -->
+    <insertBefore xpath="/ui_display_info/item_display/item_display_info[@display_group='groupConsumables']/display_entry[1]">
+        <display_entry name="$wakaProtein" title_key="statWakaProtein"/>
+        <display_entry name="$wakaCarb" title_key="statWakaCarb"/>
+        <display_entry name="$wakaFat" title_key="statWakaFat"/>
+    </insertBefore>
+</configs>

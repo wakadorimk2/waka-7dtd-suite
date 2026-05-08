@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZZ_WakaQuestProgression" />
+	<DisplayName value="Waka Quest Progression" />
+	<Description value="Quest progression tuning bundle. (1) POI Scourge Beacon: tier-aware quest derivative (quest_scourge_infestation_t1..t6) with scourge tokens grant on completion. (2) Quest Revamp super/ultra/nightmare: counter +alpha boost on completion (super +1, ultra/nightmare +2) without altering difficulty_tier (preserves trader-tier gating). Requires HarmonyX (0_TFP_Harmony) and POI Scourge. EAC must be off." />
+	<Author value="wakadorimk2" />
+	<Version value="0.3.0" />
+	<Website value="" />
+</xml>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Waka Body Layer v0.5.1 - recipes
+
+  foodWakaMetaCleanse: 過剰CVarをまとめて -25 する解毒/排出系アイテム。
+  chemistry station 製作。素材は雑食系（vita juice + 雑穀 + ハーブ系作物）で
+  「飢餓救済ではなく食べすぎ対策」のニッチ位置。
+-->
+<configs>
+
+    <append xpath="/recipes">
+
+        <recipe name="foodWakaMetaCleanse" count="1" craft_area="chemistryStation"
+                craft_time="30" tags="learnable">
+            <ingredient name="drinkVitaJuice" count="1"/>
+            <ingredient name="foodCropYuccaFruit" count="2"/>
+            <ingredient name="foodHoney" count="1"/>
+            <ingredient name="foodCropPotato" count="1"/>
+        </recipe>
+
+    </append>
+
+</configs>

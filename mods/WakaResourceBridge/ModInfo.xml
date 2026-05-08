@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaResourceBridge" />
+    <DisplayName value="Waka Resource Bridge" />
+    <Description value="Two-way bridge between EFTX weapon resources (WD40/Multitool/Toolset/RepairKits) and vanilla economy. Adds vanilla-ingredient paths for EFTX bottleneck materials, plus resourceResearchData craft/loot supplementation. Gated via craftingRepairTools and craftingWorkstations. Pure XML - EAC safe." />
+    <Author value="wakadorimk2" />
+    <Version value="1.0.0" />
+    <Website value="" />
+</xml>

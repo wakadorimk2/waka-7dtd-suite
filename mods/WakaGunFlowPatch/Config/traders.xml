@@ -1,0 +1,192 @@
+<configs>
+
+	<!-- ================================================================ -->
+	<!-- Define trader_item_groups for IZY orphan guns + EFTX guns.       -->
+	<!-- trader_item_group is a separate namespace from loot's lootgroup, -->
+	<!-- so we must declare these anew here (not reference loot.xml).     -->
+	<!-- Insert before EFTX's own schematic group anchor for ordering.    -->
+	<!-- quality="1,5" is required so vanilla traderstage_template gating -->
+	<!-- (set on each gun item) actually filters by trader stage.         -->
+	<!-- Without quality, items roll quality=0 = always-on fallback row.  -->
+	<!-- ================================================================ -->
+	<insertBefore xpath="//trader_item_group[@name='schematicsModsCommon']">
+
+		<trader_item_group name="WakaGunFlowIZYOrphans">
+			<item name="IZYgunT1ARCabineMASFARifle" quality="1,5"/>
+			<item name="IZYgunT3RifleMagnumLeveractionCarbine44" quality="1,5"/>
+			<item name="IZYgunT3DualPistols45USP45" quality="1,5"/>
+			<item name="IZYgunT5HeavyWeaponAA12AutoShotgun" quality="1,5"/>
+			<item name="IZYgunT5HeavyWeaponSuperEagle44SMG" quality="1,5"/>
+		</trader_item_group>
+
+		<trader_item_group name="WakaEFTXTraderGunsT1">
+			<item name="gunmp18" quality="1,5"/>
+			<item name="gunppsh41" quality="1,5"/>
+			<item name="gunpp9klin" quality="1,5"/>
+			<item name="gunmp5k" quality="1,5"/>
+			<item name="gunmp43" quality="1,5"/>
+			<item name="gunmts255" quality="1,5"/>
+			<item name="gunstechkin" quality="1,5"/>
+			<item name="gunm9a3" quality="1,5"/>
+			<item name="gunm1911" quality="1,5"/>
+			<item name="gunusp45match" quality="1,5"/>
+		</trader_item_group>
+
+		<trader_item_group name="WakaEFTXTraderGunsT2">
+			<item name="guntokarevtt" quality="1,5"/>
+			<item name="gunfiveseven" quality="1,5"/>
+			<item name="gunglock17" quality="1,5"/>
+			<item name="gunp226" quality="1,5"/>
+			<item name="gunadar" quality="1,5"/>
+			<item name="gunak300velociraptor" quality="1,5"/>
+			<item name="gunm700" quality="1,5"/>
+			<item name="gunaks74un" quality="1,5"/>
+			<item name="gunak74n" quality="1,5"/>
+			<item name="gunmosin" quality="1,5"/>
+			<item name="gun9a91" quality="1,5"/>
+			<item name="gunm590" quality="1,5"/>
+			<item name="gunm870" quality="1,5"/>
+			<item name="gunmp133" quality="1,5"/>
+			<item name="gunksg12" quality="1,5"/>
+			<item name="gunsks" quality="1,5"/>
+			<item name="gunakmn" quality="1,5"/>
+			<item name="gunmp5" quality="1,5"/>
+			<item name="gunuzi" quality="1,5"/>
+			<item name="gunpp19vityaz" quality="1,5"/>
+			<item name="gunump45" quality="1,5"/>
+			<item name="gunmxlr" quality="1,5"/>
+			<item name="gunnl545" quality="1,5"/>
+			<item name="guntoz106" quality="1,5"/>
+		</trader_item_group>
+
+		<trader_item_group name="WakaEFTXTraderGunsT3">
+			<item name="gunm45" quality="1,5"/>
+			<item name="gunusp45tac" quality="1,5"/>
+			<item name="gunsr1mp" quality="1,5"/>
+			<item name="gundeserteagle" quality="1,5"/>
+			<item name="gunauga3" quality="1,5"/>
+			<item name="gunm110sass" quality="1,5"/>
+			<item name="gung36kv2" quality="1,5"/>
+			<item name="gunm4a1" quality="1,5"/>
+			<item name="gunm16a4" quality="1,5"/>
+			<item name="gunhoneybadger" quality="1,5"/>
+			<item name="gundvl10" quality="1,5"/>
+			<item name="gunt5000" quality="1,5"/>
+			<item name="gunm16a1" quality="1,5"/>
+			<item name="gunFALsa58dmr" quality="1,5"/>
+			<item name="gunm1aEBR" quality="1,5"/>
+			<item name="gunrfb" quality="1,5"/>
+			<item name="gunFALsa58br" quality="1,5"/>
+			<item name="gunmdr762" quality="1,5"/>
+			<item name="gunsv98" quality="1,5"/>
+			<item name="gunsvt" quality="1,5"/>
+			<item name="gunsvd" quality="1,5"/>
+			<item name="gunak74m" quality="1,5"/>
+			<item name="gunak103" quality="1,5"/>
+			<item name="gunvss" quality="1,5"/>
+			<item name="gunthompson" quality="1,5"/>
+			<item name="gunmp9" quality="1,5"/>
+			<item name="gunuziprosmg" quality="1,5"/>
+			<item name="gunmp5sd" quality="1,5"/>
+			<item name="gunmp7" quality="1,5"/>
+			<item name="gunp90" quality="1,5"/>
+			<item name="gunsr2mveresk" quality="1,5"/>
+			<item name="gunks23" quality="1,5"/>
+			<item name="gunmp153" quality="1,5"/>
+			<item name="gunm3benelli" quality="1,5"/>
+			<item name="gunmk12spr" quality="1,5"/>
+		</trader_item_group>
+
+		<trader_item_group name="WakaEFTXTraderGunsT4">
+			<item name="gunglock18c" quality="1,5"/>
+			<item name="gunmcx" quality="1,5"/>
+			<item name="gunhk416" quality="1,5"/>
+			<item name="gunIWItavorx95" quality="1,5"/>
+			<item name="gunIWIcarmel" quality="1,5"/>
+			<item name="gunsr25" quality="1,5"/>
+			<item name="gunrsass" quality="1,5"/>
+			<item name="gunhkg28" quality="1,5"/>
+			<item name="gunscarh" quality="1,5"/>
+			<item name="gunhk417" quality="1,5"/>
+			<item name="gunash12" quality="1,5"/>
+			<item name="gunrpk16" quality="1,5"/>
+			<item name="gunak12" quality="1,5"/>
+			<item name="gunak107" quality="1,5"/>
+			<item name="gunrpd" quality="1,5"/>
+			<item name="gunak109" quality="1,5"/>
+			<item name="gunrd704" quality="1,5"/>
+			<item name="gunmk47" quality="1,5"/>
+			<item name="gunasval" quality="1,5"/>
+			<item name="gunaxmc" quality="1,5"/>
+			<item name="gunsaiga12" quality="1,5"/>
+			<item name="gunAA12" quality="1,5"/>
+			<item name="gunvector9" quality="1,5"/>
+			<item name="gunstm9" quality="1,5"/>
+			<item name="gunTheAKGuyAK50" quality="1,5"/>
+			<item name="gunmdr556" quality="1,5"/>
+		</trader_item_group>
+
+		<trader_item_group name="WakaEFTXTraderGunsT5">
+			<item name="guntokarevgold" quality="1,5"/>
+			<item name="gunpmalphadog" quality="1,5"/>
+			<item name="gunrsh12" quality="1,5"/>
+			<item name="gunm14sass" quality="1,5"/>
+			<item name="gunmcxspear" quality="1,5"/>
+			<item name="gunfnminimi" quality="1,5"/>
+			<item name="gunm60e6" quality="1,5"/>
+			<item name="gunpkp" quality="1,5"/>
+			<item name="gunswordmk18" quality="1,5"/>
+		</trader_item_group>
+
+	</insertBefore>
+
+	<!-- ================================================================ -->
+	<!-- Route into trader always-stock (Rekt/Jen/Bob/Hugh/Joel = 1,2,6,7,8) -->
+	<!-- ================================================================ -->
+
+	<append xpath="/traders/trader_info[@id='1']/trader_items[1][@count='all']">
+		<item group="WakaGunFlowIZYOrphans" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT1" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT2" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT3" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT4" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT5" count="0,1"/>
+	</append>
+
+	<append xpath="/traders/trader_info[@id='2']/trader_items[1][@count='all']">
+		<item group="WakaGunFlowIZYOrphans" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT1" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT2" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT3" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT4" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT5" count="0,1"/>
+	</append>
+
+	<append xpath="/traders/trader_info[@id='6']/trader_items[1][@count='all']">
+		<item group="WakaGunFlowIZYOrphans" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT1" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT2" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT3" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT4" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT5" count="0,1"/>
+	</append>
+
+	<append xpath="/traders/trader_info[@id='7']/trader_items[1][@count='all']">
+		<item group="WakaGunFlowIZYOrphans" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT1" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT2" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT3" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT4" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT5" count="0,1"/>
+	</append>
+
+	<append xpath="/traders/trader_info[@id='8']/trader_items[1][@count='all']">
+		<item group="WakaGunFlowIZYOrphans" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT1" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT2" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT3" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT4" count="0,1"/>
+		<item group="WakaEFTXTraderGunsT5" count="0,1"/>
+	</append>
+
+</configs>

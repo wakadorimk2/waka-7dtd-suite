@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZ_WakaJpLocPatch" />
+    <DisplayName value="Waka JP Localization Patch" />
+    <Description value="Centralized Japanese localization overrides for all installed mods. Loads last (alphabetical inner folder order) so same Key+File entries override upstream localizations. Pure Localization.txt - EAC safe." />
+    <Author value="wakadorimk2" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Waka Slayer EZS Patch - reward action sequences
+
+  ExtraSlayerChallenges 各 ZS_KillX challenge 用の報酬。50体ずつのキル達成への見合い。
+
+  - 個別: 2500XP + 1 Skill Point（50体狩った報酬として spec 1段成長分）
+  - Master: 10000XP + 5 Skill Point（28系統制覇報酬、attribute 1段昇華）
+-->
+<configs>
+    <append xpath="/gameevents">
+        <action_sequence name="waka_zs_individual_reward">
+            <property name="allow_user_trigger" value="false"/>
+            <property name="action_type" value="Game"/>
+
+            <action class="AddXP">
+                <property name="xp_amount" value="2500"/>
+            </action>
+
+            <action class="AddSkillPoints">
+                <property name="skill_points" value="1"/>
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_master_reward">
+            <property name="allow_user_trigger" value="false"/>
+            <property name="action_type" value="Game"/>
+
+            <action class="AddXP">
+                <property name="xp_amount" value="10000"/>
+            </action>
+
+            <action class="AddSkillPoints">
+                <property name="skill_points" value="5"/>
+            </action>
+        </action_sequence>
+    </append>
+</configs>

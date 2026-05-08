@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+	<!--
+		==========================================================
+		Section A: Durability Overhaul integration for Cre_More
+		==========================================================
+		Cre_More attachments use modCre* / cre_mod* names which fall
+		outside Durability Overhaul's starts-with('mod*') XPath net,
+		so they never get DegradationTags / DegradationMax / ShowQuality
+		out of the box and never break. We wire them up here.
+	-->
+
+	<!-- Flip every Cre attachment effect_group to tiered=true so DO can gate them by broken state. -->
+	<set xpath="/item_modifiers/item_modifier[starts-with(@name, 'modCre') or starts-with(@name, 'cre_mod')]/effect_group[@tiered='false']/@tiered">true</set>
+
+	<!-- Cre weapon/bow mods (excluding magazines, handled separately). -->
+	<append xpath="/item_modifiers/item_modifier[(starts-with(@name, 'modCreGun') or starts-with(@name, 'modCreWeap') or starts-with(@name, 'modCreBow')) and not(contains(@name, 'Magazine'))]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationTags" value="modGunDegradation"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+	<!-- Magazine variants get the magazine tag like vanilla MagazineExtender. -->
+	<append xpath="/item_modifiers/item_modifier[contains(@name, 'modCreGunMagazine')]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationTags" value="modGunDegradation,magazine"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+	<!-- Cre melee mods. -->
+	<append xpath="/item_modifiers/item_modifier[starts-with(@name, 'modCreMelee')]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationTags" value="modMeleeDegradation"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+	<!-- Cre armor plating tracks vanilla modArmorPlating treatment. -->
+	<append xpath="/item_modifiers/item_modifier[starts-with(@name, 'cre_modArmorPlating')]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+
+	<!--
+		==========================================================
+		Section B: Black Wolf style conditional bonuses
+		==========================================================
+		Cre's flat values are already strong, so we don't bump them.
+		Instead we add conditional/situational layers that mirror BW's
+		design (head bonus, long-range bonus, dismember chance, etc.).
+	-->
+
+	<!-- modCreWeapDamage T1-3: headshot bonus damage on top of the flat EntityDamage. -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT1']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".15">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT2']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".3">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT3']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".55">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+	</append>
+
+	<!-- modCreGunRPM T1-3: faster fire rate compounds into less spread per shot. -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT1']/effect_group[1]">
+		<passive_effect name="IncrementalSpreadMultiplier" operation="perc_add" value="-.05"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT2']/effect_group[1]">
+		<passive_effect name="IncrementalSpreadMultiplier" operation="perc_add" value="-.1"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT3']/effect_group[1]">
+		<passive_effect name="IncrementalSpreadMultiplier" operation="perc_add" value="-.2"/>
+	</append>
+
+	<!-- modCreGunReload T1-3: small RoundsPerMinute uplift, like BW MagazineExtender. -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT1']/effect_group[1]">
+		<passive_effect name="RoundsPerMinute" operation="perc_add" value=".05"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT2']/effect_group[1]">
+		<passive_effect name="RoundsPerMinute" operation="perc_add" value=".1"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT3']/effect_group[1]">
+		<passive_effect name="RoundsPerMinute" operation="perc_add" value=".15"/>
+	</append>
+
+	<!-- modCreGunGrip T1-3: also grants WeaponHandling, like BW Bipod/Forgrip. -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group[1]">
+		<passive_effect name="WeaponHandling" operation="perc_add" value=".1"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT2']/effect_group[1]">
+		<passive_effect name="WeaponHandling" operation="perc_add" value=".2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT3']/effect_group[1]">
+		<passive_effect name="WeaponHandling" operation="perc_add" value=".3"/>
+	</append>
+
+	<!-- modCreGunRange T1-3: extra damage at long range (BW BarrelExtender pattern). -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".25">
+			<requirement name="TargetRange" target="other" operation="GTE" value="40"/>
+		</passive_effect>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT2']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".5">
+			<requirement name="TargetRange" target="other" operation="GTE" value="40"/>
+		</passive_effect>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT3']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value="1">
+			<requirement name="TargetRange" target="other" operation="GTE" value="40"/>
+		</passive_effect>
+	</append>
+
+	<!-- modCreGunSniper T1-3: head dismember chance + extra headshot bonus, like BW ScopeLarge. -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".25">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+		<passive_effect name="DismemberChance" operation="base_add" value=".15">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT2']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".5">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+		<passive_effect name="DismemberChance" operation="base_add" value=".3">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT3']/effect_group[1]">
+		<passive_effect name="EntityDamage" operation="perc_add" value=".9">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+		<passive_effect name="DismemberChance" operation="base_add" value=".6">
+			<requirement name="HitLocation" body_parts="Head"/>
+		</passive_effect>
+	</append>
+
+	<!-- modCreMeleeAPM T1-3: faster swings cost less stamina (BW ErgonomicGrip pattern). -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT1']/effect_group[1]">
+		<passive_effect name="StaminaLoss" operation="perc_add" value="-.1" tags="primary,secondary"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT2']/effect_group[1]">
+		<passive_effect name="StaminaLoss" operation="perc_add" value="-.18" tags="primary,secondary"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT3']/effect_group[1]">
+		<passive_effect name="StaminaLoss" operation="perc_add" value="-.28" tags="primary,secondary"/>
+	</append>
+
+	<!-- modCreMeleeBlock T1-3: dismember chance on hit (carries the heavy block forward). -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT1']/effect_group[1]">
+		<passive_effect name="DismemberChance" operation="base_add" value=".05"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT2']/effect_group[1]">
+		<passive_effect name="DismemberChance" operation="base_add" value=".1"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT3']/effect_group[1]">
+		<passive_effect name="DismemberChance" operation="base_add" value=".18"/>
+	</append>
+
+	<!-- cre_modArmorPlating T1-3: BW PlatingBasic pattern - elemental + explosion mitigation. -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT1']/effect_group[1]">
+		<passive_effect name="ElementalDamageResist" operation="base_add" value="3" tags="heat,electrical,radiation,toxic"/>
+		<passive_effect name="ExplosionIncomingDamage" operation="perc_add" value="-.05"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT2']/effect_group[1]">
+		<passive_effect name="ElementalDamageResist" operation="base_add" value="6" tags="heat,electrical,radiation,toxic"/>
+		<passive_effect name="ExplosionIncomingDamage" operation="perc_add" value="-.08"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT3']/effect_group[1]">
+		<passive_effect name="ElementalDamageResist" operation="base_add" value="10" tags="heat,electrical,radiation,toxic"/>
+		<passive_effect name="ExplosionIncomingDamage" operation="perc_add" value="-.12"/>
+	</append>
+
+	<!-- cre_modArmorFittings T1-3: BW ImprovedFittings pattern - movement speed bonuses. -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']/effect_group[1]">
+		<passive_effect name="WalkSpeed" operation="perc_add" value=".02"/>
+		<passive_effect name="RunSpeed" operation="perc_add" value=".02"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT2']/effect_group[1]">
+		<passive_effect name="WalkSpeed" operation="perc_add" value=".04"/>
+		<passive_effect name="RunSpeed" operation="perc_add" value=".04"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT3']/effect_group[1]">
+		<passive_effect name="WalkSpeed" operation="perc_add" value=".06"/>
+		<passive_effect name="RunSpeed" operation="perc_add" value=".06"/>
+	</append>
+
+
+	<!--
+		==========================================================
+		Section C: Black Wolf style rich descriptions
+		==========================================================
+		Cre_More ships only item names (no *Desc keys at all), so the
+		tooltip body is empty above the auto-generated stat list. We
+		add a DescriptionKey per attachment pointing to a localized
+		prose block in our Localization.txt, mirroring how BW writes
+		modGun*BWDesc / modArmor*BWDesc for vanilla attachments.
+	-->
+
+	<!-- modCreWeapDamage T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT1']"><property name="DescriptionKey" value="modCreWeapDamageT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT2']"><property name="DescriptionKey" value="modCreWeapDamageT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT3']"><property name="DescriptionKey" value="modCreWeapDamageT3WakaDesc"/></append>
+
+	<!-- modCreWeapDurab T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDurabT1']"><property name="DescriptionKey" value="modCreWeapDurabT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDurabT2']"><property name="DescriptionKey" value="modCreWeapDurabT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDurabT3']"><property name="DescriptionKey" value="modCreWeapDurabT3WakaDesc"/></append>
+
+	<!-- modCreGunRPM T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT1']"><property name="DescriptionKey" value="modCreGunRPMT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT2']"><property name="DescriptionKey" value="modCreGunRPMT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT3']"><property name="DescriptionKey" value="modCreGunRPMT3WakaDesc"/></append>
+
+	<!-- modCreGunReload T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT1']"><property name="DescriptionKey" value="modCreGunReloadT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT2']"><property name="DescriptionKey" value="modCreGunReloadT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT3']"><property name="DescriptionKey" value="modCreGunReloadT3WakaDesc"/></append>
+
+	<!-- modCreGunMagazine T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunMagazineT1']"><property name="DescriptionKey" value="modCreGunMagazineT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunMagazineT2']"><property name="DescriptionKey" value="modCreGunMagazineT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunMagazineT3']"><property name="DescriptionKey" value="modCreGunMagazineT3WakaDesc"/></append>
+
+	<!-- modCreGunGrip T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']"><property name="DescriptionKey" value="modCreGunGripT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT2']"><property name="DescriptionKey" value="modCreGunGripT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT3']"><property name="DescriptionKey" value="modCreGunGripT3WakaDesc"/></append>
+
+	<!-- modCreGunRange T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']"><property name="DescriptionKey" value="modCreGunRangeT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT2']"><property name="DescriptionKey" value="modCreGunRangeT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT3']"><property name="DescriptionKey" value="modCreGunRangeT3WakaDesc"/></append>
+
+	<!-- modCreGunSniper T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']"><property name="DescriptionKey" value="modCreGunSniperT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT2']"><property name="DescriptionKey" value="modCreGunSniperT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT3']"><property name="DescriptionKey" value="modCreGunSniperT3WakaDesc"/></append>
+
+	<!-- modCreGunOneB T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunOneBT1']"><property name="DescriptionKey" value="modCreGunOneBT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunOneBT2']"><property name="DescriptionKey" value="modCreGunOneBT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunOneBT3']"><property name="DescriptionKey" value="modCreGunOneBT3WakaDesc"/></append>
+
+	<!-- modCreGunShock T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunShockT1']"><property name="DescriptionKey" value="modCreGunShockT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunShockT2']"><property name="DescriptionKey" value="modCreGunShockT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunShockT3']"><property name="DescriptionKey" value="modCreGunShockT3WakaDesc"/></append>
+
+	<!-- modCreGunBlood T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunBloodT1']"><property name="DescriptionKey" value="modCreGunBloodT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunBloodT2']"><property name="DescriptionKey" value="modCreGunBloodT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunBloodT3']"><property name="DescriptionKey" value="modCreGunBloodT3WakaDesc"/></append>
+
+	<!-- modCreBowString T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowStringT1']"><property name="DescriptionKey" value="modCreBowStringT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowStringT2']"><property name="DescriptionKey" value="modCreBowStringT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowStringT3']"><property name="DescriptionKey" value="modCreBowStringT3WakaDesc"/></append>
+
+	<!-- modCreBowPower T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']"><property name="DescriptionKey" value="modCreBowPowerT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT2']"><property name="DescriptionKey" value="modCreBowPowerT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT3']"><property name="DescriptionKey" value="modCreBowPowerT3WakaDesc"/></append>
+
+	<!-- modCreMeleeAPM T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT1']"><property name="DescriptionKey" value="modCreMeleeAPMT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT2']"><property name="DescriptionKey" value="modCreMeleeAPMT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT3']"><property name="DescriptionKey" value="modCreMeleeAPMT3WakaDesc"/></append>
+
+	<!-- modCreMeleeStamina T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeStaminaT1']"><property name="DescriptionKey" value="modCreMeleeStaminaT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeStaminaT2']"><property name="DescriptionKey" value="modCreMeleeStaminaT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeStaminaT3']"><property name="DescriptionKey" value="modCreMeleeStaminaT3WakaDesc"/></append>
+
+	<!-- modCreMeleeRange T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT1']"><property name="DescriptionKey" value="modCreMeleeRangeT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT2']"><property name="DescriptionKey" value="modCreMeleeRangeT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT3']"><property name="DescriptionKey" value="modCreMeleeRangeT3WakaDesc"/></append>
+
+	<!-- modCreMeleeBlock T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT1']"><property name="DescriptionKey" value="modCreMeleeBlockT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT2']"><property name="DescriptionKey" value="modCreMeleeBlockT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT3']"><property name="DescriptionKey" value="modCreMeleeBlockT3WakaDesc"/></append>
+
+	<!-- modCreMeleeFire T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeFireT1']"><property name="DescriptionKey" value="modCreMeleeFireT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeFireT2']"><property name="DescriptionKey" value="modCreMeleeFireT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeFireT3']"><property name="DescriptionKey" value="modCreMeleeFireT3WakaDesc"/></append>
+
+	<!-- modCreMeleeShock T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeShockT1']"><property name="DescriptionKey" value="modCreMeleeShockT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeShockT2']"><property name="DescriptionKey" value="modCreMeleeShockT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeShockT3']"><property name="DescriptionKey" value="modCreMeleeShockT3WakaDesc"/></append>
+
+	<!-- modCreMeleeBreak T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBreakT1']"><property name="DescriptionKey" value="modCreMeleeBreakT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBreakT2']"><property name="DescriptionKey" value="modCreMeleeBreakT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBreakT3']"><property name="DescriptionKey" value="modCreMeleeBreakT3WakaDesc"/></append>
+
+	<!-- cre_modArmorBandolier T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBandolierT1']"><property name="DescriptionKey" value="cre_modArmorBandolierT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBandolierT2']"><property name="DescriptionKey" value="cre_modArmorBandolierT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBandolierT3']"><property name="DescriptionKey" value="cre_modArmorBandolierT3WakaDesc"/></append>
+
+	<!-- cre_modArmorFittings T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']"><property name="DescriptionKey" value="cre_modArmorFittingsT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT2']"><property name="DescriptionKey" value="cre_modArmorFittingsT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT3']"><property name="DescriptionKey" value="cre_modArmorFittingsT3WakaDesc"/></append>
+
+	<!-- cre_modArmorPlating T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT1']"><property name="DescriptionKey" value="cre_modArmorPlatingT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT2']"><property name="DescriptionKey" value="cre_modArmorPlatingT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT3']"><property name="DescriptionKey" value="cre_modArmorPlatingT3WakaDesc"/></append>
+
+	<!-- cre_modArmorGlovesStamina T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesStaminaT1']"><property name="DescriptionKey" value="cre_modArmorGlovesStaminaT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesStaminaT2']"><property name="DescriptionKey" value="cre_modArmorGlovesStaminaT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesStaminaT3']"><property name="DescriptionKey" value="cre_modArmorGlovesStaminaT3WakaDesc"/></append>
+
+	<!-- cre_modArmorGlovesSpeed T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesSpeedT1']"><property name="DescriptionKey" value="cre_modArmorGlovesSpeedT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesSpeedT2']"><property name="DescriptionKey" value="cre_modArmorGlovesSpeedT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesSpeedT3']"><property name="DescriptionKey" value="cre_modArmorGlovesSpeedT3WakaDesc"/></append>
+
+	<!-- cre_modArmorBootsSpeed T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsSpeedT1']"><property name="DescriptionKey" value="cre_modArmorBootsSpeedT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsSpeedT2']"><property name="DescriptionKey" value="cre_modArmorBootsSpeedT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsSpeedT3']"><property name="DescriptionKey" value="cre_modArmorBootsSpeedT3WakaDesc"/></append>
+
+	<!-- cre_modArmorBootsStorage T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsStorageT1']"><property name="DescriptionKey" value="cre_modArmorBootsStorageT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsStorageT2']"><property name="DescriptionKey" value="cre_modArmorBootsStorageT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsStorageT3']"><property name="DescriptionKey" value="cre_modArmorBootsStorageT3WakaDesc"/></append>
+
+	<!-- cre_modArmorHealth T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorHealthT1']"><property name="DescriptionKey" value="cre_modArmorHealthT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorHealthT2']"><property name="DescriptionKey" value="cre_modArmorHealthT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorHealthT3']"><property name="DescriptionKey" value="cre_modArmorHealthT3WakaDesc"/></append>
+
+	<!-- cre_modArmorStamina T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorStaminaT1']"><property name="DescriptionKey" value="cre_modArmorStaminaT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorStaminaT2']"><property name="DescriptionKey" value="cre_modArmorStaminaT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorStaminaT3']"><property name="DescriptionKey" value="cre_modArmorStaminaT3WakaDesc"/></append>
+
+	<!-- cre_modArmorResist T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorResistT1']"><property name="DescriptionKey" value="cre_modArmorResistT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorResistT2']"><property name="DescriptionKey" value="cre_modArmorResistT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorResistT3']"><property name="DescriptionKey" value="cre_modArmorResistT3WakaDesc"/></append>
+
+	<!-- cre_modArmorReflectionShock T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionShockT1']"><property name="DescriptionKey" value="cre_modArmorReflectionShockT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionShockT2']"><property name="DescriptionKey" value="cre_modArmorReflectionShockT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionShockT3']"><property name="DescriptionKey" value="cre_modArmorReflectionShockT3WakaDesc"/></append>
+
+	<!-- cre_modArmorReflectionPunch T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionPunchT1']"><property name="DescriptionKey" value="cre_modArmorReflectionPunchT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionPunchT2']"><property name="DescriptionKey" value="cre_modArmorReflectionPunchT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionPunchT3']"><property name="DescriptionKey" value="cre_modArmorReflectionPunchT3WakaDesc"/></append>
+
+	<!-- cre_modArmorReflectionFire T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionFireT1']"><property name="DescriptionKey" value="cre_modArmorReflectionFireT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionFireT2']"><property name="DescriptionKey" value="cre_modArmorReflectionFireT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionFireT3']"><property name="DescriptionKey" value="cre_modArmorReflectionFireT3WakaDesc"/></append>
+
+	<!-- cre_modArmorAddLoot T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorAddLootT1']"><property name="DescriptionKey" value="cre_modArmorAddLootT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorAddLootT2']"><property name="DescriptionKey" value="cre_modArmorAddLootT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorAddLootT3']"><property name="DescriptionKey" value="cre_modArmorAddLootT3WakaDesc"/></append>
+
+	<!-- cre_modArmorBleedAnimal T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBleedAnimalT1']"><property name="DescriptionKey" value="cre_modArmorBleedAnimalT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBleedAnimalT2']"><property name="DescriptionKey" value="cre_modArmorBleedAnimalT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBleedAnimalT3']"><property name="DescriptionKey" value="cre_modArmorBleedAnimalT3WakaDesc"/></append>
+
+	<!-- cre_modArmorSniper T1-3 -->
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorSniperT1']"><property name="DescriptionKey" value="cre_modArmorSniperT1WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorSniperT2']"><property name="DescriptionKey" value="cre_modArmorSniperT2WakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorSniperT3']"><property name="DescriptionKey" value="cre_modArmorSniperT3WakaDesc"/></append>
+
+</configs>

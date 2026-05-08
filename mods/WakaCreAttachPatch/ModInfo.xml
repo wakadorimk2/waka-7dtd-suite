@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZZ_WakaCreAttachPatch" />
+    <DisplayName value="Waka Cre Attach Patch" />
+    <Description value="Cre_More Weapon/Armor Mods compatibility patch. Wires Cre's modCre*/cre_mod* attachments into Durability Overhaul (DegradationTags, DegradationMax, ShowQuality, tiered effect groups) so they break and require repair like vanilla mods. Adds Black Wolf style conditional bonuses (headshot damage, long-range damage, dismember chance, weapon handling, elemental resist, movement speed) on top of selected high-impact attachments without bumping their flat values. v0.2 adds Black Wolf style rich description text for every Cre attachment (Cre originally shipped names only, no description keys). Pure XML, loads after Cre_More, Durability Overhaul, and Black Wolf's better vanilla attachments." />
+    <Author value="wakadorimk2" />
+    <Version value="0.2.0" />
+    <Website value="" />
+</xml>

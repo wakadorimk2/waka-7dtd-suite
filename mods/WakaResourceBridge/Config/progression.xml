@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+
+<append xpath="//crafting_skill[@name='craftingRepairTools']/effect_group">
+    <!-- core bottleneck -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="5,50"
+                    value="1" tags="waka_rb_wd40"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="15,50"
+                    value="1" tags="waka_rb_multitool"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="25,50"
+                    value="1" tags="waka_rb_toolset"/>
+    <!-- RepairKit bridge -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="10,50"
+                    value="1" tags="waka_rb_repairkit_from_smg"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="10,50"
+                    value="1" tags="waka_rb_repairkit_from_mg"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="12,50"
+                    value="1" tags="waka_rb_smgkit_from_repairkit"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="12,50"
+                    value="1" tags="waka_rb_mgkit_from_repairkit"/>
+    <!-- gun parts fallback -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="30,50"
+                    value="1" tags="waka_rb_smgparts"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="30,50"
+                    value="1" tags="waka_rb_revolverparts"/>
+</append>
+
+<append xpath="//crafting_skill[@name='craftingWorkstations']/effect_group">
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="5,75"
+                    value="1" tags="waka_rb_paper_from_data"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="8,75"
+                    value="1" tags="waka_rb_data_paper"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="20,75"
+                    value="1" tags="waka_rb_data_mech"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="40,75"
+                    value="1" tags="waka_rb_data_elec"/>
+</append>
+
+</configs>

@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ZZZZZ_WakaFoodStatFix - display_value insurance patches (v0.2)
+
+  Why: In the current MO2 mod environment, food tooltips show stats as 0 for
+  any food that does not explicitly declare <display_value> tags. vanilla 2.5
+  normally falls back to reading <triggered_effect ModifyCVar> values for tooltip
+  display, but something in this stack (UI DLL hook or unidentified patch) has
+  disturbed that fallback. Injecting static <display_value> tags is the robust
+  insurance fix: it forces the tooltip to show values unconditionally.
+
+  Scope (v0.2):
+    Section 1 - Medical conditions-altered vanilla foods (8 items)
+                DisplayType rewritten to foodCanCoagulants/foodCoagulants
+    Section 2 - EFTX Food V2 custom foods (38 items)
+                Only triggered_effect, no display_value in source
+    Section 3 - Remaining vanilla foods (~61 items)
+                Confirmed empirically as also showing 0 stats in this environment
+-->
+<configs>
+
+	<!-- ================================================================== -->
+	<!-- Section 1: Medical conditions-altered vanilla foods                -->
+	<!-- ================================================================== -->
+	<append xpath="/items/item[@name='foodCanChili']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="foodHealthAmount" value="7"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanTuna']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="5"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanSalmon']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="foodHealthAmount" value="7"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanMiso']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="$waterAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodFishTacos']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="46"/>
+		<display_value name="foodHealthAmount" value="40"/>
+		<display_value name=".foodStaminaBonusAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodChiliDog']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="53"/>
+		<display_value name="foodHealthAmount" value="30"/>
+		<display_value name=".foodStaminaBonusAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodTunaFishGravyToast']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="90"/>
+		<display_value name="foodHealthAmount" value="45"/>
+		<display_value name=".foodStaminaBonusAdd" value="40"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarGoldenRodTea']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="24"/>
+	</append>
+
+	<!-- ================================================================== -->
+	<!-- Section 2: EFTX Food V2 custom foods                               -->
+	<!-- ================================================================== -->
+	<append xpath="/items/item[@name='foodWheatFlour']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="8"/>
+		<display_value name="foodHealthAmount" value="1"/>
+	</append>
+	<append xpath="/items/item[@name='foodBread']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="10"/>
+		<display_value name=".foodStaminaBonusAdd" value="15"/>
+	</append>
+	<append xpath="/items/item[@name='foodBeefstew']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodBeefstew2']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="50"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodCannedSaira']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCondensedMilk']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="50"/>
+	</append>
+	<append xpath="/items/item[@name='foodHerring']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodIskra']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="100"/>
+		<display_value name="foodHealthAmount" value="2"/>
+	</append>
+	<append xpath="/items/item[@name='foodOatFlakes']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodPeas']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodMarrowPurree']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodMayo']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="50"/>
+	</append>
+	<append xpath="/items/item[@name='foodMRE']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="100"/>
+		<display_value name="foodHealthAmount" value="2"/>
+	</append>
+	<append xpath="/items/item[@name='foodSugar']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodHumpback']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodSprats']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodArmyCracker']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodAlyonka']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodSausage']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="50"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodSlickers']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodBeefJerky']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodInstantNoodles']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodEmeliaCroutons']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodRyeCroutons']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='drinkGreenTea']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="5"/>
+		<display_value name="$waterAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='drinkTarCola']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="5"/>
+		<display_value name="$waterAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='drinkMaxEnergy']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="5"/>
+		<display_value name="$waterAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='drinkRatCola']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="5"/>
+		<display_value name="$waterAmountAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='drinkApplejuice']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="$waterAmountAdd" value="35"/>
+	</append>
+	<append xpath="/items/item[@name='drinkCanisterWithPurifiedWater']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="240"/>
+	</append>
+	<append xpath="/items/item[@name='drinkGrandJuice']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="$waterAmountAdd" value="35"/>
+	</append>
+	<append xpath="/items/item[@name='drinkVitaJuice']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="$waterAmountAdd" value="35"/>
+	</append>
+	<append xpath="/items/item[@name='drinkMilk']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="25"/>
+		<display_value name="$waterAmountAdd" value="25"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='drinkPineappleJuice']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="$waterAmountAdd" value="35"/>
+	</append>
+	<append xpath="/items/item[@name='drinkEWR']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="50"/>
+	</append>
+	<append xpath="/items/item[@name='drinkAquamariFiltered']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="60"/>
+	</append>
+	<append xpath="/items/item[@name='drinkPureMineralWaterBottle']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="90"/>
+	</append>
+	<append xpath="/items/item[@name='drinkKvass']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="60"/>
+	</append>
+
+	<!-- ================================================================== -->
+	<!-- Section 3: Remaining vanilla foods                                 -->
+	<!-- ================================================================== -->
+	<append xpath="/items/item[@name='foodBurntSmoothie']/effect_group[1]">
+		<display_value name="foodHealthAmount" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodOasisSmoothie']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="$waterAmountAdd" value="30"/>
+		<display_value name="foodHealthAmount" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodFrostbiteSmoothie']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="30"/>
+		<display_value name="$waterAmountAdd" value="20"/>
+		<display_value name="foodHealthAmount" value="15"/>
+	</append>
+	<append xpath="/items/item[@name='foodAtomicSmoothie']/effect_group[1]">
+		<display_value name="foodHealthAmount" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodHoney']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="8"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanBeef']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="foodHealthAmount" value="7"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanChicken']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="foodHealthAmount" value="7"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanLamb']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="foodHealthAmount" value="7"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanCatfood']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanDogfood']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanSham']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="foodHealthAmount" value="7"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanPasta']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name="foodHealthAmount" value="7"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanPeas']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="$waterAmountAdd" value="5"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanPears']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="$waterAmountAdd" value="5"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanSoup']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="$waterAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+	</append>
+	<append xpath="/items/item[@name='foodCanStock']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="5"/>
+		<display_value name="$waterAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCornOnTheCob']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodCornBread']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodShamSandwich']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="15"/>
+		<display_value name=".foodStaminaBonusAdd" value="-1"/>
+	</append>
+	<append xpath="/items/item[@name='foodCharredMeat']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodGrilledMeat']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodBoiledMeat']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="$waterAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="15"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodMeatStew']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="50"/>
+		<display_value name="$waterAmountAdd" value="20"/>
+		<display_value name="foodHealthAmount" value="25"/>
+		<display_value name=".foodStaminaBonusAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='foodSteakAndPotato']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="50"/>
+		<display_value name="foodHealthAmount" value="25"/>
+		<display_value name=".foodStaminaBonusAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='foodHoneyGlazedSham']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="98"/>
+		<display_value name="foodHealthAmount" value="49"/>
+		<display_value name=".foodStaminaBonusAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodHoneyBrisket']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="141"/>
+		<display_value name="foodHealthAmount" value="70"/>
+		<display_value name=".foodStaminaBonusAdd" value="40"/>
+	</append>
+	<append xpath="/items/item[@name='foodShamChowder']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="53"/>
+		<display_value name="$waterAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="80"/>
+		<display_value name=".foodStaminaBonusAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodHoboStew']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="64"/>
+		<display_value name="$waterAmountAdd" value="20"/>
+		<display_value name="foodHealthAmount" value="32"/>
+		<display_value name=".foodStaminaBonusAdd" value="30"/>
+	</append>
+	<append xpath="/items/item[@name='foodBakedPotato']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodBlueberryPie']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="45"/>
+		<display_value name="foodHealthAmount" value="22"/>
+		<display_value name=".foodStaminaBonusAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='foodPumpkinPie']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="50"/>
+		<display_value name="foodHealthAmount" value="25"/>
+		<display_value name=".foodStaminaBonusAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='foodPumpkinCheesecake']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="42"/>
+		<display_value name="foodHealthAmount" value="21"/>
+		<display_value name=".foodStaminaBonusAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='foodPumpkinBread']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="12"/>
+		<display_value name="foodHealthAmount" value="6"/>
+		<display_value name=".foodStaminaBonusAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='foodGumboStew']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="112"/>
+		<display_value name="$waterAmountAdd" value="20"/>
+		<display_value name="foodHealthAmount" value="56"/>
+		<display_value name=".foodStaminaBonusAdd" value="40"/>
+	</append>
+	<append xpath="/items/item[@name='foodShepardsPie']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="104"/>
+		<display_value name="foodHealthAmount" value="52"/>
+		<display_value name=".foodStaminaBonusAdd" value="40"/>
+	</append>
+	<append xpath="/items/item[@name='foodSpaghetti']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="122"/>
+		<display_value name="foodHealthAmount" value="61"/>
+		<display_value name=".foodStaminaBonusAdd" value="40"/>
+	</append>
+	<append xpath="/items/item[@name='foodEggBoiled']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="10"/>
+		<display_value name="foodHealthAmount" value="5"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodBaconAndEggs']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="36"/>
+		<display_value name="foodHealthAmount" value="18"/>
+		<display_value name=".foodStaminaBonusAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='foodVegetableStew']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="31"/>
+		<display_value name="$waterAmountAdd" value="20"/>
+		<display_value name="foodHealthAmount" value="15"/>
+		<display_value name=".foodStaminaBonusAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='foodRawMeat']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+		<display_value name=".foodStaminaBonusAdd" value="-1"/>
+	</append>
+	<append xpath="/items/item[@name='foodRottingFlesh']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="1"/>
+		<display_value name=".foodStaminaBonusAdd" value="-1"/>
+	</append>
+	<append xpath="/items/item[@name='foodEgg']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="5"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCornMeal']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropBlueberries']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropCorn']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropGraceCorn']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="3"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropPotato']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropMushrooms']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropMushroomsRadiated']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropYuccaFruit']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="2"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='foodCropPumpkin']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="3"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarRiverWater']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="10"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarBoiledWater']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="20"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarPureMineralWater']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="60"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarYuccaJuice']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="34"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarHoneyTea']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="8"/>
+		<display_value name="$waterAmountAdd" value="24"/>
+		<display_value name="foodHealthAmount" value="3"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarRedTea']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="24"/>
+	</append>
+	<append xpath="/items/item[@name='drinkYuccaJuiceSmoothie']/effect_group[1]">
+		<display_value name="$foodAmountAdd" value="22"/>
+		<display_value name="$waterAmountAdd" value="78"/>
+		<display_value name="foodHealthAmount" value="11"/>
+	</append>
+	<append xpath="/items/item[@name='drinkCanMegaCrush']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="60"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarCoffee']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="24"/>
+	</append>
+	<append xpath="/items/item[@name='drinkJarBlackStrapCoffee']/effect_group[1]">
+		<display_value name="$waterAmountAdd" value="24"/>
+	</append>
+
+</configs>

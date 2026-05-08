@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaBodyLayer" />
+    <DisplayName value="Waka Body Layer" />
+    <Description value="Companion to Medical conditions. Adds Protein, Carb, and Fat nutrition dimensions on top of the existing Vitamin layer. Foods get tagged with three new nutrient values (visible in food tooltips), and persistent imbalance triggers Light/Severe deficit AND excess buffs that reduce stamina, healing, run speed, and cold resistance. perkSlowMetabolism (Iron Gut) Lv3+ slows base decay and softens excess thresholds. perkPhysician Lv3+ halves the injury/infection consumption penalty - so endgame players with both perks can survive sustained combat. v0.5.1: nutrient values halved for finer balance, decay split into baseline + Food-stat-linked components, low-stamina activity adds drain, and a craftable Metabolic Cleanse Tonic flushes overload. Vitamin handling is delegated to Medical conditions. Inspired by Fallout 4 MAIM. Pure XML - EAC safe." />
+    <Author value="wakadorimk2" />
+    <Version value="0.5.1" />
+    <Website value="" />
+</xml>

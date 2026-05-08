@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaSleepWorkstationFreeze" />
+    <DisplayName value="Waka Sleep Workstation Freeze" />
+    <Description value="Backstop for Sleep Overhaul. Detects when world-time advances by an unusually large delta in a single tick (=time skip during sleep) and suppresses workstation burn processing for that tick. Result: campfires, forges, chemistry stations etc. do not burn through their fuel while you sleep. Pure Harmony patch on TileEntityWorkstation, no XML overrides, EAC must be off." />
+    <Author value="wakadorimk2" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

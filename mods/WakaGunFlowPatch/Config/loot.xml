@@ -1,0 +1,252 @@
+<configs>
+
+	<!-- ================================================================ -->
+	<!-- 1. Define Waka lootgroups BEFORE any reference point.            -->
+	<!-- 7DTD loot parser registers lootgroups in document order, so a    -->
+	<!-- group must appear BEFORE any reference to it. Anchoring at      -->
+	<!-- groupWeaponsT0_DeadEye (first weapon-related lootgroup) puts    -->
+	<!-- these ahead of every T0-T5 ref site we use below.                -->
+	<!-- (source: community.thefunpimps.com thread 34487)                 -->
+	<!-- ================================================================ -->
+
+	<insertBefore xpath="//lootgroup[@name='groupWeaponsT0_DeadEye']">
+
+		<!-- T0 starter: hand-picked low-tier firearms (pistols / SMGs /
+		     bolt-actions) so the earliest chests can occasionally drop a
+		     real gun alongside pipe weapons. -->
+		<lootgroup name="WakaStarterGuns" loot_quality_template="QLTemplateT0">
+			<item name="gunm1911"/>
+			<item name="gunusp45match"/>
+			<item name="gunstechkin"/>
+			<item name="gunm9a3"/>
+			<item name="guntokarevtt"/>
+			<item name="gunmp18"/>
+			<item name="gunmp5k"/>
+			<item name="gunppsh41"/>
+			<item name="gunpp9klin"/>
+			<item name="gunmp43"/>
+			<item name="gunmosin"/>
+			<item name="gunm700"/>
+			<item name="gunsks"/>
+			<item name="IZYgunT1ARCabineMASFARifle"/>
+		</lootgroup>
+
+		<lootgroup name="WakaEFTXGunsT1" loot_quality_template="QLTemplateT1">
+			<item name="gunmp18"/>
+			<item name="gunppsh41"/>
+			<item name="gunpp9klin"/>
+			<item name="gunmp5k"/>
+			<item name="gunmp43"/>
+			<item name="gunmts255"/>
+			<item name="gunstechkin"/>
+			<item name="gunm9a3"/>
+			<item name="gunm1911"/>
+			<item name="gunusp45match"/>
+		</lootgroup>
+		<lootgroup name="WakaEFTXGunsT2" loot_quality_template="QLTemplateT2">
+			<item name="guntokarevtt"/>
+			<item name="gunfiveseven"/>
+			<item name="gunglock17"/>
+			<item name="gunp226"/>
+			<item name="gunadar"/>
+			<item name="gunak300velociraptor"/>
+			<item name="gunm700"/>
+			<item name="gunaks74un"/>
+			<item name="gunak74n"/>
+			<item name="gunmosin"/>
+			<item name="gun9a91"/>
+			<item name="gunm590"/>
+			<item name="gunm870"/>
+			<item name="gunmp133"/>
+			<item name="gunksg12"/>
+			<item name="gunsks"/>
+			<item name="gunakmn"/>
+			<item name="gunmp5"/>
+			<item name="gunuzi"/>
+			<item name="gunpp19vityaz"/>
+			<item name="gunump45"/>
+			<item name="gunmxlr"/>
+			<item name="gunnl545"/>
+			<item name="guntoz106"/>
+		</lootgroup>
+		<lootgroup name="WakaEFTXGunsT3" loot_quality_template="QLTemplateT3">
+			<item name="gunm45"/>
+			<item name="gunusp45tac"/>
+			<item name="gunsr1mp"/>
+			<item name="gundeserteagle"/>
+			<item name="gunauga3"/>
+			<item name="gunm110sass"/>
+			<item name="gung36kv2"/>
+			<item name="gunm4a1"/>
+			<item name="gunm16a4"/>
+			<item name="gunhoneybadger"/>
+			<item name="gundvl10"/>
+			<item name="gunt5000"/>
+			<item name="gunm16a1"/>
+			<item name="gunFALsa58dmr"/>
+			<item name="gunm1aEBR"/>
+			<item name="gunrfb"/>
+			<item name="gunFALsa58br"/>
+			<item name="gunmdr762"/>
+			<item name="gunsv98"/>
+			<item name="gunsvt"/>
+			<item name="gunsvd"/>
+			<item name="gunak74m"/>
+			<item name="gunak103"/>
+			<item name="gunvss"/>
+			<item name="gunthompson"/>
+			<item name="gunmp9"/>
+			<item name="gunuziprosmg"/>
+			<item name="gunmp5sd"/>
+			<item name="gunmp7"/>
+			<item name="gunp90"/>
+			<item name="gunsr2mveresk"/>
+			<item name="gunks23"/>
+			<item name="gunmp153"/>
+			<item name="gunm3benelli"/>
+			<item name="gunmk12spr"/>
+		</lootgroup>
+		<lootgroup name="WakaEFTXGunsT4" loot_quality_template="QLTemplateT4">
+			<item name="gunglock18c"/>
+			<item name="gunmcx"/>
+			<item name="gunhk416"/>
+			<item name="gunIWItavorx95"/>
+			<item name="gunIWIcarmel"/>
+			<item name="gunsr25"/>
+			<item name="gunrsass"/>
+			<item name="gunhkg28"/>
+			<item name="gunscarh"/>
+			<item name="gunhk417"/>
+			<item name="gunash12"/>
+			<item name="gunrpk16"/>
+			<item name="gunak12"/>
+			<item name="gunak107"/>
+			<item name="gunrpd"/>
+			<item name="gunak109"/>
+			<item name="gunrd704"/>
+			<item name="gunmk47"/>
+			<item name="gunasval"/>
+			<item name="gunaxmc"/>
+			<item name="gunsaiga12"/>
+			<item name="gunAA12"/>
+			<item name="gunvector9"/>
+			<item name="gunstm9"/>
+			<item name="gunTheAKGuyAK50"/>
+			<item name="gunmdr556"/>
+		</lootgroup>
+		<lootgroup name="WakaEFTXGunsT5" loot_quality_template="QLTemplateT5">
+			<item name="guntokarevgold"/>
+			<item name="gunpmalphadog"/>
+			<item name="gunrsh12"/>
+			<item name="gunm14sass"/>
+			<item name="gunmcxspear"/>
+			<item name="gunfnminimi"/>
+			<item name="gunm60e6"/>
+			<item name="gunpkp"/>
+			<item name="gunswordmk18"/>
+		</lootgroup>
+
+	</insertBefore>
+
+	<!-- ================================================================ -->
+	<!-- 2. T0 starter chests: seed real firearms sparingly alongside    -->
+	<!-- pipe guns so early game has occasional "found treasure" moments. -->
+	<!-- E[EV/chest] ≒ 0.20 × 500 = 100                                  -->
+	<!-- ================================================================ -->
+
+	<append xpath="//lootgroup[@name='groupWeaponsT0_Ranged']">
+		<item group="WakaStarterGuns" loot_prob_template="low"/>
+	</append>
+
+	<!-- ================================================================ -->
+	<!-- 3. T1-T3: general _Ranged + POI quest reward                    -->
+	<!-- T3 は累積経路が多く E[EV] が T4 を超えるため、EFTX T3群のみ     -->
+	<!-- veryLow にダウンシフト。IZY孤立2銃は救済目的なので low維持。     -->
+	<!-- ================================================================ -->
+
+	<append xpath="//lootgroup[@name='groupWeaponsT1_Ranged']">
+		<item name="IZYgunT1ARCabineMASFARifle" loot_prob_template="low"/>
+		<item group="WakaEFTXGunsT1" loot_prob_template="low"/>
+	</append>
+	<append xpath="//lootgroup[@name='groupQuestWeaponsRangedT1']">
+		<item name="IZYgunT1ARCabineMASFARifle" loot_prob_template="low"/>
+		<item group="WakaEFTXGunsT1" loot_prob_template="low"/>
+	</append>
+
+	<append xpath="//lootgroup[@name='groupWeaponsT2_Ranged']">
+		<item group="WakaEFTXGunsT2" loot_prob_template="low"/>
+	</append>
+	<append xpath="//lootgroup[@name='groupQuestWeaponsRangedT2']">
+		<item group="WakaEFTXGunsT2" loot_prob_template="low"/>
+	</append>
+
+	<append xpath="//lootgroup[@name='groupWeaponsT3_Ranged']">
+		<item name="IZYgunT3RifleMagnumLeveractionCarbine44" loot_prob_template="low"/>
+		<item name="IZYgunT3DualPistols45USP45" loot_prob_template="low"/>
+		<item group="WakaEFTXGunsT3" loot_prob_template="veryLow"/>
+	</append>
+	<append xpath="//lootgroup[@name='groupQuestWeaponsRangedT3']">
+		<item name="IZYgunT3RifleMagnumLeveractionCarbine44" loot_prob_template="low"/>
+		<item name="IZYgunT3DualPistols45USP45" loot_prob_template="low"/>
+		<item group="WakaEFTXGunsT3" loot_prob_template="veryLow"/>
+	</append>
+
+	<!-- ================================================================ -->
+	<!-- 3b. T1-T3 POI Boss Chest (Reinforced_Chest_T[N]): direct inject -->
+	<!-- _02 は Weapon OR Armor の二択なので、間接参照(_Ranged経由)だと  -->
+	<!-- 確率が希薄になる。ここに直接追加して湧きを安定させる。         -->
+	<!-- ================================================================ -->
+
+	<append xpath="//lootgroup[@name='groupReinforcedChestT1_02']">
+		<item name="IZYgunT1ARCabineMASFARifle" loot_prob_template="low"/>
+		<item group="WakaEFTXGunsT1" loot_prob_template="low"/>
+	</append>
+	<append xpath="//lootgroup[@name='groupReinforcedChestT2_02']">
+		<item group="WakaEFTXGunsT2" loot_prob_template="low"/>
+	</append>
+	<append xpath="//lootgroup[@name='groupReinforcedChestT3_02']">
+		<item name="IZYgunT3RifleMagnumLeveractionCarbine44" loot_prob_template="low"/>
+		<item name="IZYgunT3DualPistols45USP45" loot_prob_template="low"/>
+		<item group="WakaEFTXGunsT3" loot_prob_template="veryLow"/>
+	</append>
+
+	<!-- ================================================================ -->
+	<!-- 4. T4 HardenedChest: Weapon枠(_04) のみに直接注入 + Bonus(_08)  -->
+	<!-- に薄く補充。旧版は _01〜_09 全部に入れて Ammo/Medical 枠からも  -->
+	<!-- 銃が出る設計ミスがあり、E[EV/chest] が 9000 超えに膨張していた。 -->
+	<!-- 修正後: _04(P≒9%,EV1万) + _08(P≒9.5%,EV1万,count=2) ≒ 1860     -->
+	<!-- ================================================================ -->
+
+	<append xpath="//lootgroup[@name='groupHardenedChestT4_04']">
+		<item group="WakaEFTXGunsT4" loot_prob_template="low"/>
+	</append>
+	<append xpath="//lootgroup[@name='groupHardenedChestT4_08']">
+		<item group="WakaEFTXGunsT4" loot_prob_template="veryLow"/>
+	</append>
+
+	<!-- ================================================================ -->
+	<!-- 5. T5 HardenedChest: Weapon枠(_02 count=2) のみ。                -->
+	<!-- IZY T5 Heavy 2銃 (AA12, SuperEagle) は同じ _02 に name指定で     -->
+	<!-- 直接投入して救済ルートを確保する。                               -->
+	<!-- E[EV/chest] ≒ 2 × 0.091 × 15000 ≒ 2730                         -->
+	<!-- ================================================================ -->
+
+	<append xpath="//lootgroup[@name='groupHardenedChestT5_02']">
+		<item name="IZYgunT5HeavyWeaponAA12AutoShotgun" loot_prob_template="veryLow"/>
+		<item name="IZYgunT5HeavyWeaponSuperEagle44SMG" loot_prob_template="veryLow"/>
+		<item group="WakaEFTXGunsT5" loot_prob_template="low"/>
+	</append>
+
+	<!-- ================================================================ -->
+	<!-- 6. groupArmyTruck: mid-high tier spread for variety             -->
+	<!-- T3/T4 Truck は専用POI限定で希少。ここは変更なし。               -->
+	<!-- ================================================================ -->
+
+	<append xpath="//lootgroup[@name='groupArmyTruck03']">
+		<item group="WakaEFTXGunsT3" loot_prob_template="veryLow"/>
+	</append>
+	<append xpath="//lootgroup[@name='groupArmyTruck04']">
+		<item group="WakaEFTXGunsT4" loot_prob_template="veryLow"/>
+	</append>
+
+</configs>

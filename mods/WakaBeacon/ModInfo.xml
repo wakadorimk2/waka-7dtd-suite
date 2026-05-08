@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZ_WakaBeacon" />
+	<DisplayName value="Waka Beacon" />
+	<Description value="Adds a craftable beacon block. When placed, it auto-registers a NavObject visible on map and compass, with up/down arrows on the compass and a live altitude-difference label (Beacon ▲5m / ▼12m) on the on-screen HUD. Solves vanilla map markers' lack of vertical (Y axis) information for deep mines, multi-floor POIs, and tall structures. Requires HarmonyX (0_TFP_Harmony). EAC must be off." />
+	<Author value="wakadorimk2" />
+	<Version value="0.1.0" />
+	<Website value="" />
+</xml>

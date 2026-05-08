@@ -1,0 +1,15 @@
+<configs>
+	<append xpath="/blocks">
+		<block name="wakaBeacon">
+			<property name="Extends" value="radioHam" param1="Class,DialogID,TravelCostBase,TravelCostPer100M,TravelCostPersonalMultiplier,TravelCostWaypointMultiplier,SpawnHordeOnWaypointChance"/>
+			<property name="Class" value="WakaBeaconBlock, WakaBeacon"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="CustomIcon" value="radioHam"/>
+			<property name="EconomicValue" value="500"/>
+			<property name="FilterTags" value="MC_building,SC_electrical,MC_misc"/>
+			<property name="Group" value="Building,Science"/>
+			<drop event="Harvest" name="resourceElectricParts" count="2,4" tag="salvageHarvest"/>
+			<drop event="Destroy" name="wakaBeacon" count="1" prob="0.8"/>
+		</block>
+	</append>
+</configs>

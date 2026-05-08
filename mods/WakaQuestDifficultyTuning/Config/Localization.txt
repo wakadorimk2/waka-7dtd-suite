@@ -1,0 +1,4 @@
+Key,english,german
+quest_tier1_superinfested_clear,[ea899a]Tier 1 Super Infestation[-],[ea899a]Tier 1 Super Infestation[-]
+quest_tier1_superinfested_clear_offer,"A small site nearby has more dead than usual crawling around. It's not a big nest, but they swarm. Clear out the zombies at [DECEA3]{poi.name}[-]. Heads up - there's more of them than a normal job, even if the area is small.","A small site nearby has more dead than usual crawling around. It's not a big nest, but they swarm. Clear out the zombies at [DECEA3]{poi.name}[-]. Heads up - there's more of them than a normal job, even if the area is small."
+quest_superinfestation_response1,[D95A9C]Super Infested Clear[-] at [A3B3DE]{poi.name}[-] [7eb293]T0 POI[-]([DECEA3]{poi.distance} {poi.direction}[-]),[D95A9C]Super Infested Clear[-] at [A3B3DE]{poi.name}[-] [7eb293]T0 POI[-]([DECEA3]{poi.distance} {poi.direction}[-])

@@ -1,0 +1,356 @@
+<configs>
+
+<!-- ==================================================================== -->
+<!-- Waka Quest Difficulty Tuning v0.4                                     -->
+<!--                                                                      -->
+<!-- v0.3 → v0.4 変更:                                                    -->
+<!--  user feedback: "通常10択 vs super 4択" の歪みで難クエの価値が消える、 -->
+<!--  tier別 +1/tier の段階的スケーリングに統合。super は通常+2、         -->
+<!--  ultra/nightmare は通常+3 で "更に豪華" な感触を担保。                -->
+<!--                                                                      -->
+<!-- choices_count マトリクス:                                            -->
+<!--          Normal  Super  Ultra  Nightmare                             -->
+<!--   tier1    3      5      -      -                                    -->
+<!--   tier2    4      6      7      7                                    -->
+<!--   tier3    5      7      8      8                                    -->
+<!--   tier4    6      8      9      9                                    -->
+<!--   tier5    7      9     10     10                                    -->
+<!--   tier6    8     10     11     11                                    -->
+<!--                                                                      -->
+<!-- value scaling (Waka append 分):                                      -->
+<!--   super = tier + 1                                                   -->
+<!--   ultra = tier + 2                                                   -->
+<!--   nightmare = tier + 2                                               -->
+<!--                                                                      -->
+<!-- 豪華 decor:                                                          -->
+<!--   tier4+ super/ultra/nightmare: groupCraftingRare                    -->
+<!--   tier6 super/ultra/nightmare: resourceLegendaryParts isfixed        -->
+<!--                                                                      -->
+<!-- 実装メモ:                                                            -->
+<!--  - 既存 property を持つ template には <setattribute> で書き換え      -->
+<!--  - template継承で property を持たない子 quest には <append> で追加   -->
+<!--    (子の property は親 template の property をオーバーライドする)    -->
+<!--  - FNS Make Quest Rewards Great Again の "全 tier* = 10 一律" を     -->
+<!--    後ロードでこのスケーリングに上書きする                            -->
+<!-- ==================================================================== -->
+
+
+<!-- ==================================================================== -->
+<!-- 1. tier1_clear_superinfested 新設                                    -->
+<!--    (敵数増し・敵質ぬるめ＝現装備で挑める"ちょい盛り"枠)             -->
+<!--    v0.4: choices=5 (tier1 super)、LootItem 10枠で variety 確保         -->
+<!-- ==================================================================== -->
+<insertAfter xpath="/quests/quest[@id='tier6_clear_nightmare']">
+    <quest id="tier1_clear_superinfested">
+        <property name="name_key" value="quest_tier1_superinfested_clear"/>
+        <property name="subtitle_key" value="quest_superinfestation_subtitle"/>
+        <property name="description_key" value="quest_tier1_superinfested_clear_offer"/>
+        <property name="icon" value="ui_game_symbol_quest"/>
+        <property name="category_key" value="quest"/>
+        <property name="offer_key" value="quest_tier1_superinfested_clear_offer"/>
+        <property name="repeatable" value="true"/>
+        <property name="difficulty_tier" value="1"/>
+        <property name="statement_key" value="quest_infestation_statement"/>
+        <property name="response_key" value="quest_superinfestation_response1"/>
+        <property name="login_rally_reset" value="true"/>
+        <property name="reward_choices_count" value="5"/>
+        <property name="extra_tags" value="infested"/>
+        <property name="shareable" value="true"/>
+        <property name="spawn_multiplier" value="2"/>
+        <property name="gamestage_mod" value=".7"/>
+        <property name="gamestage_bonus" value="20"/>
+        <property name="completiontype" value="TurnIn"/>
+        <property name="completion_key" value="quest_clear_completion"/>
+        <objective type="RandomPOIGoto">
+            <property name="phase" value="1"/>
+            <property name="biome_filter_type" value="SameBiome"/>
+            <property name="biome_filter" value=""/>
+            <property name="nav_object" value="quest"/>
+            <property name="poi_tier" value="-1"/>
+        </objective>
+        <objective type="RallyPoint">
+            <property name="phase" value="2"/>
+            <property name="nav_object" value="rally"/>
+            <property name="rally_marker_type" value="questRallyMarkerInfestation"/>
+        </objective>
+        <objective type="ClearSleepers">
+            <property name="phase" value="3"/>
+            <property name="nav_object" value="sleeper_volume"/>
+        </objective>
+        <objective type="POIStayWithin">
+            <property name="phase" value="3"/>
+            <property name="radius" value="25"/>
+        </objective>
+        <action type="UnlockPOI">
+            <property name="phase" value="4"/>
+        </action>
+        <objective type="ReturnToNPC">
+            <property name="phase" value="4"/>
+            <property name="nav_object" value="return_to_trader"/>
+        </objective>
+        <objective type="InteractWithNPC">
+            <property name="phase" value="4"/>
+            <property name="nav_object" value="return_to_trader"/>
+        </objective>
+        <reward type="Exp" value="4500"/>
+        <reward type="Item" id="casinoCoin" value="750"/>
+        <reward type="LootItem" id="groupQuestAmmo" ischosen="true" value="2"/>
+        <reward type="LootItem" id="groupQuestSchematics" ischosen="true" value="2"/>
+        <reward type="LootItem" id="groupQuestMods" ischosen="true" value="2"/>
+        <reward type="LootItem" id="groupQuestFood,groupQuestMedical" ischosen="true" value="2"/>
+        <reward type="LootItem" id="groupQuestResourcesT0,groupQuestT1SkillMagazineBundle" ischosen="true" value="2"/>
+        <reward type="LootItem" id="groupCraftingUncommon" ischosen="true" value="1"/>
+        <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="2"/>
+        <reward type="LootItem" id="groupQuestWeapons,groupQuestArmor" ischosen="true" value="1"/>
+        <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="2"/>
+        <reward type="LootItem" id="groupQuestWeaponsRangedT1,groupQuestMods" ischosen="true" value="1"/>
+    </quest>
+</insertAfter>
+
+
+<!-- ==================================================================== -->
+<!-- 2. choices_count tier別スケーリング (Normal)                          -->
+<!--   tier1=3, tier2=4, tier3=5, tier4=6, tier5=7, tier6=8                -->
+<!-- ==================================================================== -->
+
+<!-- tier1 normal templates (own property): tier1_clear, tier1_fetch, tier1_buried_supplies → 3 -->
+<setattribute xpath="/quests/quest[@id='tier1_clear' or @id='tier1_fetch' or @id='tier1_buried_supplies']/property[@name='reward_choices_count']" name="value">3</setattribute>
+
+<!-- tier2 normal templates (own property): tier2_clear_infested, tier2_restore_power, tier2_fetch_clear → 4 -->
+<setattribute xpath="/quests/quest[@id='tier2_clear_infested' or @id='tier2_restore_power' or @id='tier2_fetch_clear']/property[@name='reward_choices_count']" name="value">4</setattribute>
+
+<!-- tier2 normal children (template継承、property無し): clear, fetch, buried_supplies → append 4 -->
+<append xpath="/quests/quest[@id='tier2_clear' or @id='tier2_fetch' or @id='tier2_buried_supplies']">
+    <property name="reward_choices_count" value="4"/>
+</append>
+
+<!-- tier3 normal children (全て継承) → append 5 -->
+<append xpath="/quests/quest[@id='tier3_clear' or @id='tier3_fetch' or @id='tier3_buried_supplies' or @id='tier3_clear_infested' or @id='tier3_restore_power' or @id='tier3_fetch_clear']">
+    <property name="reward_choices_count" value="5"/>
+</append>
+
+<!-- tier4 normal children → append 6 -->
+<append xpath="/quests/quest[@id='tier4_clear' or @id='tier4_clear_infested' or @id='tier4_restore_power' or @id='tier4_fetch_clear']">
+    <property name="reward_choices_count" value="6"/>
+</append>
+
+<!-- tier5 normal children → append 7 -->
+<append xpath="/quests/quest[@id='tier5_clear' or @id='tier5_clear_infested' or @id='tier5_fetch_clear']">
+    <property name="reward_choices_count" value="7"/>
+</append>
+
+<!-- tier6 normal children → append 8 -->
+<append xpath="/quests/quest[@id='tier6_clear_infested']">
+    <property name="reward_choices_count" value="8"/>
+</append>
+
+
+<!-- ==================================================================== -->
+<!-- 3. choices_count tier別スケーリング (Super)                           -->
+<!--   tier1=5, tier2=6, tier3=7, tier4=8, tier5=9, tier6=10                -->
+<!--   tier1 super は §1 で property=5 で生成済                            -->
+<!-- ==================================================================== -->
+
+<!-- tier2 super template (own property: Revamp 5) → 6 -->
+<setattribute xpath="/quests/quest[@id='tier2_clear_superinfested']/property[@name='reward_choices_count']" name="value">6</setattribute>
+
+<!-- tier3-6 super children (template継承) → append scaled value -->
+<append xpath="/quests/quest[@id='tier3_clear_superinfested']">
+    <property name="reward_choices_count" value="7"/>
+</append>
+<append xpath="/quests/quest[@id='tier4_clear_superinfested']">
+    <property name="reward_choices_count" value="8"/>
+</append>
+<append xpath="/quests/quest[@id='tier5_clear_superinfested']">
+    <property name="reward_choices_count" value="9"/>
+</append>
+<append xpath="/quests/quest[@id='tier6_clear_superinfested']">
+    <property name="reward_choices_count" value="10"/>
+</append>
+
+
+<!-- ==================================================================== -->
+<!-- 4. choices_count tier別スケーリング (Ultra)                           -->
+<!--   tier2=7, tier3=8, tier4=9, tier5=10, tier6=11                       -->
+<!-- ==================================================================== -->
+
+<!-- tier2 ultra template (own property: Revamp 5) → 7 -->
+<setattribute xpath="/quests/quest[@id='tier2_clear_ultrainfested']/property[@name='reward_choices_count']" name="value">7</setattribute>
+
+<!-- tier3-6 ultra children (template継承) → append scaled value -->
+<append xpath="/quests/quest[@id='tier3_clear_ultrainfested']">
+    <property name="reward_choices_count" value="8"/>
+</append>
+<append xpath="/quests/quest[@id='tier4_clear_ultrainfested']">
+    <property name="reward_choices_count" value="9"/>
+</append>
+<append xpath="/quests/quest[@id='tier5_clear_ultrainfested']">
+    <property name="reward_choices_count" value="10"/>
+</append>
+<append xpath="/quests/quest[@id='tier6_clear_ultrainfested']">
+    <property name="reward_choices_count" value="11"/>
+</append>
+
+
+<!-- ==================================================================== -->
+<!-- 5. choices_count tier別スケーリング (Nightmare)                       -->
+<!--   tier2=7, tier3=8, tier4=9, tier5=10, tier6=11 (= ultra相当)         -->
+<!-- ==================================================================== -->
+
+<!-- tier2 nightmare template (own property: Revamp 5) → 7 -->
+<setattribute xpath="/quests/quest[@id='tier2_clear_nightmare']/property[@name='reward_choices_count']" name="value">7</setattribute>
+
+<!-- tier3-6 nightmare children → append scaled value -->
+<append xpath="/quests/quest[@id='tier3_clear_nightmare']">
+    <property name="reward_choices_count" value="8"/>
+</append>
+<append xpath="/quests/quest[@id='tier4_clear_nightmare']">
+    <property name="reward_choices_count" value="9"/>
+</append>
+<append xpath="/quests/quest[@id='tier5_clear_nightmare']">
+    <property name="reward_choices_count" value="10"/>
+</append>
+<append xpath="/quests/quest[@id='tier6_clear_nightmare']">
+    <property name="reward_choices_count" value="11"/>
+</append>
+
+
+<!-- ==================================================================== -->
+<!-- 6. Super 報酬 LootItem 拡充 (value scaling = tier + 1)                -->
+<!--   tier3-6 は子側で reward block を redefine するので各 tier に直接 append -->
+<!-- ==================================================================== -->
+<append xpath="/quests/quest[@id='tier2_clear_superinfested']">
+    <reward type="LootItem" id="groupQuestWeapons,groupQuestArmor" ischosen="true" value="3"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="3"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier3_clear_superinfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT2,groupQuestArmor" ischosen="true" value="4"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="4"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier4_clear_superinfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT2,groupQuestArmor" ischosen="true" value="5"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="5"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="1"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier5_clear_superinfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT3,groupQuestArmor" ischosen="true" value="6"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="6"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="2"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier6_clear_superinfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT3,groupQuestArmor" ischosen="true" value="7"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="7"/>
+    <reward type="Item" id="resourceLegendaryParts" ischosen="true" isfixed="true" value="1"/>
+</append>
+
+
+<!-- ==================================================================== -->
+<!-- 7. Ultra 報酬 LootItem 拡充 (value scaling = tier + 2)                -->
+<!-- ==================================================================== -->
+<append xpath="/quests/quest[@id='tier2_clear_ultrainfested']">
+    <reward type="LootItem" id="groupQuestWeapons,groupQuestArmor" ischosen="true" value="4"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="4"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier3_clear_ultrainfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT2,groupQuestArmor" ischosen="true" value="5"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="5"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier4_clear_ultrainfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT2,groupQuestArmor" ischosen="true" value="6"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="6"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="1"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier5_clear_ultrainfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT3,groupQuestArmor" ischosen="true" value="7"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="7"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="2"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier6_clear_ultrainfested']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT3,groupQuestArmor" ischosen="true" value="8"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="8"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="3"/>
+    <reward type="Item" id="resourceLegendaryParts" ischosen="true" isfixed="true" value="1"/>
+</append>
+
+
+<!-- ==================================================================== -->
+<!-- 8. Nightmare 報酬 LootItem 拡充 (= ultra pattern, value = tier + 2)   -->
+<!-- ==================================================================== -->
+<append xpath="/quests/quest[@id='tier2_clear_nightmare']">
+    <reward type="LootItem" id="groupQuestWeapons,groupQuestArmor" ischosen="true" value="4"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="4"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier3_clear_nightmare']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT2,groupQuestArmor" ischosen="true" value="5"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="5"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier4_clear_nightmare']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT2,groupQuestArmor" ischosen="true" value="6"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="6"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="1"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier5_clear_nightmare']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT3,groupQuestArmor" ischosen="true" value="7"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="7"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="2"/>
+</append>
+
+<append xpath="/quests/quest[@id='tier6_clear_nightmare']">
+    <reward type="LootItem" id="groupQuestWeaponsRangedT3,groupQuestArmor" ischosen="true" value="8"/>
+    <reward type="LootItem" id="groupQuestTools,groupQuestArmorResources" ischosen="true" value="8"/>
+    <reward type="LootItem" id="groupCraftingRare" ischosen="true" value="3"/>
+    <reward type="Item" id="resourceLegendaryParts" ischosen="true" isfixed="true" value="1"/>
+</append>
+
+
+<!-- ==================================================================== -->
+<!-- 9. ultrainfested 再調整: spawn/GS を抑えて "選べる難クエ"枠に          -->
+<!--    QuestRevamp Gears Edition の tier2_clear_ultrainfested は          -->
+<!--    実は <variable> で定義されている (quests_gears.xml L209-211)。      -->
+<!--    tier3-6 は template="tier2_clear_ultrainfested" 継承で自動反映され -->
+<!--    るため、tier2 のみ書き換えれば全 tier に伝播する。                 -->
+<!--    (v0.3 までの property/個別variable patch全失敗バグを修正)          -->
+<!-- ==================================================================== -->
+
+<!-- tier2 のみ書き換え → tier3-6 はtemplate継承で同値になる -->
+<set xpath="/quests/quest[@id='tier2_clear_ultrainfested']/variable[@name='spawn_multiplier']/@value">4</set>
+<set xpath="/quests/quest[@id='tier2_clear_ultrainfested']/variable[@name='gamestage_mod']/@value">.85</set>
+<set xpath="/quests/quest[@id='tier2_clear_ultrainfested']/variable[@name='gamestage_bonus']/@value">30</set>
+
+
+<!-- ==================================================================== -->
+<!-- 10. trader rotation 重み増し                                         -->
+<!--    Revamp の挿入分 (各tier 1件) に加えて super系をもう1件ずつ挿入。   -->
+<!--    super系は抽選確率 ×2 になる。                                     -->
+<!--    tier1 super は tier1 グループ内 (tier1_buried_supplies の後) に    -->
+<!--    挿入することで tier1 抽選から確実に拾える位置に置く。              -->
+<!--    ultra/nightmare は既存の頻度を維持 (=低頻度の"目標枠")            -->
+<!-- ==================================================================== -->
+
+<!-- tier1 super: tier1 グループ末尾 (tier1_buried_supplies 後) に2件挿入 -->
+<insertAfter xpath="/quests/quest_list[@id='trader_rekt_quests' or @id='trader_jen_quests' or @id='trader_bob_quests' or @id='trader_hugh_quests' or @id='trader_joel_quests']/quest[@id='tier1_buried_supplies']">
+    <quest id="tier1_clear_superinfested"/>
+    <quest id="tier1_clear_superinfested"/>
+</insertAfter>
+
+<!-- tier2-6 super: 既存 Revamp 挿入 (tier6_clear_infested 後) と同じ位置にもう1件ずつ -->
+<insertAfter xpath="/quests/quest_list[@id='trader_rekt_quests' or @id='trader_jen_quests' or @id='trader_bob_quests' or @id='trader_hugh_quests' or @id='trader_joel_quests']/quest[@id='tier6_clear_infested']">
+    <quest id="tier2_clear_superinfested"/>
+    <quest id="tier3_clear_superinfested"/>
+    <quest id="tier4_clear_superinfested"/>
+    <quest id="tier5_clear_superinfested"/>
+    <quest id="tier6_clear_superinfested"/>
+</insertAfter>
+
+</configs>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaPerkBoost" />
+    <DisplayName value="Waka Perk Boost" />
+    <Description value="Black Wolf's better vanilla perks companion. Compensates for Bloodfall's harder progression (longer xp_to_level, raised perk costs, suppressed armor LootProb, max_level 622) by lifting Black Wolf's combat damage, survival resistances, and looter scaling by ~50% across the board. Also rewrites long descriptions with Bloodfall-flavored prose so each rank feels earned. Pure XML, loads after Black Wolf and Bloodfall." />
+    <Author value="wakadorimk2" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

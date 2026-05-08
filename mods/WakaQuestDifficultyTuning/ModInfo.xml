@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaQuestDifficultyTuning" />
+    <DisplayName value="Waka Quest Difficulty Tuning" />
+    <Description value="Quest Revamp companion. Replaces the FNS 'all tier* = 10 choices' flatlining with a per-tier scaling so harder difficulty tiers feel meaningfully more luxurious: regular tier1=3 to tier6=8, super = +2, ultra/nightmare = +3. Adds tier1_clear_superinfested for the dull tier1 vanilla loop, rebalances ultrainfested spawn/GS toward a 'choosable hard quest' band, and doubles the trader rotation weight of super entries. Each tier-difficulty cell gets value-scaled weapon/armor/tool/resource lanes, with groupCraftingRare at tier4+ super/ultra/nightmare and a fixed resourceLegendaryParts on tier6 super/ultra/nightmare. Pure XML, loads after Quest Revamp-Gears Edition and FNS Make Quest Rewards Great Again." />
+    <Author value="wakadorimk2" />
+    <Version value="0.4.0" />
+    <Website value="" />
+</xml>

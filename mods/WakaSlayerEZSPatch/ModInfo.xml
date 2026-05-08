@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <Name value="WakaSlayerEZSPatch"/>
+    <DisplayName value="Waka Slayer EZS Patch"/>
+    <Version value="0.1.0"/>
+    <Description value="ExtraSlayerChallenges を Enhanced Zombie Scaling の T2-T5 変異体まで対応させるパッチ"/>
+    <Author value="wakadorimk2"/>
+</xml>

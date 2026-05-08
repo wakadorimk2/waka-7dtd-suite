@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Perk Boost v0.5 - progression.xml
+  Role: Bridge between BlackWolf / Bloodfall / Mickkpewpews LbD / CLBM.
+  Loads AFTER all of them.
+
+  v0.5 changes (rollback after Day-Xx playtest):
+  - v0.4 halve was too aggressive; reverted vanilla-side @value scales
+    back to v0.3 numbers. Headroom for further granular tuning is
+    preserved as a per-perk knob if needed later.
+  - ZV* perks remain unchanged (= same as v0.3 / v0.4).
+
+  v0.4 history (kept for reference): vanilla-side scales were halved
+  to flatten the curve, but it dropped utility too low for the actual
+  Bloodfall counter-pressure the player faces.
+
+  v0.3 history: Removed 10 ZV perks that pure-duplicate BlackWolf
+  (PackMule, Miner69r, LuckyLooter, etc). Kept ZV damage / HP / regen /
+  resist multipliers as the player-side answer to Bloodfall HP-2300+
+  zombies. Mickkpewpews LbD only feeds craftingSkill (=magazine read),
+  so ZV damage multipliers don't double-stack with Mickk.
+========================================================================
+-->
+
+<!-- ============================================================
+     SECTION 1: Remove ONLY pure BlackWolf duplicates
+     ============================================================ -->
+
+<!-- Strength tree -->
+<remove xpath="/progression/perks/perk[@name='perkZVIronBack']"/>          <!-- = perkPackMule -->
+<remove xpath="/progression/perks/perk[@name='perkStrengthHammerStamina']"/> <!-- generic stamina, BW Cardio/Mickk -->
+<remove xpath="/progression/perks/perk[@name='perkZVMasterMiner']"/>       <!-- = perkMiner69r -->
+
+<!-- Perception tree -->
+<remove xpath="/progression/perks/perk[@name='perkZVScavenger']"/>         <!-- = perkLuckyLooter LootStage -->
+<remove xpath="/progression/perks/perk[@name='perkPerceptionSpearRange']"/> <!-- = perkJavelinMaster MaxRange -->
+<remove xpath="/progression/perks/perk[@name='perkZVLuckyEye']"/>          <!-- = perkLuckyLooter ScavengingTime -->
+<remove xpath="/progression/perks/perk[@name='perkZVArmorPenetration']"/>  <!-- = perkPenetrator -->
+
+<!-- Fortitude tree -->
+<remove xpath="/progression/perks/perk[@name='perkZVIronStomach']"/>       <!-- = perkSlowMetabolism -->
+
+<!-- Agility tree -->
+<remove xpath="/progression/perks/perk[@name='perkZVFleetFooted']"/>       <!-- = perkRuleOneCardio RunSpeed -->
+<remove xpath="/progression/perks/perk[@name='perkZVEndurance']"/>         <!-- = generic AttacksPerMinute (BW per-weapon) -->
+
+
+<!-- ============================================================
+     SECTION 2: Survival buffs (restored to v0.3 values)
+     ============================================================ -->
+
+<!-- Pain Tolerance: damage resist + crowd-control resist -->
+<set xpath="/progression/perks/perk[@name='perkPainTolerance']/effect_group[1]/passive_effect[@name='GeneralDamageResist']/@value">.10,.45</set>
+<set xpath="/progression/perks/perk[@name='perkPainTolerance']/effect_group[1]/passive_effect[@name='BuffResistance'][@tags='buffInjuryStunned01,buffInjuryStunned02']/@value">0.30,1</set>
+<set xpath="/progression/perks/perk[@name='perkPainTolerance']/effect_group[1]/passive_effect[@name='BuffResistance'][@tags='buffLegBroken,buffArmBroken']/@value">0.10,0.50</set>
+<set xpath="/progression/perks/perk[@name='perkPainTolerance']/effect_group[1]/passive_effect[@name='BuffResistance'][@tags='buffLegSprained,buffArmSprained,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger']/@value">0.20,0.75</set>
+
+<!-- Healing Factor: passive HP regen -->
+<set xpath="/progression/perks/perk[@name='perkHealingFactor']/effect_group[1]/passive_effect[@name='HealthChangeOT']/@value">.025,.05,.10,.18,.30</set>
+
+<!-- Physician: med item effectiveness -->
+<set xpath="/progression/perks/perk[@name='perkPhysician']/effect_group[1]/triggered_effect[@cvar='$medicRegHealthIncreaseSpeed']/@value">3,5,7,10,13,17</set>
+<set xpath="/progression/perks/perk[@name='perkPhysician']/effect_group[1]/passive_effect[@name='PlayerExpGain'][@tags='medical']/@value">2,4,7,10,12</set>
+<set xpath="/progression/perks/perk[@name='perkPhysician']/effect_group[1]/passive_effect[@name='DismemberChance'][@tags='attIntellect']/@value">.30</set>
+
+<!-- Well Insulated: temperature & elemental resist -->
+<set xpath="/progression/perks/perk[@name='perkWellInsulated']/effect_group[1]/passive_effect[@name='HypothermalResist']/@value">25,50,75,100</set>
+<set xpath="/progression/perks/perk[@name='perkWellInsulated']/effect_group[1]/passive_effect[@name='HyperthermalResist']/@value">25,50,75,100</set>
+<set xpath="/progression/perks/perk[@name='perkWellInsulated']/effect_group[1]/passive_effect[@name='BuffResistance']/@value">0.15,0.55</set>
+
+
+<!-- ============================================================
+     SECTION 3: Economy / Looting (restored to v0.3 values)
+     ============================================================ -->
+
+<set xpath="/progression/perks/perk[@name='perkLuckyLooter']/effect_group[1]/passive_effect[@name='LootStage']/@value">.08,.40</set>
+<set xpath="/progression/perks/perk[@name='perkLuckyLooter']/effect_group[1]/passive_effect[@name='ScavengingTime']/@value">.15,.3,.5,.75,.95</set>
+<set xpath="/progression/perks/perk[@name='perkLuckyLooter']/effect_group/passive_effect[@name='LootDropProb']/@value">.015,.12</set>
+
+<set xpath="/progression/perks/perk[@name='perkBetterBarter']/effect_group[1]/passive_effect[@name='BarteringBuying']/@value">.08,.16,.24,.32,.40</set>
+<set xpath="/progression/perks/perk[@name='perkBetterBarter']/effect_group[1]/passive_effect[@name='BarteringSelling']/@value">.08,.16,.24,.32,.40</set>
+
+<set xpath="/progression/perks/perk[@name='perkDaringAdventurer']/effect_group[1]/passive_effect[@name='TraderStage']/@value">15,80</set>
+<set xpath="/progression/perks/perk[@name='perkDaringAdventurer']/effect_group[1]/passive_effect[@name='QuestBonusItemReward']/@value">.3,1.5</set>
+
+<set xpath="/progression/perks/perk[@name='perkLockPicking']/effect_group[1]/passive_effect[@name='LockPickTime']/@value">.5,.75</set>
+<set xpath="/progression/perks/perk[@name='perkLockPicking']/effect_group[1]/passive_effect[@name='LootQuantity'][@tags='dukes,gems']/@value">.5,1.5</set>
+<set xpath="/progression/perks/perk[@name='perkLockPicking']/effect_group[1]/passive_effect[@name='LockPickBreakChance']/@value">.5,.85</set>
+
+<set xpath="/progression/perks/perk[@name='perkTreasureHunter']/effect_group[1]/passive_effect[@name='TreasureBlocksPerReduction']/@value">0,-5,-8,-9,-9,-10</set>
+<set xpath="/progression/perks/perk[@name='perkTreasureHunter']/effect_group[1]/passive_effect[@name='LootQuantity'][@tags='buriedTreasure']/@value">.75,1.5,3,4,5</set>
+
+
+<!-- ============================================================
+     SECTION 4: Lifestyle / Cardio / Survival skills (restored)
+     ============================================================ -->
+
+<set xpath="/progression/perks/perk[@name='perkRuleOneCardio']/effect_group[1]/passive_effect[@name='StaminaChangeOT']/@value">0.15,0.75</set>
+<set xpath="/progression/perks/perk[@name='perkRuleOneCardio']/effect_group[1]/passive_effect[@name='WalkSpeed']/@value">.15,0.45</set>
+<set xpath="/progression/perks/perk[@name='perkRuleOneCardio']/effect_group[1]/passive_effect[@name='RunSpeed']/@value">.10,0.40</set>
+<set xpath="/progression/perks/perk[@name='perkRuleOneCardio']/effect_group[1]/passive_effect[@name='StaminaMax']/@value">15,75</set>
+
+<set xpath="/progression/perks/perk[@name='perkSlowMetabolism']/effect_group[1]/passive_effect[@name='WaterLossPerHealthPointGained']/@value">-.15,-.50</set>
+<set xpath="/progression/perks/perk[@name='perkSlowMetabolism']/effect_group[1]/passive_effect[@name='WaterLossPerStaminaPointGained']/@value">-.15,-.50</set>
+<set xpath="/progression/perks/perk[@name='perkSlowMetabolism']/effect_group[1]/passive_effect[@name='FoodLossPerStaminaPointGained']/@value">-.15,-.50</set>
+<set xpath="/progression/perks/perk[@name='perkSlowMetabolism']/effect_group[1]/passive_effect[@name='FoodLossPerHealthPointGained']/@value">-.15,-.50</set>
+
+<set xpath="/progression/perks/perk[@name='perkLivingOffTheLand']/effect_group[1]/passive_effect[@name='HarvestCount'][@tags='cropHarvest,wildCropsHarvest']/@value">5,8,12</set>
+<set xpath="/progression/perks/perk[@name='perkLivingOffTheLand']/effect_group[1]/passive_effect[@name='HarvestCount'][@tags='bonusCropHarvest']/@value">8,15,25</set>
+
+
+<!-- ============================================================
+     SECTION 5: Special-effect weapon perks (restored)
+     ============================================================ -->
+
+<!-- Hidden Strike: sneak attacks, knife range, armor ignore -->
+<set xpath="/progression/perks/perk[@name='perkHiddenStrike']/effect_group[1]/passive_effect[@name='DamageBonus']/@value">2,3,4,5,6,7</set>
+<set xpath="/progression/perks/perk[@name='perkHiddenStrike']/effect_group[1]/passive_effect[@name='EntityDamage']/@value">.75,1.5,2.25,3,3.75,4.5</set>
+<set xpath="/progression/perks/perk[@name='perkHiddenStrike']/effect_group[1]/passive_effect[@name='TargetArmor'][@tags='perkDeepCuts']/@value">-.15,-.75</set>
+
+<!-- The Huntsman: vs animals -->
+<set xpath="/progression/perks/perk[@name='perkTheHuntsman']/effect_group/passive_effect[@name='EntityDamage'][1]/@value">.3,1.5</set>
+<set xpath="/progression/perks/perk[@name='perkTheHuntsman']/effect_group/passive_effect[@name='EntityDamage'][2]/@value">1.5,7.5</set>
+
+<!-- Boomstick: point-blank shotgun -->
+<set xpath="/progression/perks/perk[@name='perkBoomstick']/effect_group/passive_effect[@name='EntityDamage']/@value">.3,1.5</set>
+
+<!-- Demolitions: dismember + explosive damage -->
+<set xpath="/progression/perks/perk[@name='perkDemolitionsExpert']/effect_group[2]/passive_effect[@name='DismemberChance'][@tags='perkDemolitionsExpert']/@value">.08,.16,.30,.45,.65</set>
+<set xpath="/progression/perks/perk[@name='perkDemolitionsExpert']/effect_group[2]/passive_effect[@name='BlockDamage'][@tags='perkDemolitionsExpert']/@value">0,.75</set>
+<set xpath="/progression/perks/perk[@name='perkDemolitionsExpert']/effect_group[2]/passive_effect[@name='EntityDamage'][@tags='perkDemolitionsExpert']/@value">0,.75</set>
+<set xpath="/progression/perks/perk[@name='perkDemolitionsExpert']/effect_group[2]/passive_effect[@name='WeaponHandling'][@tags='perkDemolitionsExpert']/@value">.15,.75</set>
+
+<!-- Penetrator: armor ignore -->
+<set xpath="/progression/perks/perk[@name='perkPenetrator']/effect_group[1]/passive_effect[@name='TargetArmor'][1]/@value">-.30,-.55,-.80,-1.05,-1.30</set>
+<set xpath="/progression/perks/perk[@name='perkPenetrator']/effect_group[1]/passive_effect[@name='TargetArmor'][2]/@value">-.40,-.60,-.85,-1.10,-1.30</set>
+<set xpath="/progression/perks/perk[@name='perkPenetrator']/effect_group[1]/passive_effect[@name='EntityPenetrationCount'][@tags='perkDeadEye']/@value">2,6</set>
+
+
+<!-- ============================================================
+     SECTION 6: Mining / Salvage Operations (restored)
+     ============================================================ -->
+
+<set xpath="/progression/perks/perk[@name='perkMotherLode']/effect_group[1]/passive_effect[@name='HarvestCount'][@tags='oreWoodHarvest']/@value">.4,2.0</set>
+<set xpath="/progression/perks/perk[@name='perkSalvageOperations']/effect_group/passive_effect[@name='AttacksPerMinute'][@tags='perkSalvageOperations']/@value">.15,.5</set>
+
+
+<!-- ============================================================
+     UNCHANGED: ZV* perks (Bloodfall HP-2300+ counterweight).
+     UNCHANGED: tradeoff / trigger / aura / kill-streak / special.
+     UNCHANGED: skillZVTurretControl tree (base defense).
+     ============================================================ -->
+
+</configs>

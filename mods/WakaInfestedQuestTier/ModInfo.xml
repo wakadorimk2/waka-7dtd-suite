@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZZ_WakaInfestedQuestTier" />
+	<DisplayName value="Waka Infested Quest Tier" />
+	<Description value="Makes POI Scourge's Infestation Beacon contribute to Trader Tier progression by POI tier. Replaces ItemActionStartScourgeQuest with a tier-aware variant that reads the current POI's difficulty tier and routes to quest_scourge_infestation_t1..t6, each carrying add_to_tier_complete=true with matching difficulty_tier. Requires HarmonyX (0_TFP_Harmony) and POI Scourge. EAC must be off." />
+	<Author value="wakadorimk2" />
+	<Version value="0.1.0" />
+	<Website value="" />
+</xml>

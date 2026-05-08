@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Waka Body Layer v0.3 - buffs
+
+  Adds Protein/Carb/Fat nutrition layer on top of Medical conditions' Vitamin layer.
+  Vitamin軸は Medical conditionsの buffHypovitaminosis に委譲（perkPhysician gateも尊重）。
+
+  CVar:
+    $wakaProtein / $wakaCarb / $wakaFat   範囲 0-100, 初期 50
+    $wakaInitialized                      sentinel（初期化済みフラグ）
+
+  Tick: 10秒 / 1h=360tick
+
+  Decay (perkSlowMetabolism なし):
+    -0.015/tick (-5.4/h, -130/24h) = 半日で50→20付近、1日サイクルで Severe 圏入り
+  Decay (perkSlowMetabolism Lv3+):
+    -0.008/tick (-2.9/h, -69/24h) = 24時間で枯渇に近い、軽減版
+
+  閾値（perkSlowMetabolism なし）:
+    不足: <=20 Severe / 21-40 Light / 41-79 通常 / 80-94 過剰Light / >=95 過剰Severe
+  閾値（perkSlowMetabolism Lv3+）:
+    過剰側のみ緩和: 80→85 Light / 95→97 Severe
+-->
+<configs>
+    <append xpath="/buffs">
+
+        <!-- =============================================================== -->
+        <!-- Core: 常駐管理buff (entityclasses で playerMaleに付与)            -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaBodyLayerCore" hidden="true" remove_on_death="false">
+            <stack_type value="ignore"/>
+            <update_rate value="10"/>
+
+            <effect_group>
+                <!-- =============== 初回初期化 =============== -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProtein" operation="set" value="50">
+                    <requirement name="CVarCompare" cvar="$wakaInitialized" operation="LT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarb" operation="set" value="50">
+                    <requirement name="CVarCompare" cvar="$wakaInitialized" operation="LT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFat" operation="set" value="50">
+                    <requirement name="CVarCompare" cvar="$wakaInitialized" operation="LT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaInitialized" operation="set" value="1"/>
+
+                <!-- =============== デス時リセット =============== -->
+                <!-- vanilla の Food/Water が死亡時に枯れる挙動に同調させる。
+                     30 は deficit Light 閾値(≤40)の中央、Severe(≤20)には落ちない。
+                     リスポーン直後から「食料水分＋栄養」の三方圧で復帰要求が掛かる構造。
+                     excess buff は明示Removeで残留防止、deficit Light は次tickで Core が再評価して付く。 -->
+                <triggered_effect trigger="onSelfDied" action="ModifyCVar" cvar="$wakaProtein" operation="set" value="30"/>
+                <triggered_effect trigger="onSelfDied" action="ModifyCVar" cvar="$wakaCarb" operation="set" value="30"/>
+                <triggered_effect trigger="onSelfDied" action="ModifyCVar" cvar="$wakaFat" operation="set" value="30"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaProteinDeficitSevere"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaCarbDeficitSevere"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaFatDeficitSevere"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaProteinExcessLight"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaProteinExcessSevere"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaCarbExcessLight"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaCarbExcessSevere"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaFatExcessLight"/>
+                <triggered_effect trigger="onSelfDied" action="RemoveBuff" buff="buffWakaFatExcessSevere"/>
+
+                <!-- =============== Iron Gut (perkSlowMetabolism) 連動 =============== -->
+                <!-- Medical conditions と同じく onSelfProgressionUpdate trigger を使用 -->
+                <triggered_effect trigger="onSelfProgressionUpdate" action="AddBuff" buff="buffWakaIronGutBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkSlowMetabolism" operation="GTE" value="3"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfProgressionUpdate" action="RemoveBuff" buff="buffWakaIronGutBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkSlowMetabolism" operation="LT" value="3"/>
+                </triggered_effect>
+                <!-- セッション開始時の既存perk判定（既にperk取得済みでログイン/再ロード時） -->
+                <triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffWakaIronGutBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkSlowMetabolism" operation="GTE" value="3"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffWakaIronGutBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkSlowMetabolism" operation="GTE" value="3"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+
+                <!-- =============== Physician (perkPhysician) 連動 =============== -->
+                <!-- 損傷/感染追加減衰を半減する。Iron Gut と独立。 -->
+                <triggered_effect trigger="onSelfProgressionUpdate" action="AddBuff" buff="buffWakaPhysicianBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkPhysician" operation="GTE" value="3"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfProgressionUpdate" action="RemoveBuff" buff="buffWakaPhysicianBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkPhysician" operation="LT" value="3"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffWakaPhysicianBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkPhysician" operation="GTE" value="3"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffWakaPhysicianBonus">
+                    <requirement name="ProgressionLevel" progression_name="perkPhysician" operation="GTE" value="3"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- v0.5.1: 自然減衰を「常時部分」と「食料連動部分」に分割           -->
+                <!--   常時(60%)：飢餓時も減衰、ただし緩やか                          -->
+                <!--   食料>0連動(40%)：消化代謝として食料あれば追加で減衰            -->
+                <!--   合算：v0.4.1までの -0.045/-0.036 を維持                        -->
+                <!-- =============================================================== -->
+
+                <!-- =============== 常時減衰（perk なし） =============== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.027">
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.027">
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.022">
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+
+                <!-- =============== 食料連動減衰（perk なし、Food stat>0 のみ） =============== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.018">
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                    <requirement name="StatComparePercCurrentToMax" stat="Food" operation="GT" value="0"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.018">
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                    <requirement name="StatComparePercCurrentToMax" stat="Food" operation="GT" value="0"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.014">
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                    <requirement name="StatComparePercCurrentToMax" stat="Food" operation="GT" value="0"/>
+                </triggered_effect>
+
+                <!-- =============== 常時減衰（Iron Gut あり、約47%減） =============== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.014">
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.014">
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.011">
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+
+                <!-- =============== 食料連動減衰（Iron Gut あり、Food stat>0 のみ） =============== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.010">
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                    <requirement name="StatComparePercCurrentToMax" stat="Food" operation="GT" value="0"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.010">
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                    <requirement name="StatComparePercCurrentToMax" stat="Food" operation="GT" value="0"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.007">
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                    <requirement name="StatComparePercCurrentToMax" stat="Food" operation="GT" value="0"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- v0.6: 運動連動減衰 二段化                                       -->
+                <!-- Stamina<70%（軽労作）と <30%（息切れ）で段階発動                -->
+                <!-- Iron Gut の有無に関わらず発動（運動代謝はperkで止まらない）    -->
+                <!--   軽労作層: 平地移動・採掘・短距離戦闘                          -->
+                <!--   息切れ層: 連戦・長距離スプリント・登攀                        -->
+                <!-- =============================================================== -->
+                <!-- 軽労作層 (Stamina < 70%) -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.009">
+                    <requirement name="StatComparePercCurrentToMax" stat="Stamina" operation="LT" value="0.7"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.015">
+                    <requirement name="StatComparePercCurrentToMax" stat="Stamina" operation="LT" value="0.7"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.006">
+                    <requirement name="StatComparePercCurrentToMax" stat="Stamina" operation="LT" value="0.7"/>
+                </triggered_effect>
+                <!-- 息切れ層 (Stamina < 30%) - 軽労作に上乗せ -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.012">
+                    <requirement name="StatComparePercCurrentToMax" stat="Stamina" operation="LT" value="0.3"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.020">
+                    <requirement name="StatComparePercCurrentToMax" stat="Stamina" operation="LT" value="0.3"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.008">
+                    <requirement name="StatComparePercCurrentToMax" stat="Stamina" operation="LT" value="0.3"/>
+                </triggered_effect>
+
+                <!-- =============== Cap (100超え防止) =============== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="set" value="100">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GT" value="100"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="set" value="100">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GT" value="100"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="set" value="100">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GT" value="100"/>
+                </triggered_effect>
+
+                <!-- =============== Floor (負値防止) =============== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="set" value="0">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LT" value="0"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="set" value="0">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LT" value="0"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="set" value="0">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LT" value="0"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- v0.4 連動層: 損傷buff所持で栄養消費加速                         -->
+                <!-- vanilla buffBrokenLimbStatus / buffLaceration /                 -->
+                <!-- Medical conditions buffMalunion/NerveDamage/FlexibilityLoss     -->
+                <!-- 怪我治癒には栄養が要るというロジック                            -->
+                <!-- v0.5: perkPhysician Lv3+ で半減                                 -->
+                <!-- =============================================================== -->
+                <!-- Physician なし版（フル減衰） -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.015">
+                    <requirement name="HasBuff" buff="buffBrokenLimbStatus,buffLaceration,buffLacerationBleedingStatus,buffMalunionLeg,buffMalunionArm,buffNerveDamageLeg,buffNerveDamageArm,buffFlexibilityLossLeg,buffFlexibilityLossArm"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.015">
+                    <requirement name="HasBuff" buff="buffBrokenLimbStatus,buffLaceration,buffLacerationBleedingStatus,buffMalunionLeg,buffMalunionArm,buffNerveDamageLeg,buffNerveDamageArm,buffFlexibilityLossLeg,buffFlexibilityLossArm"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.012">
+                    <requirement name="HasBuff" buff="buffBrokenLimbStatus,buffLaceration,buffLacerationBleedingStatus,buffMalunionLeg,buffMalunionArm,buffNerveDamageLeg,buffNerveDamageArm,buffFlexibilityLossLeg,buffFlexibilityLossArm"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <!-- Physician あり版（半減） -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.008">
+                    <requirement name="HasBuff" buff="buffBrokenLimbStatus,buffLaceration,buffLacerationBleedingStatus,buffMalunionLeg,buffMalunionArm,buffNerveDamageLeg,buffNerveDamageArm,buffFlexibilityLossLeg,buffFlexibilityLossArm"/>
+                    <requirement name="HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.008">
+                    <requirement name="HasBuff" buff="buffBrokenLimbStatus,buffLaceration,buffLacerationBleedingStatus,buffMalunionLeg,buffMalunionArm,buffNerveDamageLeg,buffNerveDamageArm,buffFlexibilityLossLeg,buffFlexibilityLossArm"/>
+                    <requirement name="HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.006">
+                    <requirement name="HasBuff" buff="buffBrokenLimbStatus,buffLaceration,buffLacerationBleedingStatus,buffMalunionLeg,buffMalunionArm,buffNerveDamageLeg,buffNerveDamageArm,buffFlexibilityLossLeg,buffFlexibilityLossArm"/>
+                    <requirement name="HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- v0.4 連動層: 感染buff所持で栄養消費さらに加速                   -->
+                <!-- vanilla buffInfection02Untreated/03Untreated/04 が対象           -->
+                <!-- 感染症で消化器系が弱り、食事しても効率が落ちる、を消費加速で表現 -->
+                <!-- v0.5: perkPhysician Lv3+ で半減                                 -->
+                <!-- =============================================================== -->
+                <!-- Physician なし版（フル減衰） -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.030">
+                    <requirement name="HasBuff" buff="buffInfection02Untreated,buffInfection03Untreated,buffInfection04"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.030">
+                    <requirement name="HasBuff" buff="buffInfection02Untreated,buffInfection03Untreated,buffInfection04"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.024">
+                    <requirement name="HasBuff" buff="buffInfection02Untreated,buffInfection03Untreated,buffInfection04"/>
+                    <requirement name="!HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <!-- Physician あり版（半減） -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-0.015">
+                    <requirement name="HasBuff" buff="buffInfection02Untreated,buffInfection03Untreated,buffInfection04"/>
+                    <requirement name="HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-0.015">
+                    <requirement name="HasBuff" buff="buffInfection02Untreated,buffInfection03Untreated,buffInfection04"/>
+                    <requirement name="HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-0.012">
+                    <requirement name="HasBuff" buff="buffInfection02Untreated,buffInfection03Untreated,buffInfection04"/>
+                    <requirement name="HasBuff" buff="buffWakaPhysicianBonus"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- Protein 不足検出                                                 -->
+                <!-- =============================================================== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaProteinDeficitSevere">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LTE" value="20"/>
+                    <requirement name="!HasBuff" buff="buffWakaProteinDeficitSevere"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinDeficitSevere">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GT" value="20"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaProteinDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LTE" value="40"/>
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GT" value="20"/>
+                    <requirement name="!HasBuff" buff="buffWakaProteinDeficitLight"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GT" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LTE" value="20"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- Protein 過剰検出（perk なし: ≥80 Light / ≥95 Severe）          -->
+                <!-- =============================================================== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaProteinExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="95"/>
+                    <requirement name="!HasBuff" buff="buffWakaProteinExcessSevere"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LT" value="95"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaProteinExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="80"/>
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LT" value="95"/>
+                    <requirement name="!HasBuff" buff="buffWakaProteinExcessLight"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LT" value="80"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="95"/>
+                </triggered_effect>
+                <!-- Iron Gut 連動: ≥85 Light / ≥97 Severe -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaProteinExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="97"/>
+                    <requirement name="!HasBuff" buff="buffWakaProteinExcessSevere"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaProteinExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="85"/>
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LT" value="97"/>
+                    <requirement name="!HasBuff" buff="buffWakaProteinExcessLight"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <!-- v0.3.1 cleanup: Iron Gut 取得時、85/97未満で旧過剰buff を消去 -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LT" value="85"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaProteinExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LT" value="97"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- Carb 不足検出                                                    -->
+                <!-- =============================================================== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaCarbDeficitSevere">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LTE" value="20"/>
+                    <requirement name="!HasBuff" buff="buffWakaCarbDeficitSevere"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbDeficitSevere">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GT" value="20"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaCarbDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LTE" value="40"/>
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GT" value="20"/>
+                    <requirement name="!HasBuff" buff="buffWakaCarbDeficitLight"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GT" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LTE" value="20"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- Carb 過剰検出                                                    -->
+                <!-- =============================================================== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaCarbExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="95"/>
+                    <requirement name="!HasBuff" buff="buffWakaCarbExcessSevere"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LT" value="95"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaCarbExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="80"/>
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LT" value="95"/>
+                    <requirement name="!HasBuff" buff="buffWakaCarbExcessLight"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LT" value="80"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="95"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaCarbExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="97"/>
+                    <requirement name="!HasBuff" buff="buffWakaCarbExcessSevere"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaCarbExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="85"/>
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LT" value="97"/>
+                    <requirement name="!HasBuff" buff="buffWakaCarbExcessLight"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <!-- v0.3.1 cleanup: Iron Gut 取得時、85/97未満で旧過剰buff を消去 -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LT" value="85"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaCarbExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LT" value="97"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- Fat 不足検出                                                     -->
+                <!-- =============================================================== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaFatDeficitSevere">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LTE" value="20"/>
+                    <requirement name="!HasBuff" buff="buffWakaFatDeficitSevere"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatDeficitSevere">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GT" value="20"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaFatDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LTE" value="40"/>
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GT" value="20"/>
+                    <requirement name="!HasBuff" buff="buffWakaFatDeficitLight"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GT" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatDeficitLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LTE" value="20"/>
+                </triggered_effect>
+
+                <!-- =============================================================== -->
+                <!-- Fat 過剰検出                                                     -->
+                <!-- =============================================================== -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaFatExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="95"/>
+                    <requirement name="!HasBuff" buff="buffWakaFatExcessSevere"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LT" value="95"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaFatExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="80"/>
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LT" value="95"/>
+                    <requirement name="!HasBuff" buff="buffWakaFatExcessLight"/>
+                    <requirement name="!HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LT" value="80"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="95"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaFatExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="97"/>
+                    <requirement name="!HasBuff" buff="buffWakaFatExcessSevere"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaFatExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="85"/>
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LT" value="97"/>
+                    <requirement name="!HasBuff" buff="buffWakaFatExcessLight"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <!-- v0.3.1 cleanup: Iron Gut 取得時、85/97未満で旧過剰buff を消去 -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatExcessLight">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LT" value="85"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffWakaFatExcessSevere">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LT" value="97"/>
+                    <requirement name="HasBuff" buff="buffWakaIronGutBonus"/>
+                </triggered_effect>
+
+            </effect_group>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Iron Gut Bonus（perkSlowMetabolism Lv3+ で発火、hidden）         -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaIronGutBonus" hidden="true">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Physician Bonus（perkPhysician Lv3+ で発火、hidden）            -->
+        <!-- 損傷/感染追加減衰を半減する -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaPhysicianBonus" hidden="true">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Protein Deficit (筋力・治癒)                                     -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaProteinDeficitLight" name_key="buffWakaProteinDeficitLightName" description_key="buffWakaProteinDeficitLightDesc" icon="ui_game_symbol_food_poisoning" icon_color="220,180,80">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="StaminaMax" operation="perc_add" value="-0.05"/>
+                <passive_effect name="HealingItems" operation="perc_add" value="-0.10"/>
+            </effect_group>
+        </buff>
+
+        <buff name="buffWakaProteinDeficitSevere" name_key="buffWakaProteinDeficitSevereName" description_key="buffWakaProteinDeficitSevereDesc" icon="ui_game_symbol_food_poisoning" icon_color="255,64,0">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="StaminaMax" operation="perc_add" value="-0.20"/>
+                <passive_effect name="HealingItems" operation="perc_add" value="-0.30"/>
+                <passive_effect name="EntityDamage" operation="perc_add" value="-0.10" tags="melee"/>
+            </effect_group>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Carb Deficit (スタミナ・運動)                                    -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaCarbDeficitLight" name_key="buffWakaCarbDeficitLightName" description_key="buffWakaCarbDeficitLightDesc" icon="ui_game_symbol_fatigued" icon_color="220,180,80">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="StaminaRegen" operation="perc_add" value="-0.15"/>
+            </effect_group>
+        </buff>
+
+        <buff name="buffWakaCarbDeficitSevere" name_key="buffWakaCarbDeficitSevereName" description_key="buffWakaCarbDeficitSevereDesc" icon="ui_game_symbol_fatigued" icon_color="255,64,0">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="StaminaRegen" operation="perc_add" value="-0.40"/>
+                <passive_effect name="RunSpeed" operation="perc_add" value="-0.15"/>
+            </effect_group>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Fat Deficit (寒さ脆弱性・体力)                                   -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaFatDeficitLight" name_key="buffWakaFatDeficitLightName" description_key="buffWakaFatDeficitLightDesc" icon="ui_game_symbol_temperature" icon_color="220,180,80">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="ColdResist" operation="base_add" value="-5"/>
+            </effect_group>
+        </buff>
+
+        <buff name="buffWakaFatDeficitSevere" name_key="buffWakaFatDeficitSevereName" description_key="buffWakaFatDeficitSevereDesc" icon="ui_game_symbol_temperature" icon_color="255,64,0">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="ColdResist" operation="base_add" value="-15"/>
+                <passive_effect name="HealthMax" operation="perc_add" value="-0.10"/>
+            </effect_group>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Protein Excess (消化負荷)                                       -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaProteinExcessLight" name_key="buffWakaProteinExcessLightName" description_key="buffWakaProteinExcessLightDesc" icon="ui_game_symbol_stomach" icon_color="200,80,80">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="StaminaRegen" operation="perc_add" value="-0.10"/>
+            </effect_group>
+        </buff>
+
+        <buff name="buffWakaProteinExcessSevere" name_key="buffWakaProteinExcessSevereName" description_key="buffWakaProteinExcessSevereDesc" icon="ui_game_symbol_stomach" icon_color="255,0,0">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="StaminaRegen" operation="perc_add" value="-0.25"/>
+                <passive_effect name="RunSpeed" operation="perc_add" value="-0.10"/>
+            </effect_group>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Carb Excess (体重増)                                            -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaCarbExcessLight" name_key="buffWakaCarbExcessLightName" description_key="buffWakaCarbExcessLightDesc" icon="ui_game_symbol_stomach" icon_color="200,80,80">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="RunSpeed" operation="perc_add" value="-0.05"/>
+            </effect_group>
+        </buff>
+
+        <buff name="buffWakaCarbExcessSevere" name_key="buffWakaCarbExcessSevereName" description_key="buffWakaCarbExcessSevereDesc" icon="ui_game_symbol_stomach" icon_color="255,0,0">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="RunSpeed" operation="perc_add" value="-0.15"/>
+                <passive_effect name="StaminaRegen" operation="perc_add" value="-0.10"/>
+            </effect_group>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- Fat Excess (代謝負荷)                                           -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaFatExcessLight" name_key="buffWakaFatExcessLightName" description_key="buffWakaFatExcessLightDesc" icon="ui_game_symbol_stomach" icon_color="200,80,80">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="HealingItems" operation="perc_add" value="-0.10"/>
+            </effect_group>
+        </buff>
+
+        <buff name="buffWakaFatExcessSevere" name_key="buffWakaFatExcessSevereName" description_key="buffWakaFatExcessSevereDesc" icon="ui_game_symbol_stomach" icon_color="255,0,0">
+            <stack_type value="ignore"/>
+            <duration value="0"/>
+            <effect_group>
+                <passive_effect name="HealingItems" operation="perc_add" value="-0.25"/>
+                <passive_effect name="HealthMax" operation="perc_add" value="-0.05"/>
+            </effect_group>
+        </buff>
+
+        <!-- =============================================================== -->
+        <!-- v0.6: Pulse buffs (栄養補給時の短期可視化)                       -->
+        <!-- duration=5、HUDに見える形で「いま栄養が増えてる」を提示する     -->
+        <!-- 食品の triggered_effect に AddBuff として 1ペアで仕込まれる     -->
+        <!-- 連続摂取時は stack_type=replace で duration リセット             -->
+        <!-- =============================================================== -->
+        <buff name="buffWakaProteinPulse" name_key="buffWakaProteinPulseName" description_key="buffWakaProteinPulseDesc" icon="ui_game_symbol_food" icon_color="220,180,80">
+            <stack_type value="replace"/>
+            <duration value="5"/>
+        </buff>
+
+        <buff name="buffWakaCarbPulse" name_key="buffWakaCarbPulseName" description_key="buffWakaCarbPulseDesc" icon="ui_game_symbol_food" icon_color="120,180,220">
+            <stack_type value="replace"/>
+            <duration value="5"/>
+        </buff>
+
+        <buff name="buffWakaFatPulse" name_key="buffWakaFatPulseName" description_key="buffWakaFatPulseDesc" icon="ui_game_symbol_food" icon_color="240,160,100">
+            <stack_type value="replace"/>
+            <duration value="5"/>
+        </buff>
+
+    </append>
+</configs>

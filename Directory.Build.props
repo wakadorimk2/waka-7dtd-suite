@@ -1,0 +1,26 @@
+<Project>
+
+  <!--
+    Shared build properties for every Waka mod under mods/<Name>/.
+
+    Override these locally if your 7DTD or MO2 install lives somewhere else:
+      pwsh> $env:SDTDManagedDir = "D:\Steam\...\7DaysToDie_Data\Managed"
+      pwsh> $env:SDTDHarmonyDir = "D:\Modding\MO2\mods\IZY-All in One Gun Pack v5.1\0_TFP_Harmony"
+      pwsh> dotnet build mods/WakaRamNullGuard/Source/WakaRamNullGuard.csproj -c Release
+
+    Or edit `Directory.Build.props.user` (gitignored) next to this file with the
+    same property block to make the override permanent on your machine.
+  -->
+
+  <PropertyGroup>
+    <!-- Path to the 7DTD managed assemblies (Assembly-CSharp.dll etc.) -->
+    <SDTDManagedDir Condition=" '$(SDTDManagedDir)' == '' ">C:\Program Files (x86)\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed</SDTDManagedDir>
+
+    <!-- Path to the HarmonyX assembly (0Harmony.dll). TFP ships HarmonyX inside the IZY weapon pack. -->
+    <SDTDHarmonyDir Condition=" '$(SDTDHarmonyDir)' == '' ">C:\Modding\MO2\mods\IZY-All in One Gun Pack v5.1\0_TFP_Harmony</SDTDHarmonyDir>
+  </PropertyGroup>
+
+  <!-- Allow per-machine overrides without touching version-controlled files -->
+  <Import Project="Directory.Build.props.user" Condition="Exists('Directory.Build.props.user')" />
+
+</Project>

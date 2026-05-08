@@ -1,0 +1,36 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,japanese
+statWakaProtein,ui_display,Item stat,,,Protein,タンパク質
+statWakaCarb,ui_display,Item stat,,,Carbohydrate,炭水化物
+statWakaFat,ui_display,Item stat,,,Fat,脂質
+buffWakaProteinDeficitLightName,buffs,,,,Mild Protein Deficiency,軽度のタンパク質不足
+buffWakaProteinDeficitLightDesc,buffs,,,,Lacking protein. Stamina capacity and healing item efficiency reduced.,タンパク質が不足してる。スタミナ最大値と治療アイテムの効果が低下。
+buffWakaProteinDeficitSevereName,buffs,,,,Severe Protein Deficiency,重度のタンパク質不足
+buffWakaProteinDeficitSevereDesc,buffs,,,,Severely lacking protein. Major stamina cap loss and crippled healing. Eat meat or fish.,深刻なタンパク質不足。スタミナ最大値が大幅低下、治癒速度も大きく落ちてる。肉か魚を食べて。
+buffWakaCarbDeficitLightName,buffs,,,,Mild Carb Deficiency,軽度の炭水化物不足
+buffWakaCarbDeficitLightDesc,buffs,,,,Lacking carbohydrates. Stamina regeneration reduced.,炭水化物が不足してる。スタミナの回復速度が低下。
+buffWakaCarbDeficitSevereName,buffs,,,,Severe Carb Deficiency,重度の炭水化物不足
+buffWakaCarbDeficitSevereDesc,buffs,,,,Severely lacking carbohydrates. Stamina regen heavily impaired and run speed reduced. Eat bread or grain.,深刻な炭水化物不足。スタミナ回復が大幅に低下、走行速度も落ちてる。パンか穀物を食べて。
+buffWakaFatDeficitLightName,buffs,,,,Mild Fat Deficiency,軽度の脂質不足
+buffWakaFatDeficitLightDesc,buffs,,,,Lacking fat. Cold resistance reduced.,脂質が不足してる。寒さへの耐性が低下。
+buffWakaFatDeficitSevereName,buffs,,,,Severe Fat Deficiency,重度の脂質不足
+buffWakaFatDeficitSevereDesc,buffs,,,,Severely lacking fat. Cold resistance crippled and max health reduced. Eat fatty foods or dairy.,深刻な脂質不足。寒さへの耐性が崩壊、最大HPも低下。脂っこい食事や乳製品を摂って。
+buffWakaProteinExcessLightName,buffs,,,,Mild Protein Overload,軽度のタンパク質過剰
+buffWakaProteinExcessLightDesc,buffs,,,,Too much protein. Stamina regen reduced from digestion strain.,タンパク質を取り過ぎ。消化負荷でスタミナ回復が低下。
+buffWakaProteinExcessSevereName,buffs,,,,Severe Protein Overload,重度のタンパク質過剰
+buffWakaProteinExcessSevereDesc,buffs,,,,Heavy protein overload. Stamina regen and run speed reduced. Eat carbs or vegetables to balance.,深刻なタンパク質過多。スタミナ回復と走行速度が低下。炭水化物か野菜でバランスを。
+buffWakaCarbExcessLightName,buffs,,,,Mild Carb Overload,軽度の炭水化物過剰
+buffWakaCarbExcessLightDesc,buffs,,,,Too many carbs. Run speed slightly reduced from extra weight.,炭水化物を取り過ぎ。体重増で走行速度が軽く低下。
+buffWakaCarbExcessSevereName,buffs,,,,Severe Carb Overload,重度の炭水化物過剰
+buffWakaCarbExcessSevereDesc,buffs,,,,Heavy carb overload. Run speed and stamina regen reduced. Switch to protein or fat.,深刻な炭水化物過多。走行速度とスタミナ回復が低下。タンパク質か脂質に切り替えて。
+buffWakaFatExcessLightName,buffs,,,,Mild Fat Overload,軽度の脂質過剰
+buffWakaFatExcessLightDesc,buffs,,,,Too much fat. Healing item efficiency reduced.,脂質を取り過ぎ。治療アイテムの効果が低下。
+buffWakaFatExcessSevereName,buffs,,,,Severe Fat Overload,重度の脂質過剰
+buffWakaFatExcessSevereDesc,buffs,,,,Heavy fat overload. Healing items crippled and max health reduced. Eat lean foods.,深刻な脂質過多。治療効果が崩壊、最大HPも低下。脂の少ない食事に切り替えて。
+foodWakaMetaCleanse,items,Item,,,Metabolic Cleanse Tonic,代謝リセット剤
+foodWakaMetaCleanseDesc,items,Item,,,Bitter herbal tonic that flushes excess nutrients. Reduces protein/carb/fat reserves by 25 each. Restores some stamina. Useful when overstuffed.,過剰栄養を排出する苦味のハーブ剤。タンパク質・炭水化物・脂質をそれぞれ25減らす。スタミナも少し回復。食べすぎリセット用。
+buffWakaProteinPulseName,buffs,,,,Protein +,タンパク質補給中
+buffWakaProteinPulseDesc,buffs,,,,Protein nutrition is increasing.,タンパク質を補給してる。
+buffWakaCarbPulseName,buffs,,,,Carbs +,炭水化物補給中
+buffWakaCarbPulseDesc,buffs,,,,Carbohydrate nutrition is increasing.,炭水化物を補給してる。
+buffWakaFatPulseName,buffs,,,,Fat +,脂質補給中
+buffWakaFatPulseDesc,buffs,,,,Fat nutrition is increasing.,脂質を補給してる。

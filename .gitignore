@@ -1,0 +1,77 @@
+# Build artifacts
+**/bin/
+**/obj/
+**/Source/obj/
+**/Source/bin/
+
+# Per-machine MSBuild overrides (paths to 7DTD / MO2 install)
+Directory.Build.props.user
+**/Directory.Build.props.user
+
+# Compiled binaries (rebuild from source)
+*.dll
+*.pdb
+*.mdb
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# MO2 artifacts (not relevant outside this user's setup)
+meta.ini
+**/meta.ini
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Backups
+*.bak
+*.bak_*
+*.failed_load_*
+*.orig
+
+# Local-only logs
+logs/
+*.log
+
+# Private notes (never commit)
+MEMORY.md
+memory/
+.claude/
+
+# Voice/audio assets that may have IP concerns
+**/Voice/raw/
+**/Voice/source/
+*.wav
+*.mp3
+*.ogg
+# (allow .wav under explicit Sound/ if intended for shipping)
+!**/Sound/*.wav
+!**/Sound/*.ogg
+
+# Third-party mod source (not redistributable, see manifest.csv)
+# Only Waka* mods belong in this repo
+
+# Excluded from initial OSS commit — stored privately
+# WakaPet: WIP, large authoring assets (Blender 130MB+) and IP-sensitive history
+# WakaCopper: disabled in modlist, large shipping bundles (.unity3d 125MB)
+mods/WakaPet/
+mods/WakaCopper/
+
+# Large authoring/asset binaries (use Git LFS if any of these need committing)
+*.blend
+*.blend1
+*.fbx
+*.unity3d
+*.unity3d.bak
+*.unity3d.v*_backup
+*.psd
+*.tga
+# (UI atlas .png are small and should commit; PSD authoring should not)

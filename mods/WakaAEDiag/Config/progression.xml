@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+  WakaAEDiag v0.2
+  v0.1 confirmed: triggered_effect inside effect_group[1] fires.
+  -> effect_group is alive, but passive_effect children may still be dead.
+
+  v0.2 adds an extreme test passive_effect with NO tags (= all crafts).
+  Expected: any craft drops to ~5% of base when player has AE rank >= 1.
+    - Iron door 80s -> ~4s  : passive_effect mechanism works.
+                              BW's tagged effects fail for some other reason
+                              (tag matching / value interpolation / engine quirk).
+    - Iron door stays 80s   : passive_effect itself is dead in this effect_group.
+                              Fix path: rebuild AE effect_group via remove+append.
+
+  Test passive_effect lives in a SEPARATE NEW effect_group[2] so it does not
+  collide with BW's modifications to effect_group[1].
+-->
+
+<append xpath="/progression/perks/perk[@name='perkAdvancedEngineering']/effect_group[1]">
+    <triggered_effect trigger="onSelfItemCrafted" action="LogMessage"
+                      message="[WakaAEDiag] AE effect_group[1] fired (player has perkAdvancedEngineering)"/>
+</append>
+
+<append xpath="/progression/perks/perk[@name='perkAdvancedEngineering']">
+    <effect_group>
+        <passive_effect name="CraftingTime" operation="perc_add" level="1,5" value="-0.95"/>
+    </effect_group>
+</append>
+
+</configs>

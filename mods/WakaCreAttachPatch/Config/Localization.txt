@@ -1,0 +1,145 @@
+Key,english
+
+modCreWeapDamageT1WakaDesc,A precision-machined damage core. +10% entity damage on every hit. Headshots gain an extra +15% bonus on top.
+modCreWeapDamageT2WakaDesc,A reinforced damage core. +20% entity damage on every hit. Headshots gain an extra +30% bonus on top.
+modCreWeapDamageT3WakaDesc,A military-grade damage core. +35% entity damage on every hit. Headshots gain a substantial +55% bonus on top - reward for clean aim.
+
+modCreWeapDurabT1WakaDesc,Hardened internals reduce wear. -15% degradation per use. Useful on weapons you fire often.
+modCreWeapDurabT2WakaDesc,Tempered steel components further extend weapon life. -25% degradation per use.
+modCreWeapDurabT3WakaDesc,Top-tier alloy internals. -40% degradation per use. Pairs well with high-fire-rate builds.
+
+modCreGunRPMT1WakaDesc,A tuned trigger group. +10% rate of fire. Faster cycling reduces incremental spread per shot by 5%.
+modCreGunRPMT2WakaDesc,A polished trigger group. +25% rate of fire. Faster cycling reduces incremental spread per shot by 10%.
+modCreGunRPMT3WakaDesc,A competition-grade trigger group. +50% rate of fire. Faster cycling reduces incremental spread per shot by 20%.
+
+modCreGunReloadT1WakaDesc,Streamlined feed components. +15% reload speed and a small +5% rate of fire bonus from improved cycling.
+modCreGunReloadT2WakaDesc,Optimized feed components. +35% reload speed and +10% rate of fire from improved cycling.
+modCreGunReloadT3WakaDesc,Match-grade feed components. +60% reload speed and +15% rate of fire from improved cycling.
+
+modCreGunMagazineT1WakaDesc,An extended magazine. +35% capacity. Compatible with standard, drum, and shotgun tube magazines.
+modCreGunMagazineT2WakaDesc,A high-capacity magazine. +75% capacity. Compatible with standard, drum, and shotgun tube magazines.
+modCreGunMagazineT3WakaDesc,A heavy-duty magazine. +125% capacity. Compatible with standard, drum, and shotgun tube magazines.
+
+modCreGunGripT1WakaDesc,An ergonomic grip. -15% crouching spread, -10% hipfire and walking spread, -35% recoil on all axes. Adds +10% weapon handling.
+modCreGunGripT2WakaDesc,A reinforced ergonomic grip. -30% crouching spread, -25% hipfire spread, -20% walking spread, -65% recoil on all axes. Adds +20% weapon handling.
+modCreGunGripT3WakaDesc,A custom-fit grip with vibration dampening. -70% crouching spread, -50% hipfire spread, -40% walking spread, -90% recoil on all axes. Adds +30% weapon handling.
+
+modCreGunRangeT1WakaDesc,An extended barrel and refined sight group. +10% effective range and damage falloff, +15% weapon handling. Targets beyond 40m take an extra +25% damage.
+modCreGunRangeT2WakaDesc,A precision barrel assembly. +25% effective range and damage falloff, +25% weapon handling. Targets beyond 40m take an extra +50% damage.
+modCreGunRangeT3WakaDesc,A match-grade barrel assembly. +50% effective range and damage falloff, +40% weapon handling. Targets beyond 40m take a brutal +100% damage.
+
+modCreGunSniperT1WakaDesc,A sniper conversion kit. +10% damage and +20% range, but heavy hipfire and walking penalties make this useless without aiming. Holding breath unlocks +105% weapon handling. Headshots gain +25% damage and +0.15 dismember chance.
+modCreGunSniperT2WakaDesc,A precision sniper conversion. +20% damage and +40% range, with severe spread penalties unless aiming. Holding breath unlocks +125% weapon handling. Headshots gain +50% damage and +0.30 dismember chance.
+modCreGunSniperT3WakaDesc,A match-grade sniper conversion. +30% damage and +75% range, with brutal spread penalties unless aiming. Holding breath unlocks +150% weapon handling. Headshots gain +90% damage and +0.60 dismember chance - one shot, one limb.
+
+modCreGunOneBT1WakaDesc,A single-shot trigger group. Forces 1-round bursts and -70% rate of fire, but loads each round with +55% damage. For weapons that need to hit hard, not often.
+modCreGunOneBT2WakaDesc,A heavy-hitter trigger group. Forces 1-round bursts and -70% rate of fire, but each round deals +90% damage.
+modCreGunOneBT3WakaDesc,A specialist trigger group. Forces 1-round bursts and -70% rate of fire, but each round delivers a devastating +150% damage.
+
+modCreGunShockT1WakaDesc,Electrical conduits in the barrel. Chance to shock targets, varying by weapon class - 17% on marksman rifles down to 2% on shotguns. T1 procs deal a 3-second shock.
+modCreGunShockT2WakaDesc,Refined electrical conduits. Higher proc chance across all weapon classes - up to 30% on marksman rifles. T2 procs deal a 6-second shock.
+modCreGunShockT3WakaDesc,Heavy-duty electrical conduits. Best-in-class proc rates - up to 50% on marksman rifles. T3 procs deal a 9-second shock.
+
+modCreGunBloodT1WakaDesc,Hollow-point machined bullets. Chance to apply bleed counter on hit, scaling sharply with marksman and revolver use. T1 proc rates.
+modCreGunBloodT2WakaDesc,Refined hollow-point ammunition. Higher bleed proc chance across the board, up to 40% on marksman rifles.
+modCreGunBloodT3WakaDesc,Specialist hemorrhage rounds. Best-in-class bleed proc - up to 71% on marksman rifles. Targets bleed out fast.
+
+modCreBowStringT1WakaDesc,A polymer bowstring with reduced creep. +10% projectile velocity for bows and crossbows.
+modCreBowStringT2WakaDesc,A composite bowstring. +25% projectile velocity for bows and crossbows.
+modCreBowStringT3WakaDesc,A high-tension custom bowstring. +50% projectile velocity for bows and crossbows.
+
+modCreBowPowerT1WakaDesc,A reinforced bow limb assembly. +10% damage, +10% weapon handling, and +15% range with reduced falloff.
+modCreBowPowerT2WakaDesc,A heavy-draw limb assembly. +20% damage, +25% weapon handling, and +25% range with reduced falloff.
+modCreBowPowerT3WakaDesc,A competition limb assembly. +30% damage, +50% weapon handling, and +40% range with reduced falloff.
+
+modCreMeleeAPMT1WakaDesc,A balanced grip retrofit. +20% attacks per minute, with -10% stamina cost per swing.
+modCreMeleeAPMT2WakaDesc,A weight-balanced grip. +35% attacks per minute, with -18% stamina cost per swing.
+modCreMeleeAPMT3WakaDesc,A perfectly balanced grip. +55% attacks per minute, with -28% stamina cost per swing.
+
+modCreMeleeStaminaT1WakaDesc,A shock-absorbing rubber grip. -10% stamina cost on primary and secondary attacks.
+modCreMeleeStaminaT2WakaDesc,A high-density rubber grip. -20% stamina cost on primary and secondary attacks.
+modCreMeleeStaminaT3WakaDesc,A vibration-dampening composite grip. -35% stamina cost on primary and secondary attacks.
+
+modCreMeleeRangeT1WakaDesc,An extended haft. +30% effective melee reach and block range.
+modCreMeleeRangeT2WakaDesc,A telescoping haft. +55% effective melee reach and block range.
+modCreMeleeRangeT3WakaDesc,A polearm-grade extended haft. +90% effective melee reach and block range.
+
+modCreMeleeBlockT1WakaDesc,A sharpened striking edge. +15% block damage and +0.05 dismember chance per swing.
+modCreMeleeBlockT2WakaDesc,A precision-honed edge. +25% block damage and +0.10 dismember chance per swing.
+modCreMeleeBlockT3WakaDesc,A monomolecular edge. +40% block damage and +0.18 dismember chance per swing.
+
+modCreMeleeFireT1WakaDesc,An incendiary edge coating. Bow draws have a 45% chance to ignite. Direct primary hits 20%, secondary 35%. Sustains burning element on already-burning targets.
+modCreMeleeFireT2WakaDesc,A pyrophoric edge coating. Bow draws 77% ignition. Primary hits 33%, secondary 63%. Burning duration extends to 15-17s.
+modCreMeleeFireT3WakaDesc,A volatile thermite coating. Bow draws 99% ignition. Primary hits 55%, secondary 91%. Burning duration extends to 20-23s.
+
+modCreMeleeShockT1WakaDesc,A capacitor-loaded grip. Bow draws have a 33% shock chance, primary 15%, secondary 25%. T1 shock duration 4 seconds.
+modCreMeleeShockT2WakaDesc,A high-capacity capacitor grip. Bow draws 53%, primary 25%, secondary 40%. T2 shock duration 7 seconds.
+modCreMeleeShockT3WakaDesc,A military-grade capacitor grip. Bow draws 75%, primary 33%, secondary 57%. T3 shock duration 9 seconds.
+
+modCreMeleeBreakT1WakaDesc,A bone-breaker contour. Bow draws have a 25% ragdoll chance, primary 7%, secondary 20%. Every direct hit also applies armor shredding.
+modCreMeleeBreakT2WakaDesc,A heavy-impact contour. Bow draws 37%, primary 13%, secondary 30%. Every direct hit shreds armor.
+modCreMeleeBreakT3WakaDesc,A devastating impact contour. Bow draws 51%, primary 20%, secondary 42%. Every direct hit shreds armor and ragdolls hard.
+
+cre_modArmorBandolierT1WakaDesc,Quick-access ammo loops on chest armor. +9% reload speed when chest is equipped.
+cre_modArmorBandolierT2WakaDesc,A combat-grade bandolier. +19% reload speed when chest is equipped.
+cre_modArmorBandolierT3WakaDesc,A tactical assault bandolier. +33% reload speed when chest is equipped.
+
+cre_modArmorFittingsT1WakaDesc,Improved internal padding for heavy armor. +1.5% mobility, +0.9% walking and +1.9% running stamina recovery, +2% walk and run speed. Heavy armor only.
+cre_modArmorFittingsT2WakaDesc,Refined heavy armor padding. +2.7% mobility, +1.9% walking and +5.1% running stamina recovery, +4% walk and run speed. Heavy armor only.
+cre_modArmorFittingsT3WakaDesc,Premium heavy armor padding with composite linings. +4.5% mobility, +3.1% walking and +7.3% running stamina recovery, +6% walk and run speed. Heavy armor only.
+
+cre_modArmorPlatingT1WakaDesc,Bolted-on ballistic plate. +0.9 physical damage resist, +3 elemental resist (heat/electrical/radiation/toxic), -5% explosion damage. Light armor only.
+cre_modArmorPlatingT2WakaDesc,Reinforced ballistic plate. +1.75 physical damage resist, +6 elemental resist, -8% explosion damage. Light armor only.
+cre_modArmorPlatingT3WakaDesc,Composite ballistic plate. +3.5 physical damage resist, +10 elemental resist, -12% explosion damage. Light armor only.
+
+cre_modArmorGlovesStaminaT1WakaDesc,Padded gloves that absorb impact shock. -7% stamina cost on melee attacks when gloves are equipped.
+cre_modArmorGlovesStaminaT2WakaDesc,High-density padded gloves. -15% stamina cost on melee attacks when gloves are equipped.
+cre_modArmorGlovesStaminaT3WakaDesc,Composite-padded combat gloves. -25% stamina cost on melee attacks when gloves are equipped.
+
+cre_modArmorGlovesSpeedT1WakaDesc,Lightweight assault gloves. +5% reload speed and +15% attack speed when gloves are equipped.
+cre_modArmorGlovesSpeedT2WakaDesc,Tactical assault gloves. +11% reload speed and +25% attack speed when gloves are equipped.
+cre_modArmorGlovesSpeedT3WakaDesc,Combat-grade assault gloves. +17% reload speed and +37% attack speed when gloves are equipped.
+
+cre_modArmorBootsSpeedT1WakaDesc,Shock-absorbent soles. +5% walk and run speed when chest is equipped.
+cre_modArmorBootsSpeedT2WakaDesc,Sport-engineered soles. +10% walk and run speed when chest is equipped.
+cre_modArmorBootsSpeedT3WakaDesc,Carbon-composite running soles. +15% walk and run speed when chest is equipped.
+
+cre_modArmorBootsStorageT1WakaDesc,Reinforced soles with hidden compartments. +3 carry capacity.
+cre_modArmorBootsStorageT2WakaDesc,Tactical boots with extended storage. +6 carry capacity.
+cre_modArmorBootsStorageT3WakaDesc,Heavy-duty boots with maximum storage. +9 carry capacity.
+
+cre_modArmorHealthT1WakaDesc,An armor lining that reinforces vital areas. +5 max health.
+cre_modArmorHealthT2WakaDesc,A reinforced organ-protection lining. +10 max health.
+cre_modArmorHealthT3WakaDesc,A composite trauma-resistance lining. +20 max health.
+
+cre_modArmorStaminaT1WakaDesc,Cardio-optimized fittings. +5 max stamina.
+cre_modArmorStaminaT2WakaDesc,Endurance-engineered fittings. +10 max stamina.
+cre_modArmorStaminaT3WakaDesc,Athletic-grade fittings. +20 max stamina.
+
+cre_modArmorResistT1WakaDesc,Reinforced underlining. +5% resistance against fatigue, sprains, abrasions, lacerations, stuns, and bleed effects when chest is equipped.
+cre_modArmorResistT2WakaDesc,Padded underlining. +10% resistance against fatigue, sprains, abrasions, lacerations, stuns, and bleed effects when chest is equipped.
+cre_modArmorResistT3WakaDesc,Composite trauma underlining. +20% resistance against fatigue, sprains, abrasions, lacerations, stuns, and bleed effects when chest is equipped.
+
+cre_modArmorReflectionShockT1WakaDesc,Capacitor mesh in the chest. Attackers risk a 4-second shock on melee hits. Single-target reflection.
+cre_modArmorReflectionShockT2WakaDesc,High-capacity capacitor mesh. Melee attackers and nearby foes within 1.5m risk a 7-second shock.
+cre_modArmorReflectionShockT3WakaDesc,Military-grade capacitor mesh. Melee attackers and nearby foes within 3.1m risk a 7-second shock.
+
+cre_modArmorReflectionPunchT1WakaDesc,Spring-loaded plate. Melee attackers ragdoll backward for 3 seconds with moderate force. Single-target.
+cre_modArmorReflectionPunchT2WakaDesc,Heavy-duty spring plate. Melee attackers and foes within 1.5m ragdoll for 5 seconds with high force.
+cre_modArmorReflectionPunchT3WakaDesc,Industrial-grade spring plate. Melee attackers and foes within 3.1m ragdoll for 5 seconds with maximum force.
+
+cre_modArmorReflectionFireT1WakaDesc,Pyrophoric mesh. Melee attackers can ignite from contact with a burning duration of 11-12 seconds.
+cre_modArmorReflectionFireT2WakaDesc,Volatile pyrophoric mesh. Melee attackers and foes within 1.3m can ignite for 15-17 seconds.
+cre_modArmorReflectionFireT3WakaDesc,Thermite-laced pyrophoric mesh. Melee attackers and foes within 3m can ignite for 15-17 seconds.
+
+cre_modArmorAddLootT1WakaDesc,An AI-enhanced visor that flags valuables on zombie corpses. Bonus loot drops from zombie kills via T1 loot table.
+cre_modArmorAddLootT2WakaDesc,An advanced loot-recognition visor. Bonus loot drops from zombie kills via T2 loot table.
+cre_modArmorAddLootT3WakaDesc,A specialist scavenger visor. Bonus loot drops from zombie kills via T3 loot table.
+
+cre_modArmorBleedAnimalT1WakaDesc,A specialized hunting visor that traces vein structure. Animal hits add +3 bleed counter and trigger bleeding. Kills drop extra meat via T1 table.
+cre_modArmorBleedAnimalT2WakaDesc,A precision hunting visor. Animal hits add +5 bleed counter and trigger bleeding. Kills drop extra meat via T2 table.
+cre_modArmorBleedAnimalT3WakaDesc,A master hunter's visor. Animal hits add +7 bleed counter and trigger bleeding. Kills drop extra meat via T3 table.
+
+cre_modArmorSniperT1WakaDesc,Marksman optics integrated into headgear. +50% damage, +1 entity penetration, +1 block penetration, -10% target armor, +30% headshot damage when head piece is equipped.
+cre_modArmorSniperT2WakaDesc,Precision marksman optics. +60% damage, +1 entity penetration, +1 block penetration, -20% target armor, +45% headshot damage when head piece is equipped.
+cre_modArmorSniperT3WakaDesc,Match-grade marksman optics. +70% damage, +1 entity penetration, +1 block penetration, -35% target armor, +70% headshot damage when head piece is equipped.
