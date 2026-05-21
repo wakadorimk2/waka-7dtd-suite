@@ -5,6 +5,9 @@
 !/.gitignore
 !/AGENTS.md
 !/CLAUDE.md
+!/CURRENT_STATE.md
+!/docs/
+!/docs/**
 
 # Local operating tools.
 !/tools/
