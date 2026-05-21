@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xml>
-    <Name value="ZZZZZZ_WakaSoundExpReverbTune" />
-    <DisplayName value="Waka SoundExp Reverb Tune" />
-    <Description value="SoundExp の屋内残響を抑える微調整パッチ。Harmony 経由で (1) ReverbProcessor.Configure の rt60 を上限 0.7 秒にクランプ、(2) Wet ゲインを 0.71x に縮小して小部屋ブースト 2.5x の過剰さを緩和、(3) ReverbPool.PlayReverb 出力 AudioSource.volume を 0.667x に縮小して wet 係数 0.3-0.6 -> 0.2-0.4 相当を実現、(4) VoxelField.LoadSoundMaterials Postfix で内部 wood 系マテリアルの吸音率を底上げ。SoundExp の XML には触れず、SoundExp 単体で読まれる SoundMaterials.xml の値を読み込み後に書き換える。SoundExp が無効/未導入なら無害化。" />
-    <Author value="wakadori" />
-    <Version value="0.1" />
-    <Website value="" />
-</xml>

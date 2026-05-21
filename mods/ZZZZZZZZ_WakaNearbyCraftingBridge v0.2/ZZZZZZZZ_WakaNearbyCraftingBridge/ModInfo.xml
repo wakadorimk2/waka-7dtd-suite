@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xml>
-    <Name value="ZZZZZZZZ_WakaNearbyCraftingBridge" />
-    <DisplayName value="Waka Nearby Crafting Bridge" />
-    <Description value="Allows Waka storage crates to be scanned by Asylum Nearby Crafting without editing the upstream DLL. EAC must be off." />
-    <Author value="wakadori" />
-    <Version value="0.2.0" />
-    <Website value="" />
-</xml>

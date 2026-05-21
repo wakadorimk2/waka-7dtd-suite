@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xml>
-    <Name value="ZZZZZZZZ_WakaPackwiselyCATUIFix" />
-    <DisplayName value="Waka Packwisely CATUI Fix" />
-    <Description value="Moves Packwisely backpack header pouch buttons away from CATUI inventory controls." />
-    <Author value="Waka" />
-    <Version value="0.1" />
-</xml>

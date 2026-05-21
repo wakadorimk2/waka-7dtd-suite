@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xml>
-    <Name value="WakaAEDiag"/>
-    <DisplayName value="Waka AE Diagnostic"/>
-    <Version value="0.1"/>
-    <Description value="Diagnostic logging for perkAdvancedEngineering effect_group integrity"/>
-    <Author value="Wakadori"/>
-</xml>

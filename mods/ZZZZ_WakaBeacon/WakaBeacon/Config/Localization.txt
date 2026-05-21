@@ -1,3 +1,0 @@
-Key,File,Type,UsedInMainMenu,NoTranslate,english,japanese
-wakaBeacon,blocks,Block,,,Waka Beacon,ワカビーコン
-wakaBeaconDesc,blocks,Block,,,"Emits a signal that marks its location on your map and compass, including vertical offset from your position.","設置位置を自機からの高さ差込みでマップ・コンパスに表示する発信機。"

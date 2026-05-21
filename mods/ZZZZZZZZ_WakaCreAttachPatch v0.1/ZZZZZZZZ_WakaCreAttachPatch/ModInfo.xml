@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xml>
-    <Name value="ZZZZZZZZ_WakaCreAttachPatch" />
-    <DisplayName value="Waka Cre Attach Patch" />
-    <Description value="Cre_More Weapon/Armor Mods compatibility patch. v0.4 fixes the v0.3 stat-scaling regression: 7DTD does not honor value range syntax on item_modifier passive_effects, so each Cre attachment now uses SCore ItemHasQuality multi effect_groups (q1-q2 / q3-q4 / q5-q6 → T1/T2/T3 values). Recipes are bound to vanilla crafting_skills (Auto Weapons / Get Hammered / Wasteland Treasures etc.) for magazine-learning unlock with vanilla CraftingTier scaling. Quality also scales recipe ingredient counts via CraftingIngredientCount perc_add per pickaxe pattern. Display names rewritten to thematic (drops T1 suffix). Loads after Cre_More, Durability Overhaul, Black Wolf attachments, and SCore." />
-    <Author value="wakadori" />
-    <Version value="0.5.1" />
-    <Website value="" />
-</xml>
