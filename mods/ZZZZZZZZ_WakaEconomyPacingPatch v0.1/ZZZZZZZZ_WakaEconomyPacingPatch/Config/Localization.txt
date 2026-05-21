@@ -1,9 +1,14 @@
 Key,english
 
 # Waka Economy Pacing Patch v0.1
-# Better Barter buy-side is kept from WakaPerkBoost, sell-side is nerfed here.
-perkBetterBarterRank1BWLongDesc,"You read merchants like the weather. -8% buy prices, +2.5% sell prices."
-perkBetterBarterRank2BWLongDesc,"Numbers move where you push them. -16% buy prices, +5% sell prices."
-perkBetterBarterRank3BWLongDesc,"The trader's smile means less now. -24% buy prices, +7.5% sell prices."
-perkBetterBarterRank4BWLongDesc,"Coin behaves around you. -32% buy prices, +10% sell prices."
-perkBetterBarterRank5BWLongDesc,"You leave with theirs and yours. -40% buy prices, +12.5% sell prices."
+# Better Barter and Daring Adventurer are moderated here for long-run pacing.
+perkBetterBarterRank1BWLongDesc,"You read merchants like the weather. -4% buy prices, +2% sell prices."
+perkBetterBarterRank2BWLongDesc,"Numbers move where you push them. -8% buy prices, +4% sell prices."
+perkBetterBarterRank3BWLongDesc,"The trader's smile means less now. -12% buy prices, +6% sell prices."
+perkBetterBarterRank4BWLongDesc,"Coin behaves around you. -16% buy prices, +8% sell prices."
+perkBetterBarterRank5BWLongDesc,"You leave with theirs and yours. -20% buy prices, +10% sell prices."
+perkDaringAdventurerRank1BWLongDesc,"Quests teach the wasteland's grammar. +8 trader stage. +15% bonus quest reward items."
+perkDaringAdventurerRank2BWLongDesc,"You ask the right questions. +16 trader stage. +30% bonus quest reward items."
+perkDaringAdventurerRank3BWLongDesc,"Reputation walks ahead of you. +24 trader stage. +45% bonus quest reward items."
+perkDaringAdventurerRank4BWLongDesc,"You leave a contract better than you found it. +32 trader stage. +60% bonus quest reward items. +1 quest reward choice."
+perkDaringAdventurerRank5BWLongDesc,"The traders save the good jobs for you. +40 trader stage. +75% bonus quest reward items. +2 quest reward choices."

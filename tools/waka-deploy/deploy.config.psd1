@@ -7,6 +7,11 @@
         'ZZZZZ_WakaPet'
     )
 
+    # Additional exclusions for the notebook dedicated server only.
+    NotebookExcludeMods = @(
+        'ZZZZZ_WakaBodyLayerCATUI'
+    )
+
     # MO2 outer folder -> list of inner 7DTD mod folders to skip during deploy.
     # Use when a bundle mod redundantly ships a foundation mod that you maintain
     # as a separate standalone (and want the standalone to win, regardless of

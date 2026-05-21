@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
 
-  <!-- Keep Better Barter useful for buying, but reduce sell-side compounding.
-       Vanilla and Black Wolf both set BarteringSelling to .05,.1,.15,.2,.25. -->
-  <set xpath="/progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringSelling']/@value">.025,.05,.075,.1,.125</set>
+  <!-- Keep trader perks useful, but reduce long-run economy compounding. -->
+  <set xpath="/progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringBuying']/@value">.04,.08,.12,.16,.20</set>
+  <set xpath="/progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringSelling']/@value">.02,.04,.06,.08,.10</set>
+
+  <set xpath="/progression/perks/perk[@name='perkDaringAdventurer']/effect_group/passive_effect[@name='TraderStage']/@value">8,40</set>
+  <set xpath="/progression/perks/perk[@name='perkDaringAdventurer']/effect_group/passive_effect[@name='QuestBonusItemReward']/@value">.15,.75</set>
 
 </configs>

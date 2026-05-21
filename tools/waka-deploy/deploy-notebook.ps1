@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory=$true)]
-    [string[]]$Mod,
+    [string[]]$Mod = @(),
 
     [string[]]$RemoveMod = @(),
 
@@ -26,10 +25,12 @@ $RemoteModsPath = ($RemoteDediPath.TrimEnd('/\') + '/Mods')
 
 $exclude = @{}
 $excludeMods = @()
+$notebookExcludeMods = @()
 if (Test-Path $ConfigPath) {
     $cfg = Import-PowerShellDataFile -Path $ConfigPath
     if ($cfg.Exclude) { $exclude = $cfg.Exclude }
     if ($cfg.ExcludeMods) { $excludeMods = @($cfg.ExcludeMods) }
+    if ($cfg.NotebookExcludeMods) { $notebookExcludeMods = @($cfg.NotebookExcludeMods) }
 }
 
 $logLines = New-Object System.Collections.Generic.List[string]
@@ -46,6 +47,25 @@ function Quote-RemotePsString([string]$Value) {
 function New-RemoteEncodedCommand([string]$Script) {
     $bytes = [System.Text.Encoding]::Unicode.GetBytes($Script)
     return [Convert]::ToBase64String($bytes)
+}
+
+function Test-ModNameExcluded([string]$Name, [string[]]$List) {
+    foreach ($excluded in $List) {
+        if ($Name -eq $excluded -or $Name -like "$excluded v*") {
+            return $true
+        }
+    }
+    return $false
+}
+
+function Get-ModExcludeReason([string]$Name) {
+    if (Test-ModNameExcluded $Name $notebookExcludeMods) {
+        return 'NotebookExcludeMods'
+    }
+    if (Test-ModNameExcluded $Name $excludeMods) {
+        return 'ExcludeMods'
+    }
+    return $null
 }
 
 function Invoke-RemotePowerShell([string]$Script, [string]$Description) {
@@ -68,9 +88,10 @@ function Invoke-ScpCopy([string]$SourcePath) {
 }
 
 function Get-RealModsFromOuter([System.IO.DirectoryInfo]$Outer, [switch]$Quiet) {
-    if ($excludeMods -contains $Outer.Name) {
+    $outerExcludeReason = Get-ModExcludeReason $Outer.Name
+    if ($outerExcludeReason) {
         if (-not $Quiet) {
-            Log "  excluded by config: $($Outer.Name)" 'DarkGray'
+            Log "  excluded by config $($outerExcludeReason): $($Outer.Name)" 'DarkGray'
         }
         return
     }
@@ -88,9 +109,10 @@ function Get-RealModsFromOuter([System.IO.DirectoryInfo]$Outer, [switch]$Quiet) 
     if ($exclude.ContainsKey($Outer.Name)) { $excludeList = $exclude[$Outer.Name] }
 
     foreach ($real in $realMods) {
-        if ($excludeMods -contains $real.Name) {
+        $realExcludeReason = Get-ModExcludeReason $real.Name
+        if ($realExcludeReason) {
             if (-not $Quiet) {
-                Log "  excluded by config: $($real.Name) from $($Outer.Name)" 'DarkGray'
+                Log "  excluded by config $($realExcludeReason): $($real.Name) from $($Outer.Name)" 'DarkGray'
             }
             continue
         }
@@ -111,8 +133,9 @@ function Get-RealModsFromOuter([System.IO.DirectoryInfo]$Outer, [switch]$Quiet) 
 }
 
 function Resolve-RequestedMod([string]$Name) {
-    if ($excludeMods -contains $Name) {
-        throw "Mod is excluded by deploy.config.psd1 ExcludeMods: $Name"
+    $excludeReason = Get-ModExcludeReason $Name
+    if ($excludeReason) {
+        throw "Mod is excluded by deploy.config.psd1 $($excludeReason): $Name"
     }
 
     $outerPath = Join-Path $ModsRoot $Name
@@ -164,6 +187,8 @@ if ($remaining.Count -gt 0) { exit 2 }
 }
 
 function Remove-RemoteMods([object[]]$Targets) {
+    if (-not $Targets -or $Targets.Count -eq 0) { return }
+
     $quotedDedi = Quote-RemotePsString $RemoteDediPath.Replace('/', '\')
     $quotedNames = ($Targets | ForEach-Object { Quote-RemotePsString $_.Name }) -join ', '
     $script = @"
@@ -251,6 +276,11 @@ if (`$procs.Count -ne 1) { exit 3 }
 }
 
 function Verify-RemoteLog([object[]]$Targets) {
+    if (-not $Targets -or $Targets.Count -eq 0) {
+        Log 'remote: verify newest dedicated log skipped because there are no copied targets' 'DarkGray'
+        return
+    }
+
     $quotedDedi = Quote-RemotePsString $RemoteDediPath.Replace('/', '\')
     $quotedNames = ($Targets | ForEach-Object { Quote-RemotePsString $_.Name }) -join ', '
     $script = @"
@@ -350,6 +380,9 @@ try {
     if (-not (Test-Path -LiteralPath $ModsRoot -PathType Container)) {
         throw "mods folder not found: $ModsRoot"
     }
+    if ((-not $Mod -or $Mod.Count -eq 0) -and (-not $RemoveMod -or $RemoveMod.Count -eq 0)) {
+        throw "At least one -Mod or -RemoveMod value is required."
+    }
 
     Log '=== Waka Notebook Deploy ==='
     Log "MO2 mods       : $ModsRoot"
@@ -359,13 +392,12 @@ try {
     Log "Apply          : $Apply"
     Log "Restart        : $Restart"
     Log "Verify         : $Verify"
-    if ($RemoveMod -and $RemoveMod.Count -gt 0) {
-        Log ("Remove only    : {0}" -f ($RemoveMod -join ', '))
-    }
+    Log ("Deploy/copy targets: {0}" -f ($(if ($Mod -and $Mod.Count -gt 0) { $Mod -join ', ' } else { '(none)' })))
+    Log ("Remove targets : {0}" -f ($(if ($RemoveMod -and $RemoveMod.Count -gt 0) { $RemoveMod -join ', ' } else { '(none)' })))
 
     $resolved = New-Object System.Collections.Generic.List[object]
     $claimed = @{}
-    foreach ($requested in $Mod) {
+    foreach ($requested in @($Mod)) {
         Log "--- Resolve: $requested ---" 'Cyan'
         $realMods = @(Resolve-RequestedMod $requested)
         foreach ($real in $realMods) {
@@ -381,11 +413,21 @@ try {
     }
 
     Log '--- Planned remote changes ---' 'Cyan'
-    foreach ($real in $resolved) {
-        Log ("  remove then copy: {0}/{1}" -f $RemoteModsPath, $real.Name)
+    if ($resolved.Count -gt 0) {
+        Log '  Deploy/copy targets:' 'Cyan'
+        foreach ($real in $resolved) {
+            Log ("    remove then copy: {0}/{1}" -f $RemoteModsPath, $real.Name)
+        }
+    } else {
+        Log '  Deploy/copy targets: (none)' 'DarkGray'
     }
-    foreach ($name in $RemoveMod) {
-        Log ("  remove only: {0}/{1}" -f $RemoteModsPath, $name)
+    if ($RemoveMod -and $RemoveMod.Count -gt 0) {
+        Log '  Remove targets:' 'Cyan'
+        foreach ($name in $RemoveMod) {
+            Log ("    remove only: {0}/{1}" -f $RemoteModsPath, $name)
+        }
+    } else {
+        Log '  Remove targets: (none)' 'DarkGray'
     }
     if ($Restart) { Log '  restart: stop process, start WakaStartDediHeadless.ps1 via scheduled task' }
     if ($Verify) { Log '  verify: newest output_log_dedi__*.txt for copied target load, plus removed-folder absence' }

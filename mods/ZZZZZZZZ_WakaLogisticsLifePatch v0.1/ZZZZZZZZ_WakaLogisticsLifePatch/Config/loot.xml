@@ -1,17 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <configs>
-  <!-- Delay large pouch finds so cargo planning remains relevant through midgame. -->
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselyPouchT3Chance']/loot[@level='60,99']/@prob">0</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselyPouchT3Chance']/loot[@level='100,149']/@prob">.03</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselyPouchT3Chance']/loot[@level='150,999999']/@prob">.07</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselyPouchT4Chance']/loot[@level='120,169']/@prob">0</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselyPouchT4Chance']/loot[@level='170,219']/@prob">.015</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselyPouchT4Chance']/loot[@level='220,999999']/@prob">.04</set>
-
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselySchematicT3Chance']/loot[@level='50,89']/@prob">0</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselySchematicT3Chance']/loot[@level='90,139']/@prob">.04</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselySchematicT3Chance']/loot[@level='140,999999']/@prob">.09</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselySchematicT4Chance']/loot[@level='110,159']/@prob">0</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselySchematicT4Chance']/loot[@level='160,219']/@prob">.02</set>
-  <set xpath="/lootcontainers/lootprobtemplates/lootprobtemplate[@name='packwiselySchematicT4Chance']/loot[@level='220,999999']/@prob">.05</set>
 </configs>
