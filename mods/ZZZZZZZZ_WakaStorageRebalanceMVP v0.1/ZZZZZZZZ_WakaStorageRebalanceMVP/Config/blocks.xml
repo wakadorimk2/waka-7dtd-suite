@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
+  <append xpath="/blocks/block[@name='cntSteelWritableCrate']">
+    <property class="UpgradeBlock">
+      <property name="ToBlock" value="wakaIronStorage"/>
+      <property name="Item" value="resourceForgedIron"/>
+      <property name="ItemCount" value="20"/>
+      <property name="UpgradeHitCount" value="4"/>
+    </property>
+    <property name="UpgradeSound" value="place_block_metal"/>
+  </append>
+
   <append xpath="/blocks">
     <block name="wakaIronStorage">
       <property name="CreativeMode" value="Player"/>
@@ -32,6 +42,13 @@
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10"/>
       </property>
+      <property class="UpgradeBlock">
+        <property name="ToBlock" value="wakaSteelStorage"/>
+        <property name="Item" value="resourceForgedSteel"/>
+        <property name="ItemCount" value="20"/>
+        <property name="UpgradeHitCount" value="4"/>
+      </property>
+      <property name="UpgradeSound" value="place_block_metal"/>
       <drop event="Destroy" name="resourceScrapIron" count="10,30"/>
       <drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
       <property name="SortOrder1" value="B106"/>
@@ -72,6 +89,13 @@
       <property class="RepairItems">
         <property name="resourceForgedSteel" value="10"/>
       </property>
+      <property class="UpgradeBlock">
+        <property name="ToBlock" value="wakaLogisticsContainer"/>
+        <property name="Item" value="resourceElectricParts"/>
+        <property name="ItemCount" value="12"/>
+        <property name="UpgradeHitCount" value="4"/>
+      </property>
+      <property name="UpgradeSound" value="place_block_metal"/>
       <drop event="Destroy" name="resourceScrapIron" count="10,30"/>
       <drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
       <property name="SortOrder1" value="B106"/>

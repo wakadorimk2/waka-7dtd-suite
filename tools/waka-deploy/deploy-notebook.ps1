@@ -3,6 +3,8 @@ param(
     [Parameter(Mandatory=$true)]
     [string[]]$Mod,
 
+    [string[]]$RemoveMod = @(),
+
     [switch]$Apply,
 
     [switch]$Restart,
@@ -181,6 +183,52 @@ foreach (`$name in `$names) {
     Invoke-RemotePowerShell $script 'remote: remove selected mod folders'
 }
 
+function Remove-RemoteModNames([string[]]$Names) {
+    if (-not $Names -or $Names.Count -eq 0) { return }
+
+    $quotedDedi = Quote-RemotePsString $RemoteDediPath.Replace('/', '\')
+    $quotedNames = ($Names | ForEach-Object { Quote-RemotePsString $_ }) -join ', '
+    $script = @"
+`$ErrorActionPreference = 'Stop'
+`$modsRoot = Join-Path $quotedDedi 'Mods'
+`$names = @($quotedNames)
+foreach (`$name in `$names) {
+    `$target = Join-Path `$modsRoot `$name
+    if (Test-Path -LiteralPath `$target) {
+        Write-Output ("REMOVE_MOD {0}" -f `$target)
+        Remove-Item -LiteralPath `$target -Recurse -Force
+    } else {
+        Write-Output ("REMOVE_MOD absent {0}" -f `$target)
+    }
+}
+"@
+    Invoke-RemotePowerShell $script 'remote: remove disabled mod folders'
+}
+
+function Verify-RemoteRemovedMods([string[]]$Names) {
+    if (-not $Names -or $Names.Count -eq 0) { return }
+
+    $quotedDedi = Quote-RemotePsString $RemoteDediPath.Replace('/', '\')
+    $quotedNames = ($Names | ForEach-Object { Quote-RemotePsString $_ }) -join ', '
+    $script = @"
+`$ErrorActionPreference = 'Stop'
+`$modsRoot = Join-Path $quotedDedi 'Mods'
+`$names = @($quotedNames)
+`$failed = `$false
+foreach (`$name in `$names) {
+    `$target = Join-Path `$modsRoot `$name
+    if (Test-Path -LiteralPath `$target) {
+        Write-Output ("VERIFY_REMOVE_PRESENT {0}" -f `$target)
+        `$failed = `$true
+    } else {
+        Write-Output ("VERIFY_REMOVE_ABSENT {0}" -f `$target)
+    }
+}
+if (`$failed) { exit 5 }
+"@
+    Invoke-RemotePowerShell $script 'remote: verify disabled mod folders are absent'
+}
+
 function Start-RemoteServer {
     $quotedLauncher = Quote-RemotePsString (($RemoteDediPath.TrimEnd('/\') + '/WakaStartDediHeadless.ps1').Replace('/', '\'))
     $script = @"
@@ -253,6 +301,9 @@ try {
     Log "Apply          : $Apply"
     Log "Restart        : $Restart"
     Log "Verify         : $Verify"
+    if ($RemoveMod -and $RemoveMod.Count -gt 0) {
+        Log ("Remove only    : {0}" -f ($RemoveMod -join ', '))
+    }
 
     $resolved = New-Object System.Collections.Generic.List[object]
     $claimed = @{}
@@ -275,8 +326,11 @@ try {
     foreach ($real in $resolved) {
         Log ("  remove then copy: {0}/{1}" -f $RemoteModsPath, $real.Name)
     }
+    foreach ($name in $RemoveMod) {
+        Log ("  remove only: {0}/{1}" -f $RemoteModsPath, $name)
+    }
     if ($Restart) { Log '  restart: stop process, start WakaStartDediHeadless.ps1 via scheduled task' }
-    if ($Verify) { Log '  verify: newest output_log_dedi__*.txt for target load and target-specific issues' }
+    if ($Verify) { Log '  verify: newest output_log_dedi__*.txt for copied target load, plus removed-folder absence' }
 
     if (-not $Apply) {
         Log 'DryRun only. No ssh, scp, remote delete, copy, restart, or verify was executed.' 'Yellow'
@@ -289,11 +343,15 @@ try {
 
     if ($Restart) { Stop-RemoteServer }
     Remove-RemoteMods -Targets $resolvedTargets
+    Remove-RemoteModNames -Names $RemoveMod
     foreach ($real in $resolved) {
         Invoke-ScpCopy $real.FullName
     }
     if ($Restart) { Start-RemoteServer }
-    if ($Verify) { Verify-RemoteLog -Targets $resolvedTargets }
+    if ($Verify) {
+        Verify-RemoteLog -Targets $resolvedTargets
+        Verify-RemoteRemovedMods -Names $RemoveMod
+    }
 
     Log 'Notebook deploy completed.' 'Green'
 } catch {

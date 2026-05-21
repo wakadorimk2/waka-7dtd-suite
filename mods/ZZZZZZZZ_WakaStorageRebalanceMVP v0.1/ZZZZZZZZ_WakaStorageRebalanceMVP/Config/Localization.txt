@@ -1,7 +1,7 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,English
 wakaIronStorage,blocks,Block,,,Waka Iron Storage Crate
-wakaIronStorageDesc,,,,,"A 96-slot iron storage crate for midgame base sorting. Empty it before shrinking or removing this mod."
+wakaIronStorageDesc,,,,,"A 96-slot iron storage crate for midgame base sorting. Can be upgraded from a Steel Storage Crate with Forged Iron, then upgraded with Forged Steel. Empty it before shrinking or removing this mod."
 wakaSteelStorage,blocks,Block,,,Waka Steel Storage Crate
-wakaSteelStorageDesc,,,,,"A 120-slot steel storage crate for late base materials, ammunition, and parts. Empty it before shrinking or removing this mod."
+wakaSteelStorageDesc,,,,,"A 120-slot steel storage crate for late base materials, ammunition, and parts. Can be upgraded from Waka Iron Storage Crate with Forged Steel, then upgraded with Electrical Parts. Empty it before shrinking or removing this mod."
 wakaLogisticsContainer,blocks,Block,,,Waka Logistics Storage Crate
-wakaLogisticsContainerDesc,,,,,"A 144-slot logistics container reserved for future storage quality-of-life links. Empty it before shrinking or removing this mod."
+wakaLogisticsContainerDesc,,,,,"A 144-slot logistics container for final-stage base logistics storage. It is the final Waka storage upgrade stage. Empty it before shrinking or removing this mod."

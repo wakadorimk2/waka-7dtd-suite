@@ -6,6 +6,14 @@ Adds three dedicated high-density base storage blocks:
 - Waka Steel Storage Crate: 120 slots (12x10)
 - Waka Logistics Storage Crate: 144 slots (12x12)
 
+The vanilla writable crate upgrade path is extended as:
+
+- Wood Storage Crate -> Iron Storage Crate -> Steel Storage Crate -> Waka Iron Storage Crate -> Waka Steel Storage Crate -> Waka Logistics Storage Crate
+
+The Waka crate block IDs stay stable (`wakaIronStorage`, `wakaSteelStorage`, and `wakaLogisticsContainer`) so existing placed Waka crates are not renamed or replaced.
+
+Asylum Nearby Crafting can scan these Waka crates as modded lockable storage containers when its `EnableModdedContainers` setting is enabled. This mod does not patch the Asylum DLL or change Smart Storage sorting behavior.
+
 Vehicle storage is also rebalanced around one installed vehicle storage mod:
 
 - Bicycle: 12x1 base, 12x2 with the storage mod

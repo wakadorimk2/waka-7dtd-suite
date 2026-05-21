@@ -1,0 +1,9 @@
+<configs>
+	<!-- EFTX Armored Zs still uses pre-2.5 AudioSource names, which causes repeated runtime LoadAudio warnings. -->
+	<set xpath="/Sounds/SoundDataNode[@name='demolitionzexplodewarning2']/AudioSource/@name">@:Sounds/Prefabs/AudioSource_PainLG.prefab</set>
+	<set xpath="/Sounds/SoundDataNode[@name='zombiemalealertEFT']/AudioSource/@name">@:Sounds/Prefabs/AudioSource_CreatureSenseAlert.prefab</set>
+	<set xpath="/Sounds/SoundDataNode[@name='zombiemaleattackEFT']/AudioSource/@name">@:Sounds/Prefabs/AudioSource_Creatures.prefab</set>
+	<set xpath="/Sounds/SoundDataNode[@name='zombiemaledeathEFT']/AudioSource/@name">@:Sounds/Prefabs/AudioSource_Pain.prefab</set>
+	<set xpath="/Sounds/SoundDataNode[@name='zombiemalepainEFT']/AudioSource/@name">@:Sounds/Prefabs/AudioSource_Pain.prefab</set>
+	<set xpath="/Sounds/SoundDataNode[@name='zombiemaleroamEFT']/AudioSource/@name">@:Sounds/Prefabs/AudioSource_Creatures.prefab</set>
+</configs>

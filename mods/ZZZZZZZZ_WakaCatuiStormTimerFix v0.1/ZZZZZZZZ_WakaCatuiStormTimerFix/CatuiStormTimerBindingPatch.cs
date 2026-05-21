@@ -88,32 +88,36 @@ namespace WakaCatuiStormTimerFix
                 return;
             }
 
-            int stormEndWorldTime = biomeWeather.stormWorldTime + biomeWeather.stormDuration;
-            int remainingWorldTime = Mathf.Max(0, stormEndWorldTime - WeatherManager.worldTime);
+            long stormStartWorldTime = biomeWeather.stormWorldTime;
+            long stormDuration = biomeWeather.stormDuration;
+            long stormEndWorldTime = stormStartWorldTime + stormDuration;
+            long remainingWorldTimeLong = stormEndWorldTime - WeatherManager.worldTime;
+            int remainingWorldTime = remainingWorldTimeLong <= 0 ? 0 : remainingWorldTimeLong >= int.MaxValue ? int.MaxValue : (int)remainingWorldTimeLong;
+            bool stormIsCurrent = stormDuration > 0 && stormStartWorldTime > 0 && stormEndWorldTime > WeatherManager.worldTime;
             switch (bindingName)
             {
                 case "CATUI_stormDurationTimeReal":
                     int timeOfDayIncPerSec = Mathf.Max(1, GameStats.GetInt(EnumGameStats.TimeOfDayIncPerSec));
                     int remainingRealSeconds = remainingWorldTime / timeOfDayIncPerSec;
-                    value = remainingRealSeconds <= 0 ? "" : XUiM_PlayerBuffs.ConvertToTimeString(remainingRealSeconds);
+                    value = remainingRealSeconds <= 0 ? "0" : XUiM_PlayerBuffs.ConvertToTimeString(remainingRealSeconds);
                     return;
                 case "CATUI_stormDurationTime":
                 case "CATUI_stormRemainingTime":
                     value = remainingWorldTime.ToString();
                     return;
                 case "CATUI_stormStartWorldTime":
-                    value = biomeWeather.stormWorldTime.ToString();
+                    value = stormStartWorldTime.ToString();
                     return;
                 case "CATUI_stormEndWorldTime":
                     value = stormEndWorldTime.ToString();
                     return;
                 case "CATUI_stormFill":
-                    if (biomeWeather.stormDuration <= 0)
+                    if (!stormIsCurrent)
                     {
                         value = "0.000";
                         return;
                     }
-                    float fill = Mathf.Clamp01((float)remainingWorldTime / biomeWeather.stormDuration);
+                    float fill = Mathf.Clamp((float)remainingWorldTime / biomeWeather.stormDuration, 0.001f, 1f);
                     value = fill.ToString("F3");
                     return;
             }

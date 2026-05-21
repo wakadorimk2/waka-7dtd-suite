@@ -15,7 +15,8 @@ namespace WakaTierCurve.HarmonyPatches
     /// always logged with full detail. Other entities are throttled to verbose
     /// for the first 20 calls only.
     /// </summary>
-    [HarmonyPatch(typeof(World), nameof(World.SpawnEntityInWorld))]
+    // Diagnostic-only observer. Keep compiled for reference, but do not patch in normal play.
+    // Entity swapping is handled by EntityFactoryCreateEntityPatch.
     public static class WorldSpawnEntityInWorldPatch
     {
         private static int _callCount;

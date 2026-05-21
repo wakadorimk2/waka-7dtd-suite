@@ -25,18 +25,13 @@ namespace WakaTierCurve.HarmonyPatches
     {
         private static int _callCount;
         private static int _swapCount;
-        private static bool _firstCallLogged;
+        private static float _lastGameStageCheckTime = -999f;
+        private static int _cachedGameStage = 1;
 
         [HarmonyPrefix]
         public static void Prefix(EntityCreationData _ecd)
         {
             if (_ecd == null) return;
-
-            if (!_firstCallLogged)
-            {
-                _firstCallLogged = true;
-                Log.Out($"[WakaTierCurve] EF FIRST Prefix call: entityClass={_ecd.entityClass}");
-            }
 
             int origId = _ecd.entityClass;
             // NOTE: EntityClass.list keys are entityClassName.GetHashCode() — signed int32,
@@ -44,79 +39,31 @@ namespace WakaTierCurve.HarmonyPatches
             if (origId == 0) return;
 
             int inspectIdx = System.Threading.Interlocked.Increment(ref _callCount);
-            bool verbose = inspectIdx <= 20;
 
             try
             {
-                string origName = EntityClass.list.TryGetValue(origId, out var oc) ? oc?.entityClassName : "?";
-                // Always log if the input is a Bloodfall variant — we need to see every T6+ input.
-                bool isBloodfallInput = origName != null && (origName.StartsWith("Brutal") || origName.StartsWith("Alpha")
-                    || origName.StartsWith("Prime") || origName.StartsWith("Apex") || origName.StartsWith("Torment")
-                    || origName.StartsWith("Nightmare") || origName.StartsWith("Hellborn") || origName.StartsWith("Overlord")
-                    || origName.StartsWith("Demigod") || origName.StartsWith("Bloodlord"));
-                bool log = verbose || isBloodfallInput;
-
                 if (!TierMapper.TryGetByClassId(origId, out var baseName, out var origTier))
-                {
-                    if (log)
-                        Log.Out($"[WakaTierCurve] EF inspect#{inspectIdx}: id={origId}, name='{origName}', NOT tier-able (skipped)");
                     return;
-                }
 
                 var available = TierMapper.TiersFor(baseName);
-                if (available == null)
-                {
-                    if (log)
-                        Log.Out($"[WakaTierCurve] EF inspect#{inspectIdx}: id={origId}, name='{origName}', base={baseName}, NO tier map (skipped)");
-                    return;
-                }
+                if (available == null) return;
 
                 var rng = GameManager.Instance?.World?.GetGameRandom();
-                if (rng == null)
-                {
-                    if (log)
-                        Log.Out($"[WakaTierCurve] EF inspect#{inspectIdx}: id={origId}, name='{origName}', NO RNG (skipped)");
-                    return;
-                }
+                if (rng == null) return;
 
                 int gs = GetCurrentGameStage();
                 int newTier = TierCurve.SampleTier(gs, rng, available);
 
-                if (log)
-                {
-                    var availList = string.Join(",", available.Keys);
-                    Log.Out($"[WakaTierCurve] EF inspect#{inspectIdx}: id={origId}, name='{origName}', base={baseName}, origTier={origTier}, gs={gs}, available=[{availList}], curve picked T{newTier}");
-                }
-
                 if (newTier <= 0 || newTier == origTier) return;
 
-                if (!TierMapper.TryGetClassId(baseName, newTier, out int newId))
-                {
-                    if (log)
-                        Log.Out($"[WakaTierCurve] EF inspect#{inspectIdx}: target T{newTier} not defined for base={baseName} (swap canceled)");
-                    return;
-                }
+                if (!TierMapper.TryGetClassId(baseName, newTier, out int newId)) return;
 
                 _ecd.entityClass = newId;
-                int sc = System.Threading.Interlocked.Increment(ref _swapCount);
-
-                // Always log Bloodfall→vanilla swaps, plus first 20 swaps for general visibility.
-                if (sc <= 20 || isBloodfallInput)
-                {
-                    string newName = EntityClass.list.TryGetValue(newId, out var nc) ? nc?.entityClassName : "?";
-                    Log.Out($"[WakaTierCurve] EF swap#{sc}: {origName}(T{origTier}) -> {newName}(T{newTier}) [base={baseName}, gs={gs}]");
-                }
+                System.Threading.Interlocked.Increment(ref _swapCount);
             }
             catch (Exception e)
             {
                 Log.Warning($"[WakaTierCurve] EF Prefix failed: {e.Message}");
-            }
-            finally
-            {
-                if (inspectIdx % 10 == 0)
-                {
-                    Log.Out($"[WakaTierCurve] EF Prefix calls={inspectIdx}, swaps={_swapCount}");
-                }
             }
         }
 
@@ -124,10 +71,14 @@ namespace WakaTierCurve.HarmonyPatches
         {
             try
             {
+                float now = UnityEngine.Time.realtimeSinceStartup;
+                if (now - _lastGameStageCheckTime < 1.0f)
+                    return _cachedGameStage;
+
                 var world = GameManager.Instance?.World;
-                if (world == null) return 1;
+                if (world == null) return _cachedGameStage;
                 var players = world.GetPlayers();
-                if (players == null || players.Count == 0) return 1;
+                if (players == null || players.Count == 0) return _cachedGameStage;
                 int max = 0;
                 for (int i = 0; i < players.Count; i++)
                 {
@@ -136,11 +87,13 @@ namespace WakaTierCurve.HarmonyPatches
                     int gs = p.HighestPartyGameStage;
                     if (gs > max) max = gs;
                 }
-                return max > 0 ? max : 1;
+                _cachedGameStage = max > 0 ? max : 1;
+                _lastGameStageCheckTime = now;
+                return _cachedGameStage;
             }
             catch
             {
-                return 1;
+                return _cachedGameStage;
             }
         }
     }

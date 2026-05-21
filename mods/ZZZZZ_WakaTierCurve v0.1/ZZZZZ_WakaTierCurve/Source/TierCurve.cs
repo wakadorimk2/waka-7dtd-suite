@@ -38,17 +38,11 @@ namespace WakaTierCurve
         /// </summary>
         public static int SampleTier(int gs, GameRandom rng, IReadOnlyDictionary<int, int> availableTiers)
         {
-            var weights = InterpolateWeights(gs);
-
-            // Filter to only tiers that this baseName actually has defined.
-            // This keeps the curve "shape" but avoids picking tiers that won't resolve.
             double total = 0.0;
             for (int t = 1; t <= 15; t++)
             {
                 if (availableTiers == null || availableTiers.ContainsKey(t))
-                    total += weights[t - 1];
-                else
-                    weights[t - 1] = 0.0;
+                    total += GetWeight(gs, t);
             }
             if (total <= 0.0) return 0;
 
@@ -56,30 +50,24 @@ namespace WakaTierCurve
             double acc = 0.0;
             for (int t = 1; t <= 15; t++)
             {
-                acc += weights[t - 1];
+                if (availableTiers != null && !availableTiers.ContainsKey(t)) continue;
+                acc += GetWeight(gs, t);
                 if (roll <= acc) return t;
             }
             return 15;
         }
 
-        private static double[] InterpolateWeights(int gs)
+        private static double GetWeight(int gs, int tier)
         {
-            var result = new double[15];
+            int idx = tier - 1;
 
             if (gs <= Anchors[0].Gs)
-            {
-                System.Array.Copy(Anchors[0].W, result, 15);
-                return result;
-            }
+                return Anchors[0].W[idx];
 
             int lastIdx = Anchors.Length - 1;
             if (gs >= Anchors[lastIdx].Gs)
-            {
-                System.Array.Copy(Anchors[lastIdx].W, result, 15);
-                return result;
-            }
+                return Anchors[lastIdx].W[idx];
 
-            // Find bracketing anchors.
             for (int i = 0; i < lastIdx; i++)
             {
                 var a = Anchors[i];
@@ -87,17 +75,11 @@ namespace WakaTierCurve
                 if (gs < b.Gs)
                 {
                     double t = (double)(gs - a.Gs) / (b.Gs - a.Gs);
-                    for (int k = 0; k < 15; k++)
-                    {
-                        result[k] = a.W[k] + (b.W[k] - a.W[k]) * t;
-                    }
-                    return result;
+                    return a.W[idx] + (b.W[idx] - a.W[idx]) * t;
                 }
             }
 
-            // Fallthrough (shouldn't hit).
-            System.Array.Copy(Anchors[lastIdx].W, result, 15);
-            return result;
+            return Anchors[lastIdx].W[idx];
         }
     }
 }

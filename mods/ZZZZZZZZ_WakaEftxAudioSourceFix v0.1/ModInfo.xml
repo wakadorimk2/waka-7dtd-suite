@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZZZZ_WakaEftxAudioSourceFix" />
+	<DisplayName value="Waka EFTX Audio Source Fix" />
+	<Description value="Fixes stale EFTX Armored Zs AudioSource prefab paths for 7DTD 2.5." />
+	<Author value="Waka" />
+	<Version value="0.1.0" />
+</xml>
