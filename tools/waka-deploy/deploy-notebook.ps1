@@ -257,13 +257,50 @@ function Verify-RemoteLog([object[]]$Targets) {
 `$ErrorActionPreference = 'Stop'
 `$dedi = $quotedDedi
 `$names = @($quotedNames)
-`$log = Get-ChildItem -LiteralPath `$dedi -Filter 'output_log_dedi__*.txt' -File |
-    Sort-Object LastWriteTime -Descending |
-    Select-Object -First 1
+`$deadline = (Get-Date).AddSeconds(180)
+`$content = @()
+`$log = `$null
+`$hasWorldLoad = `$false
+`$hasSteamLogon = `$false
+do {
+    `$log = Get-ChildItem -LiteralPath `$dedi -Filter 'output_log_dedi__*.txt' -File |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+    if (`$log) {
+        `$content = @(Get-Content -LiteralPath `$log.FullName -ErrorAction Stop)
+        `$hasWorldLoad = @(`$content | Select-String -SimpleMatch 'World.Load:' | Select-Object -First 1).Count -gt 0
+        `$hasSteamLogon = @(`$content | Select-String -SimpleMatch 'GameServer.LogOn successful' | Select-Object -First 1).Count -gt 0
+        if (`$content.Count -gt 0 -and `$hasWorldLoad -and `$hasSteamLogon) { break }
+    }
+    Start-Sleep -Seconds 5
+} while ((Get-Date) -lt `$deadline)
+
 if (-not `$log) { throw "No output_log_dedi__*.txt found in `$dedi" }
 Write-Output ("LATEST_LOG {0} {1}" -f `$log.LastWriteTime.ToString('s'), `$log.FullName)
-`$content = Get-Content -LiteralPath `$log.FullName -ErrorAction Stop
+if (`$content.Count -eq 0) {
+    Write-Output 'VERIFY_STARTUP log is empty after wait'
+    exit 4
+}
+
+`$procs = @(Get-Process -Name '7DaysToDieServer' -ErrorAction SilentlyContinue)
+Write-Output ("VERIFY_PROCESS count={0}" -f `$procs.Count)
+foreach (`$proc in `$procs) { Write-Output ("VERIFY_PROCESS PID={0}" -f `$proc.Id) }
+
+`$knownNullGfxNoise = @(`$content | Where-Object {
+    (`$_ -match 'Shader .+ shader is not supported on this GPU') -or
+    (`$_ -match 'Shader Unsupported: .+ All subshaders removed') -or
+    (`$_ -match 'Did you use #pragma only_renderers') -or
+    (`$_ -match 'graphics device is Null')
+})
+Write-Output ("VERIFY_CLASS Known NullGfx shader noise: {0} lines" -f `$knownNullGfxNoise.Count)
+
 `$failed = `$false
+if (`$procs.Count -ne 1) {
+    Write-Output ("VERIFY_PROCESS issue: expected exactly one 7DaysToDieServer.exe, found {0}" -f `$procs.Count)
+    `$failed = `$true
+}
+
+`$targetIssueCount = 0
 foreach (`$name in `$names) {
     `$load = @(`$content | Select-String -SimpleMatch `$name | Where-Object {
         `$_.Line -match 'Trying to load from folder:|Loaded Mod:'
@@ -276,12 +313,33 @@ foreach (`$name in `$names) {
     }
 
     `$issues = @(`$content | Select-String -SimpleMatch `$name | Where-Object {
-        `$_.Line -match 'ERR|WRN|XPath|XML|ModInfo|Exception'
+        (`$_.Line -match 'ERR|WRN|XPath|XML|ModInfo|Exception') -and -not (
+            (`$_.Line -match 'Shader .+ shader is not supported on this GPU') -or
+            (`$_.Line -match 'Shader Unsupported: .+ All subshaders removed') -or
+            (`$_.Line -match 'Did you use #pragma only_renderers') -or
+            (`$_.Line -match 'graphics device is Null')
+        )
     } | Select-Object -First 40)
+    Write-Output ("VERIFY_CLASS Target mod issues for {0}: {1} lines" -f `$name, `$issues.Count)
+    `$targetIssueCount += `$issues.Count
     foreach (`$line in `$issues) {
         Write-Output ("VERIFY_ISSUE {0}: {1}" -f `$name, `$line.Line.Trim())
     }
     if (`$issues.Count -gt 0) { `$failed = `$true }
+}
+Write-Output ("VERIFY_CLASS Target mod issues: {0} lines" -f `$targetIssueCount)
+if (`$hasWorldLoad) {
+    `$worldLoad = @(`$content | Select-String -SimpleMatch 'World.Load:' | Select-Object -First 1)[0].Line.Trim()
+    Write-Output ("VERIFY_STARTUP reached: {0}" -f `$worldLoad)
+} else {
+    Write-Output 'VERIFY_STARTUP missing: World.Load'
+    `$failed = `$true
+}
+if (`$hasSteamLogon) {
+    Write-Output 'VERIFY_STARTUP reached: GameServer.LogOn successful'
+} else {
+    Write-Output 'VERIFY_STARTUP missing: GameServer.LogOn successful'
+    `$failed = `$true
 }
 if (`$failed) { exit 4 }
 "@
