@@ -54,7 +54,7 @@
 +Lock Slot Save states
 +Asylum Smart Storage
 +Asylum Nearby Crafting
--ZZZZZZZZ_WakaNearbyCraftingBridge v0.1
++ZZZZZZZZ_WakaNearbyCraftingBridge v0.2
 -Survival Backpacks
 -ZZZZZ_WakaNhxBagAutoOpen v0.1
 -NHX Backpacks and Bags - Game v2.6
