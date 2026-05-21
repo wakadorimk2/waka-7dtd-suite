@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaSteroidsCarryFix" />
+    <DisplayName value="Waka Steroids Carry Fix" />
+    <Description value="Converts buffDrugSteroids CarryCapacity from base_set 50 to base_add 23. In Bag Layer environment (base CarryCapacity lowered to 12), the vanilla base_set 50 acts as a cap that swallows pocket mod / Pack Mule / Bag mod additions while steroids are active. base_add preserves stacking with all other CarryCapacity sources." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

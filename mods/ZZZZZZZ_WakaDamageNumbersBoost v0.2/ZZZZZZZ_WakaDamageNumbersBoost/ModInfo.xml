@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaDamageNumbersBoost" />
+    <DisplayName value="Waka Damage Numbers Boost" />
+    <Description value="Visual enhancement layer for Damage Numbers 1.9. Hooks the floating text creation path and dynamically upgrades TextMeshPro outline / fontSize / fontStyle / fill color based on Critical / Headshot / Fatal flags and a raw-damage tier (0..4). HS/Crit hits hard-override to crimson red so bleed-procs and other damage-type tints don't bury the crit signal. Adds distinct pop-in animations per flag (Crit elastic shake, Fatal slow bloom + throb, HS horizontal stretch transient) plus a universal screen-x sway for DoS-style chatter. Fixes overkill clipping (fatal floaties now show raw damage, not capped to victim HP). All floaties render through walls via ZTest Always (per-font material variant, no shared-asset pollution). 1000+ damage renders as 1.2K / 1M format. Pure Harmony patch, no XML overrides, EAC must be off." />
+    <Author value="wakadori" />
+    <Version value="0.2" />
+    <Website value="" />
+</xml>

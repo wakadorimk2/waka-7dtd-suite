@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZZ_WakaEconomyPacingPatch" />
+    <DisplayName value="Waka Economy Pacing Patch" />
+    <Description value="Small economy pacing patch. Reduces Super Corn resale value, slows Super Corn seed expansion slightly, halves Better Barter sell-side scaling, and moderates quest Dukes/reward choice inflation. Does not change ammo pricing or ammo loot flow." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

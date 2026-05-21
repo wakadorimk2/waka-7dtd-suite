@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+
+<append xpath="//lootgroup[@name='groupCraftingRare']">
+    <item name="resourceResearchData" count="1,2" loot_prob_template="low"/>
+</append>
+
+<append xpath="//lootgroup[@name='groupUtilityItems']">
+    <item name="resourceResearchData" count="1,2" loot_prob_template="low"/>
+</append>
+
+</configs>

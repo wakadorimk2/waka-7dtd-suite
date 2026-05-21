@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZZZZ_WakaScourgePurchaseFix" />
+	<DisplayName value="Waka Scourge Purchase Fix" />
+	<Description value="Fixes POI Scourge's CanSwapItems Prefix to also validate cvar_scourge_tokens balance, not just inventory space. Without this fix, rapid clicks at the Scourge Exchange Station can purchase items with insufficient tokens because POI Scourge's RemoveItem clamps cvar to 0 with Math.Max(0f, ...). Implemented as a Harmony Prefix at Priority 900 (runs before POI Scourge's Priority 800), short-circuiting CanSwapItems with __result=false when tokens are insufficient. Defensive only: if POI Scourge is absent the patch is harmless because the scourge-station check returns false. Requires HarmonyX." />
+	<Author value="wakadori" />
+	<Version value="0.1.0" />
+	<Website value="" />
+</xml>

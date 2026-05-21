@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Bloodfall Recipe Fix v0.1 - recipes.xml
+  Bloodfall Hellpick/Hellaxe/Hellshovel recipes were defined with
+  tags="workbench,Hellpick" (etc) and lack the `learnable` marker.
+  Bloodfall progression.xml registers
+    RecipeTagUnlocked tags="Hellpick,Hellaxe,Hellshovel" at level=60
+  on craftingHarvestingTools, but without `learnable` on the recipe
+  the lock never engages, so the tools are craftable from skill Lv1
+  even though the skill panel display_entry says Lv60.
+  Add `learnable` to wire the lock up.
+========================================================================
+-->
+
+<set xpath="/recipes/recipe[@name='Hellpick']/@tags">learnable,workbench,Hellpick</set>
+<set xpath="/recipes/recipe[@name='Hellaxe']/@tags">learnable,workbench,Hellaxe</set>
+<set xpath="/recipes/recipe[@name='Hellshovel']/@tags">learnable,workbench,Hellshovel</set>
+
+</configs>

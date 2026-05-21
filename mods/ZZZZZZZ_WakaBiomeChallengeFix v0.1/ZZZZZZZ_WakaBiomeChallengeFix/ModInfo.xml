@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaBiomeChallengeFix" />
+    <DisplayName value="Waka Biome Challenge Fix" />
+    <Description value="Fixes vanilla Biome Progression challenges (burnt/desert/snow/wasteland SurvivalKillZombie) where EZS T2-T5 tier variants of biome-iconic zombies don't count toward kill objectives. WakaTierCurve swaps spawned vanilla zombies into EZS variants (e.g. zombieBurnt -> zombieBurntT3), but vanilla challenges only list the T1 names in entity_names, and the second KillByTag objective excludes the biome's own tag (e.g. 'burnt'), so tier'd biome zombies fall through both objectives. This patch extends the entity_names list to include EZS T2-T5 variants for all 4 biomes. Bloodfall T6+ Brutal*/Alpha*/etc. variants spawn from non-biome-iconic bases (Darlene/Biker/etc., tagged 'allbiome') and already count via the second objective's tag inheritance, so they need no patch." />
+    <Author value="wakadori" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

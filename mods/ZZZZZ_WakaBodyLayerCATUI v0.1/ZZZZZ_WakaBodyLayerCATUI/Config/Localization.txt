@@ -1,0 +1,4 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,japanese
+xuiWakaCATUIProtein,XUi,Label,,,Protein,タンパク質
+xuiWakaCATUICarb,XUi,Label,,,Carb,炭水化物
+xuiWakaCATUIFat,XUi,Label,,,Fat,脂質

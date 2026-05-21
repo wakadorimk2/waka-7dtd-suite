@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Waka Body Layer v0.5.1 - food nutrition tags + tooltip display + meta cleanse
+
+  v0.5.1 変更:
+    - 全栄養素値を約半分に（食料値より栄養値が少なめになる粒度へ調整）
+      食料値満タンでも栄養が60-70止まる設計、食べすぎ許容、複数食材の混食で栄養カバー
+    - foodWakaMetaCleanse を新規追加（過剰CVarをまとめて -25 する解毒/排出系アイテム）
+-->
+<configs>
+
+    <!-- =============================================================== -->
+    <!-- バニラ：肉系                                                     -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='foodRawMeat']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodGrilledMeat']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBoiledMeat']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCharredMeat']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="10"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodRottingFlesh']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+    </append>
+
+    <!-- 動物油脂：純粋な脂質源 -->
+    <append xpath="/items/item[@name='resourceAnimalFat']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- バニラ：卵                                                       -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='foodEgg']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodEggBoiled']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBaconAndEggs']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- バニラ：缶詰                                                     -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='foodCanBeef']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanChicken']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanLamb']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanChili']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanTuna']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanSalmon']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanCatfood']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanDogfood']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanPasta']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="7"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanSoup']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanStock']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanPeas']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="5"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanPears']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanSham']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCanMiso']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- バニラ：穀物・パン・芋                                           -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='foodCornMeal']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCornBread']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCornOnTheCob']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodPumpkinBread']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="7"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodPumpkinPie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodPumpkinCheesecake']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBlueberryPie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBakedPotato']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodHoney']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- バニラ：作物（生）                                               -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='foodCropPotato']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCropCorn']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCropGraceCorn']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCropPumpkin']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCropYuccaFruit']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- バニラ：複合料理                                                 -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='foodMeatStew']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodVegetableStew']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodHoboStew']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodGumboStew']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="7"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodShepardsPie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodSpaghetti']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="7"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="14"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodSteakAndPotato']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodHoneyGlazedSham']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodHoneyBrisket']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="14"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodShamChowder']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodTunaFishGravyToast']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodFishTacos']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodChiliDog']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="5"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodShamSandwich']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="7"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- バニラ：飲料・スムージー                                         -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='drinkYuccaJuiceSmoothie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodOasisSmoothie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodFrostbiteSmoothie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBurntSmoothie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodAtomicSmoothie']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- EFTX Food V2                                                    -->
+    <!-- =============================================================== -->
+    <append xpath="/items/item[@name='foodWheatFlour']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBread']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBeefstew']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBeefstew2']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="5"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCannedSaira']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodCondensedMilk']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="15"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodHerring']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodIskra']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="15"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodOatFlakes']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodPeas']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="5"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodMarrowPurree']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="1"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodMayo']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodMRE']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodSugar']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="15"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodHumpback']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodSprats']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodArmyCracker']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodAlyonka']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="6"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodSausage']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="9"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodSlickers']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodBeefJerky']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="14"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodInstantNoodles']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="12"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodEmeliaCroutons']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='foodRyeCroutons']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="11"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+
+    <!-- EFTX飲料：栄養素のあるもののみ -->
+    <append xpath="/items/item[@name='drinkMilk']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaProteinPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="2"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaFatPulse"/>
+    </append>
+    <append xpath="/items/item[@name='drinkApplejuice']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='drinkGrandJuice']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='drinkPineappleJuice']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="4"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+    <append xpath="/items/item[@name='drinkVitaJuice']/effect_group[1]">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="3"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffWakaCarbPulse"/>
+    </append>
+
+    <!-- =============================================================== -->
+    <!-- v0.5.1: foodWakaMetaCleanse                                      -->
+    <!-- 過剰CVarをまとめて -25 する解毒/排出系アイテム                  -->
+    <!-- chemistry station 製作、即時効果、メタボ対策                     -->
+    <!-- =============================================================== -->
+    <append xpath="/items">
+        <item name="foodWakaMetaCleanse">
+            <property name="Extends" value="drinkVitaJuice"/>
+            <property name="DescriptionKey" value="foodWakaMetaCleanseDesc"/>
+            <property name="CustomIcon" value="drinkVitaJuice"/>
+            <property name="CustomIconTint" value="80,200,180"/>
+            <property name="EconomicValue" value="120"/>
+            <property name="Group" value="Food/Cooking"/>
+            <effect_group name="foodWakaMetaCleanse">
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProtein" operation="add" value="-25"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarb" operation="add" value="-25"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFat" operation="add" value="-25"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyStats" stat="Stamina" operation="add" value="10"/>
+            </effect_group>
+        </item>
+    </append>
+
+</configs>

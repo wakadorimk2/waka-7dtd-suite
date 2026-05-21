@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Waka Body Layer - CATUI Bridge entityclasses (placeholder)
+
+  Buffs property の重複 append は同名 property の上書き問題を引き起こすため、
+  Bridge buff の付与は buffs.xml で Body Layer Core に AddBuff trigger を
+  append する方式に変更した。
+
+  このファイルは将来 Bridge 独自の entityclass 拡張が必要になった場合の placeholder。
+-->
+<configs>
+</configs>

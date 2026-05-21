@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZ_WakaSlowCurve" />
+    <DisplayName value="Waka Slow Curve" />
+    <Description value="Progression curve flattener with PlayerLevel-gated 6-band GameStage curve (v0.5). Sub-axes: PlayerExpGain perc_add -0.15, LootStage perc_add -0.15, quality-by-quality traderstage_template pacing with baseTier2 Q1 around week 2, baseTier2 85/100/115/130/145, baseTier3 150/170/190/210/230, and EFTX baseTier4/5 plus mods/ammo late-game templates delayed beyond vanilla T3. skillMagazines drop prob 0.85, RandomRoll gate (84/99) on magazine read rate 0.85x. GameStage perc_add 6-band: Lv1-10 -.7, Lv11-30 -.6, Lv31-60 -.5, Lv61-100 -.3, Lv101-150 -.1, Lv151+ +.2. Pure XPath, loads after Bloodfall/BlackWolf/Mickkpewpews/EFTX." />
+    <Author value="wakadori" />
+    <Version value="0.5.0" />
+    <Website value="" />
+</xml>

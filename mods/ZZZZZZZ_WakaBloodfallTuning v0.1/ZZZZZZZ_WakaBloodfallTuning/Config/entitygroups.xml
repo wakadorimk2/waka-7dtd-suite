@@ -1,0 +1,1858 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Bloodfall Tuning v0.1 - entitygroups.xml
+  Rebalance Bloodfall biome wandering Tier curve.
+  Step 1: csv op="remove" wipes all Bloodfall prefixes per biome.
+  Step 2: csv op="add" reapplies surviving tiers with
+          T6 base x 0.7^(tier-6) decay curve.
+  Forest base biome: full purge (vanilla pure).
+  ForestDowntown:    T6 only (0.05 base).
+  BurntForest:       up to T7  (0.10 base).
+  Desert:            up to T8  (0.10 base).
+  Snow:              up to T9  (0.10 base).
+  Wasteland series:  all tiers (0.10 base, decays to T15 ~0.004).
+  Downtown:          up to T8  (0.08 base).
+  BM (feralHordeStageGS80+): untouched, preserves finale spike.
+========================================================================
+-->
+
+<!-- ZombiesAll -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesAll']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<!-- ZombiesNight -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesNight']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<!-- ZombiesDowntown -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesDowntown']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesDowntown']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .08
+BrutalBikerTier6, .08
+BrutalBoeTier6, .08
+BrutalBowlerTier6, .08
+BrutalBusinessManTier6, .08
+BrutalFatCopTier6, .08
+BrutalFatHawaiianTier6, .08
+BrutalFemaleFatTier6, .08
+BrutalInmateTier6, .08
+BrutalJanitorTier6, .08
+BrutalLumberjackTier6, .08
+BrutalMaleHazmatTier6, .08
+BrutalMoeTier6, .08
+BrutalMutatedTier6, .08
+BrutalNurseTier6, .08
+BrutalPartyGirlTier6, .08
+BrutalRancherTier6, .08
+BrutalSkateboarderTier6, .08
+BrutalSoldierTier6, .08
+BrutalSpiderTier6, .08
+BrutalTomClarkTier6, .08
+BrutalUtilityWorkerTier6, .08
+BrutalWightTier6, .08
+BrutalYoTier6, .08
+BrutalMarleneTier6, .08
+AlphaDarleneTier7, .056
+AlphaBikerTier7, .056
+AlphaBoeTier7, .056
+AlphaBowlerTier7, .056
+AlphaBusinessManTier7, .056
+AlphaFatCopTier7, .056
+AlphaFatHawaiianTier7, .056
+AlphaFemaleFatTier7, .056
+AlphaInmateTier7, .056
+AlphaJanitorTier7, .056
+AlphaLumberjackTier7, .056
+AlphaMaleHazmatTier7, .056
+AlphaMoeTier7, .056
+AlphaMutatedTier7, .056
+AlphaNurseTier7, .056
+AlphaPartyGirlTier7, .056
+AlphaRancherTier7, .056
+AlphaSkateboarderTier7, .056
+AlphaSoldierTier7, .056
+AlphaSpiderTier7, .056
+AlphaTomClarkTier7, .056
+AlphaUtilityWorkerTier7, .056
+AlphaWightTier7, .056
+AlphaYoTier7, .056
+AlphaMarleneTier7, .056
+PrimeDarleneTier8, .0392
+PrimeBikerTier8, .0392
+PrimeBoeTier8, .0392
+PrimeBowlerTier8, .0392
+PrimeBusinessManTier8, .0392
+PrimeFatCopTier8, .0392
+PrimeFatHawaiianTier8, .0392
+PrimeFemaleFatTier8, .0392
+PrimeInmateTier8, .0392
+PrimeJanitorTier8, .0392
+PrimeLumberjackTier8, .0392
+PrimeMaleHazmatTier8, .0392
+PrimeMoeTier8, .0392
+PrimeMutatedTier8, .0392
+PrimeNurseTier8, .0392
+PrimePartyGirlTier8, .0392
+PrimeRancherTier8, .0392
+PrimeSkateboarderTier8, .0392
+PrimeSoldierTier8, .0392
+PrimeSpiderTier8, .0392
+PrimeTomClarkTier8, .0392
+PrimeUtilityWorkerTier8, .0392
+PrimeWightTier8, .0392
+PrimeYoTier8, .0392
+PrimeMarleneTier8, .0392
+</csv>
+
+<!-- ZombiesForestDowntown -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .05
+BrutalBikerTier6, .05
+BrutalBoeTier6, .05
+BrutalBowlerTier6, .05
+BrutalBusinessManTier6, .05
+BrutalFatCopTier6, .05
+BrutalFatHawaiianTier6, .05
+BrutalFemaleFatTier6, .05
+BrutalInmateTier6, .05
+BrutalJanitorTier6, .05
+BrutalLumberjackTier6, .05
+BrutalMaleHazmatTier6, .05
+BrutalMoeTier6, .05
+BrutalMutatedTier6, .05
+BrutalNurseTier6, .05
+BrutalPartyGirlTier6, .05
+BrutalRancherTier6, .05
+BrutalSkateboarderTier6, .05
+BrutalSoldierTier6, .05
+BrutalSpiderTier6, .05
+BrutalTomClarkTier6, .05
+BrutalUtilityWorkerTier6, .05
+BrutalWightTier6, .05
+BrutalYoTier6, .05
+BrutalMarleneTier6, .05
+</csv>
+
+<!-- ZombiesForestDowntownNight -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .05
+BrutalBikerTier6, .05
+BrutalBoeTier6, .05
+BrutalBowlerTier6, .05
+BrutalBusinessManTier6, .05
+BrutalFatCopTier6, .05
+BrutalFatHawaiianTier6, .05
+BrutalFemaleFatTier6, .05
+BrutalInmateTier6, .05
+BrutalJanitorTier6, .05
+BrutalLumberjackTier6, .05
+BrutalMaleHazmatTier6, .05
+BrutalMoeTier6, .05
+BrutalMutatedTier6, .05
+BrutalNurseTier6, .05
+BrutalPartyGirlTier6, .05
+BrutalRancherTier6, .05
+BrutalSkateboarderTier6, .05
+BrutalSoldierTier6, .05
+BrutalSpiderTier6, .05
+BrutalTomClarkTier6, .05
+BrutalUtilityWorkerTier6, .05
+BrutalWightTier6, .05
+BrutalYoTier6, .05
+BrutalMarleneTier6, .05
+</csv>
+
+<!-- ZombiesBurntForest -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+</csv>
+
+<!-- ZombiesBurntForestNight -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+</csv>
+
+<!-- ZombiesDesert -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesDesert']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesDesert']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+</csv>
+
+<!-- ZombiesDesertNight -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+</csv>
+
+<!-- ZombiesSnow -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesSnow']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesSnow']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+ApexDarleneTier9, .0343
+ApexBikerTier9, .0343
+ApexBoeTier9, .0343
+ApexBowlerTier9, .0343
+ApexBusinessManTier9, .0343
+ApexFatCopTier9, .0343
+ApexFatHawaiianTier9, .0343
+ApexFemaleFatTier9, .0343
+ApexInmateTier9, .0343
+ApexJanitorTier9, .0343
+ApexLumberjackTier9, .0343
+ApexMaleHazmatTier9, .0343
+ApexMoeTier9, .0343
+ApexMutatedTier9, .0343
+ApexNurseTier9, .0343
+ApexPartyGirlTier9, .0343
+ApexRancherTier9, .0343
+ApexSkateboarderTier9, .0343
+ApexSoldierTier9, .0343
+ApexSpiderTier9, .0343
+ApexTomClarkTier9, .0343
+ApexUtilityWorkerTier9, .0343
+ApexWightTier9, .0343
+ApexYoTier9, .0343
+ApexMarleneTier9, .0343
+</csv>
+
+<!-- ZombiesSnowNight -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+ApexDarleneTier9, .0343
+ApexBikerTier9, .0343
+ApexBoeTier9, .0343
+ApexBowlerTier9, .0343
+ApexBusinessManTier9, .0343
+ApexFatCopTier9, .0343
+ApexFatHawaiianTier9, .0343
+ApexFemaleFatTier9, .0343
+ApexInmateTier9, .0343
+ApexJanitorTier9, .0343
+ApexLumberjackTier9, .0343
+ApexMaleHazmatTier9, .0343
+ApexMoeTier9, .0343
+ApexMutatedTier9, .0343
+ApexNurseTier9, .0343
+ApexPartyGirlTier9, .0343
+ApexRancherTier9, .0343
+ApexSkateboarderTier9, .0343
+ApexSoldierTier9, .0343
+ApexSpiderTier9, .0343
+ApexTomClarkTier9, .0343
+ApexUtilityWorkerTier9, .0343
+ApexWightTier9, .0343
+ApexYoTier9, .0343
+ApexMarleneTier9, .0343
+</csv>
+
+<!-- ZombiesWasteland -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+ApexDarleneTier9, .0343
+ApexBikerTier9, .0343
+ApexBoeTier9, .0343
+ApexBowlerTier9, .0343
+ApexBusinessManTier9, .0343
+ApexFatCopTier9, .0343
+ApexFatHawaiianTier9, .0343
+ApexFemaleFatTier9, .0343
+ApexInmateTier9, .0343
+ApexJanitorTier9, .0343
+ApexLumberjackTier9, .0343
+ApexMaleHazmatTier9, .0343
+ApexMoeTier9, .0343
+ApexMutatedTier9, .0343
+ApexNurseTier9, .0343
+ApexPartyGirlTier9, .0343
+ApexRancherTier9, .0343
+ApexSkateboarderTier9, .0343
+ApexSoldierTier9, .0343
+ApexSpiderTier9, .0343
+ApexTomClarkTier9, .0343
+ApexUtilityWorkerTier9, .0343
+ApexWightTier9, .0343
+ApexYoTier9, .0343
+ApexMarleneTier9, .0343
+TormentDarleneTier10, .024
+TormentBikerTier10, .024
+TormentBoeTier10, .024
+TormentBowlerTier10, .024
+TormentBusinessManTier10, .024
+TormentFatCopTier10, .024
+TormentFatHawaiianTier10, .024
+TormentFemaleFatTier10, .024
+TormentInmateTier10, .024
+TormentJanitorTier10, .024
+TormentLumberjackTier10, .024
+TormentMaleHazmatTier10, .024
+TormentMoeTier10, .024
+TormentMutatedTier10, .024
+TormentNurseTier10, .024
+TormentPartyGirlTier10, .024
+TormentRancherTier10, .024
+TormentSkateboarderTier10, .024
+TormentSoldierTier10, .024
+TormentSpiderTier10, .024
+TormentTomClarkTier10, .024
+TormentUtilityWorkerTier10, .024
+TormentWightTier10, .024
+TormentYoTier10, .024
+TormentMarleneTier10, .024
+NightmareDarleneTier11, .0168
+NightmareBikerTier11, .0168
+NightmareBoeTier11, .0168
+NightmareBowlerTier11, .0168
+NightmareBusinessManTier11, .0168
+NightmareFatCopTier11, .0168
+NightmareFatHawaiianTier11, .0168
+NightmareFemaleFatTier11, .0168
+NightmareInmateTier11, .0168
+NightmareJanitorTier11, .0168
+NightmareLumberjackTier11, .0168
+NightmareMaleHazmatTier11, .0168
+NightmareMoeTier11, .0168
+NightmareMutatedTier11, .0168
+NightmareNurseTier11, .0168
+NightmarePartyGirlTier11, .0168
+NightmareRancherTier11, .0168
+NightmareSkateboarderTier11, .0168
+NightmareSoldierTier11, .0168
+NightmareSpiderTier11, .0168
+NightmareTomClarkTier11, .0168
+NightmareUtilityWorkerTier11, .0168
+NightmareWightTier11, .0168
+NightmareYoTier11, .0168
+NightmareMarleneTier11, .0168
+HellbornDarleneTier12, .0118
+HellbornBikerTier12, .0118
+HellbornBoeTier12, .0118
+HellbornBowlerTier12, .0118
+HellbornBusinessManTier12, .0118
+HellbornFatCopTier12, .0118
+HellbornFatHawaiianTier12, .0118
+HellbornFemaleFatTier12, .0118
+HellbornInmateTier12, .0118
+HellbornJanitorTier12, .0118
+HellbornLumberjackTier12, .0118
+HellbornMaleHazmatTier12, .0118
+HellbornMoeTier12, .0118
+HellbornMutatedTier12, .0118
+HellbornNurseTier12, .0118
+HellbornPartyGirlTier12, .0118
+HellbornRancherTier12, .0118
+HellbornSkateboarderTier12, .0118
+HellbornSoldierTier12, .0118
+HellbornSpiderTier12, .0118
+HellbornTomClarkTier12, .0118
+HellbornUtilityWorkerTier12, .0118
+HellbornWightTier12, .0118
+HellbornYoTier12, .0118
+HellbornMarleneTier12, .0118
+OverlordDarleneTier13, .0082
+OverlordBikerTier13, .0082
+OverlordBoeTier13, .0082
+OverlordBowlerTier13, .0082
+OverlordBusinessManTier13, .0082
+OverlordFatCopTier13, .0082
+OverlordFatHawaiianTier13, .0082
+OverlordFemaleFatTier13, .0082
+OverlordInmateTier13, .0082
+OverlordJanitorTier13, .0082
+OverlordLumberjackTier13, .0082
+OverlordMaleHazmatTier13, .0082
+OverlordMoeTier13, .0082
+OverlordMutatedTier13, .0082
+OverlordNurseTier13, .0082
+OverlordPartyGirlTier13, .0082
+OverlordRancherTier13, .0082
+OverlordSkateboarderTier13, .0082
+OverlordSoldierTier13, .0082
+OverlordSpiderTier13, .0082
+OverlordTomClarkTier13, .0082
+OverlordUtilityWorkerTier13, .0082
+OverlordWightTier13, .0082
+OverlordYoTier13, .0082
+OverlordMarleneTier13, .0082
+DemigodDarleneTier14, .0058
+DemigodBikerTier14, .0058
+DemigodBoeTier14, .0058
+DemigodBowlerTier14, .0058
+DemigodBusinessManTier14, .0058
+DemigodFatCopTier14, .0058
+DemigodFatHawaiianTier14, .0058
+DemigodFemaleFatTier14, .0058
+DemigodInmateTier14, .0058
+DemigodJanitorTier14, .0058
+DemigodLumberjackTier14, .0058
+DemigodMaleHazmatTier14, .0058
+DemigodMoeTier14, .0058
+DemigodMutatedTier14, .0058
+DemigodNurseTier14, .0058
+DemigodPartyGirlTier14, .0058
+DemigodRancherTier14, .0058
+DemigodSkateboarderTier14, .0058
+DemigodSoldierTier14, .0058
+DemigodSpiderTier14, .0058
+DemigodTomClarkTier14, .0058
+DemigodUtilityWorkerTier14, .0058
+DemigodWightTier14, .0058
+DemigodYoTier14, .0058
+DemigodMarleneTier14, .0058
+DemigodStalkerTier14, .0058
+BloodlordDarleneTier15, .004
+BloodlordBikerTier15, .004
+BloodlordBoeTier15, .004
+BloodlordBowlerTier15, .004
+BloodlordBusinessManTier15, .004
+BloodlordFatCopTier15, .004
+BloodlordFatHawaiianTier15, .004
+BloodlordFemaleFatTier15, .004
+BloodlordInmateTier15, .004
+BloodlordJanitorTier15, .004
+BloodlordLumberjackTier15, .004
+BloodlordMaleHazmatTier15, .004
+BloodlordMoeTier15, .004
+BloodlordMutatedTier15, .004
+BloodlordNurseTier15, .004
+BloodlordPartyGirlTier15, .004
+BloodlordRancherTier15, .004
+BloodlordSkateboarderTier15, .004
+BloodlordSoldierTier15, .004
+BloodlordSpiderTier15, .004
+BloodlordTomClarkTier15, .004
+BloodlordUtilityWorkerTier15, .004
+BloodlordWightTier15, .004
+BloodlordYoTier15, .004
+BloodlordMarleneTier15, .004
+BloodlordStalkerTier15, .004
+BloodlordBerserkerTier15, .004
+</csv>
+
+<!-- ZombiesAllWasteland -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesAllWasteland']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesAllWasteland']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+ApexDarleneTier9, .0343
+ApexBikerTier9, .0343
+ApexBoeTier9, .0343
+ApexBowlerTier9, .0343
+ApexBusinessManTier9, .0343
+ApexFatCopTier9, .0343
+ApexFatHawaiianTier9, .0343
+ApexFemaleFatTier9, .0343
+ApexInmateTier9, .0343
+ApexJanitorTier9, .0343
+ApexLumberjackTier9, .0343
+ApexMaleHazmatTier9, .0343
+ApexMoeTier9, .0343
+ApexMutatedTier9, .0343
+ApexNurseTier9, .0343
+ApexPartyGirlTier9, .0343
+ApexRancherTier9, .0343
+ApexSkateboarderTier9, .0343
+ApexSoldierTier9, .0343
+ApexSpiderTier9, .0343
+ApexTomClarkTier9, .0343
+ApexUtilityWorkerTier9, .0343
+ApexWightTier9, .0343
+ApexYoTier9, .0343
+ApexMarleneTier9, .0343
+TormentDarleneTier10, .024
+TormentBikerTier10, .024
+TormentBoeTier10, .024
+TormentBowlerTier10, .024
+TormentBusinessManTier10, .024
+TormentFatCopTier10, .024
+TormentFatHawaiianTier10, .024
+TormentFemaleFatTier10, .024
+TormentInmateTier10, .024
+TormentJanitorTier10, .024
+TormentLumberjackTier10, .024
+TormentMaleHazmatTier10, .024
+TormentMoeTier10, .024
+TormentMutatedTier10, .024
+TormentNurseTier10, .024
+TormentPartyGirlTier10, .024
+TormentRancherTier10, .024
+TormentSkateboarderTier10, .024
+TormentSoldierTier10, .024
+TormentSpiderTier10, .024
+TormentTomClarkTier10, .024
+TormentUtilityWorkerTier10, .024
+TormentWightTier10, .024
+TormentYoTier10, .024
+TormentMarleneTier10, .024
+NightmareDarleneTier11, .0168
+NightmareBikerTier11, .0168
+NightmareBoeTier11, .0168
+NightmareBowlerTier11, .0168
+NightmareBusinessManTier11, .0168
+NightmareFatCopTier11, .0168
+NightmareFatHawaiianTier11, .0168
+NightmareFemaleFatTier11, .0168
+NightmareInmateTier11, .0168
+NightmareJanitorTier11, .0168
+NightmareLumberjackTier11, .0168
+NightmareMaleHazmatTier11, .0168
+NightmareMoeTier11, .0168
+NightmareMutatedTier11, .0168
+NightmareNurseTier11, .0168
+NightmarePartyGirlTier11, .0168
+NightmareRancherTier11, .0168
+NightmareSkateboarderTier11, .0168
+NightmareSoldierTier11, .0168
+NightmareSpiderTier11, .0168
+NightmareTomClarkTier11, .0168
+NightmareUtilityWorkerTier11, .0168
+NightmareWightTier11, .0168
+NightmareYoTier11, .0168
+NightmareMarleneTier11, .0168
+HellbornDarleneTier12, .0118
+HellbornBikerTier12, .0118
+HellbornBoeTier12, .0118
+HellbornBowlerTier12, .0118
+HellbornBusinessManTier12, .0118
+HellbornFatCopTier12, .0118
+HellbornFatHawaiianTier12, .0118
+HellbornFemaleFatTier12, .0118
+HellbornInmateTier12, .0118
+HellbornJanitorTier12, .0118
+HellbornLumberjackTier12, .0118
+HellbornMaleHazmatTier12, .0118
+HellbornMoeTier12, .0118
+HellbornMutatedTier12, .0118
+HellbornNurseTier12, .0118
+HellbornPartyGirlTier12, .0118
+HellbornRancherTier12, .0118
+HellbornSkateboarderTier12, .0118
+HellbornSoldierTier12, .0118
+HellbornSpiderTier12, .0118
+HellbornTomClarkTier12, .0118
+HellbornUtilityWorkerTier12, .0118
+HellbornWightTier12, .0118
+HellbornYoTier12, .0118
+HellbornMarleneTier12, .0118
+OverlordDarleneTier13, .0082
+OverlordBikerTier13, .0082
+OverlordBoeTier13, .0082
+OverlordBowlerTier13, .0082
+OverlordBusinessManTier13, .0082
+OverlordFatCopTier13, .0082
+OverlordFatHawaiianTier13, .0082
+OverlordFemaleFatTier13, .0082
+OverlordInmateTier13, .0082
+OverlordJanitorTier13, .0082
+OverlordLumberjackTier13, .0082
+OverlordMaleHazmatTier13, .0082
+OverlordMoeTier13, .0082
+OverlordMutatedTier13, .0082
+OverlordNurseTier13, .0082
+OverlordPartyGirlTier13, .0082
+OverlordRancherTier13, .0082
+OverlordSkateboarderTier13, .0082
+OverlordSoldierTier13, .0082
+OverlordSpiderTier13, .0082
+OverlordTomClarkTier13, .0082
+OverlordUtilityWorkerTier13, .0082
+OverlordWightTier13, .0082
+OverlordYoTier13, .0082
+OverlordMarleneTier13, .0082
+DemigodDarleneTier14, .0058
+DemigodBikerTier14, .0058
+DemigodBoeTier14, .0058
+DemigodBowlerTier14, .0058
+DemigodBusinessManTier14, .0058
+DemigodFatCopTier14, .0058
+DemigodFatHawaiianTier14, .0058
+DemigodFemaleFatTier14, .0058
+DemigodInmateTier14, .0058
+DemigodJanitorTier14, .0058
+DemigodLumberjackTier14, .0058
+DemigodMaleHazmatTier14, .0058
+DemigodMoeTier14, .0058
+DemigodMutatedTier14, .0058
+DemigodNurseTier14, .0058
+DemigodPartyGirlTier14, .0058
+DemigodRancherTier14, .0058
+DemigodSkateboarderTier14, .0058
+DemigodSoldierTier14, .0058
+DemigodSpiderTier14, .0058
+DemigodTomClarkTier14, .0058
+DemigodUtilityWorkerTier14, .0058
+DemigodWightTier14, .0058
+DemigodYoTier14, .0058
+DemigodMarleneTier14, .0058
+DemigodStalkerTier14, .0058
+BloodlordDarleneTier15, .004
+BloodlordBikerTier15, .004
+BloodlordBoeTier15, .004
+BloodlordBowlerTier15, .004
+BloodlordBusinessManTier15, .004
+BloodlordFatCopTier15, .004
+BloodlordFatHawaiianTier15, .004
+BloodlordFemaleFatTier15, .004
+BloodlordInmateTier15, .004
+BloodlordJanitorTier15, .004
+BloodlordLumberjackTier15, .004
+BloodlordMaleHazmatTier15, .004
+BloodlordMoeTier15, .004
+BloodlordMutatedTier15, .004
+BloodlordNurseTier15, .004
+BloodlordPartyGirlTier15, .004
+BloodlordRancherTier15, .004
+BloodlordSkateboarderTier15, .004
+BloodlordSoldierTier15, .004
+BloodlordSpiderTier15, .004
+BloodlordTomClarkTier15, .004
+BloodlordUtilityWorkerTier15, .004
+BloodlordWightTier15, .004
+BloodlordYoTier15, .004
+BloodlordMarleneTier15, .004
+BloodlordStalkerTier15, .004
+BloodlordBerserkerTier15, .004
+</csv>
+
+<!-- ZombiesWastelandNight -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+ApexDarleneTier9, .0343
+ApexBikerTier9, .0343
+ApexBoeTier9, .0343
+ApexBowlerTier9, .0343
+ApexBusinessManTier9, .0343
+ApexFatCopTier9, .0343
+ApexFatHawaiianTier9, .0343
+ApexFemaleFatTier9, .0343
+ApexInmateTier9, .0343
+ApexJanitorTier9, .0343
+ApexLumberjackTier9, .0343
+ApexMaleHazmatTier9, .0343
+ApexMoeTier9, .0343
+ApexMutatedTier9, .0343
+ApexNurseTier9, .0343
+ApexPartyGirlTier9, .0343
+ApexRancherTier9, .0343
+ApexSkateboarderTier9, .0343
+ApexSoldierTier9, .0343
+ApexSpiderTier9, .0343
+ApexTomClarkTier9, .0343
+ApexUtilityWorkerTier9, .0343
+ApexWightTier9, .0343
+ApexYoTier9, .0343
+ApexMarleneTier9, .0343
+TormentDarleneTier10, .024
+TormentBikerTier10, .024
+TormentBoeTier10, .024
+TormentBowlerTier10, .024
+TormentBusinessManTier10, .024
+TormentFatCopTier10, .024
+TormentFatHawaiianTier10, .024
+TormentFemaleFatTier10, .024
+TormentInmateTier10, .024
+TormentJanitorTier10, .024
+TormentLumberjackTier10, .024
+TormentMaleHazmatTier10, .024
+TormentMoeTier10, .024
+TormentMutatedTier10, .024
+TormentNurseTier10, .024
+TormentPartyGirlTier10, .024
+TormentRancherTier10, .024
+TormentSkateboarderTier10, .024
+TormentSoldierTier10, .024
+TormentSpiderTier10, .024
+TormentTomClarkTier10, .024
+TormentUtilityWorkerTier10, .024
+TormentWightTier10, .024
+TormentYoTier10, .024
+TormentMarleneTier10, .024
+NightmareDarleneTier11, .0168
+NightmareBikerTier11, .0168
+NightmareBoeTier11, .0168
+NightmareBowlerTier11, .0168
+NightmareBusinessManTier11, .0168
+NightmareFatCopTier11, .0168
+NightmareFatHawaiianTier11, .0168
+NightmareFemaleFatTier11, .0168
+NightmareInmateTier11, .0168
+NightmareJanitorTier11, .0168
+NightmareLumberjackTier11, .0168
+NightmareMaleHazmatTier11, .0168
+NightmareMoeTier11, .0168
+NightmareMutatedTier11, .0168
+NightmareNurseTier11, .0168
+NightmarePartyGirlTier11, .0168
+NightmareRancherTier11, .0168
+NightmareSkateboarderTier11, .0168
+NightmareSoldierTier11, .0168
+NightmareSpiderTier11, .0168
+NightmareTomClarkTier11, .0168
+NightmareUtilityWorkerTier11, .0168
+NightmareWightTier11, .0168
+NightmareYoTier11, .0168
+NightmareMarleneTier11, .0168
+HellbornDarleneTier12, .0118
+HellbornBikerTier12, .0118
+HellbornBoeTier12, .0118
+HellbornBowlerTier12, .0118
+HellbornBusinessManTier12, .0118
+HellbornFatCopTier12, .0118
+HellbornFatHawaiianTier12, .0118
+HellbornFemaleFatTier12, .0118
+HellbornInmateTier12, .0118
+HellbornJanitorTier12, .0118
+HellbornLumberjackTier12, .0118
+HellbornMaleHazmatTier12, .0118
+HellbornMoeTier12, .0118
+HellbornMutatedTier12, .0118
+HellbornNurseTier12, .0118
+HellbornPartyGirlTier12, .0118
+HellbornRancherTier12, .0118
+HellbornSkateboarderTier12, .0118
+HellbornSoldierTier12, .0118
+HellbornSpiderTier12, .0118
+HellbornTomClarkTier12, .0118
+HellbornUtilityWorkerTier12, .0118
+HellbornWightTier12, .0118
+HellbornYoTier12, .0118
+HellbornMarleneTier12, .0118
+OverlordDarleneTier13, .0082
+OverlordBikerTier13, .0082
+OverlordBoeTier13, .0082
+OverlordBowlerTier13, .0082
+OverlordBusinessManTier13, .0082
+OverlordFatCopTier13, .0082
+OverlordFatHawaiianTier13, .0082
+OverlordFemaleFatTier13, .0082
+OverlordInmateTier13, .0082
+OverlordJanitorTier13, .0082
+OverlordLumberjackTier13, .0082
+OverlordMaleHazmatTier13, .0082
+OverlordMoeTier13, .0082
+OverlordMutatedTier13, .0082
+OverlordNurseTier13, .0082
+OverlordPartyGirlTier13, .0082
+OverlordRancherTier13, .0082
+OverlordSkateboarderTier13, .0082
+OverlordSoldierTier13, .0082
+OverlordSpiderTier13, .0082
+OverlordTomClarkTier13, .0082
+OverlordUtilityWorkerTier13, .0082
+OverlordWightTier13, .0082
+OverlordYoTier13, .0082
+OverlordMarleneTier13, .0082
+DemigodDarleneTier14, .0058
+DemigodBikerTier14, .0058
+DemigodBoeTier14, .0058
+DemigodBowlerTier14, .0058
+DemigodBusinessManTier14, .0058
+DemigodFatCopTier14, .0058
+DemigodFatHawaiianTier14, .0058
+DemigodFemaleFatTier14, .0058
+DemigodInmateTier14, .0058
+DemigodJanitorTier14, .0058
+DemigodLumberjackTier14, .0058
+DemigodMaleHazmatTier14, .0058
+DemigodMoeTier14, .0058
+DemigodMutatedTier14, .0058
+DemigodNurseTier14, .0058
+DemigodPartyGirlTier14, .0058
+DemigodRancherTier14, .0058
+DemigodSkateboarderTier14, .0058
+DemigodSoldierTier14, .0058
+DemigodSpiderTier14, .0058
+DemigodTomClarkTier14, .0058
+DemigodUtilityWorkerTier14, .0058
+DemigodWightTier14, .0058
+DemigodYoTier14, .0058
+DemigodMarleneTier14, .0058
+DemigodStalkerTier14, .0058
+BloodlordDarleneTier15, .004
+BloodlordBikerTier15, .004
+BloodlordBoeTier15, .004
+BloodlordBowlerTier15, .004
+BloodlordBusinessManTier15, .004
+BloodlordFatCopTier15, .004
+BloodlordFatHawaiianTier15, .004
+BloodlordFemaleFatTier15, .004
+BloodlordInmateTier15, .004
+BloodlordJanitorTier15, .004
+BloodlordLumberjackTier15, .004
+BloodlordMaleHazmatTier15, .004
+BloodlordMoeTier15, .004
+BloodlordMutatedTier15, .004
+BloodlordNurseTier15, .004
+BloodlordPartyGirlTier15, .004
+BloodlordRancherTier15, .004
+BloodlordSkateboarderTier15, .004
+BloodlordSoldierTier15, .004
+BloodlordSpiderTier15, .004
+BloodlordTomClarkTier15, .004
+BloodlordUtilityWorkerTier15, .004
+BloodlordWightTier15, .004
+BloodlordYoTier15, .004
+BloodlordMarleneTier15, .004
+BloodlordStalkerTier15, .004
+BloodlordBerserkerTier15, .004
+</csv>
+
+<!-- ZombiesWastelandDowntown -->
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandDowntown']/text()" delim="\n" op="remove">
+Brutal*
+Alpha*
+Prime*
+Apex*
+Torment*
+Nightmare*
+Hellborn*
+Overlord*
+Demigod*
+Bloodlord*
+</csv>
+
+<csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandDowntown']/text()" delim="\n" op="add">
+BrutalDarleneTier6, .04
+BrutalBikerTier6, .04
+BrutalBoeTier6, .04
+BrutalBowlerTier6, .04
+BrutalBusinessManTier6, .04
+BrutalFatCopTier6, .04
+BrutalFatHawaiianTier6, .04
+BrutalFemaleFatTier6, .04
+BrutalInmateTier6, .04
+BrutalJanitorTier6, .04
+BrutalLumberjackTier6, .04
+BrutalMaleHazmatTier6, .04
+BrutalMoeTier6, .04
+BrutalMutatedTier6, .04
+BrutalNurseTier6, .04
+BrutalPartyGirlTier6, .04
+BrutalRancherTier6, .04
+BrutalSkateboarderTier6, .04
+BrutalSoldierTier6, .04
+BrutalSpiderTier6, .04
+BrutalTomClarkTier6, .04
+BrutalUtilityWorkerTier6, .04
+BrutalWightTier6, .04
+BrutalYoTier6, .04
+BrutalMarleneTier6, .04
+AlphaDarleneTier7, .07
+AlphaBikerTier7, .07
+AlphaBoeTier7, .07
+AlphaBowlerTier7, .07
+AlphaBusinessManTier7, .07
+AlphaFatCopTier7, .07
+AlphaFatHawaiianTier7, .07
+AlphaFemaleFatTier7, .07
+AlphaInmateTier7, .07
+AlphaJanitorTier7, .07
+AlphaLumberjackTier7, .07
+AlphaMaleHazmatTier7, .07
+AlphaMoeTier7, .07
+AlphaMutatedTier7, .07
+AlphaNurseTier7, .07
+AlphaPartyGirlTier7, .07
+AlphaRancherTier7, .07
+AlphaSkateboarderTier7, .07
+AlphaSoldierTier7, .07
+AlphaSpiderTier7, .07
+AlphaTomClarkTier7, .07
+AlphaUtilityWorkerTier7, .07
+AlphaWightTier7, .07
+AlphaYoTier7, .07
+AlphaMarleneTier7, .07
+PrimeDarleneTier8, .049
+PrimeBikerTier8, .049
+PrimeBoeTier8, .049
+PrimeBowlerTier8, .049
+PrimeBusinessManTier8, .049
+PrimeFatCopTier8, .049
+PrimeFatHawaiianTier8, .049
+PrimeFemaleFatTier8, .049
+PrimeInmateTier8, .049
+PrimeJanitorTier8, .049
+PrimeLumberjackTier8, .049
+PrimeMaleHazmatTier8, .049
+PrimeMoeTier8, .049
+PrimeMutatedTier8, .049
+PrimeNurseTier8, .049
+PrimePartyGirlTier8, .049
+PrimeRancherTier8, .049
+PrimeSkateboarderTier8, .049
+PrimeSoldierTier8, .049
+PrimeSpiderTier8, .049
+PrimeTomClarkTier8, .049
+PrimeUtilityWorkerTier8, .049
+PrimeWightTier8, .049
+PrimeYoTier8, .049
+PrimeMarleneTier8, .049
+ApexDarleneTier9, .0343
+ApexBikerTier9, .0343
+ApexBoeTier9, .0343
+ApexBowlerTier9, .0343
+ApexBusinessManTier9, .0343
+ApexFatCopTier9, .0343
+ApexFatHawaiianTier9, .0343
+ApexFemaleFatTier9, .0343
+ApexInmateTier9, .0343
+ApexJanitorTier9, .0343
+ApexLumberjackTier9, .0343
+ApexMaleHazmatTier9, .0343
+ApexMoeTier9, .0343
+ApexMutatedTier9, .0343
+ApexNurseTier9, .0343
+ApexPartyGirlTier9, .0343
+ApexRancherTier9, .0343
+ApexSkateboarderTier9, .0343
+ApexSoldierTier9, .0343
+ApexSpiderTier9, .0343
+ApexTomClarkTier9, .0343
+ApexUtilityWorkerTier9, .0343
+ApexWightTier9, .0343
+ApexYoTier9, .0343
+ApexMarleneTier9, .0343
+TormentDarleneTier10, .024
+TormentBikerTier10, .024
+TormentBoeTier10, .024
+TormentBowlerTier10, .024
+TormentBusinessManTier10, .024
+TormentFatCopTier10, .024
+TormentFatHawaiianTier10, .024
+TormentFemaleFatTier10, .024
+TormentInmateTier10, .024
+TormentJanitorTier10, .024
+TormentLumberjackTier10, .024
+TormentMaleHazmatTier10, .024
+TormentMoeTier10, .024
+TormentMutatedTier10, .024
+TormentNurseTier10, .024
+TormentPartyGirlTier10, .024
+TormentRancherTier10, .024
+TormentSkateboarderTier10, .024
+TormentSoldierTier10, .024
+TormentSpiderTier10, .024
+TormentTomClarkTier10, .024
+TormentUtilityWorkerTier10, .024
+TormentWightTier10, .024
+TormentYoTier10, .024
+TormentMarleneTier10, .024
+NightmareDarleneTier11, .0168
+NightmareBikerTier11, .0168
+NightmareBoeTier11, .0168
+NightmareBowlerTier11, .0168
+NightmareBusinessManTier11, .0168
+NightmareFatCopTier11, .0168
+NightmareFatHawaiianTier11, .0168
+NightmareFemaleFatTier11, .0168
+NightmareInmateTier11, .0168
+NightmareJanitorTier11, .0168
+NightmareLumberjackTier11, .0168
+NightmareMaleHazmatTier11, .0168
+NightmareMoeTier11, .0168
+NightmareMutatedTier11, .0168
+NightmareNurseTier11, .0168
+NightmarePartyGirlTier11, .0168
+NightmareRancherTier11, .0168
+NightmareSkateboarderTier11, .0168
+NightmareSoldierTier11, .0168
+NightmareSpiderTier11, .0168
+NightmareTomClarkTier11, .0168
+NightmareUtilityWorkerTier11, .0168
+NightmareWightTier11, .0168
+NightmareYoTier11, .0168
+NightmareMarleneTier11, .0168
+HellbornDarleneTier12, .0118
+HellbornBikerTier12, .0118
+HellbornBoeTier12, .0118
+HellbornBowlerTier12, .0118
+HellbornBusinessManTier12, .0118
+HellbornFatCopTier12, .0118
+HellbornFatHawaiianTier12, .0118
+HellbornFemaleFatTier12, .0118
+HellbornInmateTier12, .0118
+HellbornJanitorTier12, .0118
+HellbornLumberjackTier12, .0118
+HellbornMaleHazmatTier12, .0118
+HellbornMoeTier12, .0118
+HellbornMutatedTier12, .0118
+HellbornNurseTier12, .0118
+HellbornPartyGirlTier12, .0118
+HellbornRancherTier12, .0118
+HellbornSkateboarderTier12, .0118
+HellbornSoldierTier12, .0118
+HellbornSpiderTier12, .0118
+HellbornTomClarkTier12, .0118
+HellbornUtilityWorkerTier12, .0118
+HellbornWightTier12, .0118
+HellbornYoTier12, .0118
+HellbornMarleneTier12, .0118
+OverlordDarleneTier13, .0082
+OverlordBikerTier13, .0082
+OverlordBoeTier13, .0082
+OverlordBowlerTier13, .0082
+OverlordBusinessManTier13, .0082
+OverlordFatCopTier13, .0082
+OverlordFatHawaiianTier13, .0082
+OverlordFemaleFatTier13, .0082
+OverlordInmateTier13, .0082
+OverlordJanitorTier13, .0082
+OverlordLumberjackTier13, .0082
+OverlordMaleHazmatTier13, .0082
+OverlordMoeTier13, .0082
+OverlordMutatedTier13, .0082
+OverlordNurseTier13, .0082
+OverlordPartyGirlTier13, .0082
+OverlordRancherTier13, .0082
+OverlordSkateboarderTier13, .0082
+OverlordSoldierTier13, .0082
+OverlordSpiderTier13, .0082
+OverlordTomClarkTier13, .0082
+OverlordUtilityWorkerTier13, .0082
+OverlordWightTier13, .0082
+OverlordYoTier13, .0082
+OverlordMarleneTier13, .0082
+DemigodDarleneTier14, .0058
+DemigodBikerTier14, .0058
+DemigodBoeTier14, .0058
+DemigodBowlerTier14, .0058
+DemigodBusinessManTier14, .0058
+DemigodFatCopTier14, .0058
+DemigodFatHawaiianTier14, .0058
+DemigodFemaleFatTier14, .0058
+DemigodInmateTier14, .0058
+DemigodJanitorTier14, .0058
+DemigodLumberjackTier14, .0058
+DemigodMaleHazmatTier14, .0058
+DemigodMoeTier14, .0058
+DemigodMutatedTier14, .0058
+DemigodNurseTier14, .0058
+DemigodPartyGirlTier14, .0058
+DemigodRancherTier14, .0058
+DemigodSkateboarderTier14, .0058
+DemigodSoldierTier14, .0058
+DemigodSpiderTier14, .0058
+DemigodTomClarkTier14, .0058
+DemigodUtilityWorkerTier14, .0058
+DemigodWightTier14, .0058
+DemigodYoTier14, .0058
+DemigodMarleneTier14, .0058
+DemigodStalkerTier14, .0058
+BloodlordDarleneTier15, .004
+BloodlordBikerTier15, .004
+BloodlordBoeTier15, .004
+BloodlordBowlerTier15, .004
+BloodlordBusinessManTier15, .004
+BloodlordFatCopTier15, .004
+BloodlordFatHawaiianTier15, .004
+BloodlordFemaleFatTier15, .004
+BloodlordInmateTier15, .004
+BloodlordJanitorTier15, .004
+BloodlordLumberjackTier15, .004
+BloodlordMaleHazmatTier15, .004
+BloodlordMoeTier15, .004
+BloodlordMutatedTier15, .004
+BloodlordNurseTier15, .004
+BloodlordPartyGirlTier15, .004
+BloodlordRancherTier15, .004
+BloodlordSkateboarderTier15, .004
+BloodlordSoldierTier15, .004
+BloodlordSpiderTier15, .004
+BloodlordTomClarkTier15, .004
+BloodlordUtilityWorkerTier15, .004
+BloodlordWightTier15, .004
+BloodlordYoTier15, .004
+BloodlordMarleneTier15, .004
+BloodlordStalkerTier15, .004
+BloodlordBerserkerTier15, .004
+</csv>
+
+</configs>

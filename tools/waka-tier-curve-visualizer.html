@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waka Tier Curve Visualizer</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f6f8;
+      --panel: #ffffff;
+      --ink: #1f2328;
+      --muted: #656d76;
+      --line: #d0d7de;
+      --accent: #0969da;
+      --accent-2: #1a7f37;
+      --shadow: 0 1px 2px rgba(31, 35, 40, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    main {
+      width: min(1280px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 24px 0 32px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 650;
+      line-height: 1.2;
+    }
+
+    .source {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .metric,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 12px 14px;
+      min-height: 72px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .metric .value {
+      font-size: 22px;
+      font-weight: 650;
+      line-height: 1.1;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 14px;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .controls {
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font: inherit;
+      color: var(--ink);
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .tier-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      font-size: 12px;
+      color: var(--ink);
+      user-select: none;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      min-height: 34px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+    }
+
+    .table-wrap {
+      max-height: 440px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 7px 8px;
+      border-bottom: 1px solid #eaeef2;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: #f6f8fa;
+      z-index: 1;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--line);
+      overflow: hidden;
+      min-width: 72px;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .anchor-list {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .anchor {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 7px;
+      background: #fff;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tooltip {
+      position: absolute;
+      pointer-events: none;
+      display: none;
+      min-width: 130px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(31, 35, 40, 0.16);
+      font-size: 12px;
+      z-index: 2;
+    }
+
+    .tooltip strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        width: min(100vw - 20px, 760px);
+        padding-top: 16px;
+      }
+
+      header,
+      .layout {
+        display: block;
+      }
+
+      .summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel {
+        margin-bottom: 12px;
+      }
+
+      .chart-wrap {
+        height: 360px;
+      }
+
+      .anchor-list {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Waka Tier Curve Visualizer</h1>
+        <div class="source">Mirrors ZZZZZ_WakaTierCurve Source/TierCurve.cs anchors and interpolation.</div>
+      </div>
+    </header>
+
+    <section class="summary" aria-label="Current curve summary">
+      <div class="metric">
+        <div class="label">GameStage</div>
+        <div class="value" id="metric-gs">0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Expected tier</div>
+        <div class="value" id="metric-expected">1.00</div>
+      </div>
+      <div class="metric">
+        <div class="label">Most likely tier</div>
+        <div class="value" id="metric-mode">T1</div>
+      </div>
+      <div class="metric">
+        <div class="label">High tier chance</div>
+        <div class="value" id="metric-high">0.0%</div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <section class="panel">
+        <h2>Distribution by GameStage</h2>
+        <div class="chart-wrap" id="chart-wrap">
+          <canvas id="chart" width="1000" height="440" aria-label="Stacked tier distribution chart"></canvas>
+          <div class="tooltip" id="tooltip"></div>
+        </div>
+        <div class="anchor-list" id="anchor-list"></div>
+      </section>
+
+      <aside class="panel controls">
+        <h2>Sample settings</h2>
+        <label>
+          GameStage
+          <input id="gs-range" type="range" min="0" max="1000" step="1" value="0">
+          <input id="gs-number" type="number" min="0" max="1000" step="1" value="0">
+        </label>
+
+        <div>
+          <h2>Available tiers</h2>
+          <div class="checkbox-grid" id="tier-checks"></div>
+        </div>
+
+        <div class="buttons">
+          <button id="all-tiers" type="button">All tiers</button>
+          <button id="ezs-tiers" type="button">T1-T5</button>
+          <button id="bloodfall-tiers" type="button">T6-T15</button>
+          <button id="odd-tiers" type="button">Odd tiers</button>
+        </div>
+
+        <div>
+          <h2>Current weights</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tier</th>
+                  <th>Chance</th>
+                  <th>Weight</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="weights-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const anchors = [
+      { gs: 0, weights: [1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] },
+      { gs: 30, weights: [0.70, 0.30, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] },
+      { gs: 60, weights: [0.40, 0.40, 0.20, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] },
+      { gs: 100, weights: [0.20, 0.30, 0.30, 0.15, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] },
+      { gs: 150, weights: [0.05, 0.15, 0.25, 0.25, 0.20, 0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] },
+      { gs: 250, weights: [0.00, 0.05, 0.15, 0.20, 0.20, 0.20, 0.15, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00] },
+      { gs: 400, weights: [0.00, 0.00, 0.05, 0.10, 0.15, 0.20, 0.20, 0.15, 0.10, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00] },
+      { gs: 800, weights: [0.00, 0.00, 0.00, 0.00, 0.00, 0.10, 0.15, 0.20, 0.20, 0.15, 0.10, 0.05, 0.05, 0.00, 0.00] }
+    ];
+
+    const colors = [
+      "#0969da", "#1a7f37", "#bf8700", "#cf222e", "#8250df",
+      "#0a7ea4", "#6f4e37", "#d1248f", "#57606a", "#2da44e",
+      "#fb8500", "#6e7781", "#a371f7", "#116329", "#953800"
+    ];
+
+    const chart = document.getElementById("chart");
+    const ctx = chart.getContext("2d");
+    const chartWrap = document.getElementById("chart-wrap");
+    const tooltip = document.getElementById("tooltip");
+    const gsRange = document.getElementById("gs-range");
+    const gsNumber = document.getElementById("gs-number");
+    const checks = document.getElementById("tier-checks");
+    const table = document.getElementById("weights-table");
+    const metricGs = document.getElementById("metric-gs");
+    const metricExpected = document.getElementById("metric-expected");
+    const metricMode = document.getElementById("metric-mode");
+    const metricHigh = document.getElementById("metric-high");
+
+    let selectedGs = 0;
+    let hoverGs = null;
+
+    function interpolateWeights(gs) {
+      if (gs <= anchors[0].gs) return anchors[0].weights.slice();
+      const last = anchors[anchors.length - 1];
+      if (gs >= last.gs) return last.weights.slice();
+
+      for (let i = 0; i < anchors.length - 1; i++) {
+        const a = anchors[i];
+        const b = anchors[i + 1];
+        if (gs < b.gs) {
+          const p = (gs - a.gs) / (b.gs - a.gs);
+          return a.weights.map((w, k) => w + (b.weights[k] - w) * p);
+        }
+      }
+      return last.weights.slice();
+    }
+
+    function availableTiers() {
+      return Array.from(checks.querySelectorAll("input"))
+        .filter(input => input.checked)
+        .map(input => Number(input.value));
+    }
+
+    function filteredWeights(gs) {
+      const available = new Set(availableTiers());
+      const raw = interpolateWeights(gs).map((w, i) => available.has(i + 1) ? w : 0);
+      const total = raw.reduce((sum, w) => sum + w, 0);
+      const chance = total > 0 ? raw.map(w => w / total) : raw;
+      return { raw, chance, total };
+    }
+
+    function formatPct(v) {
+      return `${(v * 100).toFixed(v > 0 && v < 0.001 ? 3 : 1)}%`;
+    }
+
+    function drawChart() {
+      const rect = chart.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      chart.width = Math.max(1, Math.round(rect.width * dpr));
+      chart.height = Math.max(1, Math.round(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const w = rect.width;
+      const h = rect.height;
+      const left = 48;
+      const right = 14;
+      const top = 16;
+      const bottom = 34;
+      const plotW = w - left - right;
+      const plotH = h - top - bottom;
+      const maxGs = Number(gsRange.max);
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.strokeStyle = "#d8dee4";
+      ctx.lineWidth = 1;
+      ctx.fillStyle = "#656d76";
+      ctx.font = "12px Segoe UI, sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+
+      for (let i = 0; i <= 4; i++) {
+        const y = top + plotH * i / 4;
+        ctx.beginPath();
+        ctx.moveTo(left, y);
+        ctx.lineTo(left + plotW, y);
+        ctx.stroke();
+        ctx.fillText(`${100 - i * 25}%`, left - 8, y);
+      }
+
+      const stacks = Array.from({ length: 15 }, () => []);
+      for (let x = 0; x <= plotW; x++) {
+        const gs = Math.round(x / plotW * maxGs);
+        const { chance } = filteredWeights(gs);
+        let acc = 0;
+        for (let t = 0; t < 15; t++) {
+          const y0 = top + plotH * (1 - acc);
+          acc += chance[t];
+          const y1 = top + plotH * (1 - acc);
+          stacks[t].push({ x: left + x, y0, y1 });
+        }
+      }
+
+      for (let t = 0; t < 15; t++) {
+        const points = stacks[t];
+        ctx.beginPath();
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i];
+          if (i === 0) ctx.moveTo(p.x, p.y0);
+          else ctx.lineTo(p.x, p.y0);
+        }
+        for (let i = points.length - 1; i >= 0; i--) {
+          const p = points[i];
+          ctx.lineTo(p.x, p.y1);
+        }
+        ctx.closePath();
+        ctx.fillStyle = colors[t];
+        ctx.globalAlpha = availableTiers().includes(t + 1) ? 0.82 : 0.18;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      ctx.strokeStyle = "#24292f";
+      ctx.beginPath();
+      const selectedX = left + plotW * selectedGs / maxGs;
+      ctx.moveTo(selectedX, top);
+      ctx.lineTo(selectedX, top + plotH);
+      ctx.stroke();
+
+      for (const anchor of anchors) {
+        const x = left + plotW * anchor.gs / maxGs;
+        ctx.strokeStyle = "#8c959f";
+        ctx.setLineDash([3, 4]);
+        ctx.beginPath();
+        ctx.moveTo(x, top);
+        ctx.lineTo(x, top + plotH);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+
+      ctx.strokeStyle = "#24292f";
+      ctx.strokeRect(left, top, plotW, plotH);
+      ctx.fillStyle = "#656d76";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      for (let gs = 0; gs <= maxGs; gs += 200) {
+        const x = left + plotW * gs / maxGs;
+        ctx.fillText(String(gs), x, top + plotH + 10);
+      }
+
+      if (hoverGs !== null) {
+        const x = left + plotW * hoverGs / maxGs;
+        ctx.strokeStyle = "#0969da";
+        ctx.beginPath();
+        ctx.moveTo(x, top);
+        ctx.lineTo(x, top + plotH);
+        ctx.stroke();
+      }
+    }
+
+    function updateMetrics() {
+      const { raw, chance } = filteredWeights(selectedGs);
+      const expected = chance.reduce((sum, w, i) => sum + w * (i + 1), 0);
+      let modeIdx = 0;
+      for (let i = 1; i < chance.length; i++) {
+        if (chance[i] > chance[modeIdx]) modeIdx = i;
+      }
+      const high = chance.slice(5).reduce((sum, w) => sum + w, 0);
+
+      metricGs.textContent = String(selectedGs);
+      metricExpected.textContent = expected.toFixed(2);
+      metricMode.textContent = `T${modeIdx + 1}`;
+      metricHigh.textContent = formatPct(high);
+
+      table.innerHTML = "";
+      for (let i = 0; i < 15; i++) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>T${i + 1}</td>
+          <td>${formatPct(chance[i])}</td>
+          <td>${raw[i].toFixed(3)}</td>
+          <td><div class="bar"><span style="width:${chance[i] * 100}%; background:${colors[i]}"></span></div></td>
+        `;
+        table.appendChild(tr);
+      }
+    }
+
+    function setGs(value) {
+      selectedGs = Math.max(0, Math.min(Number(gsRange.max), Math.round(Number(value) || 0)));
+      gsRange.value = String(selectedGs);
+      gsNumber.value = String(selectedGs);
+      render();
+    }
+
+    function setTiers(predicate) {
+      checks.querySelectorAll("input").forEach(input => {
+        input.checked = predicate(Number(input.value));
+      });
+      render();
+    }
+
+    function render() {
+      updateMetrics();
+      drawChart();
+    }
+
+    function init() {
+      for (let t = 1; t <= 15; t++) {
+        const label = document.createElement("label");
+        label.className = "tier-check";
+        label.innerHTML = `<input type="checkbox" value="${t}" checked> T${t}`;
+        checks.appendChild(label);
+      }
+      checks.addEventListener("change", render);
+
+      document.getElementById("all-tiers").addEventListener("click", () => setTiers(() => true));
+      document.getElementById("ezs-tiers").addEventListener("click", () => setTiers(t => t <= 5));
+      document.getElementById("bloodfall-tiers").addEventListener("click", () => setTiers(t => t >= 6));
+      document.getElementById("odd-tiers").addEventListener("click", () => setTiers(t => t % 2 === 1));
+
+      gsRange.addEventListener("input", event => setGs(event.target.value));
+      gsNumber.addEventListener("input", event => setGs(event.target.value));
+
+      const anchorList = document.getElementById("anchor-list");
+      for (const anchor of anchors) {
+        const div = document.createElement("div");
+        div.className = "anchor";
+        const expected = anchor.weights.reduce((sum, w, i) => sum + w * (i + 1), 0);
+        div.textContent = `GS ${anchor.gs}: E ${expected.toFixed(2)}`;
+        anchorList.appendChild(div);
+      }
+
+      chartWrap.addEventListener("mousemove", event => {
+        const rect = chart.getBoundingClientRect();
+        const left = 48;
+        const right = 14;
+        const plotW = rect.width - left - right;
+        const x = Math.max(0, Math.min(plotW, event.clientX - rect.left - left));
+        hoverGs = Math.round(x / plotW * Number(gsRange.max));
+        const { chance } = filteredWeights(hoverGs);
+        const expected = chance.reduce((sum, w, i) => sum + w * (i + 1), 0);
+        let modeIdx = 0;
+        for (let i = 1; i < chance.length; i++) {
+          if (chance[i] > chance[modeIdx]) modeIdx = i;
+        }
+        tooltip.style.display = "block";
+        tooltip.style.left = `${Math.min(rect.width - 150, Math.max(8, event.clientX - rect.left + 12))}px`;
+        tooltip.style.top = `${Math.min(rect.height - 92, Math.max(8, event.clientY - rect.top + 12))}px`;
+        tooltip.innerHTML = `<strong>GS ${hoverGs}</strong>Expected ${expected.toFixed(2)}<br>Mode T${modeIdx + 1}: ${formatPct(chance[modeIdx])}`;
+        drawChart();
+      });
+
+      chartWrap.addEventListener("mouseleave", () => {
+        hoverGs = null;
+        tooltip.style.display = "none";
+        drawChart();
+      });
+
+      chartWrap.addEventListener("click", () => {
+        if (hoverGs !== null) setGs(hoverGs);
+      });
+
+      window.addEventListener("resize", drawChart);
+      render();
+    }
+
+    init();
+  </script>
+</body>
+</html>

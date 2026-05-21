@@ -1,0 +1,7 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,English
+wakaIronStorage,blocks,Block,,,Waka Iron Storage Crate
+wakaIronStorageDesc,,,,,"A 96-slot iron storage crate for midgame base sorting. Empty it before shrinking or removing this mod."
+wakaSteelStorage,blocks,Block,,,Waka Steel Storage Crate
+wakaSteelStorageDesc,,,,,"A 120-slot steel storage crate for late base materials, ammunition, and parts. Empty it before shrinking or removing this mod."
+wakaLogisticsContainer,blocks,Block,,,Waka Logistics Storage Crate
+wakaLogisticsContainerDesc,,,,,"A 144-slot logistics container reserved for future storage quality-of-life links. Empty it before shrinking or removing this mod."

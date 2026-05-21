@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <setattribute xpath="/item_modifiers/item_modifier[@name='modVehicleStorage']/property[@name='MaxModsAllowed']" name="value">1</setattribute>
+</configs>

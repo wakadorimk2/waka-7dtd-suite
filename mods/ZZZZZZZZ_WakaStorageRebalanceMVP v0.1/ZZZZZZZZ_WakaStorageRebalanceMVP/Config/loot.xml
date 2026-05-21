@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='vehicleBicycle']" name="size">12,1</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='vehicleMinibike']" name="size">12,3</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='vehicleMotorcycle']" name="size">12,5</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='vehicleGyrocopter']" name="size">12,6</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='vehicle4x4Truck']" name="size">12,11</setattribute>
+
+  <append xpath="/lootcontainers">
+    <lootcontainer name="wakaIronStorage" count="0" size="12,8" sound_open="UseActions/crate_iron_open" sound_close="UseActions/crate_iron_close" loot_quality_template="qualBaseTemplate">
+      <item name="cobweb" count="0"/>
+    </lootcontainer>
+
+    <lootcontainer name="wakaSteelStorage" count="0" size="12,10" sound_open="UseActions/crate_steel_open" sound_close="UseActions/crate_steel_close" loot_quality_template="qualBaseTemplate">
+      <item name="cobweb" count="0"/>
+    </lootcontainer>
+
+    <lootcontainer name="wakaLogisticsContainer" count="0" size="12,12" sound_open="UseActions/crate_steel_open" sound_close="UseActions/crate_steel_close" loot_quality_template="qualBaseTemplate">
+      <item name="cobweb" count="0"/>
+    </lootcontainer>
+  </append>
+</configs>

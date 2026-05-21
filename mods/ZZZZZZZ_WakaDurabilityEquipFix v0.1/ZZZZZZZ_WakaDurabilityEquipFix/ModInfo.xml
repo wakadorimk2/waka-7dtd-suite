@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZZZ_WakaDurabilityEquipFix" />
+	<DisplayName value="Waka Durability Overhaul Equipment Fix" />
+	<Description value="Fixes Durability Overhaul's DisableAfterMaxRepairs Prefix on ItemActionEntryRepair.RefreshEnabled — it only checks XUiC_ItemStack (inventory) and skips XUiC_EquipmentStack (equipped slots), so equipped clothing/armor could be repaired past their MaxRepairs count indefinitely. This mod adds a Postfix that mirrors the same check for equipment slots and forces Enabled=false when repairs &gt;= MaxRepairs. Pure Harmony, no XML, no dependency on DurabilityOverhaul.dll. Requires HarmonyX (0_TFP_Harmony). EAC must be off." />
+	<Author value="wakadori" />
+	<Version value="0.1.0" />
+	<Website value="" />
+</xml>

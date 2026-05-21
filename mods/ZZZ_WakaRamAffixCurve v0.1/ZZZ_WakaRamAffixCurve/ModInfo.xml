@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZ_WakaRamAffixCurve" />
+	<DisplayName value="Waka RAM Affix Curve" />
+	<Description value="PoE2-style quality-based affix slot curve for RAM (Random Affixes Mod). Vanilla RAM ties affix count to item attachment-slot count, so even quality 1 loot can roll 5 affixes. This mod overrides AffixSystem.CountModsToApply via Harmony Postfix so the slot cap follows item.Quality (q1=1, q2=2, ..., q6=6 max) with Magic Find perk able to push the cap (MF level / 2 bonus, capped at 6 total). CosmeticMods array is trimmed to the curve cap when safe (no existing affix in the trimmed region) so tooltips show correct slot count. All targets resolved via reflection — no compile-time dependency on RAM. Requires HarmonyX (0_TFP_Harmony) and RAM. EAC must be off." />
+	<Author value="wakadori" />
+	<Version value="0.1.0" />
+	<Website value="" />
+</xml>

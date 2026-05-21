@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaThermalCraft" />
+    <DisplayName value="Waka Thermal Craft" />
+    <Description value="Adds craftable and repairable Thermal Wear (clothingT1-T3) via craftingArmor skill with quality tier unlocks. Lightweight ingredient profile (ArmorCraftingKit + Cloth + Leather, Lv6 LegendaryParts for T3). Adds no stat buffs. Designed to replace Thermal Clothes Custom (Nexus 10229) which over-loaded MagazineSize/LootProb/MaxRange onto clothing slots." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

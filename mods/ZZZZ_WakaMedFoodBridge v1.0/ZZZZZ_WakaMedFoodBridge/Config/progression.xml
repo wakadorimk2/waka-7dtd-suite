@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+
+<append xpath="//crafting_skill[@name='craftingMedical']/effect_group">
+    <!-- mod -> vanilla -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="5,75"
+                    value="1" tags="waka_mv_bandage"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="5,75"
+                    value="1" tags="waka_mv_gauze"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="15,75"
+                    value="1" tags="waka_mv_painkillers"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="25,75"
+                    value="1" tags="waka_mv_firstaidkit"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="40,75"
+                    value="1" tags="waka_mv_antibiotics"/>
+    <!-- vanilla -> mod -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="35,75"
+                    value="1" tags="waka_vm_ifak"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="55,75"
+                    value="1" tags="waka_vm_salewa"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="55,75"
+                    value="1" tags="waka_vm_adrenaline"/>
+</append>
+
+<append xpath="//crafting_skill[@name='craftingFood']/effect_group">
+    <!-- mod -> vanilla -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="5,100"
+                    value="1" tags="waka_mv_boiledmeat"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="10,100"
+                    value="1" tags="waka_mv_grilledmeat"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="25,100"
+                    value="1" tags="waka_mv_meatstew"/>
+    <!-- vanilla -> mod -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="8,100"
+                    value="1" tags="waka_vm_bread"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="15,100"
+                    value="1" tags="waka_vm_sugar"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="30,100"
+                    value="1" tags="waka_vm_kvass"/>
+
+    <!-- v1.1 mod -> vanilla -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="12,100"
+                    value="1" tags="waka_mv_cantuna"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="12,100"
+                    value="1" tags="waka_mv_cansalmon"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="15,100"
+                    value="1" tags="waka_mv_canbeef"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="25,100"
+                    value="1" tags="waka_mv_canlamb"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="10,100"
+                    value="1" tags="waka_mv_canpasta"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="8,100"
+                    value="1" tags="waka_mv_canpeas"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="35,100"
+                    value="1" tags="waka_mv_hobostew"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="14,100"
+                    value="1" tags="waka_mv_honeytea"/>
+
+    <!-- v1.1 vanilla -> mod -->
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="18,100"
+                    value="1" tags="waka_vm_beefstew"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="12,100"
+                    value="1" tags="waka_vm_herring"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="12,100"
+                    value="1" tags="waka_vm_saira"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="8,100"
+                    value="1" tags="waka_vm_wheatflour"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="12,100"
+                    value="1" tags="waka_vm_oatflakes"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="20,100"
+                    value="1" tags="waka_vm_sausage"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="40,100"
+                    value="1" tags="waka_vm_mre"/>
+</append>
+
+</configs>

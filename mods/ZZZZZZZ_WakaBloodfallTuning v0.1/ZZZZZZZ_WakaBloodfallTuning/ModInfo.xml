@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaBloodfallTuning" />
+    <DisplayName value="Waka Bloodfall Tuning" />
+    <Description value="Bloodfall biome wandering rebalance: removes flat T6-T8 prob (0.20 across all biomes) and reapplies a T6 base x 0.7^n decay curve with biome tier ceilings. Forest series fully purged, ForestDowntown T6 only, BurntForest T6-T7, Desert T6-T8, Snow T6-T9, Wasteland series all tiers (T6-T15 with curve), Downtown T6-T8. BloodMoon (feralHordeStageGS80+) untouched preserves finale spike. Pure XML, csv op=remove + add, loads after Bloodfall." />
+    <Author value="wakadori" />
+    <Version value="0.1.1" />
+    <Website value="" />
+</xml>

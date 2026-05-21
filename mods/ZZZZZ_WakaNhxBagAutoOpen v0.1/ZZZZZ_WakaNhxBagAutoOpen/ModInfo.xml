@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaNhxBagAutoOpen" />
+    <DisplayName value="Waka NHX Bag Auto Open" />
+    <Description value="Tab connects NHX bag window to the main backpack window. Opening the player inventory auto-opens the equipped bag if any; closing the inventory auto-closes the bag. Reflection-driven Harmony hooks against NHXBackpacksAndBagsManager.OpenEquippedBag / ResetLootingState. Manual-only stash policy is preserved (not patched in this version). EAC must be off." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+    <SkipWithAntiCheat value="true" />
+</xml>

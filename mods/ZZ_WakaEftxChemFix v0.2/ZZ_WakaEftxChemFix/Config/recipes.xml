@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+
+    <!--
+        ===== Plan A: vanilla 1.25x bundle ratio fix =====
+
+        Reference: vanilla 9mmBulletBall individual = 1 round, bundle = 100 rounds
+        from 80x ingredients. Bundle is exactly 1.25x more ingredient-efficient
+        than individual. Apply same ratio to EFTX chemistry individuals so the
+        bundle path stays the endgame production route while individual is a
+        viable early-game stopgap.
+    -->
+
+    <!--
+        NitricAcid: bundleEftResourceNitricAcid uses K-Nitrate 375 to output
+        1950 acid (5.2 acid per K-Nitrate). At vanilla 1.25x bundle bonus the
+        individual should be 5.2 / 1.25 = 4.16 acid per K-Nitrate. Individual
+        uses 38 K-Nitrate so target output is 38 * 4.16 = ~158 -> count=160.
+    -->
+    <set xpath="/recipes/recipe[@name='resourceNitricAcid' and @craft_area='chemistryStation']/@count">160</set>
+
+    <!--
+        SulfuricAcid: bundleEftResourceSulfuricAcid uses Lead 250 to output
+        10000 acid (40 acid per Lead). At vanilla 1.25x bundle bonus the
+        individual should be 40 / 1.25 = 32 acid per Lead. Individual uses
+        25 Lead so target output is 25 * 32 = 800 -> count=800.
+    -->
+    <set xpath="/recipes/recipe[@name='resourceSulfuricAcid' and @craft_area='chemistryStation']/@count">800</set>
+
+    <!--
+        OxBleach circular dependency removal: the recipe requiring
+        Acid + Glue + NitricAcid x350 to produce 1 OxBleach is impossible
+        because NitricAcid individual requires OxBleach. Identify by the
+        NitricAcid ingredient (the other OxBleach recipe uses AnimalFat etc).
+    -->
+    <remove xpath="/recipes/recipe[@name='resourceOxBleach' and ingredient[@name='resourceNitricAcid']]"/>
+
+    <!--
+        OxBleach vanilla-style recipe (Acid + Water + RottingFlesh +
+        Cornmeal + AnimalFat) currently outputs 1, but vanilla baseline
+        for the same ingredient set is count=2. Identify by AnimalFat.
+    -->
+    <set xpath="/recipes/recipe[@name='resourceOxBleach' and ingredient[@name='resourceAnimalFat']]/@count">2</set>
+
+    <!--
+        ===== Plan B: graphite/pyroxylin alternate routes (chemistry-strict) =====
+
+        Pyroxylin is nitrocellulose: the very product of cellulose + nitric +
+        sulfuric. Skip-the-intermediate alt for the powder line.
+        Graphite is the carbon source of black powder (C 15% / KNO3 75% / S 10%).
+        Pair it with potassium nitrate to form a chemistry-station gunpowder
+        route that bypasses the matches-only vanilla path.
+
+        These are additional same-name recipes (7DTD picks any in the
+        crafting UI), so the existing cellulose+nitric+sulfuric route stays.
+    -->
+    <append xpath="/recipes">
+        <!-- pyroxylin alone -> powder x1 (vanilla equivalent: cellulose+nitric+sulfuric) -->
+        <recipe name="resource_item_other_powder" count="1" craft_time="3" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
+            <ingredient name="resourcePyroxylin" count="1"/>
+        </recipe>
+        <!-- pyroxylin + gunpowder -> powder_green x1 (vanilla: cellulose+gunpowder+nitric+sulfuric) -->
+        <recipe name="resource_item_other_powder_green" count="1" craft_time="5" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
+            <ingredient name="resourcePyroxylin" count="1"/>
+            <ingredient name="resourceGunPowder" count="1"/>
+        </recipe>
+        <!-- pyroxylin + KNO3 -> powder_red x1 (vanilla: cellulose+KNO3+nitric+sulfuric) -->
+        <recipe name="resource_item_other_powder_red" count="1" craft_time="7" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
+            <ingredient name="resourcePyroxylin" count="1"/>
+            <ingredient name="resourcePotassiumNitratePowder" count="1"/>
+        </recipe>
+        <!-- graphite + KNO3 -> gunpowder x10 (matches alt, requires chemistry station) -->
+        <recipe name="resourceGunPowder" count="10" craft_time="50" craft_area="chemistryStation" tags="chemStationCrafting">
+            <ingredient name="resourceGraphitePowder" count="1"/>
+            <ingredient name="resourcePotassiumNitratePowder" count="3"/>
+        </recipe>
+    </append>
+
+</configs>

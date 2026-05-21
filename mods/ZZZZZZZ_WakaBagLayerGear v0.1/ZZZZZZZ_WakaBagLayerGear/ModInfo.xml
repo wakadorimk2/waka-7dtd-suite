@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaBagLayerGear" />
+    <DisplayName value="Waka Bag Layer Gear" />
+    <Description value="Optional craftable chest-mounted bag mods split out from Waka Bag Layer. Adds Small Pouch, Side Bag, Day Pack, Hauler, and Expedition carry-capacity attachments. Keep disabled when using only the 91-slot inventory layer." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

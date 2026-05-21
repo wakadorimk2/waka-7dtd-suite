@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <!--
+        clothingMaster is the parent of clothingHeadT1-T3 / clothingOutfitT1-T3 /
+        clothingHandsT1-T3 / clothingFeetT1-T3 (Extends with param1="CustomIcon").
+        UnlockedBy + RepairTools propagate through Extends, so we only need to add
+        them on the parent.
+    -->
+    <insertAfter xpath="/items/item[@name='clothingMaster']/property[@name='ShowQuality']">
+        <property name="UnlockedBy" value="craftingArmor"/>
+        <property name="RepairTools" value="resourceRepairKit"/>
+    </insertAfter>
+
+    <!--
+        Durability Overhaul (Alter_DurabilityOverhaul) inserts a flat
+        DegradationMax="3600,10800" on every Clothing-slot item with no tier
+        differentiation. Rescale to a tier-aware band targeting outdoor active
+        15-30 min/day usage (=900-1800 per game day):
+          T1: ~1 day (Q1) -> ~2 days (Q6)
+          T2: ~1.5 day (Q1) -> ~3 days (Q6)
+          T3: ~2 days (Q1) -> ~4 days (Q6)
+    -->
+    <set xpath="/items/item[@name='clothingHeadT1' or @name='clothingOutfitT1' or @name='clothingHandsT1' or @name='clothingFeetT1']/effect_group/passive_effect[@name='DegradationMax']/@value">1500,3000</set>
+    <set xpath="/items/item[@name='clothingHeadT2' or @name='clothingOutfitT2' or @name='clothingHandsT2' or @name='clothingFeetT2']/effect_group/passive_effect[@name='DegradationMax']/@value">2400,4800</set>
+    <set xpath="/items/item[@name='clothingHeadT3' or @name='clothingOutfitT3' or @name='clothingHandsT3' or @name='clothingFeetT3']/effect_group/passive_effect[@name='DegradationMax']/@value">3000,6000</set>
+</configs>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaBagLayer" />
+    <DisplayName value="Waka Bag Layer" />
+    <Description value="Pure XML inventory layer for a 91-slot backpack. Lowers initial CarryCapacity 27 to 12, expands BagSize to 91 (UI grid 7x13), makes 20 over-capacity slots nearly immobilizing, and rescales Black Wolf Pack Mule pocket bonuses for this larger bag. No extra backpack mod, no DLL, no Harmony, EAC compatible." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

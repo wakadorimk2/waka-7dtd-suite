@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaMedFoodBridge" />
+    <DisplayName value="Waka Med and Food Bridge" />
+    <Description value="Two-way bridge between EFTX Meds/Food and vanilla medical/food economy. Adds alternate recipes so EFTX materials can craft vanilla items and vanilla materials can craft EFTX items. Gated via vanilla craftingMedical and craftingFood. Pure XML - EAC safe." />
+    <Author value="wakadori" />
+    <Version value="1.0.0" />
+    <Website value="" />
+</xml>

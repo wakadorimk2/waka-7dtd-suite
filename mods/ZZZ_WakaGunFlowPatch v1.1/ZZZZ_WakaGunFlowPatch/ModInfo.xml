@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZ_WakaGunFlowPatch" />
+	<DisplayName value="Waka Gun Flow Patch" />
+	<Description value="Unifies EFTX guns into T1-T5 loot and trader flow. Routes EFTX gun bodies into groupWeaponsT[N]_Ranged and trader stock. v1.1: Removes the 5 orphan IZY guns (FAR Rifle, 44 Leveraction Carbine, Dual USP45, AA12, Super Eagle 44SMG) from trader/loot injection and Hidden=true masks them, due to broken icon assets that made them unusable in-hand. v1.2: Isolates ~60 IZY guns from groupRangedAll (where IZY's 11 sub-packs dominated trader rolls), gives them dedicated WakaIZYTraderGunsT1-T5 groups with per-trader 0,1 slots. Achieves EFTX/IZY/vanilla parity in trader stock." />
+	<Author value="wakadori" />
+	<Version value="1.2.0" />
+	<Website value="" />
+</xml>

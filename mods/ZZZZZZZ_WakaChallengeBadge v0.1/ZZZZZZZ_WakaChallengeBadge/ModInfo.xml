@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaChallengeBadge" />
+    <DisplayName value="Waka Challenge Badge" />
+    <Description value="Adds a LINE-style red badge next to the CATUI skill point badge showing the number of challenges ready to redeem. Hooks XUiController.GetBindingValue to expose {CATUI_playerChallengesClaimable}; appends a Challenges rect to CATUI's HUDLeftStatBars Stat table with the same visual style as SkillPoints. Requires CATUI (for 7DTD 2.5). EAC must be off." />
+    <Author value="wakadori" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

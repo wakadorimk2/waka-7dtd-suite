@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZ_WakaPlayLog" />
+	<DisplayName value="Waka Play Log" />
+	<Description value="Semantic play-event logger. Writes NDJSON session logs to %APPDATA%/7DaysToDie/WakaLog/ for downstream LLM consumption (chill-assistant). MVP scope (22 events): combat (kill_basic/special, boss_kill, player_death, weapon/armor_broken, critical_hp, buff_acquired, infection_progressed), quest (accepted/completed/failed/cancelled, scourge_beacon_started/cleared, trader_tier_up, trader_high_value_trade), movement (poi_first_visit, biome_crossed, fast_travel_used, session_distance_summary, day_started), meta (session_start/end). Subscribe-and-write only; no aggregation. Requires HarmonyX (0_TFP_Harmony). EAC must be off." />
+	<Author value="wakadori" />
+	<Version value="0.1.0" />
+	<Website value="" />
+</xml>

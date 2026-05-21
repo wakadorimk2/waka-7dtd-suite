@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Keep Better Barter useful for buying, but reduce sell-side compounding.
+       Vanilla and Black Wolf both set BarteringSelling to .05,.1,.15,.2,.25. -->
+  <set xpath="/progression/perks/perk[@name='perkBetterBarter']/effect_group/passive_effect[@name='BarteringSelling']/@value">.025,.05,.075,.1,.125</set>
+
+</configs>

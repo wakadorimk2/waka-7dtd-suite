@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/blocks">
+    <block name="wakaIronStorage">
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="CompositeTileEntity"/>
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="wakaIronStorage"/>
+        </property>
+        <property class="TEFeatureLockable"/>
+        <property class="TEFeatureSignable">
+          <property name="FontSize" value="90"/>
+          <property name="LineCount" value="3"/>
+          <property name="LineWidth" value="0.55"/>
+        </property>
+      </property>
+      <property name="CustomIcon" value="cntIronWritableCrate"/>
+      <property name="DescriptionKey" value="wakaIronStorageDesc"/>
+      <property name="Material" value="Mmetal"/>
+      <property name="Shape" value="ModelEntity"/>
+      <property name="Model" value="@:Entities/LootContainers/ironWritableCratePrefab.prefab"/>
+      <property name="WaterFlow" value="permitted"/>
+      <property name="Path" value="solid"/>
+      <property name="Place" value="TowardsPlacerInverted"/>
+      <property name="AllowedRotations" value="Basic90"/>
+      <property name="FuelValue" value="300"/>
+      <property name="EconomicValue" value="12"/>
+      <property name="MaxDamage" value="2500"/>
+      <property name="SoundPickup" value="crateiron_grab"/>
+      <property name="SoundPlace" value="crateiron_place"/>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="10"/>
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="10,30"/>
+      <drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
+      <property name="SortOrder1" value="B106"/>
+      <property name="SortOrder2" value="0012"/>
+      <property name="Group" value="Building,advBuilding"/>
+      <property name="Tags" value="timecharge"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_decor"/>
+    </block>
+
+    <block name="wakaSteelStorage">
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="CompositeTileEntity"/>
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="wakaSteelStorage"/>
+        </property>
+        <property class="TEFeatureLockable"/>
+        <property class="TEFeatureSignable">
+          <property name="FontSize" value="90"/>
+          <property name="LineCount" value="3"/>
+          <property name="LineWidth" value="0.55"/>
+        </property>
+      </property>
+      <property name="CustomIcon" value="cntSteelWritableCrate"/>
+      <property name="DescriptionKey" value="wakaSteelStorageDesc"/>
+      <property name="Material" value="Msteel"/>
+      <property name="Shape" value="ModelEntity"/>
+      <property name="Model" value="@:Entities/LootContainers/steelWritableCratePrefab.prefab"/>
+      <property name="WaterFlow" value="permitted"/>
+      <property name="Path" value="solid"/>
+      <property name="Place" value="TowardsPlacerInverted"/>
+      <property name="AllowedRotations" value="Basic90"/>
+      <property name="FuelValue" value="300"/>
+      <property name="EconomicValue" value="24"/>
+      <property name="MaxDamage" value="5000"/>
+      <property name="SoundPickup" value="cratesteel_grab"/>
+      <property name="SoundPlace" value="cratesteel_place"/>
+      <property class="RepairItems">
+        <property name="resourceForgedSteel" value="10"/>
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="10,30"/>
+      <drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
+      <property name="SortOrder1" value="B106"/>
+      <property name="SortOrder2" value="0013"/>
+      <property name="Group" value="Building,advBuilding"/>
+      <property name="Tags" value="timecharge"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_decor"/>
+    </block>
+
+    <block name="wakaLogisticsContainer">
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="CompositeTileEntity"/>
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="wakaLogisticsContainer"/>
+        </property>
+        <property class="TEFeatureLockable"/>
+        <property class="TEFeatureSignable">
+          <property name="FontSize" value="90"/>
+          <property name="LineCount" value="3"/>
+          <property name="LineWidth" value="0.55"/>
+        </property>
+      </property>
+      <property name="CustomIcon" value="cntSteelWritableCrate"/>
+      <property name="DescriptionKey" value="wakaLogisticsContainerDesc"/>
+      <property name="Material" value="Msteel"/>
+      <property name="Shape" value="ModelEntity"/>
+      <property name="Model" value="@:Entities/LootContainers/steelWritableCratePrefab.prefab"/>
+      <property name="WaterFlow" value="permitted"/>
+      <property name="Path" value="solid"/>
+      <property name="Place" value="TowardsPlacerInverted"/>
+      <property name="AllowedRotations" value="Basic90"/>
+      <property name="FuelValue" value="300"/>
+      <property name="EconomicValue" value="40"/>
+      <property name="MaxDamage" value="5000"/>
+      <property name="SoundPickup" value="cratesteel_grab"/>
+      <property name="SoundPlace" value="cratesteel_place"/>
+      <property class="RepairItems">
+        <property name="resourceForgedSteel" value="10"/>
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="10,30"/>
+      <drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
+      <property name="SortOrder1" value="B106"/>
+      <property name="SortOrder2" value="0014"/>
+      <property name="Group" value="Building,advBuilding"/>
+      <property name="Tags" value="timecharge"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_decor"/>
+    </block>
+  </append>
+</configs>

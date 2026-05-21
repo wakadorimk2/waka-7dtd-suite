@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaPet" />
+    <DisplayName value="Waka Pet" />
+    <Description value="Adds an immortal, friendly NPC pet on top of SCore + NPCCore. v0.6 swaps the static-mesh statue Rocky for a Tripo AI auto-rigged 5-legged Rocky with walk + question animations (NLA-baked into the FBX). AvatarController set to AvatarControllerDummy to suppress NPCCore's ArcticFox bone-name animator override; the Prefab carries its own Animator + RockyAnimator.controller. Requires 0-SCore and 0-XNPCCore. Personal use only - not for redistribution." />
+    <Author value="wakadori" />
+    <Version value="0.6.0" />
+    <Website value="" />
+    <SkipWithAntiCheat value="true" />
+</xml>

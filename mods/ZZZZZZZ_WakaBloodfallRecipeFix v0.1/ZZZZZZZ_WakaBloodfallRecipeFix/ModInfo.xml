@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaBloodfallRecipeFix" />
+    <DisplayName value="Waka Bloodfall Recipe Fix" />
+    <Description value="Fixes Bloodfall Hell tools (Hellpick/Hellaxe/Hellshovel) recipes that miss the `learnable` tag. Without `learnable`, Bloodfall's craftingHarvestingTools Lv60 RecipeTagUnlocked never engages and the tools become craftable from the start despite the skill panel showing them as locked. This patch adds `learnable` to wire the lock up so Bloodfall's intended Lv60 gating works as designed." />
+    <Author value="wakadori" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

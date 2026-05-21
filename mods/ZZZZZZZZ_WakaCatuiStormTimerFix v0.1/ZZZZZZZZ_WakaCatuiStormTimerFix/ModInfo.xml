@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZZ_WakaCatuiStormTimerFix" />
+    <DisplayName value="Waka CATUI Storm Timer Fix" />
+    <Description value="Clamps CATUI storm timer bindings so expired storms do not display negative remaining time after Sleep time skips. Requires CATUI. EAC must be off." />
+    <Author value="wakadori" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

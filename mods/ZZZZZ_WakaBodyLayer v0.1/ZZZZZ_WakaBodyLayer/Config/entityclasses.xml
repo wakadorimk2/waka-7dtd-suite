@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Waka Body Layer v0.1 - entityclasses
+
+  playerMale / playerFemale に buffWakaBodyLayerCore を付与（常駐管理buff）。
+  Medical conditionsの buffSocial 付与（npcTraderTemplate）と同じパターン。
+-->
+<configs>
+    <append xpath="/entity_classes/entity_class[@name='playerMale']">
+        <property name="Buffs" value="buffWakaBodyLayerCore"/>
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='playerFemale']">
+        <property name="Buffs" value="buffWakaBodyLayerCore"/>
+    </append>
+</configs>

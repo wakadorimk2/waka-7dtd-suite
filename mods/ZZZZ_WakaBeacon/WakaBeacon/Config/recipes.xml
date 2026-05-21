@@ -1,0 +1,10 @@
+<configs>
+	<append xpath="/recipes">
+		<recipe name="wakaBeacon" count="1" craft_area="workbench" tags="workbenchCrafting">
+			<ingredient name="resourceForgedIron" count="10"/>
+			<ingredient name="resourceElectricParts" count="8"/>
+			<ingredient name="resourceDuctTape" count="2"/>
+			<ingredient name="resourceMechanicalParts" count="2"/>
+		</recipe>
+	</append>
+</configs>

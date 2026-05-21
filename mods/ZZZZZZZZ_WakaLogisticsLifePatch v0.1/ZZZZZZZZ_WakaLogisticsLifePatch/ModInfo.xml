@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="ZZZZZZZZ_WakaLogisticsLifePatch" />
+  <DisplayName value="Waka Logistics Life Patch" />
+  <Description value="Keeps base logistics helpful but restores packing, return trips, and storage planning as part of daily life." />
+  <Author value="Waka" />
+  <Version value="0.1" />
+</xml>

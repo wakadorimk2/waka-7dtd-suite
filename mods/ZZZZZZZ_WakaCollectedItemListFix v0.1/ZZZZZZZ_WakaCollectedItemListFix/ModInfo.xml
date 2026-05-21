@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaCollectedItemListFix" />
+    <DisplayName value="Waka CollectedItemList Fix" />
+    <Description value="Fixes the long-standing 'pickup notification stuck on right side of screen' bug in vanilla 7DTD. Vanilla XUiC_CollectedItemList.removeLastEntry uses a TemporaryObject coroutine to destroy toast GameObjects after 2 seconds, but Unity does not run Start() on inactive GameObjects - so when the HUD becomes inactive (e.g. opening the ESC menu mid-pickup-burst from a TakeAll on a container with 15+ items) the coroutine never starts and the toast becomes orphaned: removed from the items list but still rendered, overlapping any subsequent toasts. This Harmony Prefix calls Object.Destroy on the GameObject directly, bypassing the active-state requirement. Equivalent to the console workaround 'xui reload toolbelt' but automatic. Trade-off: the 0.4s fade-out / slide-right animation is no longer visible (toasts blink out instantly). Inspired by tyw's CollectedItemListFix (Nexus #7452, v1.2-v1.4); rebuilt for v2.6. EAC must be off." />
+    <Author value="wakadori" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- Smart storage should be a base upgrade, not a day-one replacement for sorting. -->
+  <set xpath="/recipes/recipe[@name='smartDumpChest']/@craft_time">90</set>
+  <set xpath="/recipes/recipe[@name='smartDumpChest']/ingredient[@name='resourceWood']/@count">40</set>
+  <set xpath="/recipes/recipe[@name='smartDumpChest']/ingredient[@name='resourceForgedIron']/@count">25</set>
+  <set xpath="/recipes/recipe[@name='smartDumpChest']/ingredient[@name='resourceCloth']/@count">10</set>
+  <append xpath="/recipes/recipe[@name='smartDumpChest']">
+    <ingredient name="resourceMechanicalParts" count="12" />
+    <ingredient name="resourceElectricParts" count="6" />
+    <ingredient name="resourceDuctTape" count="6" />
+  </append>
+
+  <!-- Pouches are useful trip-planning tools, but larger tiers should cost real prep. -->
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT1']/ingredient[@name='resourceCloth']/@count">18</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT1']/ingredient[@name='resourceLeather']/@count">8</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT2']/ingredient[@name='resourceLeather']/@count">24</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT2']/ingredient[@name='resourceMechanicalParts']/@count">18</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT3']/ingredient[@name='armorParts']/@count">18</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT3']/ingredient[@name='resourceForgedSteel']/@count">24</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT4']/ingredient[@name='armorParts']/@count">36</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT4']/ingredient[@name='resourceLegendaryParts']/@count">4</set>
+
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyMedicalPouchT1']/ingredient[@name='resourceCloth']/@count">20</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyMedicalPouchT2']/ingredient[@name='resourceCloth']/@count">40</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyMedicalPouchT2']/ingredient[@name='medicalFirstAidBandage']/@count">6</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyMedicalPouchT3']/ingredient[@name='armorParts']/@count">16</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyMedicalPouchT3']/ingredient[@name='medicalFirstAidKit']/@count">6</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyMedicalPouchT4']/ingredient[@name='armorParts']/@count">32</set>
+  <set xpath="/recipes/recipe[@name='modArmorPackwiselyMedicalPouchT4']/ingredient[@name='resourceLegendaryParts']/@count">4</set>
+</configs>

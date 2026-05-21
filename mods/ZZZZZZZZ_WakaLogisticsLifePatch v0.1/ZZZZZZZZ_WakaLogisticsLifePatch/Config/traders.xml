@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- Keep traders from flattening pouch progression into a known shopping route. -->
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='groupArmorMods']/item[@name='modArmorPackwiselyAmmoPouchT3']/@prob">0.18</set>
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='groupArmorMods']/item[@name='modArmorPackwiselyAmmoPouchT4']/@prob">0.04</set>
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='groupArmorMods']/item[@name='modArmorPackwiselyMedicalPouchT3']/@prob">0.18</set>
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='groupArmorMods']/item[@name='modArmorPackwiselyMedicalPouchT4']/@prob">0.04</set>
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='rareBooks']/item[@name='modArmorPackwiselyAmmoPouchT3Schematic']/@prob">0.08</set>
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='rareBooks']/item[@name='modArmorPackwiselyMedicalPouchT3Schematic']/@prob">0.08</set>
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='rareBooks']/item[@name='modArmorPackwiselyAmmoPouchT4Schematic']/@prob">0.02</set>
+  <set xpath="/traders/trader_item_groups/trader_item_group[@name='rareBooks']/item[@name='modArmorPackwiselyMedicalPouchT4Schematic']/@prob">0.02</set>
+</configs>

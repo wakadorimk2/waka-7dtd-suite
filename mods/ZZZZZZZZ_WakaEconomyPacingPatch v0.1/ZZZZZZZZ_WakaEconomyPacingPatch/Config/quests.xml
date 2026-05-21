@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Quest reward pacing: keep quest rewards meaningful without letting repeatable
+       quests dominate the economy through Dukes payouts or 10-choice reward lists. -->
+
+  <!-- Normal tier quest Dukes curve. Use tierN_ so tier1 does not also catch tier10. -->
+  <set xpath="/quests/quest[starts-with(@id,'tier1_')]/reward[@type='Item' and @id='casinoCoin']/@value">500</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier2_')]/reward[@type='Item' and @id='casinoCoin']/@value">800</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_')]/reward[@type='Item' and @id='casinoCoin']/@value">1200</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_')]/reward[@type='Item' and @id='casinoCoin']/@value">1700</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_')]/reward[@type='Item' and @id='casinoCoin']/@value">2300</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier6_')]/reward[@type='Item' and @id='casinoCoin']/@value">3000</set>
+
+  <!-- Quest Revamp difficulty payouts. Higher difficulty still pays more, but is no
+       longer a 6k-10k Dukes loop. Quest Revamp extends these through tier10, capped. -->
+  <set xpath="/quests/quest[starts-with(@id,'tier2_') and contains(@id,'_superinfested')]/reward[@type='Item' and @id='casinoCoin']/@value">1200</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_') and contains(@id,'_superinfested')]/reward[@type='Item' and @id='casinoCoin']/@value">1800</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_') and contains(@id,'_superinfested')]/reward[@type='Item' and @id='casinoCoin']/@value">2600</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_') and contains(@id,'_superinfested')]/reward[@type='Item' and @id='casinoCoin']/@value">3600</set>
+  <set xpath="/quests/quest[(starts-with(@id,'tier6_') or starts-with(@id,'tier7_') or starts-with(@id,'tier8_') or starts-with(@id,'tier9_') or starts-with(@id,'tier10_')) and contains(@id,'_superinfested')]/reward[@type='Item' and @id='casinoCoin']/@value">4800</set>
+
+  <set xpath="/quests/quest[starts-with(@id,'tier2_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='Item' and @id='casinoCoin']/@value">1600</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='Item' and @id='casinoCoin']/@value">2400</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='Item' and @id='casinoCoin']/@value">3400</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='Item' and @id='casinoCoin']/@value">4600</set>
+  <set xpath="/quests/quest[(starts-with(@id,'tier6_') or starts-with(@id,'tier7_') or starts-with(@id,'tier8_') or starts-with(@id,'tier9_') or starts-with(@id,'tier10_')) and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='Item' and @id='casinoCoin']/@value">6000</set>
+
+  <!-- Reward choice counts after FNS and WakaQuestDifficultyTuning. -->
+  <set xpath="/quests/quest[starts-with(@id,'tier1_')]/property[@name='reward_choices_count']/@value">3</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier2_')]/property[@name='reward_choices_count']/@value">4</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_')]/property[@name='reward_choices_count']/@value">5</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_')]/property[@name='reward_choices_count']/@value">5</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_')]/property[@name='reward_choices_count']/@value">6</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier6_')]/property[@name='reward_choices_count']/@value">6</set>
+
+  <set xpath="/quests/quest[starts-with(@id,'tier2_') and contains(@id,'_superinfested')]/property[@name='reward_choices_count']/@value">4</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_') and contains(@id,'_superinfested')]/property[@name='reward_choices_count']/@value">5</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_') and contains(@id,'_superinfested')]/property[@name='reward_choices_count']/@value">6</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_') and contains(@id,'_superinfested')]/property[@name='reward_choices_count']/@value">7</set>
+  <set xpath="/quests/quest[(starts-with(@id,'tier6_') or starts-with(@id,'tier7_') or starts-with(@id,'tier8_') or starts-with(@id,'tier9_') or starts-with(@id,'tier10_')) and contains(@id,'_superinfested')]/property[@name='reward_choices_count']/@value">8</set>
+
+  <set xpath="/quests/quest[starts-with(@id,'tier2_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/property[@name='reward_choices_count']/@value">5</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/property[@name='reward_choices_count']/@value">6</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/property[@name='reward_choices_count']/@value">7</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/property[@name='reward_choices_count']/@value">8</set>
+  <set xpath="/quests/quest[(starts-with(@id,'tier6_') or starts-with(@id,'tier7_') or starts-with(@id,'tier8_') or starts-with(@id,'tier9_') or starts-with(@id,'tier10_')) and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/property[@name='reward_choices_count']/@value">9</set>
+
+  <!-- Cap high-value item reward batch sizes. Pure ammo/medical/food rewards are left alone. -->
+  <set xpath="/quests/quest[starts-with(@id,'tier1_')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">1</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier2_')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">1</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">2</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">2</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">3</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier6_')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">3</set>
+
+  <set xpath="/quests/quest[starts-with(@id,'tier2_') and contains(@id,'_superinfested')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">2</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_') and contains(@id,'_superinfested')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">3</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_') and contains(@id,'_superinfested')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">3</set>
+  <set xpath="/quests/quest[(starts-with(@id,'tier5_') or starts-with(@id,'tier6_') or starts-with(@id,'tier7_') or starts-with(@id,'tier8_') or starts-with(@id,'tier9_') or starts-with(@id,'tier10_')) and contains(@id,'_superinfested')]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">4</set>
+
+  <set xpath="/quests/quest[starts-with(@id,'tier2_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">3</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier3_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">3</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier4_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">4</set>
+  <set xpath="/quests/quest[starts-with(@id,'tier5_') and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">4</set>
+  <set xpath="/quests/quest[(starts-with(@id,'tier6_') or starts-with(@id,'tier7_') or starts-with(@id,'tier8_') or starts-with(@id,'tier9_') or starts-with(@id,'tier10_')) and (contains(@id,'_ultrainfested') or contains(@id,'_nightmare'))]/reward[@type='LootItem' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools') or contains(@id,'groupQuestArmor'))]/@value">5</set>
+
+  <!-- Fixed weapons/tools from Quest Revamp remain valuable, but compete as choices. -->
+  <set xpath="/quests/quest/reward[@type='LootItem' and @isfixed='true' and (contains(@id,'groupQuestWeapons') or contains(@id,'groupQuestTools'))]/@isfixed">false</set>
+
+</configs>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+
+<append xpath="/recipes">
+
+    <!-- ===== mod -> vanilla ===== -->
+
+    <recipe name="medicalFirstAidBandage" count="1" tags="learnable,waka_mv_bandage">
+        <ingredient name="resourceSalineSolution" count="2"/>
+        <ingredient name="resourceCloth" count="2"/>
+    </recipe>
+
+    <recipe name="medicalBandage" count="2" tags="learnable,waka_mv_gauze">
+        <ingredient name="resourceCloth" count="2"/>
+        <ingredient name="resourceBottleOfHydrogenPeroxide" count="1"/>
+    </recipe>
+
+    <recipe name="medicalFirstAidKit" count="1" craft_area="chemistryStation"
+            tags="learnable,waka_mv_firstaidkit">
+        <ingredient name="resourcePileOfMeds" count="3"/>
+        <ingredient name="medicalFirstAidBandage" count="1"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+
+    <recipe name="drugAntibiotics" count="1" craft_area="chemistryStation" craft_tool="toolBeaker"
+            tags="learnable,waka_mv_antibiotics">
+        <ingredient name="medicaldrugAugmentinAntibiotics" count="1"/>
+        <ingredient name="drinkJarBoiledWater" count="1"/>
+    </recipe>
+
+    <recipe name="drugPainkillers" count="2" craft_area="chemistryStation" craft_tool="toolBeaker"
+            tags="learnable,waka_mv_painkillers">
+        <ingredient name="medicaldrugAnalginPainkillers" count="1"/>
+        <ingredient name="medicaldrugIbuprofenPainkillers" count="1"/>
+    </recipe>
+
+    <recipe name="foodGrilledMeat" count="2" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_mv_grilledmeat">
+        <ingredient name="foodBread" count="1"/>
+        <ingredient name="foodRawMeat" count="3"/>
+    </recipe>
+
+    <recipe name="foodBoiledMeat" count="1" craft_area="campfire" craft_tool="toolCookingPot"
+            tags="learnable,waka_mv_boiledmeat">
+        <ingredient name="foodRawMeat" count="2"/>
+        <ingredient name="drinkJarBoiledWater" count="1"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodMeatStew" count="1" craft_area="campfire" craft_tool="toolCookingPot"
+            tags="learnable,waka_mv_meatstew">
+        <ingredient name="foodBeefstew" count="1"/>
+        <ingredient name="foodRawMeat" count="2"/>
+        <ingredient name="foodCropPotato" count="1"/>
+    </recipe>
+
+    <!-- ===== vanilla -> mod ===== -->
+
+    <recipe name="medicalIFAK" count="1" craft_area="chemistryStation"
+            tags="learnable,waka_vm_ifak">
+        <ingredient name="foodHoney" count="3"/>
+        <ingredient name="resourceCloth" count="6"/>
+        <ingredient name="drugAntibiotics" count="2"/>
+        <ingredient name="resourceDuctTape" count="2"/>
+    </recipe>
+
+    <recipe name="medicalSalewa" count="1" craft_area="chemistryStation"
+            tags="learnable,waka_vm_salewa">
+        <ingredient name="medicalFirstAidKit" count="1"/>
+        <ingredient name="drugAntibiotics" count="1"/>
+        <ingredient name="foodHoney" count="2"/>
+    </recipe>
+
+    <recipe name="medicalInjectorAdrenaline" count="1" craft_area="chemistryStation" craft_tool="toolBeaker"
+            tags="learnable,waka_vm_adrenaline">
+        <ingredient name="drugPainkillers" count="4"/>
+        <ingredient name="foodHoney" count="4"/>
+        <ingredient name="drinkJarPureMineralWater" count="2"/>
+    </recipe>
+
+    <recipe name="foodBread" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_vm_bread">
+        <ingredient name="foodCornMeal" count="2"/>
+        <ingredient name="drinkJarBoiledWater" count="1"/>
+    </recipe>
+
+    <recipe name="foodSugar" count="1" craft_area="campfire" craft_tool="toolCookingPot"
+            tags="learnable,waka_vm_sugar">
+        <ingredient name="foodHoney" count="3"/>
+    </recipe>
+
+    <recipe name="drinkKvass" count="1" craft_area="chemistryStation"
+            tags="learnable,waka_vm_kvass">
+        <ingredient name="drinkJarBeer" count="1"/>
+        <ingredient name="foodSugar" count="1"/>
+        <ingredient name="foodCornMeal" count="1"/>
+    </recipe>
+
+    <!-- ===== v1.1 mod -> vanilla (canned / stew / drink) ===== -->
+
+    <recipe name="foodCanTuna" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_mv_cantuna">
+        <ingredient name="foodCannedSaira" count="2"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodCanSalmon" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_mv_cansalmon">
+        <ingredient name="foodHerring" count="2"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodCanBeef" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_mv_canbeef">
+        <ingredient name="foodBeefstew" count="2"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodCanLamb" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_mv_canlamb">
+        <ingredient name="foodHumpback" count="1"/>
+        <ingredient name="foodBeefstew2" count="1"/>
+    </recipe>
+
+    <recipe name="foodCanPasta" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_mv_canpasta">
+        <ingredient name="foodInstantNoodles" count="2"/>
+        <ingredient name="drinkJarBoiledWater" count="1"/>
+    </recipe>
+
+    <recipe name="foodCanPeas" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_mv_canpeas">
+        <ingredient name="foodPeas" count="2"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodHoboStew" count="1" craft_area="campfire" craft_tool="toolCookingPot"
+            tags="learnable,waka_mv_hobostew">
+        <ingredient name="foodMRE" count="1"/>
+        <ingredient name="foodBeefstew" count="1"/>
+        <ingredient name="foodCropPotato" count="1"/>
+        <ingredient name="drinkJarBoiledWater" count="1"/>
+    </recipe>
+
+    <recipe name="drinkJarHoneyTea" count="1" craft_area="campfire" craft_tool="toolCookingPot"
+            tags="learnable,waka_mv_honeytea">
+        <ingredient name="drinkGreenTea" count="1"/>
+        <ingredient name="foodHoney" count="1"/>
+        <ingredient name="drinkJarBoiledWater" count="1"/>
+    </recipe>
+
+    <!-- ===== v1.1 vanilla -> mod (canned / flour / meat product) ===== -->
+
+    <recipe name="foodBeefstew" count="1" craft_area="campfire" craft_tool="toolCookingPot"
+            tags="learnable,waka_vm_beefstew">
+        <ingredient name="foodCanBeef" count="1"/>
+        <ingredient name="foodCropPotato" count="1"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodHerring" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_vm_herring">
+        <ingredient name="foodCanTuna" count="1"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodCannedSaira" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_vm_saira">
+        <ingredient name="foodCanSalmon" count="1"/>
+        <ingredient name="resourceCanOfWhiteSalt" count="1"/>
+    </recipe>
+
+    <recipe name="foodWheatFlour" count="1" craft_area="campfire"
+            tags="learnable,waka_vm_wheatflour">
+        <ingredient name="foodCornMeal" count="2"/>
+    </recipe>
+
+    <recipe name="foodOatFlakes" count="1" craft_area="campfire" craft_tool="toolCookingGrill"
+            tags="learnable,waka_vm_oatflakes">
+        <ingredient name="foodCornMeal" count="1"/>
+        <ingredient name="foodHoney" count="1"/>
+    </recipe>
+
+    <recipe name="foodSausage" count="1" craft_area="campfire" craft_tool="toolCookingPot"
+            tags="learnable,waka_vm_sausage">
+        <ingredient name="foodCanBeef" count="1"/>
+        <ingredient name="foodHoney" count="1"/>
+        <ingredient name="resourceCloth" count="1"/>
+    </recipe>
+
+    <recipe name="foodMRE" count="1" craft_area="chemistryStation"
+            tags="learnable,waka_vm_mre">
+        <ingredient name="foodCanChili" count="1"/>
+        <ingredient name="foodCanPasta" count="1"/>
+        <ingredient name="foodBread" count="1"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+
+</append>
+
+</configs>

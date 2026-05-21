@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZ_WakaAmmoFlowPatch" />
+    <DisplayName value="Waka Ammo Flow Patch" />
+    <Description value="Tightens Black Wolf better loot spawns ammo entries to create hand-to-mouth ammo economy in day 1-3. Per group: Small ~x0.25 count and prob -2 steps (guaranteed-&gt;low, low-&gt;veryLow). Medium ~x0.33 count and prob -1 step. Large ~x0.5 count and prob -1 step. Targets 9mm, 762, 44Magnum, Shotgun shells (Small/Medium/Large groups, 12 lootgroups). Pure XML, no DLL. Load order: must be after Black Wolf better loot spawns." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <append xpath="/windows/window[@name='HUDLeftStatBars']/rect[@name='Stat']/table">
+        <rect name="ChallengesClaim" width="50" height="50" controller="HUDStatBar" visible="{# statvisible and CATUI_playerChallengesClaimable != '0' }" tooltip_key="xuiChallenges">
+            <sprite gradient_start="[darkestGrey]" gradient_end="[black]" sprite="catui_bg_state" style="CATUI.sprite.filled.prue" />
+            <sprite sprite="ui_game_symbol_challenge" size="38,38" pos="6,-6" globalopacity="false" />
+            <rect pos="44,-44" width="24" height="24">
+                <sprite type="sliced" sprite="ui_game_header_fill" pos="0,0" color="[CATUI_red]" justify="center" pivot="center" />
+                <label pos="0,-1" font_size="20" color="[white]" text="{CATUI_playerChallengesClaimable}" style="CATUI.text.shadow.black.1px" justify="center" pivot="center" />
+            </rect>
+        </rect>
+    </append>
+</configs>

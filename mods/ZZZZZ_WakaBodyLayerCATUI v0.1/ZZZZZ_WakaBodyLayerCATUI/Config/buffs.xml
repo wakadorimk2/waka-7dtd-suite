@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Waka Body Layer - CATUI Bridge buffs
+
+  目的: $wakaProtein/$wakaCarb/$wakaFat (0-100, Body Layer 側で 100 cap) を CATUI HUD bar 用に正規化する。
+
+  生成する CVar:
+    $wakaProteinFill / $wakaCarbFill / $wakaFatFill          : 0.0 - 1.0 (現在値 / 100、cap 1.0)
+    $wakaProteinInvFill / $wakaCarbInvFill / $wakaFatInvFill : 0.0 - 1.0 (1 - Fill、mask用)
+    $wakaProteinWarnFill / $wakaCarbWarnFill / $wakaFatWarnFill : 0.0 or Fill (警告overlay用)
+
+  HUD は 0-80 緑帯 / 80-100 赤帯 の固定背景に黒 mask を被せる構造。
+  mask は右から InvFill 分だけ塗りつぶし (fillInvert=true) で、現在値より右を隠す。
+
+  付与方法: Body Layer Core buff の effect_group に AddBuff trigger を append。
+            entityclasses で別 property 追加すると Body Layer の Buffs property を
+            上書きしてしまう懸念があるため、Body Layer Core 経由で付与する。
+
+  Body Layer 本体は触らずに、Bridge mod 側だけで完結する責務分離設計。
+
+  更新トリガ:
+    onSelfBuffStart        : buff 付与時 (再ログイン等)
+    onSelfBuffUpdate       : 1秒tick で滑らかな追従
+    onSelfPrimaryActionEnd : 食事直後の即時更新 (Body Layer の食事 trigger と同じタイミング)
+-->
+<configs>
+    <!-- =================================================================== -->
+    <!-- Body Layer Core buff に Bridge AddBuff trigger を追加                -->
+    <!-- =================================================================== -->
+    <append xpath="/buffs/buff[@name='buffWakaBodyLayerCore']/effect_group">
+        <!-- Body Layer Core 付与時に Bridge も付与 -->
+        <triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffWakaCATUIBridge">
+            <requirement name="!HasBuff" buff="buffWakaCATUIBridge"/>
+        </triggered_effect>
+        <!-- セッション再開時の保険 -->
+        <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" buff="buffWakaCATUIBridge">
+            <requirement name="!HasBuff" buff="buffWakaCATUIBridge"/>
+        </triggered_effect>
+    </append>
+
+    <append xpath="/buffs">
+
+        <buff name="buffWakaCATUIBridge" hidden="true" remove_on_death="false">
+            <stack_type value="ignore"/>
+            <update_rate value="1"/>
+
+            <effect_group>
+                <!-- =================================================== -->
+                <!-- Protein                                             -->
+                <!-- =================================================== -->
+                <!-- Fill / InvFill: onSelfBuffStart -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinFill" operation="set" value="@$wakaProtein"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaProteinFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinInvFill" operation="subtract" value="@$wakaProteinFill"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="@$wakaProteinFill">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="@$wakaProteinFill">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <!-- Fill / InvFill: onSelfBuffUpdate -->
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinFill" operation="set" value="@$wakaProtein"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaProteinFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinInvFill" operation="subtract" value="@$wakaProteinFill"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="@$wakaProteinFill">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="@$wakaProteinFill">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <!-- Fill / InvFill: onSelfPrimaryActionEnd (食事直後の即更新) -->
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinFill" operation="set" value="@$wakaProtein"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaProteinFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinInvFill" operation="subtract" value="@$wakaProteinFill"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="@$wakaProteinFill">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaProteinWarnFill" operation="set" value="@$wakaProteinFill">
+                    <requirement name="CVarCompare" cvar="$wakaProtein" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <!-- =================================================== -->
+                <!-- Carb                                                -->
+                <!-- =================================================== -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbFill" operation="set" value="@$wakaCarb"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaCarbFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbInvFill" operation="subtract" value="@$wakaCarbFill"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="@$wakaCarbFill">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="@$wakaCarbFill">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbFill" operation="set" value="@$wakaCarb"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaCarbFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbInvFill" operation="subtract" value="@$wakaCarbFill"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="@$wakaCarbFill">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="@$wakaCarbFill">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbFill" operation="set" value="@$wakaCarb"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaCarbFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbInvFill" operation="subtract" value="@$wakaCarbFill"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="@$wakaCarbFill">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaCarbWarnFill" operation="set" value="@$wakaCarbFill">
+                    <requirement name="CVarCompare" cvar="$wakaCarb" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <!-- =================================================== -->
+                <!-- Fat                                                 -->
+                <!-- =================================================== -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatFill" operation="set" value="@$wakaFat"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaFatFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatInvFill" operation="subtract" value="@$wakaFatFill"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="@$wakaFatFill">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="@$wakaFatFill">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatFill" operation="set" value="@$wakaFat"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaFatFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatInvFill" operation="subtract" value="@$wakaFatFill"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="@$wakaFatFill">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="@$wakaFatFill">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="80"/>
+                </triggered_effect>
+
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatFill" operation="set" value="@$wakaFat"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatFill" operation="multiply" value="0.01"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatFill" operation="set" value="1">
+                    <requirement name="CVarCompare" cvar="$wakaFatFill" operation="GT" value="1"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatInvFill" operation="set" value="1"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatInvFill" operation="subtract" value="@$wakaFatFill"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="@$wakaFatFill">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="LTE" value="40"/>
+                </triggered_effect>
+                <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$wakaFatWarnFill" operation="set" value="@$wakaFatFill">
+                    <requirement name="CVarCompare" cvar="$wakaFat" operation="GTE" value="80"/>
+                </triggered_effect>
+            </effect_group>
+        </buff>
+
+    </append>
+</configs>

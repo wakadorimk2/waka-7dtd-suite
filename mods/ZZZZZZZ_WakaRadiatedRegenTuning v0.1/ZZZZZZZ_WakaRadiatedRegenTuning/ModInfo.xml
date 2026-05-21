@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="ZZZZZZZ_WakaRadiatedRegenTuning"/>
+  <DisplayName value="Waka Radiated Regen Tuning"/>
+  <Description value="Reduces radiated zombie regeneration values while preserving existing tier differences."/>
+  <Author value="Waka"/>
+  <Version value="0.1"/>
+  <Website value=""/>
+</xml>

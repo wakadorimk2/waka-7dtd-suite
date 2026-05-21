@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZ_WakaRamNullGuard" />
+	<DisplayName value="Waka RAM Null Guard" />
+	<Description value="Null guards for RAM (Random Affixes Mod). Defensive Harmony Prefixes around 7 RAM internal methods that lack null checks: (1) AffixUtils.ChallengeGroupIsCompleted (challengeJournal null), (2) AffixSystem.ApplyAffixToLootCheck (player=null spam from non-player loot spawns), (3) AffixResurgence.ResurgenceCheck, (4) AffixBringItDown.BringItDownCheck, (5) AffixPermadeath.PermadeathCheck, (6) AffixGiantSlayer.GiantSlayerCheck (4-6 = _damageSource null on damage events), (7) AffixBulletRecovery.BulletRecoveryCheck (_actionData chain null on every shot). All Prefixes resolve targets via reflection so this mod has no compile-time dependency on RAM and self-disables when RAM is absent. Requires HarmonyX (0_TFP_Harmony) and RAM. EAC must be off." />
+	<Author value="wakadori" />
+	<Version value="0.3.0" />
+	<Website value="" />
+</xml>

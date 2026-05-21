@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZZZZ_WakaSoloServerPause" />
+	<DisplayName value="Waka Solo Server Pause" />
+	<Description value="Solo-server AFK safety mode. /pause or /waka_pause blocks damage, pauses buff/stat ticking, ignores AI, and stops enemy movement while exactly one player is connected." />
+	<Author value="wakadori" />
+	<Version value="0.1" />
+	<Website value="" />
+</xml>

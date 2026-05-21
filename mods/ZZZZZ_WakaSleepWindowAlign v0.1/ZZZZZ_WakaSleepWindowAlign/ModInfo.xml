@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaSleepWindowAlign" />
+    <DisplayName value="Waka Sleep Window Align" />
+    <Description value="Aligns Sleep Overhaul's allowed sleep window with Byteblazar's Singularity / Advanced Sky Manager night cycle. (1) Harmony Prefix on BedrollUtil.IsWithinSleepWindow extends allowed hours from 20:00-02:00 to 20:00-05:00. (2) Transpiler on XUiC_TFDSleepDialog raises the dialog hour clamp from 1-8 to 1-12 across all five clamp sites. (3) Transpiler on BedrollPatches.HandleSleepPrefix replaces the radial command's hardcoded 8 with a dynamic 'until dawn' calculation. (4) Localization override for the time-window warning. Pure Harmony + Localization, EAC must be off." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

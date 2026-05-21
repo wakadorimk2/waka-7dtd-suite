@@ -1,0 +1,109 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,russian
+
+modCreWeapDamageT1,items,Item,,,Striker Core,
+modCreWeapDamageWakaDesc,items,Item,,,"A precision-machined damage core. Higher quality boosts entity damage; q5+ unlocks a headshot bonus. Stats panel shows the mid-tier baseline.",
+
+modCreWeapDurabT1,items,Item,,,Hardened Internals,
+modCreWeapDurabWakaDesc,items,Item,,,"Tempered steel internals reduce wear. Higher quality means weapons hold up longer between repairs.",
+
+modCreGunRPMT1,items,Item,,,Tuned Trigger Group,
+modCreGunRPMWakaDesc,items,Item,,,"A tuned trigger group. Faster rate of fire scales with quality; q5+ also tightens incremental spread per shot.",
+
+modCreGunReloadT1,items,Item,,,Quick-Feed Assembly,
+modCreGunReloadWakaDesc,items,Item,,,"Streamlined feed components. Reload speed scales with quality; q5+ adds a small rate-of-fire bonus from improved cycling.",
+
+modCreGunMagazineT1,items,Item,,,Tactical Magazine Extender,
+modCreGunMagazineWakaDesc,items,Item,,,"An extended magazine. Capacity scales with quality. Compatible with standard, drum, and shotgun tube magazines.",
+
+modCreGunGripT1,items,Item,,,Ergonomic Grip Wrap,
+modCreGunGripWakaDesc,items,Item,,,"Ergonomic grip with vibration dampening. Spread and recoil cuts scale with quality; q5+ also adds weapon handling.",
+
+modCreGunRangeT1,items,Item,,,Precision Barrel Sleeve,
+modCreGunRangeWakaDesc,items,Item,,,"An extended barrel and refined sight group. Range, falloff, and handling scale with quality. q5+ rewards distant targets with a heavy damage bonus.",
+
+modCreGunSniperT1,items,Item,,,Marksman Optic Package,
+modCreGunSniperWakaDesc,items,Item,,,"A long-range scope and barrel package. Trades hipfire and walking accuracy for crouched precision. q5+ headshots gain extra damage and dismember chance.",
+
+modCreGunOneBT1,items,Item,,,Single-Tap Conversion Kit,
+modCreGunOneBWakaDesc,items,Item,,,"A single-shot conversion. Forces 1-round bursts at much lower fire rate, but entity damage scales massively with quality. Built for slow precision builds.",
+
+modCreGunShockT1,items,Item,,,Voltaic Discharge Coil,
+modCreGunShockWakaDesc,items,Item,,,"A shock-discharge coil. Shocks targets on hit; proc chance and duration scale with quality. Per-perk weapon tag bonuses preserved.",
+
+modCreGunBloodT1,items,Item,,,Hemorrhage Round Liner,
+modCreGunBloodWakaDesc,items,Item,,,"A blood-letting bullet liner. Proc effect held at the q1-q2 baseline for now; future revisions may add per-quality scaling.",
+
+modCreBowStringT1,items,Item,,,High-Tension Bowstring,
+modCreBowStringWakaDesc,items,Item,,,"A high-tension bowstring. Higher quality means faster arrows that reach further before drop kicks in.",
+
+modCreBowPowerT1,items,Item,,,Reinforced Bow Limb,
+modCreBowPowerWakaDesc,items,Item,,,"A reinforced bow limb assembly. Damage, handling, range, and falloff all scale with quality.",
+
+modCreMeleeAPMT1,items,Item,,,Balanced Haft,
+modCreMeleeAPMWakaDesc,items,Item,,,"A balanced haft. Faster swings scale with quality; q5+ also reduces stamina cost on primary and secondary attacks.",
+
+modCreMeleeStaminaT1,items,Item,,,Padded Grip Wrap,
+modCreMeleeStaminaWakaDesc,items,Item,,,"A grip wrap that bleeds the kinetic shock. Stamina cost reduction on primary and secondary attacks scales with quality.",
+
+modCreMeleeRangeT1,items,Item,,,Reach Extension Sleeve,
+modCreMeleeRangeWakaDesc,items,Item,,,"A reach extension. Range and block reach scale with quality. Strikes connect at a half-step further.",
+
+modCreMeleeBlockT1,items,Item,,,Heavy Block Plate,
+modCreMeleeBlockWakaDesc,items,Item,,,"A heavy block plate. Block damage scales with quality; q5+ adds dismember chance on hit.",
+
+modCreMeleeFireT1,items,Item,,,Pyro-Treated Edge,
+modCreMeleeFireWakaDesc,items,Item,,,"A fire-treated edge. Proc held at q1-q2 base for now. Future revisions may add per-quality scaling.",
+
+modCreMeleeShockT1,items,Item,,,Electrified Striker,
+modCreMeleeShockWakaDesc,items,Item,,,"An electrified striker. Proc held at q1-q2 base for now.",
+
+modCreMeleeBreakT1,items,Item,,,Bone-Breaker Flange,
+modCreMeleeBreakWakaDesc,items,Item,,,"A bone-breaking flange. Proc held at q1-q2 base for now.",
+
+cre_modArmorBandolierT1,items,Item,,,Tactical Bandolier,
+cre_modArmorBandolierWakaDesc,items,Item,,,"Extra ammunition pouches. Higher-quality pieces hold meaningfully more rounds (q1-q2 light / q3-q4 mid / q5-q6 heavy bandolier buff).",
+
+cre_modArmorFittingsT1,items,Item,,,Articulated Fittings,
+cre_modArmorFittingsWakaDesc,items,Item,,,"Articulated fittings reduce armor weight. Mobility and stamina recovery scale with quality; q5+ also adds walk and run speed.",
+
+cre_modArmorPlatingT1,items,Item,,,Composite Plating,
+cre_modArmorPlatingWakaDesc,items,Item,,,"A heavy composite plate. Physical damage resist scales with quality; q5+ also adds elemental resist (heat/electrical/radiation/toxic) and explosion mitigation.",
+
+cre_modArmorGlovesStaminaT1,items,Item,,,Padded Combat Gloves,
+cre_modArmorGlovesStaminaWakaDesc,items,Item,,,"Padded gloves. Hand stamina buff scales with quality (light / mid / heavy buff variants).",
+
+cre_modArmorGlovesSpeedT1,items,Item,,,Lightweight Tactical Gloves,
+cre_modArmorGlovesSpeedWakaDesc,items,Item,,,"Lightweight tactical gloves. Higher quality adds a passive RunSpeed bump on top of the equip buff.",
+
+cre_modArmorBootsSpeedT1,items,Item,,,Shock-Absorbing Soles,
+cre_modArmorBootsSpeedWakaDesc,items,Item,,,"Shock-absorbing soles. Movement speed scales with quality (light / mid / heavy boots speed buff).",
+
+cre_modArmorBootsStorageT1,items,Item,,,Reinforced Storage Soles,
+cre_modArmorBootsStorageWakaDesc,items,Item,,,"Reinforced soles with storage straps. Carry capacity scales with quality.",
+
+cre_modArmorHealthT1,items,Item,,,Health Reinforcement Padding,
+cre_modArmorHealthWakaDesc,items,Item,,,"A health-boosting padding. Max health bonus scales with quality.",
+
+cre_modArmorStaminaT1,items,Item,,,Stamina Reinforcement Padding,
+cre_modArmorStaminaWakaDesc,items,Item,,,"A stamina-boosting padding. Max stamina bonus scales with quality.",
+
+cre_modArmorResistT1,items,Item,,,Protective Lining,
+cre_modArmorResistWakaDesc,items,Item,,,"A protective lining. Element resists scale with quality (light / mid / heavy resist buff).",
+
+cre_modArmorReflectionShockT1,items,Item,,,Voltaic Reflection Plate,
+cre_modArmorReflectionShockWakaDesc,items,Item,,,"A shock-reflecting plate. Reflection power scales with quality.",
+
+cre_modArmorReflectionPunchT1,items,Item,,,Repulsion Plate,
+cre_modArmorReflectionPunchWakaDesc,items,Item,,,"A repulsive plate. Reflection power scales with quality.",
+
+cre_modArmorReflectionFireT1,items,Item,,,Pyro-Reflection Plate,
+cre_modArmorReflectionFireWakaDesc,items,Item,,,"A fire-reflecting plate. Reflection power scales with quality.",
+
+cre_modArmorAddLootT1,items,Item,,,Scavenger's Visor,
+cre_modArmorAddLootWakaDesc,items,Item,,,"A scavenger's visor. Loot bonus scales with quality.",
+
+cre_modArmorBleedAnimalT1,items,Item,,,Hunter's Edge Mod,
+cre_modArmorBleedAnimalWakaDesc,items,Item,,,"A hunter's edge. Animal-bleed proc scales with quality.",
+
+cre_modArmorSniperT1,items,Item,,,Marksman Helmet Mod,
+cre_modArmorSniperWakaDesc,items,Item,,,"A focused-aim helmet attachment. Aim stability scales with quality.",

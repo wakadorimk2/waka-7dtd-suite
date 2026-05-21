@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Slow Curve v0.1 - items.xml
+  Magazine reading rate 0.85x
+
+  Vanilla mechanic: each *SkillMagazine has an effect_group with
+      <triggered_effect trigger="onSelfPrimaryActionEnd"
+                        action="AddProgressionLevel" level="1"/>
+      <triggered_effect trigger="onSelfPrimaryActionEnd"
+                        action="GiveExp" exp="50"/>
+  AddProgressionLevel only accepts integer levels, so we cannot set
+  level="0.85". Instead we wrap the AddProgressionLevel triggered_effect
+  in a RandomRoll requirement (84/99 LTE) so that ~85% of reads grant
+  the level. The GiveExp triggered_effect is left untouched, so XP
+  gain from reading is unaffected.
+
+  XPath uses contains(@name,'SkillMagazine') to hit all 23 magazines
+  (harvestingTools, repairTools, salvageTools, sledgehammers,
+  workstation, bows, spears, blades, clubs, handguns, shotguns, rifles,
+  machineGuns, explosives, armor, medical, knuckles, food, seed,
+  robotics, vehicles, electrician, traps). The masterSkillMagazine
+  parent has no AddProgressionLevel triggered_effect of its own,
+  so the inner predicate filters it out automatically.
+
+  The secondary nerd-outfit conditional level-up (effect_group [3]
+  in vanilla) is left alone - it's already gated by a separate
+  RandomRoll, and gating it again would compound below the design.
+========================================================================
+-->
+
+
+<!-- ============================================================
+     Add 84/99 RandomRoll requirement to the primary
+     AddProgressionLevel triggered_effect on every *SkillMagazine
+     ============================================================ -->
+<append xpath="/items/item[contains(@name,'SkillMagazine')]/effect_group/triggered_effect[@action='AddProgressionLevel']">
+    <requirement name="RandomRoll" seed_type="Random" min_max="0,99" operation="LTE" value="84"/>
+</append>
+
+</configs>

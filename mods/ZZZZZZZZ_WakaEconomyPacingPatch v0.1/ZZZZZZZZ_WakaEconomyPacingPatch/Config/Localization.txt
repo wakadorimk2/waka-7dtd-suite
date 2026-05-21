@@ -1,0 +1,9 @@
+Key,english
+
+# Waka Economy Pacing Patch v0.1
+# Better Barter buy-side is kept from WakaPerkBoost, sell-side is nerfed here.
+perkBetterBarterRank1BWLongDesc,"You read merchants like the weather. -8% buy prices, +2.5% sell prices."
+perkBetterBarterRank2BWLongDesc,"Numbers move where you push them. -16% buy prices, +5% sell prices."
+perkBetterBarterRank3BWLongDesc,"The trader's smile means less now. -24% buy prices, +7.5% sell prices."
+perkBetterBarterRank4BWLongDesc,"Coin behaves around you. -32% buy prices, +10% sell prices."
+perkBetterBarterRank5BWLongDesc,"You leave with theirs and yours. -40% buy prices, +12.5% sell prices."

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+    <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingArmor']">
+
+        <display_entry icon="modArmorStoragePocket" name_key="modArmorWakaBagLayerSmallPouch" has_quality="false" unlock_level="1">
+            <unlock_entry item="modArmorWakaBagLayerSmallPouch" unlock_tier="1" recipes="modArmorWakaBagLayerSmallPouch"/>
+        </display_entry>
+
+        <display_entry icon="modArmorDoubleStoragePocket" name_key="modArmorWakaBagLayerSideBag" has_quality="false" unlock_level="10">
+            <unlock_entry item="modArmorWakaBagLayerSideBag" unlock_tier="1" recipes="modArmorWakaBagLayerSideBag"/>
+        </display_entry>
+
+        <display_entry icon="modArmorTripleStoragePocket" name_key="modArmorWakaBagLayerDayPack" has_quality="false" unlock_level="40">
+            <unlock_entry item="modArmorWakaBagLayerDayPack" unlock_tier="1" recipes="modArmorWakaBagLayerDayPack"/>
+        </display_entry>
+
+        <display_entry icon="modArmorQuadStoragePocket" name_key="modArmorWakaBagLayerHauler" has_quality="false" unlock_level="70">
+            <unlock_entry item="modArmorWakaBagLayerHauler" unlock_tier="1" recipes="modArmorWakaBagLayerHauler"/>
+        </display_entry>
+
+        <display_entry icon="modArmorBandolier" name_key="modArmorWakaBagLayerExpedition" has_quality="false" unlock_level="100">
+            <unlock_entry item="modArmorWakaBagLayerExpedition" unlock_tier="1" recipes="modArmorWakaBagLayerExpedition"/>
+        </display_entry>
+
+    </append>
+</configs>

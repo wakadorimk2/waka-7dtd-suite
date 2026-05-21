@@ -1,0 +1,177 @@
+Key,english
+
+# =============================================================================
+# Waka Perk Boost v0.1 - Localization.txt
+# Overwrites Black Wolf's perkXxxRankNBWLongDesc keys with Bloodfall-flavored,
+# numerically-updated long descriptions. English only - JP loc patches override
+# this further if needed.
+# =============================================================================
+
+# ===== Archery =====
+perkArcheryRank1BWLongDesc,"Quiet has always been the archer's first arrow. In Bloodfall's red dawn, that silence feeds you. +30% entity damage and +15% block damage with bows and crossbows. Draw 30% faster, reload 30% faster, ADS 80% spread. +20 projectile velocity, +20 flat headshot damage. 5/10/15% projectile stick on T1/T2/T3. Arrows degrade 10% slower. +2% chance for archery loot and Bow Hunter / Ranger magazines."
+perkArcheryRank2BWLongDesc,"You read the wind now. Each draw burns a little less of you. +60% entity damage, +30% block damage. Draw 60% faster, reload 60% faster, ADS 65% spread. +40 projectile velocity, +40 flat headshot damage. 10/20/30% stick. Arrows degrade 15% slower. +4% chance for archery loot."
+perkArcheryRank3BWLongDesc,"The bowstring sings in tune with the storm. +90% entity damage, +45% block damage. Draw 90% faster, reload 90% faster, ADS 50% spread. +60 projectile velocity, +60 flat headshot damage. 15/30/45% stick. Arrows degrade 20% slower. +6% chance for archery loot."
+perkArcheryRank4BWLongDesc,"Range is no longer guesswork. +120% entity damage, +60% block damage. Draw 120% faster, reload 120% faster, ADS 35% spread. +80 projectile velocity, +80 flat headshot damage. 20/40/60% stick. Arrows degrade 25% slower. +8% chance for archery loot."
+perkArcheryRank5BWLongDesc,"You've earned the long shot. The dead never hear it coming. +150% entity damage, +75% block damage. Draw 150% faster, reload 150% faster, ADS 20% spread. +100 projectile velocity, +100 flat headshot damage. 25/50/75% stick. Arrows degrade 30% slower. +10% chance for archery loot. Unlock the recipe to craft electric arrows and bolts."
+
+# ===== Brawler =====
+perkBrawlerRank1BWLongDesc,"Knuckles are the first weapon and the last. In Bloodfall, that's not metaphor. +15% entity damage and +30% block damage with knuckles. Knuckles degrade 10% slower. +2% chance for knuckle loot, brawling magazines, and Bar Brawling perk books."
+perkBrawlerRank2BWLongDesc,"Each impact drives the breath out cleaner. +30% entity damage, +60% block damage. Knuckles degrade 15% slower. +4% loot chance. Killing with knuckles restores 15 stamina."
+perkBrawlerRank3BWLongDesc,"You feel the rhythm of the brawl. +45% entity damage, +90% block damage. Knuckles degrade 20% slower. +6% loot chance. Killing with knuckles restores 20 stamina."
+perkBrawlerRank4BWLongDesc,"Bone-cracking precision. +60% entity damage, +120% block damage. Knuckles degrade 25% slower. +8% loot chance. Killing with knuckles restores 25 stamina."
+perkBrawlerRank5BWLongDesc,"Hands of the wasteland. +75% entity damage, +150% block damage. Knuckles degrade 30% slower. +10% loot chance. Killing with knuckles restores 35 stamina."
+
+# ===== Deep Cuts =====
+perkDeepCutsRank1BWLongDesc,"A blade is a question the dead must answer in red. +15% entity damage, +30% block damage with knives. Knives swing 10% faster. Hitting an enemy adds 2 to a bleed counter; reaching threshold applies bleeding. Dismembers add 75 bleed instantly. Knives degrade 10% slower."
+perkDeepCutsRank2BWLongDesc,"You learn where the seams of a body run. +30% entity damage, +60% block damage. Knives swing 20% faster. Bleed +4 per hit. Knives degrade 15% slower."
+perkDeepCutsRank3BWLongDesc,"Cuts go deep where they must. +45% entity damage, +90% block damage. Knives swing 30% faster. Bleed +6 per hit. Knives degrade 20% slower."
+perkDeepCutsRank4BWLongDesc,"The blade is an extension of will. +60% entity damage, +120% block damage. Knives swing 40% faster. Bleed +8 per hit. Knives degrade 25% slower."
+perkDeepCutsRank5BWLongDesc,"You leave a trail of red work behind you. +75% entity damage, +150% block damage. Knives swing 50% faster. Bleed +10 per hit, secondary attacks +20. Knives degrade 30% slower."
+
+# ===== Javelin Master =====
+perkJavelinMasterRank1BWLongDesc,"The spear was old when the dead first walked. It works. +15% entity damage, +30% block damage with spears. +15% range. Spears degrade 10% slower. +2% chance for spear loot and Spear Hunter perk books."
+perkJavelinMasterRank2BWLongDesc,"Distance is your friend. Hold the line. +30% entity damage, +60% block damage. +20% range. Spears degrade 15% slower. +4% loot chance. Spear kills restore 15 stamina."
+perkJavelinMasterRank3BWLongDesc,"Throw, retrieve, throw again. +45% entity damage, +90% block damage. +30% range. Spears degrade 20% slower. +6% loot chance. Spear kills restore 20 stamina."
+perkJavelinMasterRank4BWLongDesc,"The arc is muscle memory now. +60% entity damage, +120% block damage. +40% range. Spears degrade 25% slower. +8% loot chance. Spear kills restore 25 stamina."
+perkJavelinMasterRank5BWLongDesc,"You speak the old language fluently. +75% entity damage, +150% block damage. +50% range. Spears degrade 30% slower. +10% loot chance. Spear kills restore 35 stamina."
+
+# ===== Electrocutioner =====
+perkElectrocutionerRank1BWLongDesc,"A jolt to the right place ends the fight before it costs you a finger. +15% entity damage, +30% block damage with stun batons. +10% xp on kill. Batons degrade 10% slower. +2% loot chance for robotics gear and Tech Junkie books."
+perkElectrocutionerRank2BWLongDesc,"You read the body's wiring. +30% entity damage, +60% block damage. +20% xp on kill. Batons degrade 15% slower. +4% loot chance. Baton kills restore 15 stamina."
+perkElectrocutionerRank3BWLongDesc,"Charged hits, charged moves. +45% entity damage, +90% block damage. +30% xp on kill. Batons degrade 20% slower. +6% loot chance. Baton kills restore 20 stamina."
+perkElectrocutionerRank4BWLongDesc,"Every twitch is a confession. +60% entity damage, +120% block damage. +40% xp on kill. Batons degrade 25% slower. +8% loot chance. Baton kills restore 25 stamina."
+perkElectrocutionerRank5BWLongDesc,"You make the dead dance one last time. +75% entity damage, +150% block damage. +50% xp on kill. Batons degrade 30% slower. +10% loot chance. Baton kills restore 35 stamina."
+
+# ===== Miner 69'r =====
+perkMiner69rRank1BWLongDesc,"Stone remembers. So do you. +15% entity damage and +45% block damage with mining tools. Tools swing 15% faster. +2% loot chance for harvesting magazines / Art of Mining books. Mining kills restore 10 stamina."
+perkMiner69rRank2BWLongDesc,"The pickaxe rises smoother. +30% entity damage, +90% block damage. Swings 22% faster. +4% loot chance. Mining kills restore 15 stamina."
+perkMiner69rRank3BWLongDesc,"Each strike feels lighter than the last. +45% entity damage, +135% block damage. Swings 30% faster. +6% loot chance. Mining kills restore 20 stamina."
+perkMiner69rRank4BWLongDesc,"You dig as if the earth offers itself. +60% entity damage, +180% block damage. Swings 40% faster. +8% loot chance. Mining kills restore 25 stamina."
+perkMiner69rRank5BWLongDesc,"There is no stone you have not asked. +75% entity damage, +225% block damage. Swings 50% faster. +10% loot chance. Mining kills restore 35 stamina. Stamina cost of mining swings reduced by 60%."
+
+# ===== Boomstick =====
+perkBoomstickRank1BWLongDesc,"There's a reason it's called a Boomstick. Up close, the dead don't argue. +30% entity damage at point-blank (≤4m) with shotguns. Shotguns degrade 10% slower. Stuns scale by rank."
+perkBoomstickRank2BWLongDesc,"You ride the recoil now. +60% entity damage at point-blank. Shotguns degrade 15% slower."
+perkBoomstickRank3BWLongDesc,"One shell, one statement. +90% entity damage at point-blank. Shotguns degrade 20% slower."
+perkBoomstickRank4BWLongDesc,"The pellet pattern bends to your will. +120% entity damage at point-blank. Shotguns degrade 25% slower."
+perkBoomstickRank5BWLongDesc,"At kissing range, you are the apocalypse. +150% entity damage at point-blank. Shotguns degrade 30% slower. Leg shots can cripple."
+
+# ===== Hidden Strike =====
+perkHiddenStrikeRank1BWLongDesc,"Patience is a weapon. The dead never see the second sunrise. Sneak attacks deal +200% damage and +75% bonus entity damage. Knives reach +15% farther and ignore 15% target armor. +10% xp on night kills. +2% chance for Urban Warfare books."
+perkHiddenStrikeRank2BWLongDesc,"Footsteps fade in your wake. Sneak attacks +300% damage, +150% bonus. Knives ignore 30% armor. +15% night xp. +4% Urban Warfare chance."
+perkHiddenStrikeRank3BWLongDesc,"You move where shadows live. Sneak attacks +400% damage, +225% bonus. Knives ignore 45% armor. +20% night xp."
+perkHiddenStrikeRank4BWLongDesc,"Your timing is perfect. Sneak attacks +500% damage, +300% bonus. Knives ignore 60% armor. +25% night xp."
+perkHiddenStrikeRank5BWLongDesc,"You are the silence between heartbeats. Sneak attacks +600% damage, +375% bonus. Knives ignore 75% armor. +30% night xp."
+
+# ===== The Huntsman =====
+perkTheHuntsmanRank1BWLongDesc,"Out here, fur is currency. +20% harvest from animals. +30% ranged damage and +150% melee damage versus animals and zombie animals. +2% Hunter's Journal book chance."
+perkTheHuntsmanRank2BWLongDesc,"You read tracks like text. +40% harvest. +60% ranged, +300% melee vs animals. +4% Journal chance."
+perkTheHuntsmanRank3BWLongDesc,"You pass through the wood like wind. +60% harvest. +90% ranged, +450% melee vs animals. +6% Journal chance."
+perkTheHuntsmanRank4BWLongDesc,"The kill is clean, the meat is good. +80% harvest. +120% ranged, +600% melee vs animals. +8% Journal chance."
+perkTheHuntsmanRank5BWLongDesc,"You are the hunter the wasteland answers to. +100% harvest. +150% ranged, +750% melee vs animals. +10% Journal chance. Raw and cooked food in your backpack no longer attracts zombies by smell."
+
+# ===== Demolitions Expert =====
+perkDemolitionsExpertRank1BWLongDesc,"In Bloodfall, fire is the great equalizer. +8% dismember chance with explosives. Aim 15% tighter. Explosives degrade 10% slower. +10 projectile velocity for RPGs."
+perkDemolitionsExpertRank2BWLongDesc,"You cradle a grenade like a sleeping child. +16% dismember. Aim 12% tighter. Explosives degrade 20% slower. +15 projectile velocity. Aware of explosive resist effects."
+perkDemolitionsExpertRank3BWLongDesc,"The thunder is yours to throw. +30% dismember. Aim 9% tighter. Explosives degrade 30% slower. +20 projectile velocity."
+perkDemolitionsExpertRank4BWLongDesc,"Charges set, fuses cut. +45% dismember. Aim 6% tighter. Explosives degrade 40% slower. +25 projectile velocity. +37% block/entity damage with explosives. +30% reload speed."
+perkDemolitionsExpertRank5BWLongDesc,"The blast crater is your signature. +65% dismember. Aim 2% tighter. Explosives degrade 50% slower. +30 projectile velocity. +75% block/entity damage with explosives. +35% reload speed. Unlock incendiary rocket recipe."
+
+# ===== Penetrator =====
+perkPenetratorRank1BWLongDesc,"Armor is a polite suggestion. Ignore 30% target armor with firearms, archery, and turrets (40% with spears)."
+perkPenetratorRank2BWLongDesc,"Steel slips through steel. Ignore 55% target armor (60% with spears). Bows penetrate +2 enemies."
+perkPenetratorRank3BWLongDesc,"You see the gap in every plate. Ignore 80% target armor (85% with spears). Bows penetrate +4 enemies."
+perkPenetratorRank4BWLongDesc,"There is no armor, only delay. Ignore 105% target armor (110% with spears). Bows penetrate +6 enemies."
+
+# ===== Pain Tolerance =====
+perkPainToleranceRank1BWLongDesc,"Pain is information. You stop letting it run you. -10% all damage taken. +30% resist to stunned debuffs. +10% resist to broken limbs. +20% resist to sprains."
+perkPainToleranceRank2BWLongDesc,"You walk it off. -19% all damage taken. +47% stunned resist. +20% broken-limb resist. +33% sprain resist."
+perkPainToleranceRank3BWLongDesc,"Bruises are bookmarks. -28% all damage taken. +65% stunned resist. +30% broken-limb resist. +47% sprain resist."
+perkPainToleranceRank4BWLongDesc,"Your body keeps secrets. -36% all damage taken. +82% stunned resist. +40% broken-limb resist. +61% sprain resist."
+perkPainToleranceRank5BWLongDesc,"You don't flinch anymore. -45% all damage taken. +100% stunned resist. +50% broken-limb resist. +75% sprain resist. Gain Ignore the Pain status."
+
+# ===== Healing Factor =====
+perkHealingFactorRank1BWLongDesc,"Your wounds knit while you breathe. +0.025 hp/sec passive regen. Disabled while critically hungry or thirsty."
+perkHealingFactorRank2BWLongDesc,"Each scar fades a little faster. +0.05 hp/sec passive regen."
+perkHealingFactorRank3BWLongDesc,"Your blood remembers how to be whole. +0.10 hp/sec passive regen."
+perkHealingFactorRank4BWLongDesc,"Even broken bones find their way back. +0.18 hp/sec passive regen."
+perkHealingFactorRank5BWLongDesc,"You heal as the wasteland heals - slowly, but it does. +0.30 hp/sec passive regen. (~18 hp/min while fed and watered.)"
+
+# ===== Physician =====
+perkPhysicianRank1BWLongDesc,"Steady hands save more than steady aim. Medical items work harder in your hands. +200% xp from medical items. Med-kit regen rate ×3. Crafting at chem station unaffected at this rank."
+perkPhysicianRank2BWLongDesc,"You read pulse and pupils as text. +400% xp from medical items. Med-kit regen rate ×5. -20% chem-station crafting time."
+perkPhysicianRank3BWLongDesc,"Triage by reflex. +700% xp from medical items. Med-kit regen rate ×7. -40% chem-station crafting time."
+perkPhysicianRank4BWLongDesc,"Surgery in the dark, by feel. +1000% xp from medical items. Med-kit regen rate ×10. -80% chem-station crafting time. +30% dismember with intellect weapons."
+perkPhysicianRank5BWLongDesc,"You are the closest thing the wasteland has to a hospital. +1200% xp from medical items. Med-kit regen rate ×17. -120% chem-station crafting time. +30% dismember with intellect weapons."
+
+# ===== Well Insulated =====
+perkWellInsulatedRank1BWLongDesc,"Cold burns. Heat burns. You learn the trick of neither. +25 hot/cold resist. +15% elemental & infection resist. +15% chance to shrug off elemental debuffs. +3% Fireman's Almanac chance. Burnt Forest hazard immunity."
+perkWellInsulatedRank2BWLongDesc,"The biome forgets you. +50 hot/cold resist. +30% elemental & infection resist. +30% shrug-off chance. +5% Almanac chance. Desert hazard immunity."
+perkWellInsulatedRank3BWLongDesc,"Storms break around you. +75 hot/cold resist. +45% elemental & infection resist. +45% shrug-off chance. +7% Almanac chance. Snow hazard immunity."
+perkWellInsulatedRank4BWLongDesc,"You walk where weather has lost its argument. +100 hot/cold resist. +55% elemental & infection resist. +55% shrug-off chance. +10% Almanac chance. Wasteland hazard immunity. Resist all storms 120s longer."
+
+# ===== Lucky Looter =====
+perkLuckyLooterRank1BWLongDesc,"You learn what the wasteland is willing to give. +8% loot stage. -15% scavenge time. +1.5% loot drop chance."
+perkLuckyLooterRank2BWLongDesc,"Your eye finds the corner most people miss. +16% loot stage. -30% scavenge time. +4.4% loot drop chance."
+perkLuckyLooterRank3BWLongDesc,"You're the one the dust trusts. +24% loot stage. -50% scavenge time. +7.3% loot drop chance."
+perkLuckyLooterRank4BWLongDesc,"Containers seem heavier when you open them. +32% loot stage. -75% scavenge time. +10.2% loot drop chance."
+perkLuckyLooterRank5BWLongDesc,"You walk in, and the wasteland walks out with you. +40% loot stage. -95% scavenge time. +12% loot drop chance."
+
+# ===== Better Barter =====
+perkBetterBarterRank1BWLongDesc,"You read merchants like the weather. -8% buy prices, +8% sell prices."
+perkBetterBarterRank2BWLongDesc,"Numbers move where you push them. -16% buy, +16% sell."
+perkBetterBarterRank3BWLongDesc,"The trader's smile means less now. -24% buy, +24% sell."
+perkBetterBarterRank4BWLongDesc,"Coin behaves around you. -32% buy, +32% sell."
+perkBetterBarterRank5BWLongDesc,"You leave with theirs and yours. -40% buy, +40% sell."
+
+# ===== Daring Adventurer =====
+perkDaringAdventurerRank1BWLongDesc,"Quests teach the wasteland's grammar. +15 trader stage. +30% bonus quest reward items."
+perkDaringAdventurerRank2BWLongDesc,"You ask the right questions. +31 trader stage. +60% bonus reward items."
+perkDaringAdventurerRank3BWLongDesc,"Reputation walks ahead of you. +47 trader stage. +90% bonus reward items."
+perkDaringAdventurerRank4BWLongDesc,"You leave a contract better than you found it. +63 trader stage. +120% bonus reward items. +1 quest reward choice."
+perkDaringAdventurerRank5BWLongDesc,"The traders save the good jobs for you. +80 trader stage. +150% bonus reward items. +2 quest reward choices."
+
+# ===== Lock Picking =====
+perkLockPickingRank1BWLongDesc,"Tumblers want to fall. You teach them how. -50% pick time. -50% break chance. +50% loot for cash, dukes and gems. +2% Forge Ahead / Great Heist book chance."
+perkLockPickingRank2BWLongDesc,"Locks talk to you now. -65% pick time. -67% break chance. +100% cash/dukes/gems loot. +6% book chance."
+perkLockPickingRank3BWLongDesc,"There are no closed doors. -75% pick time. -85% break chance. +150% cash/dukes/gems loot. +10% book chance."
+
+# ===== Treasure Hunter =====
+perkTreasureHunterRank1BWLongDesc,"The earth keeps secrets. You ask politely. -1m search radius per 5 blocks dug. +75% buried treasure loot. +150% damage to dirt."
+perkTreasureHunterRank2BWLongDesc,"You feel the X under your boots. -1m radius per 3 blocks. +150% treasure loot. +300% dirt damage."
+perkTreasureHunterRank3BWLongDesc,"Buried things rise to greet you. -1m radius per block. +300% treasure loot. +450% dirt damage."
+perkTreasureHunterRank4BWLongDesc,"The crates are heavier these days. +400% treasure loot. +600% dirt damage. Bonus cash and dukes inside chests."
+perkTreasureHunterRank5BWLongDesc,"The map is a formality. +500% treasure loot. +750% dirt damage. One extra rare item per buried chest."
+
+# ===== Salvage Operations =====
+perkSalvageOperationsRank1BWLongDesc,"In Bloodfall, broken metal is half a life. Salvage tools swing 15% faster. Salvage kills restore 10 stamina."
+perkSalvageOperationsRank2BWLongDesc,"You strip a wreck like it owes you. Salvage tools swing 22% faster. Kills restore 15 stamina."
+perkSalvageOperationsRank3BWLongDesc,"You find use in everything. Salvage tools swing 30% faster. Kills restore 20 stamina."
+perkSalvageOperationsRank4BWLongDesc,"The world becomes parts to you. Salvage tools swing 40% faster. Kills restore 25 stamina."
+perkSalvageOperationsRank5BWLongDesc,"There is nothing too broken for your hand. Salvage tools swing 50% faster. Kills restore 35 stamina. -60% stamina cost on salvage swings."
+
+# ===== Rule One Cardio =====
+perkRuleOneCardioRank1BWLongDesc,"Rule one of the apocalypse. Don't stop. +15% running stamina regen. +15% walk speed. +10% run speed. +15 max stamina."
+perkRuleOneCardioRank2BWLongDesc,"Lungs grow with mileage. +30% regen. +22% walk. +17% run. +30 max stamina."
+perkRuleOneCardioRank3BWLongDesc,"Distance shrinks. +45% regen. +30% walk. +25% run. +45 max stamina."
+perkRuleOneCardioRank4BWLongDesc,"You arrive earlier than the dead expect. +60% regen. +37% walk. +32% run. +60 max stamina."
+perkRuleOneCardioRank5BWLongDesc,"Your second wind is your first. +75% regen. +45% walk. +40% run. +75 max stamina."
+
+# ===== Slow Metabolism =====
+perkSlowMetabolismRank1BWLongDesc,"Hunger and thirst slow when the body learns to wait. -15% water and food drain from regen and exertion. Hold breath 84s. -3% dysentery chance. +10% consumable buff duration."
+perkSlowMetabolismRank2BWLongDesc,"You ration without thinking. -23% drain. Hold breath 108s. -6% dysentery. +20% buff duration."
+perkSlowMetabolismRank3BWLongDesc,"Each calorie travels farther. -32% drain. Hold breath 132s. -9% dysentery. +30% buff duration."
+perkSlowMetabolismRank4BWLongDesc,"You ration like a monk. -40% drain. Hold breath 156s. -12% dysentery. +40% buff duration."
+perkSlowMetabolismRank5BWLongDesc,"You sip the world. -50% drain. Hold breath 180s. -15% dysentery. +50% buff duration."
+
+# ===== Living Off The Land =====
+perkLivingOffTheLandRank1BWLongDesc,"The land remembers tenants who pay attention. Crops yield up to +5x. Bonus flat crops +8. +10% seed harvest. Farm plots are now harvestable. -30% farm plot cost. +2% Southern Farming chance. 10% chance for 1 beeswax from tree harvest."
+perkLivingOffTheLandRank2BWLongDesc,"Your soil knows your hand. Crops up to +8x. Bonus +15. +15% seed harvest. -50% farm plot cost. +6% Southern Farming chance. 10% chance for 1-2 beeswax."
+perkLivingOffTheLandRank3BWLongDesc,"You feed yourself first, then teach others how. Crops up to +12x. Bonus +25. +20% seed harvest. +10% Southern Farming chance. 10% chance for 1-3 beeswax."
+
+# ===== Mother Lode =====
+perkMotherLodeRank1BWLongDesc,"The ore beneath knows the rhythm of your strike. +40% ore and wood harvest. -10% xp from harvesting (ore comes faster, lessons come slower)."
+perkMotherLodeRank2BWLongDesc,"The vein opens cleaner. +80% ore and wood harvest. -20% harvest xp."
+perkMotherLodeRank3BWLongDesc,"You take what the rock offers. +120% ore and wood harvest. -30% harvest xp."
+perkMotherLodeRank4BWLongDesc,"The motherlode reveals itself. +160% ore and wood harvest. -40% harvest xp."
+perkMotherLodeRank5BWLongDesc,"The earth gives because you ask correctly. +200% ore and wood harvest. -50% harvest xp."

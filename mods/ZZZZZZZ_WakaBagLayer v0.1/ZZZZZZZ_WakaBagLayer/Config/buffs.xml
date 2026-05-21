@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <!-- 20 over-capacity slots subtracts roughly 100% Mobility. -->
+    <set xpath="/buffs/buff[@name='buffEncumberedInv']/effect_group/triggered_effect[@cvar='$encumbranceEffect' and @operation='multiply']/@value">0.05</set>
+</configs>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaBodyLayerCATUI" />
+    <DisplayName value="Waka Body Layer - CATUI Bridge" />
+    <Description value="Optional bridge mod for Waka Body Layer + CATUI. Adds Protein/Carb/Fat nutrition stats to the CATUI HUD bottom-left status row. Color-coded text shows deficit (red/orange) and excess (yellow/purple) zones at a glance. Requires Waka Body Layer 0.5+, CATUI, and Quartz. Pure XML - EAC safe." />
+    <Author value="wakadori" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaFoodStatFix" />
+    <DisplayName value="Waka Food Stat Display Fix" />
+    <Description value="Insurance patch for food stat tooltip display. Injects static display_value tags into every vanilla food, every EFTX custom food, and every Medical-altered food so stats remain visible even when triggered_effect-based tooltip resolution is disturbed by UI mods. Pure XML append - EAC safe." />
+    <Author value="wakadori" />
+    <Version value="0.2.0" />
+    <Website value="" />
+</xml>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Slow Curve v0.2 - buffs.xml
+  Persistent player buff carrying XP, LootStage, and (new in v0.2)
+  PlayerLevel-gated GameStage curve. Self-applies via buffStatusCheck01
+  hook so it persists across deaths and pre-existing saves.
+
+  Sub-axes carried here:
+    PlayerExpGain perc_add -0.15  -> 0.85x XP gain (input-side brake)
+    LootStage     perc_add -0.15  -> J-curve flat brake on loot stage
+    GameStage     perc_add (PlayerLevel-gated 6-band curve, v0.4):
+        Lv 1-3    : (unmodified, vanilla GS passes through)
+        Lv 4-10   : -.7  (30% of vanilla; early silence, ~Day1-2)
+        Lv 11-30  : -.6  (40% of vanilla; warm-up, ~Day3-5)
+        Lv 31-60  : -.5  (50% of vanilla; mid-game, ~Day5-8)
+        Lv 61-100 : -.3  (70% of vanilla; late-mid, ~Day8-12)
+        Lv 101-150: -.1  (90% of vanilla; late-game, ~Day12-21)
+        Lv 151+   : +.2  (120% of vanilla; true finale, ~Day21+)
+
+    v0.4 re-bands for actual leveling pace (observed Day14-21 reaches
+    Lv120, so v0.3's Lv51+ finale-boost mis-fired in mid-game). The
+    6-band curve aligns each step to a Day window.
+
+    v0.4.1 carves out Lv 1-3: vanilla GS at Lv1-3 Day0 yields 0 after
+    perc_add -.7 (e.g. Lv3: 3*0.3=0.9 -> floor 0), silencing
+    sleeperVolume+BM. Lv 1-3 now skip the band so vanilla GS (1-3)
+    passes through; band re-enters at Lv4 where 4*1.2*0.3=1.44
+    -> floor 1 is the lowest level keeping GS>=1.
+
+    v0.2 used base_add but produced negative GS (-44 observed at Lv5
+    Day0), which silenced sleeperVolume + BM entirely. perc_add keeps
+    the vanilla curve shape and stays positive.
+
+  Why PlayerLevel and not day-based gating?
+  - Vanilla 7DTD exposes no working currentGameStageDay cvar to
+    CVarCompare; day-based requirement has no precedent.
+  - PlayerLevel requirement is widely implemented (vanilla
+    entityclasses.xml uses LT/GTE on it).
+  - Bloodfall's perkGeneralGameStage proves passive_effect
+    GameStage operation="base_add" works at runtime.
+
+  TraderStage is NOT modified here. Vanilla trader stage =
+  PlayerLevel x (1 + quest_tier_mod), so the XP brake already
+  cascades to ~0.85x trader stage. The remaining brake to 0.7x is
+  applied by raising traderstage_template min thresholds by 1.21x
+  in traders.xml (0.85 * 0.824 = 0.7).
+========================================================================
+-->
+
+
+<!-- ============================================================
+     1. The persistent core buff
+     ============================================================ -->
+<append xpath="/buffs">
+
+    <buff name="buffWakaSlowCurveCore" hidden="true" remove_on_death="false">
+        <stack_type value="ignore"/>
+        <duration value="0"/>
+
+        <!-- Input-side brakes: always on -->
+        <effect_group>
+            <passive_effect name="PlayerExpGain" operation="perc_add" value="-.15"/>
+            <passive_effect name="LootStage"     operation="perc_add" value="-.15"/>
+        </effect_group>
+
+        <!-- GameStage curve: Lv 4-10 (~Day1-2), 30% of vanilla — early silence
+             Lv 1-3 is carved out: vanilla GS (1-3) passes through unmodified
+             to avoid floor truncation to 0. At Lv3 Day0, vanilla GS=3, then
+             perc_add -.7 yields 0.9 -> floor 0. Lv4 Day0 yields 1.44 -> 1,
+             which is the lowest level where the band stays >= 1. -->
+        <effect_group>
+            <requirement name="PlayerLevel" operation="GTE" value="4"/>
+            <requirement name="PlayerLevel" operation="LTE" value="10"/>
+            <passive_effect name="GameStage" operation="perc_add" value="-.7"/>
+        </effect_group>
+
+        <!-- GameStage curve: Lv 11-30 (~Day3-5), 40% of vanilla — warm-up -->
+        <effect_group>
+            <requirement name="PlayerLevel" operation="GT"  value="10"/>
+            <requirement name="PlayerLevel" operation="LTE" value="30"/>
+            <passive_effect name="GameStage" operation="perc_add" value="-.6"/>
+        </effect_group>
+
+        <!-- GameStage curve: Lv 31-60 (~Day5-8), 50% of vanilla — mid-game -->
+        <effect_group>
+            <requirement name="PlayerLevel" operation="GT"  value="30"/>
+            <requirement name="PlayerLevel" operation="LTE" value="60"/>
+            <passive_effect name="GameStage" operation="perc_add" value="-.5"/>
+        </effect_group>
+
+        <!-- GameStage curve: Lv 61-100 (~Day8-12), 70% of vanilla — late-mid -->
+        <effect_group>
+            <requirement name="PlayerLevel" operation="GT"  value="60"/>
+            <requirement name="PlayerLevel" operation="LTE" value="100"/>
+            <passive_effect name="GameStage" operation="perc_add" value="-.3"/>
+        </effect_group>
+
+        <!-- GameStage curve: Lv 101-150 (~Day12-21), 90% of vanilla — late-game -->
+        <effect_group>
+            <requirement name="PlayerLevel" operation="GT"  value="100"/>
+            <requirement name="PlayerLevel" operation="LTE" value="150"/>
+            <passive_effect name="GameStage" operation="perc_add" value="-.1"/>
+        </effect_group>
+
+        <!-- GameStage curve: Lv 151+ (~Day21+), 120% of vanilla — true finale -->
+        <effect_group>
+            <requirement name="PlayerLevel" operation="GT" value="150"/>
+            <passive_effect name="GameStage" operation="perc_add" value=".2"/>
+        </effect_group>
+    </buff>
+
+</append>
+
+
+<!-- ============================================================
+     2. Hook: append a self-heal trigger to buffStatusCheck01
+        (vanilla always-on tick buff, update_rate=2s) so that
+        buffWakaSlowCurveCore is present whenever the player is
+        in-game, even after death/respawn or first install on an
+        existing save.
+     ============================================================ -->
+<append xpath="/buffs/buff[@name='buffStatusCheck01']/effect_group">
+
+    <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffWakaSlowCurveCore">
+        <requirement name="!HasBuff" buff="buffWakaSlowCurveCore"/>
+    </triggered_effect>
+
+</append>
+
+</configs>

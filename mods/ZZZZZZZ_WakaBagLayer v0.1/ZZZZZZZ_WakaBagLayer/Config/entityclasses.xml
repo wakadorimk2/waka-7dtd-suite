@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <!-- DF inspired: lower base CarryCapacity so the player feels encumbered without bag/perk/pocket investment -->
+    <set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='CarryCapacity']/@value">12</set>
+
+    <!-- Expand UI BagSize to 91 (CATUI-style 7 rows x 13 cols). -->
+    <set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='BagSize']/@value">91</set>
+</configs>

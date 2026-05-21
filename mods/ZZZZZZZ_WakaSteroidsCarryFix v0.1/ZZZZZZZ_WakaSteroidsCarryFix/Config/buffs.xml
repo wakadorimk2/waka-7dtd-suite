@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <set xpath="//buff[@name='buffDrugSteroids']/effect_group/passive_effect[@name='CarryCapacity']/@operation">base_add</set>
+    <set xpath="//buff[@name='buffDrugSteroids']/effect_group/passive_effect[@name='CarryCapacity']/@value">23</set>
+</configs>

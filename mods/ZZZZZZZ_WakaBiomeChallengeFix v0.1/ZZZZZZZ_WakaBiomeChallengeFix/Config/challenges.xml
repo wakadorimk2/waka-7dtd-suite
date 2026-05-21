@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Biome Challenge Fix v0.1 - challenges.xml
+
+  Vanilla Biome Progression "<biome>SurvivalKillZombie" challenges have
+  two objectives:
+    obj1: type="Kill" entity_names="<biome-iconic T1 names>" count=5
+    obj2: type="KillByTag" entity_tags="<other-biome tags only>" count=5
+
+  WakaTierCurve dynamically swaps spawned T1 zombies into EZS T2-T5
+  variants (zombieBurnt -> zombieBurntT3, zombieRancherT5, etc.).
+  These variants:
+    - have a different name not in obj1's entity_names
+    - inherit the biome tag (e.g. "burnt") which is intentionally
+      excluded from obj2's entity_tags
+
+  Result: tier'd biome-iconic kills count for neither objective and
+  the challenge becomes unclearable past T1.
+
+  Fix: extend obj1's entity_names with EZS T2-T5 + Feral/Radiated
+  variants of each biome's iconic base zombie, plus Bloodfall T6-T15
+  variants where Bloodfall defines that biome-iconic base.
+
+  Note: Bloodfall does not define Burnt/Chuck T6-T15 variants in this
+  loadout. Rancher and Mutated do exist at T6-T15 and must be counted
+  explicitly because their biome tag is excluded from obj2.
+========================================================================
+-->
+
+<!-- BURNT FOREST: zombieBurnt T2-T5 + Feral/Radiated -->
+<set xpath="/challenges/challenge[@name='burntSurvivalKillZombie']/objective[@type='Kill']/@entity_names">zombieBurnt,zombieBurntFeral,zombieBurntRadiated,zombieBurntCharged,zombieBurntInfernal,zombieBurntT2,zombieBurntFeralT2,zombieBurntRadiatedT2,zombieBurntT3,zombieBurntFeralT3,zombieBurntRadiatedT3,zombieBurntT4,zombieBurntFeralT4,zombieBurntRadiatedT4,zombieBurntT5,zombieBurntFeralT5,zombieBurntRadiatedT5</set>
+
+<!-- DESERT: zombieRancher T2-T5 + Feral/Radiated, Bloodfall Rancher T6-T15 (PlagueSpitter has no tier variants) -->
+<set xpath="/challenges/challenge[@name='desertSurvivalKillZombie']/objective[@type='Kill']/@entity_names">zombiePlagueSpitter,zombiePlagueSpitterFeral,zombiePlagueSpitterRadiated,zombiePlagueSpitterCharged,zombiePlagueSpitterInfernal,zombieRancher,zombieRancherFeral,zombieRancherRadiated,zombieRancherCharged,zombieRancherInfernal,zombieRancherT2,zombieRancherFeralT2,zombieRancherRadiatedT2,zombieRancherT3,zombieRancherFeralT3,zombieRancherRadiatedT3,zombieRancherT4,zombieRancherFeralT4,zombieRancherRadiatedT4,zombieRancherT5,zombieRancherFeralT5,zombieRancherRadiatedT5,BrutalRancherTier6,AlphaRancherTier7,PrimeRancherTier8,ApexRancherTier9,TormentRancherTier10,NightmareRancherTier11,HellbornRancherTier12,OverlordRancherTier13,DemigodRancherTier14,BloodlordRancherTier15</set>
+
+<!-- SNOW: zombieChuck T2-T5 + Feral/Radiated (Frostclaw has no EZS T-variants) -->
+<set xpath="/challenges/challenge[@name='snowSurvivalKillZombie']/objective[@type='Kill']/@entity_names">zombieFrostclaw,zombieFrostclawFeral,zombieFrostclawRadiated,zombieFrostclawCharged,zombieFrostclawInfernal,zombieChuck,zombieChuckFeral,zombieChuckRadiated,zombieChuckCharged,zombieChuckInfernal,zombieChuckT2,zombieChuckFeralT2,zombieChuckRadiatedT2,zombieChuckT3,zombieChuckFeralT3,zombieChuckRadiatedT3,zombieChuckT4,zombieChuckFeralT4,zombieChuckRadiatedT4,zombieChuckT5,zombieChuckFeralT5,zombieChuckRadiatedT5</set>
+
+<!-- WASTELAND: zombieMutated T2-T5 + Feral/Radiated, Bloodfall Mutated T6-T15 -->
+<set xpath="/challenges/challenge[@name='wastelandSurvivalKillZombie']/objective[@type='Kill']/@entity_names">zombieMutated,zombieMutatedFeral,zombieMutatedRadiated,zombieMutatedCharged,zombieMutatedInfernal,zombieMutatedT2,zombieMutatedFeralT2,zombieMutatedRadiatedT2,zombieMutatedT3,zombieMutatedFeralT3,zombieMutatedRadiatedT3,zombieMutatedT4,zombieMutatedFeralT4,zombieMutatedRadiatedT4,zombieMutatedT5,zombieMutatedFeralT5,zombieMutatedRadiatedT5,BrutalMutatedTier6,AlphaMutatedTier7,PrimeMutatedTier8,ApexMutatedTier9,TormentMutatedTier10,NightmareMutatedTier11,HellbornMutatedTier12,OverlordMutatedTier13,DemigodMutatedTier14,BloodlordMutatedTier15</set>
+
+</configs>

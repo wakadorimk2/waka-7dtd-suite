@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+	<!--
+		==========================================================
+		v0.5 — Hybrid (Base + Delta) for panel-friendly stat display
+		==========================================================
+		v0.4 used SCore ItemHasQuality multi-group for q-band scaling.
+		Verified working in actual gameplay (Mag Size q1=33→q4=39), but
+		the workbench Modify panel preview *doesn't* fire requirement-
+		gated effect_groups (plate showed Armor Rating 0 at q3).
+
+		v0.5 hybrid structure:
+		    Base group (no requirement) = T2 mid value → panel sees this
+		    q1-q2 group (LTE 2)         = (T1 - T2) negative delta
+		    q5-q6 group (GTE 5)         = (T3 - T2) positive delta
+		                                  + BW conditional bonuses
+
+		Result:
+		    Panel preview: base (T2 mid) value visible at all qualities
+		    Actual gameplay: q1=T1, q3-q4=T2, q5-q6=T3 with BW bonuses
+		    Player sees a "guideline" number; description hints scaling
+	-->
+
+
+	<!--
+		==========================================================
+		Section A: Durability Overhaul integration (T1 only)
+		==========================================================
+	-->
+
+	<set xpath="/item_modifiers/item_modifier[(starts-with(@name, 'modCre') or starts-with(@name, 'cre_mod')) and contains(@name, 'T1')]/effect_group[@tiered='false']/@tiered">true</set>
+
+	<append xpath="/item_modifiers/item_modifier[(starts-with(@name, 'modCreGun') or starts-with(@name, 'modCreWeap') or starts-with(@name, 'modCreBow')) and contains(@name, 'T1') and not(contains(@name, 'Magazine'))]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationTags" value="modGunDegradation"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[contains(@name, 'modCreGunMagazine') and contains(@name, 'T1')]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationTags" value="modGunDegradation,magazine"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[starts-with(@name, 'modCreMelee') and contains(@name, 'T1')]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationTags" value="modMeleeDegradation"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[starts-with(@name, 'cre_modArmorPlating') and contains(@name, 'T1')]">
+		<property name="ShowQuality" value="true"/>
+		<property name="DegradationMax" value="300,1100"/>
+	</append>
+
+
+	<!--
+		==========================================================
+		Section D1: Make Cre T1 items quality-aware (Quality=6)
+		==========================================================
+	-->
+
+	<append xpath="/item_modifiers/item_modifier[(starts-with(@name, 'modCre') or starts-with(@name, 'cre_mod')) and contains(@name, 'T1')]">
+		<property name="Quality" value="6"/>
+	</append>
+
+
+	<!--
+		==========================================================
+		Section D2: Set Cre T1 base passive_effects to T2 mid value
+		(panel sees this since base group has no requirement)
+		==========================================================
+	-->
+
+	<!-- Weapon-side base value substitutions -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT1']/effect_group/passive_effect[@name='EntityDamage']/@value">.20</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreWeapDurabT1']/effect_group/passive_effect[@name='DegradationPerUse']/@value">-.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT1']/effect_group/passive_effect[@name='RoundsPerMinute']/@value">.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT1']/effect_group/passive_effect[@name='ReloadSpeedMultiplier']/@value">.35</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunMagazineT1']/effect_group/passive_effect[@name='MagazineSize']/@value">.75</set>
+
+	<!-- Grip multi-effect -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group/passive_effect[@name='SpreadMultiplierCrouching']/@value">-.30</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group/passive_effect[@name='SpreadMultiplierHip']/@value">-.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group/passive_effect[@name='SpreadMultiplierWalking']/@value">-.20</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group/passive_effect[@name='KickDegreesVerticalMin']/@value">-.65</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group/passive_effect[@name='KickDegreesVerticalMax']/@value">-.65</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group/passive_effect[@name='KickDegreesHorizontalMin']/@value">-.65</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']/effect_group/passive_effect[@name='KickDegreesHorizontalMax']/@value">-.65</set>
+
+	<!-- Range -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']/effect_group/passive_effect[@name='DamageFalloffRange']/@value">.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']/effect_group/passive_effect[@name='MaxRange']/@value">.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']/effect_group/passive_effect[@name='WeaponHandling']/@value">.25</set>
+
+	<!-- Sniper heavy multi-effect -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='EntityDamage']/@value">.20</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='DamageFalloffRange']/@value">.40</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='MaxRange']/@value">.40</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='WeaponHandling' and not(requirement)]/@value">-.65</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='WeaponHandling' and requirement[@name='HasBuff']]/@value">1.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='SpreadMultiplierHip']/@value">1.15</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='SpreadMultiplierAiming']/@value">-.35</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='SpreadMultiplierCrouching']/@value">1.15</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']/effect_group/passive_effect[@name='SpreadMultiplierWalking']/@value">1.15</set>
+
+	<!-- OneB (only EntityDamage scales; others static) -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreGunOneBT1']/effect_group/passive_effect[@name='EntityDamage']/@value">.90</set>
+
+	<!-- BowString -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreBowStringT1']/effect_group/passive_effect[@name='ProjectileVelocity']/@value">.25</set>
+
+	<!-- BowPower -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']/effect_group/passive_effect[@name='EntityDamage']/@value">.20</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']/effect_group/passive_effect[@name='WeaponHandling']/@value">.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']/effect_group/passive_effect[@name='DamageFalloffRange']/@value">.25</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']/effect_group/passive_effect[@name='MaxRange']/@value">.25</set>
+
+	<!-- Melee -->
+	<set xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT1']/effect_group/passive_effect[@name='AttacksPerMinute']/@value">.35</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreMeleeStaminaT1']/effect_group/passive_effect[@name='StaminaLoss']/@value">-.20</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT1']/effect_group/passive_effect[@name='MaxRange']/@value">.55</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT1']/effect_group/passive_effect[@name='BlockRange']/@value">.55</set>
+	<set xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT1']/effect_group/passive_effect[@name='BlockDamage']/@value">.25</set>
+
+	<!-- Armor -->
+	<set xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']/effect_group/passive_effect[@name='Mobility']/@value">.027</set>
+	<set xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']/effect_group/passive_effect[@name='StaminaChangeOT' and @tags='walking']/@value">.019</set>
+	<set xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']/effect_group/passive_effect[@name='StaminaChangeOT' and @tags='running']/@value">.051</set>
+	<set xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT1']/effect_group/passive_effect[@name='PhysicalDamageResist']/@value">1.75</set>
+	<set xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsStorageT1']/effect_group/passive_effect[@name='CarryCapacity']/@value">6</set>
+	<set xpath="/item_modifiers/item_modifier[@name='cre_modArmorHealthT1']/effect_group/passive_effect[@name='HealthMax']/@value">10</set>
+	<set xpath="/item_modifiers/item_modifier[@name='cre_modArmorStaminaT1']/effect_group/passive_effect[@name='StaminaMax']/@value">10</set>
+
+
+	<!--
+		==========================================================
+		Section D3: q1-q2 negative delta (LTE 2 → reduces to T1)
+		==========================================================
+	-->
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value="-.10"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDurabT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="DegradationPerUse" operation="perc_add" value=".10"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="RoundsPerMinute" operation="perc_add" value="-.15"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-.20"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunMagazineT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="MagazineSize" operation="perc_add" value="-.40"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="SpreadMultiplierCrouching" operation="perc_add" value=".15"/>
+			<passive_effect name="SpreadMultiplierHip" operation="perc_add" value=".15"/>
+			<passive_effect name="SpreadMultiplierWalking" operation="perc_add" value=".10"/>
+			<passive_effect name="KickDegreesVerticalMin" operation="perc_add" value=".30"/>
+			<passive_effect name="KickDegreesVerticalMax" operation="perc_add" value=".30"/>
+			<passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value=".30"/>
+			<passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value=".30"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="DamageFalloffRange" operation="perc_add" value="-.15"/>
+			<passive_effect name="MaxRange" operation="perc_add" value="-.15"/>
+			<passive_effect name="WeaponHandling" operation="perc_add" value="-.10"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value="-.10"/>
+			<passive_effect name="DamageFalloffRange" operation="perc_add" value="-.20"/>
+			<passive_effect name="MaxRange" operation="perc_add" value="-.20"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunOneBT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value="-.35"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowStringT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="ProjectileVelocity" operation="perc_add" value="-.15"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value="-.10"/>
+			<passive_effect name="WeaponHandling" operation="perc_add" value="-.15"/>
+			<passive_effect name="DamageFalloffRange" operation="perc_add" value="-.10"/>
+			<passive_effect name="MaxRange" operation="perc_add" value="-.10"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="AttacksPerMinute" operation="perc_add" value="-.15"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeStaminaT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="StaminaLoss" operation="perc_add" value=".10" tags="primary,secondary"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="MaxRange" operation="perc_add" value="-.25"/>
+			<passive_effect name="BlockRange" operation="perc_add" value="-.25"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="BlockDamage" operation="perc_add" value="-.10"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="Mobility" operation="perc_add" value="-.012"/>
+			<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.010" tags="walking"/>
+			<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.032" tags="running"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="PhysicalDamageResist" operation="base_add" value="-.85"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsStorageT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="CarryCapacity" operation="base_add" value="-3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorHealthT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="HealthMax" operation="base_add" value="-5"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorStaminaT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+			<passive_effect name="StaminaMax" operation="base_add" value="-5"/>
+		</effect_group>
+	</append>
+
+
+	<!--
+		==========================================================
+		Section D4: q5-q6 positive delta + BW conditional bonuses
+		(GTE 5 → raises to T3 + adds rewards)
+		==========================================================
+	-->
+
+	<!-- modCreWeapDamage: +delta + headshot bonus -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value=".15"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value=".55">
+				<requirement name="HitLocation" body_parts="Head"/>
+			</passive_effect>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDurabT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="DegradationPerUse" operation="perc_add" value="-.15"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="RoundsPerMinute" operation="perc_add" value=".25"/>
+			<passive_effect name="IncrementalSpreadMultiplier" operation="perc_add" value="-.20"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".25"/>
+			<passive_effect name="RoundsPerMinute" operation="perc_add" value=".15"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunMagazineT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="MagazineSize" operation="perc_add" value=".50"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="SpreadMultiplierCrouching" operation="perc_add" value="-.40"/>
+			<passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-.25"/>
+			<passive_effect name="SpreadMultiplierWalking" operation="perc_add" value="-.20"/>
+			<passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-.25"/>
+			<passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-.25"/>
+			<passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-.25"/>
+			<passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-.25"/>
+			<passive_effect name="WeaponHandling" operation="perc_add" value=".30"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="DamageFalloffRange" operation="perc_add" value=".25"/>
+			<passive_effect name="MaxRange" operation="perc_add" value=".25"/>
+			<passive_effect name="WeaponHandling" operation="perc_add" value=".15"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value="1.0">
+				<requirement name="TargetRange" target="other" operation="GTE" value="40"/>
+			</passive_effect>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value=".10"/>
+			<passive_effect name="DamageFalloffRange" operation="perc_add" value=".35"/>
+			<passive_effect name="MaxRange" operation="perc_add" value=".35"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value=".90">
+				<requirement name="HitLocation" body_parts="Head"/>
+			</passive_effect>
+			<passive_effect name="DismemberChance" operation="base_add" value=".60">
+				<requirement name="HitLocation" body_parts="Head"/>
+			</passive_effect>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunOneBT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value=".60"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowStringT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="ProjectileVelocity" operation="perc_add" value=".25"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="EntityDamage" operation="perc_add" value=".10"/>
+			<passive_effect name="WeaponHandling" operation="perc_add" value=".25"/>
+			<passive_effect name="DamageFalloffRange" operation="perc_add" value=".15"/>
+			<passive_effect name="MaxRange" operation="perc_add" value=".15"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="AttacksPerMinute" operation="perc_add" value=".20"/>
+			<passive_effect name="StaminaLoss" operation="perc_add" value="-.28" tags="primary,secondary"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeStaminaT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="StaminaLoss" operation="perc_add" value="-.15" tags="primary,secondary"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="MaxRange" operation="perc_add" value=".35"/>
+			<passive_effect name="BlockRange" operation="perc_add" value=".35"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="BlockDamage" operation="perc_add" value=".15"/>
+			<passive_effect name="DismemberChance" operation="base_add" value=".18"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="Mobility" operation="perc_add" value=".018"/>
+			<passive_effect name="StaminaChangeOT" operation="perc_add" value=".012" tags="walking"/>
+			<passive_effect name="StaminaChangeOT" operation="perc_add" value=".022" tags="running"/>
+			<passive_effect name="WalkSpeed" operation="perc_add" value=".06"/>
+			<passive_effect name="RunSpeed" operation="perc_add" value=".06"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="PhysicalDamageResist" operation="base_add" value="1.75"/>
+			<passive_effect name="ElementalDamageResist" operation="base_add" value="10" tags="heat,electrical,radiation,toxic"/>
+			<passive_effect name="ExplosionIncomingDamage" operation="perc_add" value="-.12"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsStorageT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="CarryCapacity" operation="base_add" value="3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorHealthT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="HealthMax" operation="base_add" value="10"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorStaminaT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<passive_effect name="StaminaMax" operation="base_add" value="10"/>
+		</effect_group>
+	</append>
+
+
+	<!--
+		==========================================================
+		Section D5: Triggered_effect armor attachments
+		(unchanged from v0.4 — these don't show in panel anyway,
+		ItemHasQuality multi-group works for triggered_effect)
+		==========================================================
+	-->
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBandolierT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBandolierT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffBandolierChestT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffBandolierChestT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffBandolierChestT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffBandolierChestT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesStaminaT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesStaminaT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffHandStaminaT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffHandStaminaT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffHandStaminaT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffHandStaminaT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesSpeedT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesSpeedT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffHandSpeedT1"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffHandSpeedT1"/>
+			<passive_effect name="RunSpeed" operation="perc_add" value=".03"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffHandSpeedT1"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffHandSpeedT1"/>
+			<passive_effect name="RunSpeed" operation="perc_add" value=".06"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsSpeedT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsSpeedT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffBootsSpeedT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffBootsSpeedT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffBootsSpeedT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffBootsSpeedT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorResistT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorResistT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffResistT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffResistT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffResistT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffResistT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionShockT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionShockT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffReflectionShockT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffReflectionShockT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffReflectionShockT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffReflectionShockT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionPunchT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionPunchT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffReflectionPunchT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffReflectionPunchT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffReflectionPunchT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffReflectionPunchT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionFireT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionFireT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffReflectionFireT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffReflectionFireT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffReflectionFireT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffReflectionFireT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorAddLootT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorAddLootT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffAddLootT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffAddLootT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffAddLootT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffAddLootT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBleedAnimalT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBleedAnimalT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffAnimalBleedT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffAnimalBleedT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffAnimalBleedT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffAnimalBleedT3"/>
+		</effect_group>
+	</append>
+
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorSniperT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorSniperT1']">
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffArmorSniperT2"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffArmorSniperT2"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<triggered_effect trigger="onSelfEquipStart" action="AddBuff" buff="cre_buffArmorSniperT3"/>
+			<triggered_effect trigger="onSelfEquipStop" action="RemoveBuff" buff="cre_buffArmorSniperT3"/>
+		</effect_group>
+	</append>
+
+	<!-- Proc-based weapon attachments: q1-2 base, q3+ relies on Section D4 bonuses if any -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunBloodT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeFireT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeShockT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBreakT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+
+	<!-- modCreGunShock: 4 effect_groups (per-perk) gated to LTE 2 -->
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunShockT1']/effect_group">
+		<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="2"/>
+	</append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunShockT1']">
+		<effect_group tiered="true">
+			<requirement name="HoldingItemHasTags" tags="perkGunslinger"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<requirement name="RandomRoll" seed_type="Random" min_max="0,100" operation="LTE" value="10"/>
+			<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffShocked" duration="4"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement name="HoldingItemHasTags" tags="perkMachineGunner"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<requirement name="RandomRoll" seed_type="Random" min_max="0,100" operation="LTE" value="10"/>
+			<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffShocked" duration="4"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement name="HoldingItemHasTags" tags="revolver"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="3"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="LTE" value="4"/>
+			<requirement name="RandomRoll" seed_type="Random" min_max="0,100" operation="LTE" value="20"/>
+			<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffShocked" duration="4"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement name="HoldingItemHasTags" tags="perkGunslinger"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<requirement name="RandomRoll" seed_type="Random" min_max="0,100" operation="LTE" value="15"/>
+			<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffShocked" duration="5"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement name="HoldingItemHasTags" tags="perkMachineGunner"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<requirement name="RandomRoll" seed_type="Random" min_max="0,100" operation="LTE" value="15"/>
+			<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffShocked" duration="5"/>
+		</effect_group>
+		<effect_group tiered="true">
+			<requirement name="HoldingItemHasTags" tags="revolver"/>
+			<requirement invert="true" name="ItemHasQuality, SCore" operation="GTE" value="5"/>
+			<requirement name="RandomRoll" seed_type="Random" min_max="0,100" operation="LTE" value="25"/>
+			<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffShocked" duration="5"/>
+		</effect_group>
+	</append>
+
+
+	<!--
+		==========================================================
+		Section C: Description keys (T1 only, unchanged)
+		==========================================================
+	-->
+
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDamageT1']"><property name="DescriptionKey" value="modCreWeapDamageWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreWeapDurabT1']"><property name="DescriptionKey" value="modCreWeapDurabWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRPMT1']"><property name="DescriptionKey" value="modCreGunRPMWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunReloadT1']"><property name="DescriptionKey" value="modCreGunReloadWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunMagazineT1']"><property name="DescriptionKey" value="modCreGunMagazineWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunGripT1']"><property name="DescriptionKey" value="modCreGunGripWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunRangeT1']"><property name="DescriptionKey" value="modCreGunRangeWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunSniperT1']"><property name="DescriptionKey" value="modCreGunSniperWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunOneBT1']"><property name="DescriptionKey" value="modCreGunOneBWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunShockT1']"><property name="DescriptionKey" value="modCreGunShockWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreGunBloodT1']"><property name="DescriptionKey" value="modCreGunBloodWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowStringT1']"><property name="DescriptionKey" value="modCreBowStringWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreBowPowerT1']"><property name="DescriptionKey" value="modCreBowPowerWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeAPMT1']"><property name="DescriptionKey" value="modCreMeleeAPMWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeStaminaT1']"><property name="DescriptionKey" value="modCreMeleeStaminaWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeRangeT1']"><property name="DescriptionKey" value="modCreMeleeRangeWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBlockT1']"><property name="DescriptionKey" value="modCreMeleeBlockWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeFireT1']"><property name="DescriptionKey" value="modCreMeleeFireWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeShockT1']"><property name="DescriptionKey" value="modCreMeleeShockWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='modCreMeleeBreakT1']"><property name="DescriptionKey" value="modCreMeleeBreakWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBandolierT1']"><property name="DescriptionKey" value="cre_modArmorBandolierWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorFittingsT1']"><property name="DescriptionKey" value="cre_modArmorFittingsWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorPlatingT1']"><property name="DescriptionKey" value="cre_modArmorPlatingWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesStaminaT1']"><property name="DescriptionKey" value="cre_modArmorGlovesStaminaWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorGlovesSpeedT1']"><property name="DescriptionKey" value="cre_modArmorGlovesSpeedWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsSpeedT1']"><property name="DescriptionKey" value="cre_modArmorBootsSpeedWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBootsStorageT1']"><property name="DescriptionKey" value="cre_modArmorBootsStorageWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorHealthT1']"><property name="DescriptionKey" value="cre_modArmorHealthWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorStaminaT1']"><property name="DescriptionKey" value="cre_modArmorStaminaWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorResistT1']"><property name="DescriptionKey" value="cre_modArmorResistWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionShockT1']"><property name="DescriptionKey" value="cre_modArmorReflectionShockWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionPunchT1']"><property name="DescriptionKey" value="cre_modArmorReflectionPunchWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorReflectionFireT1']"><property name="DescriptionKey" value="cre_modArmorReflectionFireWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorAddLootT1']"><property name="DescriptionKey" value="cre_modArmorAddLootWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorBleedAnimalT1']"><property name="DescriptionKey" value="cre_modArmorBleedAnimalWakaDesc"/></append>
+	<append xpath="/item_modifiers/item_modifier[@name='cre_modArmorSniperT1']"><property name="DescriptionKey" value="cre_modArmorSniperWakaDesc"/></append>
+
+
+	<!--
+		==========================================================
+		Section E: Remove T2/T3 items (last)
+		==========================================================
+	-->
+	<remove xpath="/item_modifiers/item_modifier[(starts-with(@name, 'modCre') or starts-with(@name, 'cre_mod')) and contains(@name, 'T2')]"/>
+	<remove xpath="/item_modifiers/item_modifier[(starts-with(@name, 'modCre') or starts-with(@name, 'cre_mod')) and contains(@name, 'T3')]"/>
+
+</configs>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Waka Slayer EZS + Bloodfall Patch v0.3 - action sequences
+  Each challenge fires AddQuest to deliver 5-choice reward.
+-->
+<configs>
+    <append xpath="/gameevents">
+        <action_sequence name="waka_zs_reward_arlene">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_arlene" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_biker">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_biker" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_boe">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_boe" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_darlene">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_darlene" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_marlene">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_marlene" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_moe">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_moe" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_joe">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_joe" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_steve">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_steve" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_yo">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_yo" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_businessman">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_businessman" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_janitor">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_janitor" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_utilityworker">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_utilityworker" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_malehazmat">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_malehazmat" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_lab">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_lab" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_burnt">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_burnt" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_bowler">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_bowler" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_tomclark">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_tomclark" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_frostclaw">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_frostclaw" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_skateboarder">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_skateboarder" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_partygirl">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_partygirl" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_crawler">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_crawler" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_inmate">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_inmate" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_soldier">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_soldier" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_screamer">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_screamer" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_mutated">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_mutated" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_plaguespitter">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_plaguespitter" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_nurse">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_nurse" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_fatcop">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_fatcop" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_fathawaiian">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_fathawaiian" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_femalefat">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_femalefat" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_lumberjack">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_lumberjack" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_rancher">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_rancher" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_spider">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_spider" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <action_sequence name="waka_zs_reward_wight">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_wight" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+
+        <!-- Master reward: legendary gun crafting bundle 5択 + 50000 XP -->
+        <action_sequence name="waka_zs_master_reward">
+            <property name="action_type" value="Game" />
+            <action class="AddQuest">
+                <property name="quest" value="waka_zs_quest_master" param1="quest" />
+                <property name="notify" value="false" />
+            </action>
+        </action_sequence>
+    </append>
+</configs>

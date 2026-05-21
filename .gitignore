@@ -1,0 +1,78 @@
+# Default: keep this live MO2 workspace private unless explicitly allowed.
+/*
+
+# Repository operating notes.
+!/.gitignore
+!/AGENTS.md
+!/CLAUDE.md
+
+# Local operating tools.
+!/tools/
+!/tools/**
+/tools/waka-deploy/deploy.log
+
+# Active profile state worth tracking.
+!/profiles/
+/profiles/*
+!/profiles/Default/
+!/profiles/Default/
+/profiles/Default/*
+!/profiles/Default/modlist.txt
+!/profiles/Default/lockedorder.txt
+!/profiles/Default/settings.ini
+!/profiles/Default/initweaks.ini
+
+# Local Waka patches and source.
+!/mods/
+/mods/*
+/mods/*/.git
+/mods/*/.git/**
+!/mods/*Waka*/
+!/mods/*Waka*/**
+/mods/*Waka*/.git
+/mods/*Waka*/.git/**
+/mods/ZZZZ_WakaCopper v0.1/
+/mods/ZZZZ_WakaCopper v0.1/**
+
+# Generated, downloaded, cached, or private runtime material.
+/downloads/
+/logs/
+/webcache/
+/crashDumps/
+/_nexus_cache/
+/overwrite/
+/_analysis/
+/_archive/
+/_decomp/
+
+# MO2/game binaries and build outputs.
+*.exe
+*.dll
+*.pdb
+*.dat
+*.log
+*.tmp
+*.bak
+*.bak*
+*_backup
+*.unity3d
+*.unity3d.*
+*.blend
+*.blend1
+*.fbx
+*.wav
+*.jpg
+*.jpeg
+*.png
+*.xcf
+bin/
+obj/
+**/bin/
+**/obj/
+**/Resources/
+**/Resources/**
+**/UIAtlases/
+**/UIAtlases/**
+**/.vs/
+**/.idea/
+**/.vscode/

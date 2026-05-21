@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+	<!--
+		Waka Body Layer の栄養 CVar ($wakaProtein/Carb/Fat) を
+		CATUI HUD の下部ステータスクラスタへ統合表示する。
+
+		デザイン: HP/Stamina を左カラムに縦積みし、同じ幅の Protein/Carb/Fat
+		         バーを右カラムに縦積みする。Food/Water の扇形ゲージは中央に残す。
+
+		配置: HUDCenterBottomStat の hud rect 内。
+		         左カラム x=128 width=300、右カラム bar x=578 width=300。
+
+		buffWakaCATUIBridge が $wakaProteinFill 等 (0.0-1.0) を維持しているので、
+		それを fill 属性に渡して現在値を可視化する。
+
+		常時更新: 各 rect 内に CATUI_playerCurrentLife dummy label を仕込んで毎秒 dirty 化。
+
+		ローカライズ: ラベルは Localization.txt の xuiWakaCATUIProtein/Carb/Fat key を
+		             {# localization('...')} で動的取得。日本語切替で「タンパク質/炭水化物/脂質」表示。
+	-->
+
+	<!--
+		CATUI 本体は直接編集せず、既存 HP/Stamina ノードの属性だけを後段パッチで調整する。
+		Food/Water は現行の扇形ゲージを維持する。
+	-->
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_health_bar']/@pos">128, 24</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_health_bar']/CATUI_stat_bar/@width">300</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_health_bar']/CATUI_stat_bar/@height">28</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_health_bar']/CATUI_stat_bar/@inner_pos_x">0</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_health_bar']/CATUI_stat_bar/@inner_pos_y">0</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_health_bar']/CATUI_stat_bar/@inner_width">300</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_health_bar']/CATUI_stat_bar/@has_invert">true</set>
+
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_stamina_bar']/@pos">128, -6</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_stamina_bar']/CATUI_stat_bar/@width">300</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_stamina_bar']/CATUI_stat_bar/@height">28</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_stamina_bar']/CATUI_stat_bar/@inner_pos_x">0</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_stamina_bar']/CATUI_stat_bar/@inner_pos_y">0</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_stamina_bar']/CATUI_stat_bar/@inner_width">300</set>
+	<set xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']/rect[@name='CATUI_stamina_bar']/CATUI_stat_bar/@has_invert">true</set>
+
+	<append xpath="/windows/window[@name='HUDCenterBottomStat']/rect[@name='hud']">
+
+		<rect name="WakaNutrition" pos="578, 24" width="300" height="56">
+
+			<!-- Protein -->
+			<rect name="WakaProtein" pos="0, 0" width="300" height="18" controller="HUDStatBar" tooltip_key="statWakaProtein" visible="{statvisible}">
+				<!-- 生存時間 binding を invisible で仕込んで毎秒 dirty 化、cvar binding を再評価させる -->
+				<label depth="0" pos="0,0" width="1" height="1" font_size="1" color="0,0,0,0" text="{CATUI_playerCurrentLife}" />
+				<sprite depth="2" pos="0,0" width="300" height="18" color="0,0,0,215" type="sliced" />
+				<sprite depth="3" pos="2,-2" width="296" height="14" color="28,36,34,235" type="sliced" />
+				<filledsprite depth="4" type="filled" pos="2,-2" width="296" height="14" color="218,150,24,225" fill="{cvar($wakaProteinFill:F3)}" filldirection="Horizontal" foregroundlayer="true" />
+				<filledsprite depth="5" type="filled" pos="2,-2" width="296" height="14" color="255,120,40,235" fill="{cvar($wakaProteinWarnFill:F3)}" filldirection="Horizontal" foregroundlayer="true" />
+				<sprite depth="6" pos="120,-2" width="1" height="14" color="255,255,255,120" type="sliced" />
+				<sprite depth="6" pos="240,-2" width="1" height="14" color="255,255,255,120" type="sliced" />
+				<label depth="7" pos="6,-3" width="72" height="18" font_size="11" color="[white]" text="{# localization('xuiWakaCATUIProtein')}" justify="left" style="CATUI.text.shadow.black.1px" />
+				<label depth="7" pos="78,-3" width="110" height="18" font_size="11" color="[white]" text="{cvar($wakaProtein)}/100" justify="left" style="CATUI.text.shadow.black.1px" />
+			</rect>
+
+			<!-- Carb -->
+			<rect name="WakaCarb" pos="0, -19" width="300" height="18" controller="HUDStatBar" tooltip_key="statWakaCarb" visible="{statvisible}">
+				<label depth="0" pos="0,0" width="1" height="1" font_size="1" color="0,0,0,0" text="{CATUI_playerCurrentLife}" />
+				<sprite depth="2" pos="0,0" width="300" height="18" color="0,0,0,215" type="sliced" />
+				<sprite depth="3" pos="2,-2" width="296" height="14" color="28,36,34,235" type="sliced" />
+				<filledsprite depth="4" type="filled" pos="2,-2" width="296" height="14" color="218,150,24,225" fill="{cvar($wakaCarbFill:F3)}" filldirection="Horizontal" foregroundlayer="true" />
+				<filledsprite depth="5" type="filled" pos="2,-2" width="296" height="14" color="255,120,40,235" fill="{cvar($wakaCarbWarnFill:F3)}" filldirection="Horizontal" foregroundlayer="true" />
+				<sprite depth="6" pos="120,-2" width="1" height="14" color="255,255,255,120" type="sliced" />
+				<sprite depth="6" pos="240,-2" width="1" height="14" color="255,255,255,120" type="sliced" />
+				<label depth="7" pos="6,-3" width="72" height="18" font_size="11" color="[white]" text="{# localization('xuiWakaCATUICarb')}" justify="left" style="CATUI.text.shadow.black.1px" />
+				<label depth="7" pos="78,-3" width="110" height="18" font_size="11" color="[white]" text="{cvar($wakaCarb)}/100" justify="left" style="CATUI.text.shadow.black.1px" />
+			</rect>
+
+			<!-- Fat -->
+			<rect name="WakaFat" pos="0, -38" width="300" height="18" controller="HUDStatBar" tooltip_key="statWakaFat" visible="{statvisible}">
+				<label depth="0" pos="0,0" width="1" height="1" font_size="1" color="0,0,0,0" text="{CATUI_playerCurrentLife}" />
+				<sprite depth="2" pos="0,0" width="300" height="18" color="0,0,0,215" type="sliced" />
+				<sprite depth="3" pos="2,-2" width="296" height="14" color="28,36,34,235" type="sliced" />
+				<filledsprite depth="4" type="filled" pos="2,-2" width="296" height="14" color="218,150,24,225" fill="{cvar($wakaFatFill:F3)}" filldirection="Horizontal" foregroundlayer="true" />
+				<filledsprite depth="5" type="filled" pos="2,-2" width="296" height="14" color="255,120,40,235" fill="{cvar($wakaFatWarnFill:F3)}" filldirection="Horizontal" foregroundlayer="true" />
+				<sprite depth="6" pos="120,-2" width="1" height="14" color="255,255,255,120" type="sliced" />
+				<sprite depth="6" pos="240,-2" width="1" height="14" color="255,255,255,120" type="sliced" />
+				<label depth="7" pos="6,-3" width="72" height="18" font_size="11" color="[white]" text="{# localization('xuiWakaCATUIFat')}" justify="left" style="CATUI.text.shadow.black.1px" />
+				<label depth="7" pos="78,-3" width="110" height="18" font_size="11" color="[white]" text="{cvar($wakaFat)}/100" justify="left" style="CATUI.text.shadow.black.1px" />
+			</rect>
+
+		</rect>
+
+	</append>
+</configs>

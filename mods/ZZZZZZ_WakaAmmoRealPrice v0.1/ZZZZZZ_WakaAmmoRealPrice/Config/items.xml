@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- ====================================================================== -->
+  <!-- Waka Ammo Real Price v0.1                                              -->
+  <!-- caliber baseline (per-round): 9mm=5 / .45=8 / 5.56=10 / 7.62x39=8     -->
+  <!--   / .44Mag=25 / 7.62x51 NATO=25 / .338=50 / .50BMG=80 / .50AE=40     -->
+  <!--   / 12g=18 (slug=30) / RPG/40mm=200-350 / Vanilla Rocket=350         -->
+  <!-- HP +50%, AP +60-80%, Specialty rounds priced ad-hoc                  -->
+  <!-- Bundles set to 100x base round (vanilla quirk: bundle stacks 300)    -->
+  <!-- ====================================================================== -->
+
+
+  <!-- ====================================================================== -->
+  <!-- VANILLA AMMO                                                           -->
+  <!-- ====================================================================== -->
+
+  <!-- 9mm Luger -->
+  <set xpath="/items/item[@name='ammo9mmBulletBall']/property[@name='EconomicValue']/@value">5</set>
+  <set xpath="/items/item[@name='ammo9mmBulletHP']/property[@name='EconomicValue']/@value">8</set>
+  <set xpath="/items/item[@name='ammo9mmBulletAP']/property[@name='EconomicValue']/@value">9</set>
+
+  <!-- .44 Magnum -->
+  <set xpath="/items/item[@name='ammo44MagnumBulletBall']/property[@name='EconomicValue']/@value">25</set>
+  <set xpath="/items/item[@name='ammo44MagnumBulletHP']/property[@name='EconomicValue']/@value">35</set>
+  <set xpath="/items/item[@name='ammo44MagnumBulletAP']/property[@name='EconomicValue']/@value">40</set>
+
+  <!-- 7.62x39 (vanilla AK round) -->
+  <set xpath="/items/item[@name='ammo762mmBulletBall']/property[@name='EconomicValue']/@value">8</set>
+  <set xpath="/items/item[@name='ammo762mmBulletHP']/property[@name='EconomicValue']/@value">12</set>
+  <set xpath="/items/item[@name='ammo762mmBulletAP']/property[@name='EconomicValue']/@value">14</set>
+
+  <!-- 12 gauge shotgun -->
+  <set xpath="/items/item[@name='ammoShotgunShell']/property[@name='EconomicValue']/@value">18</set>
+  <set xpath="/items/item[@name='ammoShotgunSlug']/property[@name='EconomicValue']/@value">30</set>
+  <set xpath="/items/item[@name='ammoShotgunBreachingSlug']/property[@name='EconomicValue']/@value">35</set>
+
+  <!-- Junk Turret (improvised, low-grade) -->
+  <set xpath="/items/item[@name='ammoJunkTurretRegular']/property[@name='EconomicValue']/@value">5</set>
+  <set xpath="/items/item[@name='ammoJunkTurretShell']/property[@name='EconomicValue']/@value">15</set>
+  <set xpath="/items/item[@name='ammoJunkTurretAP']/property[@name='EconomicValue']/@value">9</set>
+
+  <!-- Rockets (vanilla) -->
+  <set xpath="/items/item[@name='ammoRocketHE']/property[@name='EconomicValue']/@value">350</set>
+  <append xpath="/items/item[@name='ammoRocketFrag']">
+    <property name="EconomicValue" value="380"/>
+  </append>
+
+
+  <!-- ====================================================================== -->
+  <!-- VANILLA AMMO BUNDLES (300-stack typical, set ~100x base round)        -->
+  <!-- ====================================================================== -->
+
+  <set xpath="/items/item[@name='ammoBundle9mmBulletBall']/property[@name='EconomicValue']/@value">500</set>
+  <set xpath="/items/item[@name='ammoBundle9mmBulletHP']/property[@name='EconomicValue']/@value">800</set>
+  <set xpath="/items/item[@name='ammoBundle9mmBulletAP']/property[@name='EconomicValue']/@value">900</set>
+
+  <set xpath="/items/item[@name='ammoBundle44MagnumBulletBall']/property[@name='EconomicValue']/@value">2500</set>
+  <set xpath="/items/item[@name='ammoBundle44MagnumBulletHP']/property[@name='EconomicValue']/@value">3500</set>
+  <set xpath="/items/item[@name='ammoBundle44MagnumBulletAP']/property[@name='EconomicValue']/@value">4000</set>
+
+  <set xpath="/items/item[@name='ammoBundle762mmBulletBall']/property[@name='EconomicValue']/@value">800</set>
+  <set xpath="/items/item[@name='ammoBundle762mmBulletHP']/property[@name='EconomicValue']/@value">1200</set>
+  <set xpath="/items/item[@name='ammoBundle762mmBulletAP']/property[@name='EconomicValue']/@value">1400</set>
+
+  <set xpath="/items/item[@name='ammoBundleShotgunShell']/property[@name='EconomicValue']/@value">1800</set>
+  <set xpath="/items/item[@name='ammoBundleShotgunSlug']/property[@name='EconomicValue']/@value">3000</set>
+  <set xpath="/items/item[@name='ammoBundleShotgunBreachingSlug']/property[@name='EconomicValue']/@value">3500</set>
+
+  <set xpath="/items/item[@name='ammoBundleJunkTurretRegular']/property[@name='EconomicValue']/@value">500</set>
+  <append xpath="/items/item[@name='ammoBundleJunkTurretShell']">
+    <property name="EconomicValue" value="1500"/>
+  </append>
+  <append xpath="/items/item[@name='ammoBundleJunkTurretAP']">
+    <property name="EconomicValue" value="900"/>
+  </append>
+
+
+  <!-- ====================================================================== -->
+  <!-- IZY AMMO (5.56 / .45 ACP / muzzleloader / specialty / RPG / 25mm)    -->
+  <!-- ====================================================================== -->
+
+  <!-- 5.56 NATO (IZY) -->
+  <set xpath="/items/item[@name='ammo556mmBulletBall']/property[@name='EconomicValue']/@value">10</set>
+  <set xpath="/items/item[@name='ammo556mmHIpower']/property[@name='EconomicValue']/@value">14</set>
+  <set xpath="/items/item[@name='ammo556mmArmorPiercing']/property[@name='EconomicValue']/@value">17</set>
+  <set xpath="/items/item[@name='ammo556mmBulletBallBundle']/property[@name='EconomicValue']/@value">1000</set>
+  <set xpath="/items/item[@name='ammo556mmHIpowerBundle']/property[@name='EconomicValue']/@value">1400</set>
+  <set xpath="/items/item[@name='ammo556mmArmorPiercingBundle']/property[@name='EconomicValue']/@value">1700</set>
+
+  <!-- .45 ACP (IZY) -->
+  <set xpath="/items/item[@name='ammo45ACPBulletBall']/property[@name='EconomicValue']/@value">8</set>
+  <set xpath="/items/item[@name='ammo45ACPHighpower']/property[@name='EconomicValue']/@value">12</set>
+  <set xpath="/items/item[@name='ammo45ACPArmorpiecing']/property[@name='EconomicValue']/@value">14</set>
+  <set xpath="/items/item[@name='ammo45ACPEnhanced']/property[@name='EconomicValue']/@value">20</set>
+  <set xpath="/items/item[@name='ammoBundle45ACPBulletBall']/property[@name='EconomicValue']/@value">800</set>
+  <set xpath="/items/item[@name='ammoBundle45ACPHighpower']/property[@name='EconomicValue']/@value">1200</set>
+  <set xpath="/items/item[@name='ammoBundle45ACPArmorpiecing']/property[@name='EconomicValue']/@value">1400</set>
+  <set xpath="/items/item[@name='ammoBundle45ACPEnhanced']/property[@name='EconomicValue']/@value">2000</set>
+
+  <!-- IZY shotgun specialties -->
+  <set xpath="/items/item[@name='ammoShotgunShellPremium']/property[@name='EconomicValue']/@value">35</set>
+  <set xpath="/items/item[@name='ammoShotgunShellDragoBreath']/property[@name='EconomicValue']/@value">40</set>
+
+  <!-- IZY 7.62 explosive (specialty round) -->
+  <set xpath="/items/item[@name='ammo762mmExplosiveFragmentations']/property[@name='EconomicValue']/@value">50</set>
+
+  <!-- IZY muzzleloader (period-correct, cheap powder rounds) -->
+  <set xpath="/items/item[@name='ammoleadball']/property[@name='EconomicValue']/@value">3</set>
+  <set xpath="/items/item[@name='ammoMuzzleloadershot']/property[@name='EconomicValue']/@value">5</set>
+  <set xpath="/items/item[@name='ammoMuzzleloaderscattershot']/property[@name='EconomicValue']/@value">4</set>
+
+  <!-- IZY light crossbow bolts -->
+  <set xpath="/items/item[@name='ammoCrossbowLightBoltStone']/property[@name='EconomicValue']/@value">5</set>
+  <set xpath="/items/item[@name='ammoCrossbowLightBoltIron']/property[@name='EconomicValue']/@value">10</set>
+  <set xpath="/items/item[@name='ammoCrossbowLightBoltSteelAP']/property[@name='EconomicValue']/@value">20</set>
+
+  <!-- IZY 25mm grenade (M203/Chinalake/XM25) -->
+  <set xpath="/items/item[@name='ammo25mmGrenadeTraining']/property[@name='EconomicValue']/@value">80</set>
+  <set xpath="/items/item[@name='ammo25mmGrenadeFRAGS']/property[@name='EconomicValue']/@value">120</set>
+  <set xpath="/items/item[@name='ammo25mmGrenadeHE']/property[@name='EconomicValue']/@value">150</set>
+
+  <!-- IZY RPG-7 -->
+  <set xpath="/items/item[@name='ammoRocketRPGTraning']/property[@name='EconomicValue']/@value">200</set>
+  <set xpath="/items/item[@name='ammoRocketRPGHE']/property[@name='EconomicValue']/@value">350</set>
+  <set xpath="/items/item[@name='ammoRocketRPGIncendiary']/property[@name='EconomicValue']/@value">400</set>
+
+  <!-- IZY napalm (flamethrower fuel) -->
+  <set xpath="/items/item[@name='IZYAmmoHeavyWeaponFlamethrowerNapalmStandardMixture']/property[@name='EconomicValue']/@value">80</set>
+  <set xpath="/items/item[@name='IZYAmmoHeavyWeaponFlamethrowerNapalmLethalMixture']/property[@name='EconomicValue']/@value">130</set>
+
+
+  <!-- ====================================================================== -->
+  <!-- AMMO PRESS PATCH (IZY shotgun / 762 explosive bundles)               -->
+  <!-- ====================================================================== -->
+
+  <set xpath="/items/item[@name='ammoShotgunShellPremiumBundle']/property[@name='EconomicValue']/@value">3500</set>
+  <set xpath="/items/item[@name='ammoShotgunShellDragoBreathBundle']/property[@name='EconomicValue']/@value">4000</set>
+  <set xpath="/items/item[@name='ammo762mmExplosiveFragmentationsBundle']/property[@name='EconomicValue']/@value">5000</set>
+
+
+  <!-- ====================================================================== -->
+  <!-- EFTX AMMO (60+ items, real-caliber accurate hierarchy)                -->
+  <!-- ====================================================================== -->
+
+  <!-- 5.45x39 (AK-74 family) -->
+  <set xpath="/items/item[@name='ammoEft54539']/property[@name='EconomicValue']/@value">10</set>
+  <set xpath="/items/item[@name='ammoEft54539AP']/property[@name='EconomicValue']/@value">14</set>
+  <set xpath="/items/item[@name='ammoEft54539HP']/property[@name='EconomicValue']/@value">12</set>
+
+  <!-- 5.56 NATO -->
+  <set xpath="/items/item[@name='ammoEft55645NATO']/property[@name='EconomicValue']/@value">10</set>
+  <set xpath="/items/item[@name='ammoEft55645NATOAP']/property[@name='EconomicValue']/@value">17</set>
+  <set xpath="/items/item[@name='ammoEft55645NATOHP']/property[@name='EconomicValue']/@value">14</set>
+
+  <!-- .300 BLK (subsonic-capable, expensive niche) -->
+  <set xpath="/items/item[@name='ammoEft300blk']/property[@name='EconomicValue']/@value">22</set>
+  <set xpath="/items/item[@name='ammoEft300blkAP']/property[@name='EconomicValue']/@value">30</set>
+  <set xpath="/items/item[@name='ammoEft300blkHP']/property[@name='EconomicValue']/@value">28</set>
+
+  <!-- 7.62x39 (AKM family, EFTX variant) -->
+  <set xpath="/items/item[@name='ammoEft76239']/property[@name='EconomicValue']/@value">8</set>
+  <set xpath="/items/item[@name='ammoEft76239AP']/property[@name='EconomicValue']/@value">14</set>
+  <set xpath="/items/item[@name='ammoEft76239HP']/property[@name='EconomicValue']/@value">12</set>
+
+  <!-- 9x39 subsonic (VSS/AS Val niche) -->
+  <set xpath="/items/item[@name='ammoEft939']/property[@name='EconomicValue']/@value">18</set>
+  <set xpath="/items/item[@name='ammoEft939AP']/property[@name='EconomicValue']/@value">25</set>
+  <set xpath="/items/item[@name='ammoEft939HP']/property[@name='EconomicValue']/@value">22</set>
+
+  <!-- 6.8x51 SIG hybrid (M5/MX premium) -->
+  <set xpath="/items/item[@name='ammoEft6851SIGHybrid']/property[@name='EconomicValue']/@value">30</set>
+
+  <!-- 7.62x51 NATO (.308 std mil) -->
+  <set xpath="/items/item[@name='ammoEft76251NATO']/property[@name='EconomicValue']/@value">25</set>
+  <set xpath="/items/item[@name='ammoEft76251NATOAP']/property[@name='EconomicValue']/@value">42</set>
+  <set xpath="/items/item[@name='ammoEft76251NATOHP']/property[@name='EconomicValue']/@value">35</set>
+
+  <!-- 7.62x54R (Mosin/SVD) -->
+  <set xpath="/items/item[@name='ammoEft76254R']/property[@name='EconomicValue']/@value">22</set>
+  <set xpath="/items/item[@name='ammoEft76254RAP']/property[@name='EconomicValue']/@value">38</set>
+  <set xpath="/items/item[@name='ammoEft76254RHP']/property[@name='EconomicValue']/@value">30</set>
+
+  <!-- .308 Match -->
+  <set xpath="/items/item[@name='ammoEft308ME']/property[@name='EconomicValue']/@value">30</set>
+
+  <!-- 12.7x55 STs (anti-material specialty) -->
+  <set xpath="/items/item[@name='ammoEft12755PS12']/property[@name='EconomicValue']/@value">60</set>
+  <set xpath="/items/item[@name='ammoEft12755PS12B']/property[@name='EconomicValue']/@value">70</set>
+  <set xpath="/items/item[@name='ammoEft12755PS12A']/property[@name='EconomicValue']/@value">75</set>
+
+  <!-- .338 Lapua Magnum (premium sniper) -->
+  <set xpath="/items/item[@name='ammoEft338']/property[@name='EconomicValue']/@value">50</set>
+  <set xpath="/items/item[@name='ammoEft338AP']/property[@name='EconomicValue']/@value">75</set>
+  <set xpath="/items/item[@name='ammoEft338HP']/property[@name='EconomicValue']/@value">65</set>
+
+  <!-- .50 BMG (Barrett class) -->
+  <set xpath="/items/item[@name='ammoEft50BMGSlap']/property[@name='EconomicValue']/@value">110</set>
+  <set xpath="/items/item[@name='ammoEft50BMGHP']/property[@name='EconomicValue']/@value">100</set>
+
+  <!-- 7.62x25 Tokarev (cheap WW2-era pistol) -->
+  <set xpath="/items/item[@name='ammoEft76225mmTokarev']/property[@name='EconomicValue']/@value">8</set>
+
+  <!-- 9x18 PM (Makarov, cheap) -->
+  <set xpath="/items/item[@name='ammoEft918mmPM']/property[@name='EconomicValue']/@value">5</set>
+
+  <!-- 9x19 Luger (EFTX) -->
+  <set xpath="/items/item[@name='ammoEft919mm']/property[@name='EconomicValue']/@value">5</set>
+  <set xpath="/items/item[@name='ammoEft919mmAP']/property[@name='EconomicValue']/@value">9</set>
+  <set xpath="/items/item[@name='ammoEft919mmHP']/property[@name='EconomicValue']/@value">8</set>
+
+  <!-- 9x21 Russian (rare, slightly premium) -->
+  <set xpath="/items/item[@name='ammoEft921mm']/property[@name='EconomicValue']/@value">9</set>
+  <set xpath="/items/item[@name='ammoEft921mmAP']/property[@name='EconomicValue']/@value">14</set>
+  <set xpath="/items/item[@name='ammoEft921mmHP']/property[@name='EconomicValue']/@value">12</set>
+
+  <!-- .45 ACP (EFTX) -->
+  <set xpath="/items/item[@name='ammoEft45ACP']/property[@name='EconomicValue']/@value">8</set>
+  <set xpath="/items/item[@name='ammoEft45ACPAP']/property[@name='EconomicValue']/@value">14</set>
+  <set xpath="/items/item[@name='ammoEft45ACPRIP']/property[@name='EconomicValue']/@value">18</set>
+
+  <!-- 4.6x30 HK (MP7 niche) -->
+  <set xpath="/items/item[@name='ammoEft4630mmHK']/property[@name='EconomicValue']/@value">12</set>
+  <set xpath="/items/item[@name='ammoEft4630mmHKAP']/property[@name='EconomicValue']/@value">20</set>
+  <set xpath="/items/item[@name='ammoEft4630mmHKHP']/property[@name='EconomicValue']/@value">17</set>
+
+  <!-- 5.7x28 FN (P90/Five-seveN niche) -->
+  <set xpath="/items/item[@name='ammoEft5728FN']/property[@name='EconomicValue']/@value">13</set>
+  <set xpath="/items/item[@name='ammoEft5728FNAP']/property[@name='EconomicValue']/@value">22</set>
+  <set xpath="/items/item[@name='ammoEft5728FNHP']/property[@name='EconomicValue']/@value">18</set>
+
+  <!-- .50 AE (Desert Eagle) -->
+  <set xpath="/items/item[@name='ammoEft50ae']/property[@name='EconomicValue']/@value">40</set>
+  <set xpath="/items/item[@name='ammoEft50aeHP']/property[@name='EconomicValue']/@value">55</set>
+
+  <!-- EFTX shotgun variants -->
+  <set xpath="/items/item[@name='ammoEft20GBuck']/property[@name='EconomicValue']/@value">12</set>
+  <set xpath="/items/item[@name='ammoEft7mmShotgun']/property[@name='EconomicValue']/@value">18</set>
+  <set xpath="/items/item[@name='ammoEftFlechetteShotgun']/property[@name='EconomicValue']/@value">25</set>
+  <set xpath="/items/item[@name='ammoEftAP20Slug']/property[@name='EconomicValue']/@value">30</set>
+  <set xpath="/items/item[@name='ammoEftShrapnel25Shotgun']/property[@name='EconomicValue']/@value">28</set>
+  <set xpath="/items/item[@name='ammoEftBarricadeSlug']/property[@name='EconomicValue']/@value">35</set>
+
+  <!-- 40x46 grenade (M203/M320 family) -->
+  <set xpath="/items/item[@name='ammoEft4046381']/property[@name='EconomicValue']/@value">200</set>
+  <set xpath="/items/item[@name='ammoEft4046576']/property[@name='EconomicValue']/@value">250</set>
+
+  <!-- 40x53 (auto grenade launcher, premium) -->
+  <set xpath="/items/item[@name='ammoEft4053vog25']/property[@name='EconomicValue']/@value">280</set>
+
+  <!-- EFTX shotgun grenade -->
+  <set xpath="/items/item[@name='ammoEftshg725']/property[@name='EconomicValue']/@value">100</set>
+
+  <!-- RPG-7 PG-7VL (EFTX) -->
+  <set xpath="/items/item[@name='ammoEft9340pg7vl']/property[@name='EconomicValue']/@value">350</set>
+
+  <!-- Compressed air ammo (training/utility, low value) -->
+  <set xpath="/items/item[@name='ammoEftAir']/property[@name='EconomicValue']/@value">5</set>
+  <set xpath="/items/item[@name='ammoEftGrenadeAir']/property[@name='EconomicValue']/@value">100</set>
+
+
+  <!-- ====================================================================== -->
+  <!-- SCG DEFENSE SOLUTIONS (.50 BMG turret round)                          -->
+  <!-- ====================================================================== -->
+
+  <set xpath="/items/item[@name='ammo50BulletBall']/property[@name='EconomicValue']/@value">80</set>
+
+</configs>

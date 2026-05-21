@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+
+<append xpath="/recipes">
+
+    <!-- ===== core bottleneck fix: vanilla -> EFTX loot-only materials ===== -->
+
+    <recipe name="resourceWD40" count="1" craft_area="chemistryStation" craft_tool="toolBeaker"
+            tags="learnable,waka_rb_wd40">
+        <ingredient name="resourceOil" count="2"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+        <ingredient name="resourceScrapPolymers" count="2"/>
+    </recipe>
+
+    <recipe name="resourceMultitool" count="1" craft_area="workbench"
+            tags="learnable,waka_rb_multitool">
+        <ingredient name="resourceForgedSteel" count="2"/>
+        <ingredient name="resourceMechanicalParts" count="3"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+
+    <recipe name="resourceToolset" count="1" craft_area="workbench"
+            tags="learnable,waka_rb_toolset">
+        <ingredient name="resourceForgedSteel" count="5"/>
+        <ingredient name="resourceMechanicalParts" count="5"/>
+        <ingredient name="resourceWD40" count="1"/>
+        <ingredient name="resourceDuctTape" count="2"/>
+    </recipe>
+
+    <!-- ===== RepairKit bridge (asymmetric to prevent loops) ===== -->
+
+    <recipe name="resourceRepairKit" count="1" craft_area="workbench"
+            tags="learnable,waka_rb_repairkit_from_smg">
+        <ingredient name="resourceSMGRepairKit" count="4"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+
+    <recipe name="resourceRepairKit" count="1" craft_area="workbench"
+            tags="learnable,waka_rb_repairkit_from_mg">
+        <ingredient name="resourceMachineGunRepairKit" count="4"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+
+    <recipe name="resourceSMGRepairKit" count="3" craft_area="workbench"
+            tags="learnable,waka_rb_smgkit_from_repairkit">
+        <ingredient name="resourceRepairKit" count="1"/>
+        <ingredient name="resourceWD40" count="1"/>
+    </recipe>
+
+    <recipe name="resourceMachineGunRepairKit" count="3" craft_area="workbench"
+            tags="learnable,waka_rb_mgkit_from_repairkit">
+        <ingredient name="resourceRepairKit" count="1"/>
+        <ingredient name="resourceWD40" count="1"/>
+    </recipe>
+
+    <!-- ===== gun parts fallback (heavier than EFTX native, emergency only) ===== -->
+
+    <recipe name="resourceSMGParts" count="1" craft_area="workbench"
+            tags="learnable,waka_rb_smgparts">
+        <ingredient name="resourceForgedSteel" count="6"/>
+        <ingredient name="resourceMechanicalParts" count="12"/>
+        <ingredient name="resourceScrapPolymers" count="12"/>
+        <ingredient name="resourceWD40" count="1"/>
+    </recipe>
+
+    <recipe name="resourceRevolverParts" count="1" craft_area="workbench"
+            tags="learnable,waka_rb_revolverparts">
+        <ingredient name="resourceForgedSteel" count="6"/>
+        <ingredient name="resourceMechanicalParts" count="12"/>
+        <ingredient name="resourceScrapPolymers" count="12"/>
+        <ingredient name="resourceWD40" count="1"/>
+    </recipe>
+
+    <!-- ===== research data (extraction from junk / reverse rescue) ===== -->
+
+    <recipe name="resourceResearchData" count="1" craft_area="workbench"
+            tags="learnable,waka_rb_data_paper">
+        <ingredient name="resourcePaper" count="10"/>
+        <ingredient name="resourceScrapPolymers" count="2"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+
+    <recipe name="resourceResearchData" count="2" craft_area="workbench"
+            tags="learnable,waka_rb_data_mech">
+        <ingredient name="resourcePaper" count="5"/>
+        <ingredient name="resourceMechanicalParts" count="1"/>
+        <ingredient name="resourceScrapPolymers" count="3"/>
+    </recipe>
+
+    <recipe name="resourceResearchData" count="3" craft_area="workbench"
+            tags="learnable,waka_rb_data_elec">
+        <ingredient name="resourcePaper" count="5"/>
+        <ingredient name="resourceElectricParts" count="1"/>
+        <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+
+    <recipe name="resourcePaper" count="20" craft_area="workbench"
+            tags="learnable,waka_rb_paper_from_data">
+        <ingredient name="resourceResearchData" count="1"/>
+    </recipe>
+
+</append>
+
+</configs>

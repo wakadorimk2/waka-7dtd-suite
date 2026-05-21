@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Waka Economy Pacing Patch v0.1
+       Keep Super Corn as a useful crop, but stop it from acting as a high-yield
+       Dukes mint once farming scales up. Vanilla foodCropGraceCorn EconomicValue
+       is 200; normal farm crops are 10. -->
+  <set xpath="/items/item[@name='foodCropGraceCorn']/property[@name='EconomicValue']/@value">20</set>
+
+  <!-- Crafted or functional items should not become Dukes printers. -->
+  <set xpath="/items/item[@name='liquorMoonshine']/property[@name='EconomicValue']/@value">475</set>
+  <set xpath="/items/item[@name='liquorMoonshine']/property[@name='Stacknumber']/@value">5</set>
+  <append xpath="/items/item[@name='liquorMoonshine']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+
+  <set xpath="/items/item[@name='affixUnlockToken']/property[@name='EconomicValue']/@value">250</set>
+  <append xpath="/items/item[@name='affixUnlockToken']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+
+  <!-- High-stack industrial ingredients are inputs, not merchant cargo. -->
+  <append xpath="/items/item[@name='resourceCanisterWithPurifiedWater']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='resourceOFZ30x165mmShell']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='resourcePyroxylin']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='resourceGraphitePowder']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='resourceGraphiteOre']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='resourceOxBleach']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+
+  <!-- Pass 1: specialty ammo/fuel and bulk acids should be use-value only. -->
+  <append xpath="/items/item[@name='IZYAmmoHeavyWeaponFlamethrowerNapalmLethalMixture']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='IZYAmmoHeavyWeaponFlamethrowerNapalmStandardMixture']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='ammoRocketIncendiary']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='ammoArrowElectric']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='ammoCrossbowBoltElectric']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='resourceSulfuricAcid']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='resourceNitricAcid']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+
+  <!-- Pass 2: functional progression currencies are not vendor goods. -->
+  <append xpath="/items/item[@name='affixUpgradeToken']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+  <append xpath="/items/item[@name='scourgeSkillPointBundle']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+
+  <!-- Gold pistol is craftable and baseTier1; keep it special without becoming a mint. -->
+  <set xpath="/items/item[@name='guntokarevgold']/property[@name='EconomicValue']/@value">5000</set>
+
+  <!-- Pass 3: normalize IZY T4/T4.5 outliers to the established T4 ceiling. -->
+  <set xpath="/items/item[@name='IZYgunT445TACSMGKrissSuperV']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT4DualMagnumDesertEagles']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT4BowVanhelsingAutomaticCrossbowVH']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT445SMGM1928thompson']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT4LMGlightmachinegunMG34R']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT4DualPistolMP9s']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT4MarksManRifleM110SASS']/property[@name='EconomicValue']/@value">10000</set>
+
+  <!-- Pass 4: cap craftable EFTX T5 resale outliers to reduce recipe-to-vendor margins. -->
+  <set xpath="/items/item[@name='gunTheAKGuyAK50']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='gunswordmk18']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='gunpkp']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='gunm60e6']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='gunfnminimi']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='gunmcxspear']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='gunm14sass']/property[@name='EconomicValue']/@value">10000</set>
+
+  <!-- Pass 5: remove remaining obvious resale pressure from functional/progression goods. -->
+  <set xpath="/items/item[@name='IZYgunT5HeavyWeaponM134MinigunGatling']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT5HeavyWeaponM2flameThrower']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='IZYgunT5DualSMGsSuperVectors']/property[@name='EconomicValue']/@value">10000</set>
+
+  <append xpath="/items/item[@name='affixExtractionToken']">
+    <property name="SellableToTrader" value="false"/>
+  </append>
+
+</configs>

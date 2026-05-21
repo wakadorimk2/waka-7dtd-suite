@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Slow Super Corn plot expansion without removing the seed recipe.
+       Vanilla requires 5 foodCropGraceCorn per plantedGraceCorn1. -->
+  <set xpath="/recipes/recipe[@name='plantedGraceCorn1']/ingredient[@name='foodCropGraceCorn']/@count">8</set>
+
+</configs>

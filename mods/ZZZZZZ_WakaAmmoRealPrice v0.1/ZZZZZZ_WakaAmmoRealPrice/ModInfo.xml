@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZ_WakaAmmoRealPrice" />
+    <DisplayName value="Waka Ammo Real Price" />
+    <Description value="Re-prices ammo across vanilla / EFTX / IZY / SCG to mirror real-world caliber market hierarchy. 9mm cheap baseline, .308/.50AE premium, .50BMG specialty. Overall ~1.5-2x ammo price uplift to make 'shoot or save' a real decision before sortie. Trader buy and sell both shift; loot crate value rises in tandem. v0.1 covers ammo only; gun re-pricing planned for v0.2." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Slow Curve v0.1 - traders.xml
+  Vanilla formula:  Trader Stage = Player Level * (1 + quest_tier_mod)
+  XP brake -0.15 already gives 0.85x trader stage as a cascade.
+  Earlier versions used a broad 1.21x trader threshold pass. The hot path
+  below now uses explicit quality-by-quality pacing so baseTier2 starts
+  around the second week and higher qualities resolve gradually instead of
+  collapsing into a single unlock stage.
+
+  Legacy multiplier table (rounded) still applies to supporting tiers:
+      5 -> 6     30 -> 36    65 -> 79     100 -> 121
+     10 -> 12    35 -> 42    70 -> 85     150 -> 182
+     15 -> 18    40 -> 48    75 -> 91
+     20 -> 24    45 -> 54    80 -> 97
+     25 -> 30    50 -> 61    85 -> 103
+                 55 -> 67    90 -> 109
+                 60 -> 73    95 -> 115
+
+  @min values of 1 are kept (always-available), 999999 entries are
+  kept (never-show), only the meaningful gating values are scaled.
+========================================================================
+-->
+
+
+<!-- ============================================================
+     baseTier0 (Stone Tools | Pipe Weapons | Utility Tools)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier0']/entry[@quality='2']/@min">1</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier0']/entry[@quality='3']/@min">6</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier0']/entry[@quality='4']/@min">12</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier0']/entry[@quality='5']/@min">18</set>
+
+
+<!-- ============================================================
+     baseTier1 (Iron Tools | T1 Weapons | T1 Explosives) - HOT PATH
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier1']/entry[@quality='1']/@min">18</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier1']/entry[@quality='2']/@min">36</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier1']/entry[@quality='3']/@min">48</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier1']/entry[@quality='4']/@min">61</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier1']/entry[@quality='5']/@min">73</set>
+
+
+<!-- ============================================================
+     baseTier2 (Steel Tools | T2 Weapons | T2 Explosives) - HOT PATH
+     Target: first Q1 appearance around week 2, then staged quality gains.
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier2']/entry[@quality='1']/@min">85</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier2']/entry[@quality='2']/@min">100</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier2']/entry[@quality='3']/@min">115</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier2']/entry[@quality='4']/@min">130</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier2']/entry[@quality='5']/@min">145</set>
+
+
+<!-- ============================================================
+     baseTier3 (Mech Tools | T3 Weapons) - HOT PATH
+     Keep a clear gap after baseTier2 and before EFTX late-game tiers.
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier3']/entry[@quality='1']/@min">150</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier3']/entry[@quality='2']/@min">170</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier3']/entry[@quality='3']/@min">190</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier3']/entry[@quality='4']/@min">210</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier3']/entry[@quality='5']/@min">230</set>
+
+
+<!-- ============================================================
+     EFTX late-game trader templates
+     EFTX inserts these after vanilla baseTier3/modsTier3/ammoTier3.
+     Waka loads later and pushes them beyond the vanilla T3 curve.
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier4']/entry[@quality='1']/@min">250</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier4']/entry[@quality='2']/@min">275</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier4']/entry[@quality='3']/@min">300</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier4']/entry[@quality='4']/@min">325</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier4']/entry[@quality='5']/@min">350</set>
+
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier5']/entry[@quality='1']/@min">360</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier5']/entry[@quality='2']/@min">390</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier5']/entry[@quality='3']/@min">420</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier5']/entry[@quality='4']/@min">450</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='baseTier5']/entry[@quality='5']/@min">480</set>
+
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='modsTier4']/entry[@quality='0']/@min">250</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='modsTier5']/entry[@quality='0']/@min">360</set>
+
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='ammoTier4']/entry[@quality='0']/@min">120</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='ammoTier5']/entry[@quality='0']/@min">170</set>
+
+
+<!-- ============================================================
+     midTier (Forge / Workbench / Chem Station / Super Corn)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='midTier0']/entry[@quality='0']/@min">12</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='midTier1']/entry[@quality='0']/@min">24</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='midTier2']/entry[@quality='0']/@min">36</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='midTier3']/entry[@quality='0']/@min">48</set>
+
+
+<!-- ============================================================
+     ammoTier (advanced ammo HP/Slug/HE, AP/Breach/Frag)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='ammoTier2']/entry[@quality='0']/@min">30</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='ammoTier3']/entry[@quality='0']/@min">67</set>
+
+
+<!-- ============================================================
+     arrowsTier (Iron / Steel / Flaming / Explosive)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='arrowsTier1']/entry[@quality='0']/@min">12</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='arrowsTier2']/entry[@quality='0']/@min">30</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='arrowsTier3']/entry[@quality='0']/@min">48</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='arrowsTier4']/entry[@quality='0']/@min">67</set>
+
+
+<!-- ============================================================
+     bowsTier (Primitive / Wooden / Compound / Crossbow)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier0']/entry[@quality='2']/@min">1</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier0']/entry[@quality='3']/@min">6</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier0']/entry[@quality='4']/@min">12</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier0']/entry[@quality='5']/@min">18</set>
+
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier1']/entry[@quality='1']/@min">18</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier1']/entry[@quality='2']/@min">24</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier1']/entry[@quality='3']/@min">30</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier1']/entry[@quality='4']/@min">36</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier1']/entry[@quality='5']/@min">42</set>
+
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier2']/entry[@quality='1']/@min">36</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier2']/entry[@quality='2']/@min">48</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier2']/entry[@quality='3']/@min">61</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier2']/entry[@quality='4']/@min">73</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier2']/entry[@quality='5']/@min">85</set>
+
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier3']/entry[@quality='1']/@min">61</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier3']/entry[@quality='2']/@min">73</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier3']/entry[@quality='3']/@min">85</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier3']/entry[@quality='4']/@min">97</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='bowsTier3']/entry[@quality='5']/@min">109</set>
+
+
+<!-- ============================================================
+     modsTier (gun / armor mods)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='modsTier2']/entry[@quality='0']/@min">30</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='modsTier3']/entry[@quality='0']/@min">67</set>
+
+
+<!-- ============================================================
+     clothingTier
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='clothingTier2']/entry[@quality='0']/@min">30</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='clothingTier3']/entry[@quality='0']/@min">67</set>
+
+
+<!-- ============================================================
+     electricTier (incl. Solar / Blade Trap / Auto Turret)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier2']/entry[@quality='0']/@min">30</set>
+
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier3']/entry[@quality='0']/@min">67</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier3']/entry[@quality='1']/@min">54</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier3']/entry[@quality='2']/@min">67</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier3']/entry[@quality='3']/@min">79</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier3']/entry[@quality='4']/@min">91</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier3']/entry[@quality='5']/@min">103</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='electricTier3']/entry[@quality='6']/@min">115</set>
+
+
+<!-- ============================================================
+     vehicleTier (Bicycle .. Gyrocopter)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='vehicleTier1']/entry[@quality='0']/@min">30</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='vehicleTier2']/entry[@quality='0']/@min">61</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='vehicleTier3']/entry[@quality='0']/@min">91</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='vehicleTier4']/entry[@quality='0']/@min">121</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='vehicleTier5']/entry[@quality='0']/@min">182</set>
+
+
+<!-- ============================================================
+     armorTier1 (All Armor by quality)
+     ============================================================ -->
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='armorTier1']/entry[@quality='1']/@min">1</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='armorTier1']/entry[@quality='2']/@min">12</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='armorTier1']/entry[@quality='3']/@min">30</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='armorTier1']/entry[@quality='4']/@min">61</set>
+<set xpath="/traders/traderstage_templates/traderstage_template[@name='armorTier1']/entry[@quality='5']/@min">91</set>
+
+</configs>

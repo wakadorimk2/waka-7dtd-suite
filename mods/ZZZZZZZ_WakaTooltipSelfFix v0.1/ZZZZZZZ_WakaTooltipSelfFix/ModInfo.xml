@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ZZZZZZZ_WakaTooltipSelfFix" />
+	<DisplayName value="Waka Tooltip Self Fix" />
+	<Description value="Fixes vanilla bug where food/drink tooltips show all CVar-based stats (foodAmountAdd, foodHealthAmount, $wakaProtein etc.) as 0 after MinEventParams.CachedEventParam.Self gets set to null by some game event. Harmony Prefix on XUiM_ItemStack.GetCustomDisplayValueForItem ensures Self is restored to the local player before tooltip iteration, so triggered_effect ModifyCVar CanExecute checks pass consistently. Requires HarmonyX (0_TFP_Harmony). EAC must be off." />
+	<Author value="wakadori" />
+	<Version value="0.1.0" />
+	<Website value="" />
+</xml>

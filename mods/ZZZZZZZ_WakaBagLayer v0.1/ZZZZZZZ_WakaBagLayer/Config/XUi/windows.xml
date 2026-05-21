@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <!-- 91-slot grid (7 rows x 13 cols). Matches BagSize 91 in entityclasses.xml -->
+    <set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@rows">7</set>
+    <set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cols">13</set>
+    <!-- Shrink the grid so 91 slots actually fit on screen (matches CATUI_backpack_more_slot's value) -->
+    <setattribute xpath="//window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']" name="transform_scale">0.69</setattribute>
+</configs>

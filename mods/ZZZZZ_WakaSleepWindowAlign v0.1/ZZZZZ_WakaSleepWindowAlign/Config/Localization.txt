@@ -1,0 +1,2 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,Context / Alternate Text,german,spanish,french,italian,japanese,koreana,polish,brazilian,russian,turkish,schinese,tchinese
+sleep_warn_timewindow,UI,XUI,,,"You can only sleep between 20:00 and 05:00.",,,,,,"睡眠は 20:00 から 05:00 の間のみ可能です。",,,,,,,

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+<!--
+========================================================================
+  Waka Slow Curve v0.1 - loot.xml
+  Magazine drop chance 0.85x.
+
+  Vanilla pattern (34 references in loot.xml):
+      <item group="skillMagazines" loot_prob_template="med"/>
+      <item group="skillMagazines" count="1" loot_prob_template="veryLow"/>
+      <item group="skillMagazines" count="1"/>
+
+  We add a uniform @prob="0.85" multiplier to every reference under
+  any lootgroup or lootcontainer. @prob multiplies on top of the
+  loot_prob_template curve, so the relative shape (low / med / high)
+  is preserved while every magazine drop is 15% rarer.
+
+  References without @loot_prob_template (e.g. groupCrackabookCrate*)
+  also receive @prob="0.85" — the multiplier applies to the implicit
+  base probability of 1.0 in those cases.
+========================================================================
+-->
+
+
+<!-- ============================================================
+     Add @prob="0.85" to every skillMagazines reference
+     ============================================================ -->
+<setattribute xpath="/lootcontainers//item[@group='skillMagazines']" name="prob">0.85</setattribute>
+
+</configs>

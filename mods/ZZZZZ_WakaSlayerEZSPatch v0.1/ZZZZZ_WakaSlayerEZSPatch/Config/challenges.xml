@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Waka Slayer EZS + Bloodfall Patch v0.2
+
+  ExtraSlayerChallenges の各 challenge の entity_names を、
+    - Enhanced Zombie Scaling が生成する T2/T3/T4/T5 変異体
+    - Bloodfall - Hardcore Overhaul が追加する Tier6-Tier15 変異体
+      (Brutal=T6, Alpha=T7, Prime=T8, Apex=T9, Torment=T10,
+       Nightmare=T11, Hellborn=T12, Overlord=T13, Demigod=T14, Bloodlord=T15)
+  まで拡張する。
+
+  Bloodfall の boss/minion 系 (bossCryptlord, CryptlordMinion, bossDevastator,
+  bossRevenant, bossContaminator, bossCerberon, CerberonMinion, bossLighteater)
+  はカウント対象に含めない。
+
+  Bloodfall 固有のゾンビ (FatCop / FatHawaiian / FemaleFat / Lumberjack /
+  Rancher / Spider / Wight) には新規 ZS_KillX challenge を追加する。
+  これらは独立 group "ZombieSlayers_Bloodfall" に入れ、既存 Master group の
+  達成基準には影響させない。
+
+  count="50" は変えない。
+-->
+<configs>
+
+    <!-- ============== GROUP 1 (vanilla + EZS T2-T5 + Bloodfall Tier6-15) ============== -->
+    <set xpath="/challenges/challenge[@name='ZS_KillArlene']//objective/@entity_names">zombieArlene,zombieArleneFeral,zombieArleneRadiated,zombieArleneCharged,zombieArleneT2,zombieArleneFeralT2,zombieArleneRadiatedT2,zombieArleneT3,zombieArleneFeralT3,zombieArleneRadiatedT3,zombieArleneT4,zombieArleneFeralT4,zombieArleneRadiatedT4,zombieArleneT5,zombieArleneFeralT5,zombieArleneRadiatedT5</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillBiker']//objective/@entity_names">zombieBiker,zombieBikerFeral,zombieBikerRadiated,zombieBikerInfernal,zombieBikerT2,zombieBikerFeralT2,zombieBikerRadiatedT2,zombieBikerT3,zombieBikerFeralT3,zombieBikerRadiatedT3,zombieBikerT4,zombieBikerFeralT4,zombieBikerRadiatedT4,zombieBikerT5,zombieBikerFeralT5,zombieBikerRadiatedT5,BrutalBikerTier6,AlphaBikerTier7,PrimeBikerTier8,ApexBikerTier9,TormentBikerTier10,NightmareBikerTier11,HellbornBikerTier12,OverlordBikerTier13,DemigodBikerTier14,BloodlordBikerTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillBoe']//objective/@entity_names">zombieBoe,zombieBoeFeral,zombieBoeRadiated,zombieBoeCharged,zombieBoeInfernal,zombieBoeT2,zombieBoeFeralT2,zombieBoeRadiatedT2,zombieBoeT3,zombieBoeFeralT3,zombieBoeRadiatedT3,zombieBoeT4,zombieBoeFeralT4,zombieBoeRadiatedT4,zombieBoeT5,zombieBoeFeralT5,zombieBoeRadiatedT5,BrutalBoeTier6,AlphaBoeTier7,PrimeBoeTier8,ApexBoeTier9,TormentBoeTier10,NightmareBoeTier11,HellbornBoeTier12,OverlordBoeTier13,DemigodBoeTier14,BloodlordBoeTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillDarlene']//objective/@entity_names">zombieDarlene,zombieDarleneFeral,zombieDarleneRadiated,zombieDarleneCharged,zombieDarleneInfernal,zombieDarleneT2,zombieDarleneFeralT2,zombieDarleneRadiatedT2,zombieDarleneT3,zombieDarleneFeralT3,zombieDarleneRadiatedT3,zombieDarleneT4,zombieDarleneFeralT4,zombieDarleneRadiatedT4,zombieDarleneT5,zombieDarleneFeralT5,zombieDarleneRadiatedT5,BrutalDarleneTier6,AlphaDarleneTier7,PrimeDarleneTier8,ApexDarleneTier9,TormentDarleneTier10,NightmareDarleneTier11,HellbornDarleneTier12,OverlordDarleneTier13,DemigodDarleneTier14,BloodlordDarleneTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillMarlene']//objective/@entity_names">zombieMarlene,zombieMarleneFeral,zombieMarleneRadiated,zombieMarleneCharged,zombieMarleneT2,zombieMarleneFeralT2,zombieMarleneRadiatedT2,zombieMarleneT3,zombieMarleneFeralT3,zombieMarleneRadiatedT3,zombieMarleneT4,zombieMarleneFeralT4,zombieMarleneRadiatedT4,zombieMarleneT5,zombieMarleneFeralT5,zombieMarleneRadiatedT5,BrutalMarleneTier6,AlphaMarleneTier7,PrimeMarleneTier8,ApexMarleneTier9,TormentMarleneTier10,NightmareMarleneTier11,HellbornMarleneTier12,OverlordMarleneTier13,DemigodMarleneTier14,BloodlordMarleneTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillMoe']//objective/@entity_names">zombieMoe,zombieMoeFeral,zombieMoeRadiated,zombieMoeInfernal,zombieMoeT2,zombieMoeFeralT2,zombieMoeRadiatedT2,zombieMoeT3,zombieMoeFeralT3,zombieMoeRadiatedT3,zombieMoeT4,zombieMoeFeralT4,zombieMoeRadiatedT4,zombieMoeT5,zombieMoeFeralT5,zombieMoeRadiatedT5,BrutalMoeTier6,AlphaMoeTier7,PrimeMoeTier8,ApexMoeTier9,TormentMoeTier10,NightmareMoeTier11,HellbornMoeTier12,OverlordMoeTier13,DemigodMoeTier14,BloodlordMoeTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillJoe']//objective/@entity_names">zombieJoe,zombieJoeFeral,zombieJoeRadiated,zombieJoeCharged,zombieJoeT2,zombieJoeFeralT2,zombieJoeRadiatedT2,zombieJoeT3,zombieJoeFeralT3,zombieJoeRadiatedT3,zombieJoeT4,zombieJoeFeralT4,zombieJoeRadiatedT4,zombieJoeT5,zombieJoeFeralT5,zombieJoeRadiatedT5</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillSteve']//objective/@entity_names">zombieSteve,zombieSteveFeral,zombieSteveRadiated,zombieSteveCharged,zombieSteveT2,zombieSteveFeralT2,zombieSteveRadiatedT2,zombieSteveT3,zombieSteveFeralT3,zombieSteveRadiatedT3,zombieSteveT4,zombieSteveFeralT4,zombieSteveRadiatedT4,zombieSteveT5,zombieSteveFeralT5,zombieSteveRadiatedT5</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillYo']//objective/@entity_names">zombieYo,zombieYoFeral,zombieYoRadiated,zombieYoCharged,zombieYoInfernal,zombieYoT2,zombieYoFeralT2,zombieYoRadiatedT2,zombieYoT3,zombieYoFeralT3,zombieYoRadiatedT3,zombieYoT4,zombieYoFeralT4,zombieYoRadiatedT4,zombieYoT5,zombieYoFeralT5,zombieYoRadiatedT5,BrutalYoTier6,AlphaYoTier7,PrimeYoTier8,ApexYoTier9,TormentYoTier10,NightmareYoTier11,HellbornYoTier12,OverlordYoTier13,DemigodYoTier14,BloodlordYoTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillBusinessMan']//objective/@entity_names">zombieBusinessMan,zombieBusinessManFeral,zombieBusinessManRadiated,zombieBusinessManCharged,zombieBusinessManInfernal,zombieBusinessManT2,zombieBusinessManFeralT2,zombieBusinessManRadiatedT2,zombieBusinessManT3,zombieBusinessManFeralT3,zombieBusinessManRadiatedT3,zombieBusinessManT4,zombieBusinessManFeralT4,zombieBusinessManRadiatedT4,zombieBusinessManT5,zombieBusinessManFeralT5,zombieBusinessManRadiatedT5,BrutalBusinessManTier6,AlphaBusinessManTier7,PrimeBusinessManTier8,ApexBusinessManTier9,TormentBusinessManTier10,NightmareBusinessManTier11,HellbornBusinessManTier12,OverlordBusinessManTier13,DemigodBusinessManTier14,BloodlordBusinessManTier15</set>
+
+    <!-- ============== GROUP 2 ============== -->
+    <set xpath="/challenges/challenge[@name='ZS_KillJanitor']//objective/@entity_names">zombieJanitor,zombieJanitorFeral,zombieJanitorRadiated,zombieJanitorCharged,zombieJanitorInfernal,zombieJanitorT2,zombieJanitorFeralT2,zombieJanitorRadiatedT2,zombieJanitorT3,zombieJanitorFeralT3,zombieJanitorRadiatedT3,zombieJanitorT4,zombieJanitorFeralT4,zombieJanitorRadiatedT4,zombieJanitorT5,zombieJanitorFeralT5,zombieJanitorRadiatedT5,BrutalJanitorTier6,AlphaJanitorTier7,PrimeJanitorTier8,ApexJanitorTier9,TormentJanitorTier10,NightmareJanitorTier11,HellbornJanitorTier12,OverlordJanitorTier13,DemigodJanitorTier14,BloodlordJanitorTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillUtilityWorker']//objective/@entity_names">zombieUtilityWorker,zombieUtilityWorkerFeral,zombieUtilityWorkerRadiated,zombieUtilityWorkerCharged,zombieUtilityWorkerInfernal,zombieUtilityWorkerT2,zombieUtilityWorkerFeralT2,zombieUtilityWorkerRadiatedT2,zombieUtilityWorkerT3,zombieUtilityWorkerFeralT3,zombieUtilityWorkerRadiatedT3,zombieUtilityWorkerT4,zombieUtilityWorkerFeralT4,zombieUtilityWorkerRadiatedT4,zombieUtilityWorkerT5,zombieUtilityWorkerFeralT5,zombieUtilityWorkerRadiatedT5,BrutalUtilityWorkerTier6,AlphaUtilityWorkerTier7,PrimeUtilityWorkerTier8,ApexUtilityWorkerTier9,TormentUtilityWorkerTier10,NightmareUtilityWorkerTier11,HellbornUtilityWorkerTier12,OverlordUtilityWorkerTier13,DemigodUtilityWorkerTier14,BloodlordUtilityWorkerTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillMaleHazmat']//objective/@entity_names">zombieMaleHazmat,zombieMaleHazmatFeral,zombieMaleHazmatRadiated,zombieMaleHazmatCharged,zombieMaleHazmatInfernal,zombieMaleHazmatT2,zombieMaleHazmatFeralT2,zombieMaleHazmatRadiatedT2,zombieMaleHazmatT3,zombieMaleHazmatFeralT3,zombieMaleHazmatRadiatedT3,zombieMaleHazmatT4,zombieMaleHazmatFeralT4,zombieMaleHazmatRadiatedT4,zombieMaleHazmatT5,zombieMaleHazmatFeralT5,zombieMaleHazmatRadiatedT5,BrutalMaleHazmatTier6,AlphaMaleHazmatTier7,PrimeMaleHazmatTier8,ApexMaleHazmatTier9,TormentMaleHazmatTier10,NightmareMaleHazmatTier11,HellbornMaleHazmatTier12,OverlordMaleHazmatTier13,DemigodMaleHazmatTier14,BloodlordMaleHazmatTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillLab']//objective/@entity_names">zombieLab,zombieLabFeral,zombieLabRadiated,zombieLabCharged,zombieLabT2,zombieLabFeralT2,zombieLabRadiatedT2,zombieLabT3,zombieLabFeralT3,zombieLabRadiatedT3,zombieLabT4,zombieLabFeralT4,zombieLabRadiatedT4,zombieLabT5,zombieLabFeralT5,zombieLabRadiatedT5</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillBurnt']//objective/@entity_names">zombieBurnt,zombieBurntFeral,zombieBurntRadiated,zombieBurntCharged,zombieBurntInfernal,zombieBurntT2,zombieBurntFeralT2,zombieBurntRadiatedT2,zombieBurntT3,zombieBurntFeralT3,zombieBurntRadiatedT3,zombieBurntT4,zombieBurntFeralT4,zombieBurntRadiatedT4,zombieBurntT5,zombieBurntFeralT5,zombieBurntRadiatedT5</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillBowler']//objective/@entity_names">zombieBowler,zombieBowlerFeral,zombieBowlerRadiated,zombieBowlerInfernal,zombieBowlerT2,zombieBowlerFeralT2,zombieBowlerRadiatedT2,zombieBowlerT3,zombieBowlerFeralT3,zombieBowlerRadiatedT3,zombieBowlerT4,zombieBowlerFeralT4,zombieBowlerRadiatedT4,zombieBowlerT5,zombieBowlerFeralT5,zombieBowlerRadiatedT5,BrutalBowlerTier6,AlphaBowlerTier7,PrimeBowlerTier8,ApexBowlerTier9,TormentBowlerTier10,NightmareBowlerTier11,HellbornBowlerTier12,OverlordBowlerTier13,DemigodBowlerTier14,BloodlordBowlerTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillTomClark']//objective/@entity_names">zombieTomClark,zombieTomClarkFeral,zombieTomClarkRadiated,zombieTomClarkCharged,zombieTomClarkT2,zombieTomClarkFeralT2,zombieTomClarkRadiatedT2,zombieTomClarkT3,zombieTomClarkFeralT3,zombieTomClarkRadiatedT3,zombieTomClarkT4,zombieTomClarkFeralT4,zombieTomClarkRadiatedT4,zombieTomClarkT5,zombieTomClarkFeralT5,zombieTomClarkRadiatedT5,BrutalTomClarkTier6,AlphaTomClarkTier7,PrimeTomClarkTier8,ApexTomClarkTier9,TormentTomClarkTier10,NightmareTomClarkTier11,HellbornTomClarkTier12,OverlordTomClarkTier13,DemigodTomClarkTier14,BloodlordTomClarkTier15</set>
+
+    <!-- Frostclaw は EZS / Bloodfall variant 無し（変更なし） -->
+
+    <set xpath="/challenges/challenge[@name='ZS_KillSkateboarder']//objective/@entity_names">zombieSkateboarder,zombieSkateboarderFeral,zombieSkateboarderRadiated,zombieSkateboarderCharged,zombieSkateboarderInfernal,zombieSkateboarderT2,zombieSkateboarderFeralT2,zombieSkateboarderRadiatedT2,zombieSkateboarderT3,zombieSkateboarderFeralT3,zombieSkateboarderRadiatedT3,zombieSkateboarderT4,zombieSkateboarderFeralT4,zombieSkateboarderRadiatedT4,zombieSkateboarderT5,zombieSkateboarderFeralT5,zombieSkateboarderRadiatedT5,BrutalSkateboarderTier6,AlphaSkateboarderTier7,PrimeSkateboarderTier8,ApexSkateboarderTier9,TormentSkateboarderTier10,NightmareSkateboarderTier11,HellbornSkateboarderTier12,OverlordSkateboarderTier13,DemigodSkateboarderTier14,BloodlordSkateboarderTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillPartyGirl']//objective/@entity_names">zombiePartyGirl,zombiePartyGirlFeral,zombiePartyGirlRadiated,zombiePartyGirlCharged,zombiePartyGirlT2,zombiePartyGirlFeralT2,zombiePartyGirlRadiatedT2,zombiePartyGirlT3,zombiePartyGirlFeralT3,zombiePartyGirlRadiatedT3,zombiePartyGirlT4,zombiePartyGirlFeralT4,zombiePartyGirlRadiatedT4,zombiePartyGirlT5,zombiePartyGirlFeralT5,zombiePartyGirlRadiatedT5,BrutalPartyGirlTier6,AlphaPartyGirlTier7,PrimePartyGirlTier8,ApexPartyGirlTier9,TormentPartyGirlTier10,NightmarePartyGirlTier11,HellbornPartyGirlTier12,OverlordPartyGirlTier13,DemigodPartyGirlTier14,BloodlordPartyGirlTier15</set>
+
+    <!-- ============== GROUP 3 ============== -->
+    <!-- Crawler は EZS の base/Feral T2-T5 のみ（Radiated 無し）。Bloodfall は Tier14/15 のみ Stalker 派生 -->
+    <set xpath="/challenges/challenge[@name='ZS_KillCrawler']//objective/@entity_names">zombieSteveCrawler,zombieSteveCrawlerFeral,zombieSteveCrawlerT2,zombieSteveCrawlerFeralT2,zombieSteveCrawlerT3,zombieSteveCrawlerFeralT3,zombieSteveCrawlerT4,zombieSteveCrawlerFeralT4,zombieSteveCrawlerT5,zombieSteveCrawlerFeralT5,DemigodStalkerTier14,BloodlordStalkerTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillInmate']//objective/@entity_names">zombieInmate,zombieInmateFeral,zombieInmateRadiated,zombieInmateCharged,zombieInmateInfernal,zombieInmateT2,zombieInmateFeralT2,zombieInmateRadiatedT2,zombieInmateT3,zombieInmateFeralT3,zombieInmateRadiatedT3,zombieInmateT4,zombieInmateFeralT4,zombieInmateRadiatedT4,zombieInmateT5,zombieInmateFeralT5,zombieInmateRadiatedT5,BrutalInmateTier6,AlphaInmateTier7,PrimeInmateTier8,ApexInmateTier9,TormentInmateTier10,NightmareInmateTier11,HellbornInmateTier12,OverlordInmateTier13,DemigodInmateTier14,BloodlordInmateTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillSoldier']//objective/@entity_names">zombieSoldier,zombieSoldierFeral,zombieSoldierRadiated,zombieSoldierInfernal,zombieSoldierT2,zombieSoldierFeralT2,zombieSoldierRadiatedT2,zombieSoldierT3,zombieSoldierFeralT3,zombieSoldierRadiatedT3,zombieSoldierT4,zombieSoldierFeralT4,zombieSoldierRadiatedT4,zombieSoldierT5,zombieSoldierFeralT5,zombieSoldierRadiatedT5,BrutalSoldierTier6,AlphaSoldierTier7,PrimeSoldierTier8,ApexSoldierTier9,TormentSoldierTier10,NightmareSoldierTier11,HellbornSoldierTier12,OverlordSoldierTier13,DemigodSoldierTier14,BloodlordSoldierTier15</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillScreamer']//objective/@entity_names">zombieScreamer,zombieScreamerFeral,zombieScreamerRadiated,zombieScreamerCharged,zombieScreamerT2,zombieScreamerFeralT2,zombieScreamerRadiatedT2,zombieScreamerT3,zombieScreamerFeralT3,zombieScreamerRadiatedT3,zombieScreamerT4,zombieScreamerFeralT4,zombieScreamerRadiatedT4,zombieScreamerT5,zombieScreamerFeralT5,zombieScreamerRadiatedT5</set>
+
+    <set xpath="/challenges/challenge[@name='ZS_KillMutated']//objective/@entity_names">zombieMutated,zombieMutatedFeral,zombieMutatedRadiated,zombieMutatedCharged,zombieMutatedInfernal,zombieMutatedT2,zombieMutatedFeralT2,zombieMutatedRadiatedT2,zombieMutatedT3,zombieMutatedFeralT3,zombieMutatedRadiatedT3,zombieMutatedT4,zombieMutatedFeralT4,zombieMutatedRadiatedT4,zombieMutatedT5,zombieMutatedFeralT5,zombieMutatedRadiatedT5,BrutalMutatedTier6,AlphaMutatedTier7,PrimeMutatedTier8,ApexMutatedTier9,TormentMutatedTier10,NightmareMutatedTier11,HellbornMutatedTier12,OverlordMutatedTier13,DemigodMutatedTier14,BloodlordMutatedTier15</set>
+
+    <!-- PlagueSpitter は EZS / Bloodfall variant 無し（変更なし） -->
+
+    <set xpath="/challenges/challenge[@name='ZS_KillNurse']//objective/@entity_names">zombieNurse,zombieNurseFeral,zombieNurseRadiated,zombieNurseCharged,zombieNurseInfernal,zombieNurseT2,zombieNurseFeralT2,zombieNurseRadiatedT2,zombieNurseT3,zombieNurseFeralT3,zombieNurseRadiatedT3,zombieNurseT4,zombieNurseFeralT4,zombieNurseRadiatedT4,zombieNurseT5,zombieNurseFeralT5,zombieNurseRadiatedT5,BrutalNurseTier6,AlphaNurseTier7,PrimeNurseTier8,ApexNurseTier9,TormentNurseTier10,NightmareNurseTier11,HellbornNurseTier12,OverlordNurseTier13,DemigodNurseTier14,BloodlordNurseTier15</set>
+
+    <!-- ============== reward_event 個別割当 (各 challenge → 性格別 5択 quest) ============== -->
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillArlene']">waka_zs_reward_arlene</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillBiker']">waka_zs_reward_biker</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillBoe']">waka_zs_reward_boe</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillDarlene']">waka_zs_reward_darlene</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillMarlene']">waka_zs_reward_marlene</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillMoe']">waka_zs_reward_moe</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillJoe']">waka_zs_reward_joe</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillSteve']">waka_zs_reward_steve</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillYo']">waka_zs_reward_yo</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillBusinessMan']">waka_zs_reward_businessman</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillJanitor']">waka_zs_reward_janitor</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillUtilityWorker']">waka_zs_reward_utilityworker</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillMaleHazmat']">waka_zs_reward_malehazmat</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillLab']">waka_zs_reward_lab</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillBurnt']">waka_zs_reward_burnt</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillBowler']">waka_zs_reward_bowler</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillTomClark']">waka_zs_reward_tomclark</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillFrostclaw']">waka_zs_reward_frostclaw</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillSkateboarder']">waka_zs_reward_skateboarder</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillPartyGirl']">waka_zs_reward_partygirl</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillCrawler']">waka_zs_reward_crawler</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillInmate']">waka_zs_reward_inmate</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillSoldier']">waka_zs_reward_soldier</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillScreamer']">waka_zs_reward_screamer</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillMutated']">waka_zs_reward_mutated</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillPlagueSpitter']">waka_zs_reward_plaguespitter</setattribute>
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_KillNurse']">waka_zs_reward_nurse</setattribute>
+
+    <!-- Master: legendary gun bundle 5択 -->
+    <setattribute name="reward_event" xpath="/challenges/challenge[@name='ZS_groupCompleteZombieSlayersExtra']">waka_zs_master_reward</setattribute>
+
+    <!-- ============== reward_text_key (報酬種別ラベル：弾薬/爆発物/Mods/希少/レジェ) ============== -->
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillArlene']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillBiker']">waka_zs_reward_text_ammo_ap</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillBoe']">waka_zs_reward_text_ammo_ap</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillDarlene']">challengeKillRewardExplosives</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillMarlene']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillMoe']">waka_zs_reward_text_ammo_ap</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillJoe']">waka_zs_reward_text_ammo_ap</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillSteve']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillYo']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillBusinessMan']">challengeKillRewardMods</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillJanitor']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillUtilityWorker']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillMaleHazmat']">challengeKillRewardMods</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillLab']">challengeKillRewardMods</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillBurnt']">challengeKillRewardExplosives</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillBowler']">challengeKillRewardExplosives</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillTomClark']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillFrostclaw']">waka_zs_reward_text_ammo_ap</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillSkateboarder']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillPartyGirl']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillCrawler']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillInmate']">challengeKillRewardRegAmmo</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillSoldier']">challengeKillRewardMods</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillScreamer']">challengeKillRewardMods</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillMutated']">challengeKillRewardLegendary</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillPlagueSpitter']">challengeKillRewardRareItems</setattribute>
+    <setattribute name="reward_text_key" xpath="/challenges/challenge[@name='ZS_KillNurse']">challengeKillRewardMods</setattribute>
+
+    <!-- ============== icon 差別化 (residents/workers=zombie, specials/master/bloodfall=skull) ============== -->
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillArlene']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillBiker']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillBoe']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillDarlene']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillMarlene']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillMoe']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillJoe']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillSteve']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillYo']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillBusinessMan']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillJanitor']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillUtilityWorker']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillMaleHazmat']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillLab']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillBurnt']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillBowler']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillTomClark']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillFrostclaw']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillSkateboarder']">ui_game_symbol_zombie</setattribute>
+    <setattribute name="icon" xpath="/challenges/challenge[@name='ZS_KillPartyGirl']">ui_game_symbol_zombie</setattribute>
+    <!-- group 3 (specials) は skull 維持（変更なし） -->
+
+    <!-- ============== group title_key 差別化 ============== -->
+    <setattribute name="title_key" xpath="/challenges/challenge_group[@name='ZombieSlayers_1']">waka_zs_group_residents</setattribute>
+    <setattribute name="title_key" xpath="/challenges/challenge_group[@name='ZombieSlayers_2']">waka_zs_group_workers</setattribute>
+    <setattribute name="title_key" xpath="/challenges/challenge_group[@name='ZombieSlayers_3']">waka_zs_group_specials</setattribute>
+    <setattribute name="title_key" xpath="/challenges/challenge_group[@name='ZombieSlayers_Master']">waka_zs_group_master</setattribute>
+
+    <!-- ============== Bloodfall 固有ゾンビの新規 challenge group ============== -->
+    <!-- 既存 Master group の達成基準に影響しない独立 group として追加。     -->
+    <append xpath="/challenges">
+        <challenge_group category="ExtraSlayer" name="ZombieSlayers_Bloodfall" title_key="waka_zs_group_bloodfall" link_challenges="true"/>
+
+        <challenge name="ZS_KillFatCop" group="ZombieSlayers_Bloodfall" title_key="waka_zs_name_fatcop" icon="ui_game_symbol_skull"
+                   short_description_key="waka_zs_desc_fatcop" description_key="waka_zs_desc_fatcop" reward_text_key="challengeKillRewardRareItems"
+                   reward_event="waka_zs_reward_fatcop">
+            <objective type="Kill" entity_names="zombieFatCop,zombieFatCopFeral,zombieFatCopRadiated,zombieFatCopT2,zombieFatCopFeralT2,zombieFatCopRadiatedT2,zombieFatCopT3,zombieFatCopFeralT3,zombieFatCopRadiatedT3,zombieFatCopT4,zombieFatCopFeralT4,zombieFatCopRadiatedT4,zombieFatCopT5,zombieFatCopFeralT5,zombieFatCopRadiatedT5,BrutalFatCopTier6,AlphaFatCopTier7,PrimeFatCopTier8,ApexFatCopTier9,TormentFatCopTier10,NightmareFatCopTier11,HellbornFatCopTier12,OverlordFatCopTier13,DemigodFatCopTier14,BloodlordFatCopTier15" count="50"/>
+        </challenge>
+
+        <challenge name="ZS_KillFatHawaiian" group="ZombieSlayers_Bloodfall" title_key="waka_zs_name_fathawaiian" icon="ui_game_symbol_skull"
+                   short_description_key="waka_zs_desc_fathawaiian" description_key="waka_zs_desc_fathawaiian" reward_text_key="challengeKillRewardLegendary"
+                   reward_event="waka_zs_reward_fathawaiian">
+            <objective type="Kill" entity_names="zombieFatHawaiian,zombieFatHawaiianFeral,zombieFatHawaiianRadiated,zombieFatHawaiianT2,zombieFatHawaiianFeralT2,zombieFatHawaiianRadiatedT2,zombieFatHawaiianT3,zombieFatHawaiianFeralT3,zombieFatHawaiianRadiatedT3,zombieFatHawaiianT4,zombieFatHawaiianFeralT4,zombieFatHawaiianRadiatedT4,zombieFatHawaiianT5,zombieFatHawaiianFeralT5,zombieFatHawaiianRadiatedT5,BrutalFatHawaiianTier6,AlphaFatHawaiianTier7,PrimeFatHawaiianTier8,ApexFatHawaiianTier9,TormentFatHawaiianTier10,NightmareFatHawaiianTier11,HellbornFatHawaiianTier12,OverlordFatHawaiianTier13,DemigodFatHawaiianTier14,BloodlordFatHawaiianTier15" count="50"/>
+        </challenge>
+
+        <challenge name="ZS_KillFemaleFat" group="ZombieSlayers_Bloodfall" title_key="waka_zs_name_femalefat" icon="ui_game_symbol_skull"
+                   short_description_key="waka_zs_desc_femalefat" description_key="waka_zs_desc_femalefat" reward_text_key="challengeKillRewardExplosives"
+                   reward_event="waka_zs_reward_femalefat">
+            <objective type="Kill" entity_names="zombieFemaleFat,zombieFemaleFatFeral,zombieFemaleFatRadiated,zombieFemaleFatT2,zombieFemaleFatFeralT2,zombieFemaleFatRadiatedT2,zombieFemaleFatT3,zombieFemaleFatFeralT3,zombieFemaleFatRadiatedT3,zombieFemaleFatT4,zombieFemaleFatFeralT4,zombieFemaleFatRadiatedT4,zombieFemaleFatT5,zombieFemaleFatFeralT5,zombieFemaleFatRadiatedT5,BrutalFemaleFatTier6,AlphaFemaleFatTier7,PrimeFemaleFatTier8,ApexFemaleFatTier9,TormentFemaleFatTier10,NightmareFemaleFatTier11,HellbornFemaleFatTier12,OverlordFemaleFatTier13,DemigodFemaleFatTier14,BloodlordFemaleFatTier15" count="50"/>
+        </challenge>
+
+        <challenge name="ZS_KillLumberjack" group="ZombieSlayers_Bloodfall" title_key="waka_zs_name_lumberjack" icon="ui_game_symbol_skull"
+                   short_description_key="waka_zs_desc_lumberjack" description_key="waka_zs_desc_lumberjack" reward_text_key="challengeKillRewardExplosives"
+                   reward_event="waka_zs_reward_lumberjack">
+            <objective type="Kill" entity_names="zombieLumberjack,zombieLumberjackFeral,zombieLumberjackRadiated,zombieLumberjackT2,zombieLumberjackFeralT2,zombieLumberjackRadiatedT2,zombieLumberjackT3,zombieLumberjackFeralT3,zombieLumberjackRadiatedT3,zombieLumberjackT4,zombieLumberjackFeralT4,zombieLumberjackRadiatedT4,zombieLumberjackT5,zombieLumberjackFeralT5,zombieLumberjackRadiatedT5,BrutalLumberjackTier6,AlphaLumberjackTier7,PrimeLumberjackTier8,ApexLumberjackTier9,TormentLumberjackTier10,NightmareLumberjackTier11,HellbornLumberjackTier12,OverlordLumberjackTier13,DemigodLumberjackTier14,BloodlordLumberjackTier15" count="50"/>
+        </challenge>
+
+        <challenge name="ZS_KillRancher" group="ZombieSlayers_Bloodfall" title_key="waka_zs_name_rancher" icon="ui_game_symbol_skull"
+                   short_description_key="waka_zs_desc_rancher" description_key="waka_zs_desc_rancher" reward_text_key="challengeKillRewardMods"
+                   reward_event="waka_zs_reward_rancher">
+            <objective type="Kill" entity_names="zombieRancher,zombieRancherFeral,zombieRancherRadiated,zombieRancherT2,zombieRancherFeralT2,zombieRancherRadiatedT2,zombieRancherT3,zombieRancherFeralT3,zombieRancherRadiatedT3,zombieRancherT4,zombieRancherFeralT4,zombieRancherRadiatedT4,zombieRancherT5,zombieRancherFeralT5,zombieRancherRadiatedT5,BrutalRancherTier6,AlphaRancherTier7,PrimeRancherTier8,ApexRancherTier9,TormentRancherTier10,NightmareRancherTier11,HellbornRancherTier12,OverlordRancherTier13,DemigodRancherTier14,BloodlordRancherTier15" count="50"/>
+        </challenge>
+
+        <challenge name="ZS_KillSpider" group="ZombieSlayers_Bloodfall" title_key="waka_zs_name_spider" icon="ui_game_symbol_skull"
+                   short_description_key="waka_zs_desc_spider" description_key="waka_zs_desc_spider" reward_text_key="challengeKillRewardMods"
+                   reward_event="waka_zs_reward_spider">
+            <objective type="Kill" entity_names="zombieSpider,zombieSpiderFeral,zombieSpiderRadiated,zombieSpiderT2,zombieSpiderFeralT2,zombieSpiderRadiatedT2,zombieSpiderT3,zombieSpiderFeralT3,zombieSpiderRadiatedT3,zombieSpiderT4,zombieSpiderFeralT4,zombieSpiderRadiatedT4,zombieSpiderT5,zombieSpiderFeralT5,zombieSpiderRadiatedT5,BrutalSpiderTier6,AlphaSpiderTier7,PrimeSpiderTier8,ApexSpiderTier9,TormentSpiderTier10,NightmareSpiderTier11,HellbornSpiderTier12,OverlordSpiderTier13,DemigodSpiderTier14,BloodlordSpiderTier15" count="50"/>
+        </challenge>
+
+        <!-- Wight: vanilla には base が無い (Feral/Radiated のみ)。EZS も同様 -->
+        <challenge name="ZS_KillWight" group="ZombieSlayers_Bloodfall" title_key="waka_zs_name_wight" icon="ui_game_symbol_skull"
+                   short_description_key="waka_zs_desc_wight" description_key="waka_zs_desc_wight" reward_text_key="challengeKillRewardLegendary"
+                   reward_event="waka_zs_reward_wight">
+            <objective type="Kill" entity_names="zombieWightFeral,zombieWightRadiated,zombieWightFeralT2,zombieWightRadiatedT2,zombieWightFeralT3,zombieWightRadiatedT3,zombieWightFeralT4,zombieWightRadiatedT4,zombieWightFeralT5,zombieWightRadiatedT5,BrutalWightTier6,AlphaWightTier7,PrimeWightTier8,ApexWightTier9,TormentWightTier10,NightmareWightTier11,HellbornWightTier12,OverlordWightTier13,DemigodWightTier14,BloodlordWightTier15" count="50"/>
+        </challenge>
+    </append>
+
+</configs>

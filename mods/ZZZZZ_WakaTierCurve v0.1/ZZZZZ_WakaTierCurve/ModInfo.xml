@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZ_WakaTierCurve" />
+    <DisplayName value="Waka Tier Curve" />
+    <Description value="Unifies vanilla T1, EZS T2-T5, and Bloodfall T6-T15 zombies into a single 15-tier curve driven by player GameStage. Single Harmony Prefix on EntityFactory.CreateEntity(EntityCreationData) — the chokepoint every entity creation funnels through, including chunk restore from region save files. Covers spawn, WalkerSim cached agents, and persistent world entities in one hook." />
+    <Author value="wakadori" />
+    <Version value="0.3.2" />
+    <Website value="" />
+</xml>

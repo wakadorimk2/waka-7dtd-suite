@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Waka Slayer EZS + Bloodfall Patch v0.4.1 - reward quests
+
+  v0.4 hotfix: type="Item" id="a,b,c" のカンマ区切り構文は XUiC_QuestTurnInEntry
+  の icon 解決で NullRef を引き起こし quest turn-in UI が壊れる。
+  (id 全体を 1 item として ItemClass.GetItemClass() に渡して null → NullRef)
+  各弾を独立 reward 行に分解。EFTX 混在は「選択肢として並べる」形で実現。
+
+  v0.3 → v0.4 → v0.4.1 の変更点:
+    - 5択全 isfixed=true → reward_choices_count=3 chosen
+      (challenge clear のご褒美をガチャ性のあるものにする)
+    - vanilla 弾薬 entry の隣に EFTX 弾を個別行で並列追加 (Reg型/AP型 各 11枠中3選)
+    - ammo 数量を全体的に削減
+      (vanilla 150-300 / Turret 1000 を ~半減〜1/3 に、
+       Ammo Flow Patch・Ammo Real Price と歩調を合わせる)
+    - Mod / Legendary / Rare / Master 系 quest も 5択中 3 chosen に
+      (内容は v0.3 と同じ、選択肢化のみ)
+
+  数量設計:
+    矢: 80 (vanilla 150 -> 80)
+    9mm 系: 100 (vanilla 300 -> 100)
+    Shotgun 系: 80 (vanilla 150 -> 80)
+    7.62 系: 80 (vanilla 150 -> 80)
+    JunkTurret 系: 300 (vanilla 1000 -> 300)
+    Thrown: Molotov 12 / Grenade 15 / Contact 15 / TimedCharge 6 / Filter 6
+-->
+<configs>
+    <append xpath="/quests">
+
+        <!-- ============================================================ -->
+        <!-- RegAmmo型 (vanilla弾 + EFTX並列、11枠中3 chosen) — 11 quests  -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_arlene" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_arlene"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_marlene" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_marlene"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_steve" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_steve"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_yo" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_yo"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_tomclark" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_tomclark"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_skateboarder" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_skateboarder"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_partygirl" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_partygirl"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_crawler" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_crawler"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_inmate" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_inmate"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_janitor" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_janitor"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_utilityworker" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_utilityworker"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowIron" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletBall" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mm" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunShell" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft20GBuck" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft7mmShotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletBall" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATO" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretRegular" ischosen="true" value="300"/>
+        </quest>
+
+
+        <!-- ============================================================ -->
+        <!-- APAmmo型 (vanilla AP弾 + EFTX AP/HP並列、11枠中3 chosen) — 5 quests -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_biker" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_biker"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowSteelAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mmAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACPAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunSlug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftAP20Slug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftShrapnel25Shotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239AP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATOAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretAP" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_boe" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_boe"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowSteelAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mmAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACPAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunSlug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftAP20Slug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftShrapnel25Shotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239AP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATOAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretAP" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_moe" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_moe"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowSteelAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mmAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACPAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunSlug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftAP20Slug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftShrapnel25Shotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239AP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATOAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretAP" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_joe" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_joe"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowSteelAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mmAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACPAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunSlug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftAP20Slug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftShrapnel25Shotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239AP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATOAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretAP" ischosen="true" value="300"/>
+        </quest>
+
+        <quest id="waka_zs_quest_frostclaw" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_frostclaw"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="ammoArrowSteelAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo9mmBulletAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft919mmAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoEft45ACPAP" ischosen="true" value="100"/>
+            <reward type="Item" id="ammoShotgunSlug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftAP20Slug" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEftShrapnel25Shotgun" ischosen="true" value="80"/>
+            <reward type="Item" id="ammo762mmBulletAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76239AP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoEft76251NATOAP" ischosen="true" value="80"/>
+            <reward type="Item" id="ammoJunkTurretAP" ischosen="true" value="300"/>
+        </quest>
+
+
+        <!-- ============================================================ -->
+        <!-- Thrown型 (投擲・爆発物、5択中3 chosen) — 5 quests             -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_darlene" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_darlene"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="thrownAmmoMolotovCocktail" ischosen="true" value="12"/>
+            <reward type="Item" id="thrownGrenade" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownGrenadeContact" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownTimedCharge" ischosen="true" value="6"/>
+            <reward type="Item" id="mineAirFilter" ischosen="true" value="6"/>
+        </quest>
+
+        <quest id="waka_zs_quest_burnt" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_burnt"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="thrownAmmoMolotovCocktail" ischosen="true" value="12"/>
+            <reward type="Item" id="thrownGrenade" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownGrenadeContact" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownTimedCharge" ischosen="true" value="6"/>
+            <reward type="Item" id="mineAirFilter" ischosen="true" value="6"/>
+        </quest>
+
+        <quest id="waka_zs_quest_bowler" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_bowler"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="thrownAmmoMolotovCocktail" ischosen="true" value="12"/>
+            <reward type="Item" id="thrownGrenade" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownGrenadeContact" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownTimedCharge" ischosen="true" value="6"/>
+            <reward type="Item" id="mineAirFilter" ischosen="true" value="6"/>
+        </quest>
+
+        <quest id="waka_zs_quest_femalefat" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_femalefat"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="thrownAmmoMolotovCocktail" ischosen="true" value="12"/>
+            <reward type="Item" id="thrownGrenade" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownGrenadeContact" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownTimedCharge" ischosen="true" value="6"/>
+            <reward type="Item" id="mineAirFilter" ischosen="true" value="6"/>
+        </quest>
+
+        <quest id="waka_zs_quest_lumberjack" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_lumberjack"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="thrownAmmoMolotovCocktail" ischosen="true" value="12"/>
+            <reward type="Item" id="thrownGrenade" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownGrenadeContact" ischosen="true" value="15"/>
+            <reward type="Item" id="thrownTimedCharge" ischosen="true" value="6"/>
+            <reward type="Item" id="mineAirFilter" ischosen="true" value="6"/>
+        </quest>
+
+
+        <!-- ============================================================ -->
+        <!-- ArmorMod型 (5択中3 chosen、内容は v0.3 と同じ) — 5 quests     -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_businessman" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_businessman"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modArmorCigar" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorHelmetLight" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorBandolier" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorTripleStoragePocket" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorImpactBracing" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_malehazmat" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_malehazmat"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modArmorCigar" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorHelmetLight" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorBandolier" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorTripleStoragePocket" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorImpactBracing" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_lab" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_lab"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modArmorCigar" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorHelmetLight" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorBandolier" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorTripleStoragePocket" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorImpactBracing" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_nurse" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_nurse"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modArmorCigar" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorHelmetLight" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorBandolier" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorTripleStoragePocket" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorImpactBracing" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_spider" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_spider"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modArmorCigar" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorHelmetLight" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorBandolier" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorTripleStoragePocket" ischosen="true" value="1"/>
+            <reward type="Item" id="modArmorImpactBracing" ischosen="true" value="1"/>
+        </quest>
+
+
+        <!-- ============================================================ -->
+        <!-- GunMod型 (5択中3 chosen、内容は v0.3 と同じ) — 3 quests       -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_soldier" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_soldier"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modGunCrippleEm" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunSoundSuppressorSilencer" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunShotgunTubeExtenderMagazine" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunDrumMagazineExtender" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunMeleeRadRemover" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_screamer" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_screamer"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modGunCrippleEm" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunSoundSuppressorSilencer" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunShotgunTubeExtenderMagazine" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunDrumMagazineExtender" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunMeleeRadRemover" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_rancher" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_rancher"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="modGunCrippleEm" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunSoundSuppressorSilencer" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunShotgunTubeExtenderMagazine" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunDrumMagazineExtender" ischosen="true" value="1"/>
+            <reward type="Item" id="modGunMeleeRadRemover" ischosen="true" value="1"/>
+        </quest>
+
+
+        <!-- ============================================================ -->
+        <!-- Legendary型 (5択中3 chosen、内容は v0.3 と同じ) — 3 quests    -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_mutated" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_mutated"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="questRewardLegendarySteelSpearCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendarySteelClubCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendarySteelKnuckleCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryMacheteCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryBatonCraftingBundle" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_fathawaiian" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_fathawaiian"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="questRewardLegendarySteelSpearCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendarySteelClubCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendarySteelKnuckleCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryMacheteCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryBatonCraftingBundle" ischosen="true" value="1"/>
+        </quest>
+
+        <quest id="waka_zs_quest_wight" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_wight"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="questRewardLegendarySteelSpearCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendarySteelClubCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendarySteelKnuckleCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryMacheteCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryBatonCraftingBundle" ischosen="true" value="1"/>
+        </quest>
+
+
+        <!-- ============================================================ -->
+        <!-- Rare型 (5択中3 chosen、内容は v0.3 と同じ) — 2 quests         -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_plaguespitter" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="zombie_slayer_name_plaguespitter"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="toolDewFilter" ischosen="true" value="1"/>
+            <reward type="Item" id="plantedGraceCorn1Schematic" ischosen="true" value="1"/>
+            <reward type="Item" id="solarCell" ischosen="true" value="3"/>
+            <reward type="Item" id="toolForgeCrucible" ischosen="true" value="1"/>
+            <reward type="Item" id="resourceLegendaryParts" ischosen="true" value="4"/>
+        </quest>
+
+        <quest id="waka_zs_quest_fatcop" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_fatcop"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="10000"/>
+            <reward type="Item" id="toolDewFilter" ischosen="true" value="1"/>
+            <reward type="Item" id="plantedGraceCorn1Schematic" ischosen="true" value="1"/>
+            <reward type="Item" id="solarCell" ischosen="true" value="3"/>
+            <reward type="Item" id="toolForgeCrucible" ischosen="true" value="1"/>
+            <reward type="Item" id="resourceLegendaryParts" ischosen="true" value="4"/>
+        </quest>
+
+
+        <!-- ============================================================ -->
+        <!-- Master: ZombieSlayers_1+2+3 全制覇報酬 (5択中3 chosen) — 1   -->
+        <!-- ============================================================ -->
+        <quest id="waka_zs_quest_master" template="challengegroup_reward_homesteading">
+            <property name="reward_choices_count" value="3"/>
+            <variable name="name" value="waka_zs_name_master"/>
+            <variable name="subtitle" value="zombie_slayer_subtitle"/>
+            <variable name="description" value="zombie_slayer_desc"/>
+            <variable name="completion" value="zombie_slayer_completion"/>
+            <reward type="Exp" value="50000"/>
+            <reward type="Item" id="questRewardLegendaryRifleCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryShotgunCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryMachineGunCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryHandgunCraftingBundle" ischosen="true" value="1"/>
+            <reward type="Item" id="questRewardLegendaryRoboticsCraftingBundle" ischosen="true" value="1"/>
+        </quest>
+    </append>
+</configs>

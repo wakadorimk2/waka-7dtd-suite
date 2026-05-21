@@ -1,0 +1,5 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,japanese
+entityWakaPetRabbit,entityclasses,Entity name,,,Rocky,ロッキー
+entityWakaPetRabbit_caged,entityclasses,Entity name,,,Rocky,ロッキー
+buffWakaPetImmortalName,buffs,,,,Rocky Immortality,ロッキー守護
+buffWakaPetImmortalDesc,buffs,,,,This Eridian visitor is protected from all harm.,このエリディアンの訪問者はあらゆる危害から守られている。
