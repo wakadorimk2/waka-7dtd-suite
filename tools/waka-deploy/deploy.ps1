@@ -18,9 +18,11 @@ $LogPath     = Join-Path $PSScriptRoot 'deploy.log'
 $ConfigPath  = Join-Path $PSScriptRoot 'deploy.config.psd1'
 
 $exclude = @{}
+$excludeMods = @()
 if (Test-Path $ConfigPath) {
     $cfg = Import-PowerShellDataFile -Path $ConfigPath
     if ($cfg.Exclude) { $exclude = $cfg.Exclude }
+    if ($cfg.ExcludeMods) { $excludeMods = @($cfg.ExcludeMods) }
 }
 
 $logLines = New-Object System.Collections.Generic.List[string]
@@ -81,6 +83,11 @@ $missing = 0
 $noinfo  = 0
 
 foreach ($mo2Mod in $enabled) {
+    if ($excludeMods -contains $mo2Mod) {
+        Log "  excluded by config: $mo2Mod" 'DarkGray'
+        continue
+    }
+
     $mo2Path = Join-Path $ModsRoot $mo2Mod
     if (-not (Test-Path $mo2Path)) {
         Log "  MISSING: $mo2Mod" 'Red'
@@ -108,6 +115,11 @@ foreach ($mo2Mod in $enabled) {
 
     foreach ($real in $realMods) {
         $targetName = $real.Name
+
+        if ($excludeMods -contains $targetName) {
+            Log "  excluded by config: $targetName from $mo2Mod" 'DarkGray'
+            continue
+        }
 
         if ($excludeList -contains $targetName) {
             Log "  excluded by config: $targetName from $mo2Mod" 'DarkGray'
