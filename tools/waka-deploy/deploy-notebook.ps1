@@ -57,7 +57,7 @@ function Invoke-RemotePowerShell([string]$Script, [string]$Description) {
 }
 
 function Invoke-ScpCopy([string]$SourcePath) {
-    $target = ('{0}:"{1}/"' -f $RemoteHost, $RemoteModsPath)
+    $target = ('{0}:{1}/' -f $RemoteHost, $RemoteModsPath)
     Log ("scp: {0} -> {1}" -f $SourcePath, $target) 'DarkCyan'
     & scp -r $SourcePath $target
     if ($LASTEXITCODE -ne 0) {
@@ -285,13 +285,15 @@ try {
         return
     }
 
+    $resolvedTargets = @($resolved.ToArray())
+
     if ($Restart) { Stop-RemoteServer }
-    Remove-RemoteMods @($resolved)
+    Remove-RemoteMods -Targets $resolvedTargets
     foreach ($real in $resolved) {
         Invoke-ScpCopy $real.FullName
     }
     if ($Restart) { Start-RemoteServer }
-    if ($Verify) { Verify-RemoteLog @($resolved) }
+    if ($Verify) { Verify-RemoteLog -Targets $resolvedTargets }
 
     Log 'Notebook deploy completed.' 'Green'
 } catch {
