@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
-  <!-- Smart storage should be a base upgrade, not a day-one replacement for sorting. -->
-  <set xpath="/recipes/recipe[@name='smartDumpChest']/@craft_time">90</set>
-  <set xpath="/recipes/recipe[@name='smartDumpChest']/ingredient[@name='resourceWood']/@count">40</set>
-  <set xpath="/recipes/recipe[@name='smartDumpChest']/ingredient[@name='resourceForgedIron']/@count">25</set>
-  <set xpath="/recipes/recipe[@name='smartDumpChest']/ingredient[@name='resourceCloth']/@count">10</set>
-  <append xpath="/recipes/recipe[@name='smartDumpChest']">
-    <ingredient name="resourceMechanicalParts" count="12" />
-    <ingredient name="resourceElectricParts" count="6" />
-    <ingredient name="resourceDuctTape" count="6" />
-  </append>
-
   <!-- Pouches are useful trip-planning tools, but larger tiers should cost real prep. -->
   <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT1']/ingredient[@name='resourceCloth']/@count">18</set>
   <set xpath="/recipes/recipe[@name='modArmorPackwiselyAmmoPouchT1']/ingredient[@name='resourceLeather']/@count">8</set>

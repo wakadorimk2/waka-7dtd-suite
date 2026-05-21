@@ -85,6 +85,39 @@ Set-Location "C:\Program Files (x86)\Steam\steamapps\common\7 Days to Die Dedica
 
 The deploy script removes existing junctions under the game `Mods` folder, keeps real folders, then creates junctions for enabled profile entries. It writes `tools/waka-deploy/deploy.log`.
 
+## Codex CapFrameX MCP Notes
+
+CapFrameX exposes its MCP server from the running CapFrameX app when MCP is enabled in `%APPDATA%\CapFrameX\Configuration\AppSettings.json`.
+
+Known working local settings:
+
+- `McpEnabled`: `true`
+- `WebservicePort`: `1337`
+- MCP endpoint: `http://localhost:1337/mcp`
+- Codex MCP name: `capframex`
+
+Check the current Codex registration:
+
+```powershell
+codex mcp list
+codex mcp get capframex
+```
+
+If the MCP entry is missing, register it again:
+
+```powershell
+codex mcp add capframex --url http://localhost:1337/mcp
+```
+
+If Codex cannot see the tools, confirm CapFrameX is running and listening:
+
+```powershell
+Test-NetConnection -ComputerName localhost -Port 1337
+Select-String -LiteralPath "$env:APPDATA\CapFrameX\Logs\CapFrameX_003.log" -Pattern "MCP|1337" | Select-Object -Last 20
+```
+
+After adding or changing MCP registration, start a new Codex session if the `cfx_*` tools do not appear in the current session.
+
 ## Remote Dedicated Server SSH Notes
 
 Detailed notebook-server SSH, SCP, save-backup, scheduled-task restart, and log-verification procedures now live in `skills/7dtd-dedicated-mod-sync-restart/SKILL.md`.

@@ -2,7 +2,7 @@
 <xml>
   <Name value="ZZZZZZZZ_WakaStorageRebalanceMVP" />
   <DisplayName value="Waka Storage Rebalance MVP" />
-  <Description value="Adds dedicated 12-column base storage containers without expanding vanilla writable crates or Smart Dump Chest storage." />
+  <Description value="Adds dedicated 12-column base storage containers without expanding vanilla writable crates." />
   <Author value="Waka" />
   <Version value="0.1" />
 </xml>

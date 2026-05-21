@@ -1,2 +1,1 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,English
-smartDumpChestDesc,,,,,"A base storage upgrade that redistributes dumped items into nearby matching containers. It is useful inside a compact storage room, but it will not replace planning what to carry before you leave home."
