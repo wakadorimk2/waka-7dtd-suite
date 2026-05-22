@@ -24,6 +24,13 @@
 !/profiles/Default/lockedorder.txt
 !/profiles/Default/settings.ini
 !/profiles/Default/initweaks.ini
+!/profiles/NotebookServer/
+!/profiles/NotebookServer/*
+!/profiles/NotebookServer/modlist.txt
+!/profiles/NotebookServer/lockedorder.txt
+!/profiles/NotebookServer/settings.ini
+!/profiles/NotebookServer/initweaks.ini
+!/profiles/NotebookServer/archives.txt
 
 # Local Waka patches and source.
 !/mods/

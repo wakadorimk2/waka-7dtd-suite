@@ -9,7 +9,8 @@
 
     # Additional exclusions for the notebook dedicated server only.
     NotebookExcludeMods = @(
-        'ZZZZZ_WakaBodyLayerCATUI'
+        'ZZZ_CATUI'
+        'ZZZ_CATUI_toolbelt_more_slot'
     )
 
     # MO2 outer folder -> list of inner 7DTD mod folders to skip during deploy.

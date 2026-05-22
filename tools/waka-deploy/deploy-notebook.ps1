@@ -4,6 +4,10 @@ param(
 
     [string[]]$RemoveMod = @(),
 
+    [switch]$FromProfile,
+
+    [string]$ProfilePath,
+
     [switch]$Apply,
 
     [switch]$Restart,
@@ -19,9 +23,13 @@ $ErrorActionPreference = 'Stop'
 
 $Mo2Base    = Split-Path (Split-Path $PSScriptRoot)
 $ModsRoot   = Join-Path $Mo2Base 'mods'
+$ProfilesRoot = Join-Path $Mo2Base 'profiles'
 $LogPath    = Join-Path $PSScriptRoot 'deploy-notebook.log'
 $ConfigPath = Join-Path $PSScriptRoot 'deploy.config.psd1'
 $RemoteModsPath = ($RemoteDediPath.TrimEnd('/\') + '/Mods')
+if ([string]::IsNullOrWhiteSpace($ProfilePath)) {
+    $ProfilePath = Join-Path $ProfilesRoot 'NotebookServer'
+}
 
 $exclude = @{}
 $excludeMods = @()
@@ -66,6 +74,64 @@ function Get-ModExcludeReason([string]$Name) {
         return 'ExcludeMods'
     }
     return $null
+}
+
+function Get-ProfileModPlan([string]$Path) {
+    if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
+        throw "Profile folder not found: $Path"
+    }
+
+    $modListPath = Join-Path $Path 'modlist.txt'
+    if (-not (Test-Path -LiteralPath $modListPath -PathType Leaf)) {
+        throw "Profile modlist.txt not found: $modListPath"
+    }
+
+    $enabled = New-Object System.Collections.Generic.List[string]
+    $disabledKnown = New-Object System.Collections.Generic.List[object]
+    $enabledExcluded = New-Object System.Collections.Generic.List[object]
+    $seenEnabled = @{}
+    $seenDisabledKnown = @{}
+
+    foreach ($rawLine in Get-Content -LiteralPath $modListPath) {
+        $line = $rawLine.Trim()
+        if ([string]::IsNullOrWhiteSpace($line) -or $line.StartsWith('#')) { continue }
+        if ($line.Length -lt 2) { continue }
+
+        $state = $line[0]
+        if ($state -ne '+' -and $state -ne '-') { continue }
+
+        $name = $line.Substring(1).Trim()
+        if ([string]::IsNullOrWhiteSpace($name) -or $name.EndsWith('_separator')) { continue }
+
+        $excludeReason = Get-ModExcludeReason $name
+        if ($state -eq '+') {
+            if ($excludeReason) {
+                $enabledExcluded.Add([pscustomobject]@{
+                    Name   = $name
+                    Reason = $excludeReason
+                })
+                continue
+            }
+
+            if (-not $seenEnabled.ContainsKey($name)) {
+                $seenEnabled[$name] = $true
+                $enabled.Add($name)
+            }
+        } elseif ($excludeReason -and -not $seenDisabledKnown.ContainsKey($name)) {
+            $seenDisabledKnown[$name] = $true
+            $disabledKnown.Add([pscustomobject]@{
+                Name   = $name
+                Reason = $excludeReason
+            })
+        }
+    }
+
+    [pscustomobject]@{
+        ModListPath      = $modListPath
+        Enabled          = @($enabled.ToArray())
+        DisabledKnown    = @($disabledKnown.ToArray())
+        EnabledExcluded  = @($enabledExcluded.ToArray())
+    }
 }
 
 function Invoke-RemotePowerShell([string]$Script, [string]$Description) {
@@ -132,7 +198,7 @@ function Get-RealModsFromOuter([System.IO.DirectoryInfo]$Outer, [switch]$Quiet) 
     }
 }
 
-function Resolve-RequestedMod([string]$Name) {
+function Resolve-RequestedMod([string]$Name, [switch]$AllowEmptyAfterExclusions) {
     $excludeReason = Get-ModExcludeReason $Name
     if ($excludeReason) {
         throw "Mod is excluded by deploy.config.psd1 $($excludeReason): $Name"
@@ -143,6 +209,17 @@ function Resolve-RequestedMod([string]$Name) {
         $outer = Get-Item -LiteralPath $outerPath
         $realMods = @(Get-RealModsFromOuter $outer)
         if ($realMods.Count -eq 0) {
+            $rawRealMods = @()
+            if (Test-Path (Join-Path $outer.FullName 'ModInfo.xml')) {
+                $rawRealMods = @($outer)
+            } else {
+                $rawRealMods = @(Get-ChildItem -LiteralPath $outer.FullName -Directory | Where-Object {
+                    Test-Path (Join-Path $_.FullName 'ModInfo.xml')
+                })
+            }
+            if ($AllowEmptyAfterExclusions -and $rawRealMods.Count -gt 0) {
+                return @()
+            }
             throw "No ModInfo.xml found at depth 0 or 1 for MO2 folder: $Name"
         }
         return $realMods
@@ -380,18 +457,45 @@ try {
     if (-not (Test-Path -LiteralPath $ModsRoot -PathType Container)) {
         throw "mods folder not found: $ModsRoot"
     }
+
+    $profilePlan = $null
+    if ($FromProfile) {
+        $profilePlan = Get-ProfileModPlan -Path $ProfilePath
+        $profileEnabledLookup = @{}
+        foreach ($enabledName in $profilePlan.Enabled) { $profileEnabledLookup[$enabledName] = $true }
+        $Mod = @(@($Mod) + @($profilePlan.Enabled) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
+        $RemoveMod = @(@($RemoveMod) + @($profilePlan.DisabledKnown | ForEach-Object { $_.Name }) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
+    } else {
+        $profileEnabledLookup = @{}
+    }
+
     if ((-not $Mod -or $Mod.Count -eq 0) -and (-not $RemoveMod -or $RemoveMod.Count -eq 0)) {
-        throw "At least one -Mod or -RemoveMod value is required."
+        throw "At least one -Mod, -RemoveMod, or -FromProfile target is required."
     }
 
     Log '=== Waka Notebook Deploy ==='
     Log "MO2 mods       : $ModsRoot"
+    Log "From profile   : $FromProfile"
+    if ($FromProfile) {
+        Log "Profile path   : $ProfilePath"
+        Log "Profile modlist: $($profilePlan.ModListPath)"
+    }
     Log "Remote host    : $RemoteHost"
     Log "Remote dedi    : $RemoteDediPath"
     Log "Remote Mods    : $RemoteModsPath"
     Log "Apply          : $Apply"
     Log "Restart        : $Restart"
     Log "Verify         : $Verify"
+    if ($FromProfile) {
+        Log ("Profile enabled deploy candidates: {0}" -f ($(if ($profilePlan.Enabled.Count -gt 0) { $profilePlan.Enabled -join ', ' } else { '(none)' })))
+        if ($profilePlan.EnabledExcluded.Count -gt 0) {
+            Log 'Profile enabled entries skipped by deploy.config.psd1:' 'DarkGray'
+            foreach ($entry in $profilePlan.EnabledExcluded) {
+                Log ("  {0}: {1}" -f $entry.Reason, $entry.Name) 'DarkGray'
+            }
+        }
+        Log ("Profile disabled known removals: {0}" -f ($(if ($profilePlan.DisabledKnown.Count -gt 0) { @($profilePlan.DisabledKnown | ForEach-Object { $_.Name }) -join ', ' } else { '(none)' })))
+    }
     Log ("Deploy/copy targets: {0}" -f ($(if ($Mod -and $Mod.Count -gt 0) { $Mod -join ', ' } else { '(none)' })))
     Log ("Remove targets : {0}" -f ($(if ($RemoveMod -and $RemoveMod.Count -gt 0) { $RemoveMod -join ', ' } else { '(none)' })))
 
@@ -399,7 +503,11 @@ try {
     $claimed = @{}
     foreach ($requested in @($Mod)) {
         Log "--- Resolve: $requested ---" 'Cyan'
-        $realMods = @(Resolve-RequestedMod $requested)
+        $realMods = @(Resolve-RequestedMod $requested -AllowEmptyAfterExclusions:($FromProfile -and $profileEnabledLookup.ContainsKey($requested)))
+        if ($realMods.Count -eq 0) {
+            Log "  skipped because all 7DTD mod folders inside this MO2 folder are excluded by deploy.config.psd1" 'DarkGray'
+            continue
+        }
         foreach ($real in $realMods) {
             if ($claimed.ContainsKey($real.Name)) {
                 throw "Duplicate target mod '$($real.Name)' requested by '$requested' and '$($claimed[$real.Name])'"
