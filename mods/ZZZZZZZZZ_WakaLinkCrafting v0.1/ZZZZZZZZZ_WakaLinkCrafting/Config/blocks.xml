@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='ReadFromContainers']/@value">true</set>
+  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='Distance']/@value">8</set>
+  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='Debug']/@value">false</set>
+  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='bindtoWorkstation']/@value">workbench:wakaLinkedLogisticsContainer</set>
+  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='enforcebindtoWorkstation']/@value">true</set>
+  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='BlockUpgradeRepair']/property[@name='ReadFromContainers']/@value">false</set>
+
+  <append xpath="/blocks/block[@name='wakaLogisticsContainer']">
+    <property class="UpgradeBlock">
+      <property name="ToBlock" value="wakaLinkedLogisticsContainer"/>
+      <property name="Item" value="resourceElectricParts"/>
+      <property name="ItemCount" value="24"/>
+      <property name="UpgradeHitCount" value="4"/>
+    </property>
+    <property name="UpgradeSound" value="place_block_metal"/>
+  </append>
+
+  <append xpath="/blocks">
+    <block name="wakaLinkedLogisticsContainer">
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="CompositeTileEntity"/>
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="wakaLinkedLogisticsContainer"/>
+        </property>
+        <property class="TEFeatureLockable"/>
+        <property class="TEFeatureSignable">
+          <property name="FontSize" value="90"/>
+          <property name="LineCount" value="3"/>
+          <property name="LineWidth" value="0.55"/>
+        </property>
+      </property>
+      <property name="CustomIcon" value="cntSteelWritableCrate"/>
+      <property name="CustomIconTint" value="70,190,210"/>
+      <property name="DescriptionKey" value="wakaLinkedLogisticsContainerDesc"/>
+      <property name="Material" value="Msteel"/>
+      <property name="Shape" value="ModelEntity"/>
+      <property name="Model" value="@:Entities/LootContainers/steelWritableCratePrefab.prefab"/>
+      <property name="WaterFlow" value="permitted"/>
+      <property name="Path" value="solid"/>
+      <property name="Place" value="TowardsPlacerInverted"/>
+      <property name="AllowedRotations" value="Basic90"/>
+      <property name="FuelValue" value="300"/>
+      <property name="EconomicValue" value="60"/>
+      <property name="MaxDamage" value="5000"/>
+      <property name="SoundPickup" value="cratesteel_grab"/>
+      <property name="SoundPlace" value="cratesteel_place"/>
+      <property class="RepairItems">
+        <property name="resourceForgedSteel" value="10"/>
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="10,30"/>
+      <drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
+      <property name="SortOrder1" value="B106"/>
+      <property name="SortOrder2" value="0015"/>
+      <property name="Group" value="Building,advBuilding"/>
+      <property name="Tags" value="timecharge"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_decor"/>
+    </block>
+  </append>
+</configs>

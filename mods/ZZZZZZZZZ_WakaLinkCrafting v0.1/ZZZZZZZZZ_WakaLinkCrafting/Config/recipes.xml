@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="wakaLinkedLogisticsContainer" count="1" tags="packMuleCrafting" craft_time="120">
+      <ingredient name="wakaLogisticsContainer" count="1"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="carBattery" count="1"/>
+    </recipe>
+  </append>
+</configs>

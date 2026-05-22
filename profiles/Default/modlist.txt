@@ -48,6 +48,7 @@
 +CATUI (for 7DTD 2.5)
 +ZZZZZZZZ_WakaLogisticsLifePatch v0.1
 +ZZZZZZZZ_WakaStorageRebalanceMVP v0.1
++ZZZZZZZZZ_WakaLinkCrafting v0.1
 -ストレージ_separator
 +SCG Turrets Use EFTX Ammo
 +SCG Defense Solutions v2.1 Exp

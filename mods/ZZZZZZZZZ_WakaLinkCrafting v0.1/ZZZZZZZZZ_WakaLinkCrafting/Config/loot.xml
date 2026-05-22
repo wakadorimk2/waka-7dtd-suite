@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/lootcontainers">
+    <lootcontainer name="wakaLinkedLogisticsContainer" count="0" size="12,12" sound_open="UseActions/crate_steel_open" sound_close="UseActions/crate_steel_close" loot_quality_template="qualBaseTemplate">
+      <item name="cobweb" count="0"/>
+    </lootcontainer>
+  </append>
+</configs>
