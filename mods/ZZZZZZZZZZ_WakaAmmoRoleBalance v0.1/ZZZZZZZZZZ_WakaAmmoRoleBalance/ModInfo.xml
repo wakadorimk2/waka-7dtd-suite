@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZZZZ_WakaAmmoRoleBalance" />
+    <DisplayName value="Waka Ammo Role Balance" />
+    <Description value="Late-load balance patch for Bloodfall + EFTX + IZY + Black Wolf ammo roles. Narrows AP/AP slug into armor solutions, trims explosive fragment DPS, and reduces AP20/AP turret challenge reward supply." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>

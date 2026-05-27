@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Candidate C: keep Slayer AP rewards as prep bundles, not a sustain source. -->
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and @id='ammoEftAP20Slug']/@value">20</set>
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and @id='ammoJunkTurretAP']/@value">80</set>
+
+</configs>

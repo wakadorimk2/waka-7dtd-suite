@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!--
+    Waka Ammo Role Balance v0.1
+    Candidate A: restore AP as armor utility instead of universal meat DPS.
+    AP direct damage is trimmed, while armor ignore is raised modestly.
+  -->
+
+  <!-- Vanilla AP bullets -->
+  <set xpath="/items/item[@name='ammo9mmBulletAP']/effect_group[@name='ammo9mmBulletAP']/passive_effect[@name='EntityDamage']/@value">34</set>
+  <set xpath="/items/item[@name='ammo9mmBulletAP']/effect_group[@name='ammo9mmBulletAP']/passive_effect[@name='TargetArmor']/@value">-.65</set>
+  <set xpath="/items/item[@name='ammo9mmBulletAP']/effect_group[@name='ammo9mmBulletAP']/display_value[@name='dTargetArmor']/@value">-.65</set>
+
+  <set xpath="/items/item[@name='ammo44MagnumBulletAP']/effect_group[@name='ammo44MagnumBulletAP']/passive_effect[@name='EntityDamage']/@value">68</set>
+  <set xpath="/items/item[@name='ammo44MagnumBulletAP']/effect_group[@name='ammo44MagnumBulletAP']/passive_effect[@name='TargetArmor']/@value">-.65</set>
+  <set xpath="/items/item[@name='ammo44MagnumBulletAP']/effect_group[@name='ammo44MagnumBulletAP']/display_value[@name='dTargetArmor']/@value">-.65</set>
+
+  <set xpath="/items/item[@name='ammo762mmBulletAP']/effect_group[@name='ammo762mmBulletAP']/passive_effect[@name='EntityDamage'][1]/@value">48</set>
+  <set xpath="/items/item[@name='ammo762mmBulletAP']/effect_group[@name='ammo762mmBulletAP']/passive_effect[@name='TargetArmor']/@value">-.65</set>
+  <set xpath="/items/item[@name='ammo762mmBulletAP']/effect_group[@name='ammo762mmBulletAP']/display_value[@name='dTargetArmor']/@value">-.65</set>
+
+  <set xpath="/items/item[@name='ammoJunkTurretAP']/effect_group[@name='ammoJunkTurretAP']/passive_effect[@name='EntityDamage']/@value">11.5</set>
+  <set xpath="/items/item[@name='ammoJunkTurretAP']/effect_group[@name='ammoJunkTurretAP']/passive_effect[@name='TargetArmor']/@value">-.65</set>
+  <set xpath="/items/item[@name='ammoJunkTurretAP']/effect_group[@name='ammoJunkTurretAP']/display_value[@name='dTargetArmor']/@value">-.65</set>
+
+  <!-- Vanilla slugs: keep breaching/armor value, reduce generic boss/meat burst. -->
+  <set xpath="/items/item[@name='ammoShotgunSlug']/effect_group[@name='ammoShotgunSlug']/passive_effect[@name='EntityDamage']/@value">135</set>
+  <set xpath="/items/item[@name='ammoShotgunSlug']/effect_group[@name='ammoShotgunSlug']/passive_effect[@name='TargetArmor']/@value">-.65</set>
+  <set xpath="/items/item[@name='ammoShotgunSlug']/effect_group[@name='ammoShotgunSlug']/display_value[@name='dTargetArmor']/@value">-.65</set>
+
+  <set xpath="/items/item[@name='ammoShotgunBreachingSlug']/effect_group[@name='ammoShotgunBreachingSlug']/passive_effect[@name='EntityDamage']/@value">85</set>
+
+  <!-- IZY AP and explosive specialty rounds -->
+  <set xpath="/items/item[@name='ammo556mmArmorPiercing']/effect_group/passive_effect[@name='EntityDamage']/@value">42</set>
+  <set xpath="/items/item[@name='ammo556mmArmorPiercing']/effect_group/passive_effect[@name='TargetArmor' and not(requirement)]/@value">-.65</set>
+  <set xpath="/items/item[@name='ammo556mmArmorPiercing']/effect_group/display_value[@name='dTargetArmor']/@value">-.65</set>
+
+  <set xpath="/items/item[@name='ammo45ACPArmorpiecing']/effect_group/passive_effect[@name='EntityDamage']/@value">36</set>
+  <set xpath="/items/item[@name='ammo45ACPArmorpiecing']/effect_group/passive_effect[@name='TargetArmor' and not(requirement)]/@value">-.65</set>
+  <set xpath="/items/item[@name='ammo45ACPArmorpiecing']/effect_group/display_value[@name='dTargetArmor']/@value">-.65</set>
+
+  <set xpath="/items/item[@name='ammo762mmExplosiveFragmentations']/property[@class='Action1']/property[@name='Explosion.EntityDamage']/@value">60</set>
+  <set xpath="/items/item[@name='ammo762mmExplosiveFragmentations']/property[@class='Action1']/property[@name='Explosion.RadiusEntities']/@value">2</set>
+  <set xpath="/items/item[@name='ammo762mmExplosiveFragmentations']/effect_group/passive_effect[@name='EntityDamage']/@value">65</set>
+
+  <!-- EFTX AP slugs, when present from the EFTX pack, become armor-shell tools. -->
+  <set xpath="/items/item[@name='ammoEftAP20Slug']/effect_group[@name='ammo']/passive_effect[@name='EntityDamage']/@value">160</set>
+  <set xpath="/items/item[@name='ammoEftAP20Slug']/effect_group[@name='ammo']/passive_effect[@name='TargetArmor' and not(requirement)]/@value">-.80</set>
+  <set xpath="/items/item[@name='ammoEftAP20Slug']/effect_group[@name='ammo']/display_value[@name='dTargetArmor']/@value">-.80</set>
+
+  <set xpath="/items/item[@name='ammoEftBarricadeSlug']/effect_group[@name='ammo']/passive_effect[@name='EntityDamage']/@value">175</set>
+  <set xpath="/items/item[@name='ammoEftBarricadeSlug']/effect_group[@name='ammo']/passive_effect[@name='TargetArmor' and not(requirement)]/@value">-.85</set>
+  <set xpath="/items/item[@name='ammoEftBarricadeSlug']/effect_group[@name='ammo']/display_value[@name='dTargetArmor']/@value">-.85</set>
+
+</configs>

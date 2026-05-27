@@ -29,6 +29,7 @@
 +ZZZZZZZ_WakaBloodfallTuning v0.1
 +ZZZZZZZ_WakaRadiatedRegenTuning v0.1
 +ZZZZZZZ_WakaAmmoFlowPatch v0.1
++ZZZZZZZZZZ_WakaAmmoRoleBalance v0.1
 +ZZZZZZ_WakaAmmoRealPrice v0.1
 +ZZZZZZ_WakaSlowCurve v0.1
 +ZZZZZ_WakaSleepWindowAlign v0.1

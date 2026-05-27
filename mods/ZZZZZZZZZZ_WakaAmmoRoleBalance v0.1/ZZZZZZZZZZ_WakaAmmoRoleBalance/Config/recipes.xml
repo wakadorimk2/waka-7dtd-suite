@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Candidate C: make AP slug press output feel like specialty prep, not baseline shotgun ammo. -->
+  <set xpath="//recipe[@name='ammoEftAP20Slug' and @craft_area='ammopress']/ingredient[@name='resourceScrapLead']/@count">30</set>
+  <set xpath="//recipe[@name='ammoEftAP20Slug' and @craft_area='ammopress']/ingredient[@name='resource_item_other_powder_red']/@count">32</set>
+  <append xpath="//recipe[@name='ammoEftAP20Slug' and @craft_area='ammopress']">
+    <ingredient name="resourceForgedSteel" count="1"/>
+  </append>
+
+  <set xpath="//recipe[@name='ammoEftBarricadeSlug' and @craft_area='ammopress']/ingredient[@name='resourceScrapLead']/@count">35</set>
+  <set xpath="//recipe[@name='ammoEftBarricadeSlug' and @craft_area='ammopress']/ingredient[@name='resource_item_other_powder_red']/@count">36</set>
+  <append xpath="//recipe[@name='ammoEftBarricadeSlug' and @craft_area='ammopress']">
+    <ingredient name="resourceForgedSteel" count="1"/>
+  </append>
+
+</configs>
