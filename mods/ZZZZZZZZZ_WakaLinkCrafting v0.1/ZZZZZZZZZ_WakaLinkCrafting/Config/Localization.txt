@@ -1,3 +1,3 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,English
 wakaLinkedLogisticsContainer,blocks,Block,,,Waka Linked Logistics Crate
-wakaLinkedLogisticsContainerDesc,,,,,"A 144-slot linked logistics crate for controlled workbench crafting. SCore remote crafting reads only the nearest linked crate, never regular Waka or vanilla storage. Sign it clearly so the active source is obvious."
+wakaLinkedLogisticsContainerDesc,,,,,"A 144-slot linked logistics crate for controlled workstation crafting. SCore remote crafting reads all linked crates in range, nearest first, for configured workstations only. Forges, regular Waka storage, and vanilla storage are excluded. Sign them clearly so the active sources are obvious."

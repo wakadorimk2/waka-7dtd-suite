@@ -3,7 +3,7 @@
   <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='ReadFromContainers']/@value">true</set>
   <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='Distance']/@value">8</set>
   <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='Debug']/@value">false</set>
-  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='bindtoWorkstation']/@value">workbench:wakaLinkedLogisticsContainer</set>
+  <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='bindtoWorkstation']/@value">workbench,campfire,chemistryStation,cementMixer,ammopress,researchbench:wakaLinkedLogisticsContainer</set>
   <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='AdvancedRecipes']/property[@name='enforcebindtoWorkstation']/@value">true</set>
   <set xpath="/blocks/block[@name='ConfigFeatureBlock']/property[@class='BlockUpgradeRepair']/property[@name='ReadFromContainers']/@value">false</set>
 

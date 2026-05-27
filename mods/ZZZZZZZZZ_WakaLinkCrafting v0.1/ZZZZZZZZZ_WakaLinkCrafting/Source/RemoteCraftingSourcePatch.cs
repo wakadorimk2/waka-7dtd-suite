@@ -9,39 +9,45 @@ namespace WakaLinkCrafting
     public static class RemoteCraftingSourcePatch
     {
         const string LinkedLootList = "wakaLinkedLogisticsContainer";
-        const string WorkbenchName = "workbench";
+        static readonly HashSet<string> AllowedWorkstations = new HashSet<string>
+        {
+            "workbench",
+            "campfire",
+            "chemistryStation",
+            "cementMixer",
+            "ammopress",
+            "researchbench"
+        };
         static readonly Dictionary<int, SelectionLogState> LastLoggedSelection = new Dictionary<int, SelectionLogState>();
 
         public static void Postfix(EntityAlive player, bool forRepairs, ref List<TileEntity> __result)
         {
             if (__result == null || __result.Count == 0) return;
 
-            if (forRepairs || !IsWorkbenchContext(player))
+            if (forRepairs || !IsAllowedWorkstationContext(player))
             {
                 __result.Clear();
                 return;
             }
 
-            var nearest = FindNearestLinkedContainer(player, __result);
+            var linkedContainers = FindLinkedContainersOrdered(player, __result);
             __result.Clear();
-            if (nearest == null) return;
+            if (linkedContainers.Count == 0) return;
 
-            __result.Add(nearest);
-            LogSelectedContainer(player, nearest);
+            __result.AddRange(linkedContainers);
+            LogSelectedContainers(player, linkedContainers);
         }
 
-        static bool IsWorkbenchContext(EntityAlive player)
+        static bool IsAllowedWorkstationContext(EntityAlive player)
         {
             if (!(player is EntityPlayerLocal localPlayer)) return false;
             var workstation = localPlayer.PlayerUI?.xui?.currentWorkstation;
-            return workstation == WorkbenchName;
+            return !string.IsNullOrEmpty(workstation) && AllowedWorkstations.Contains(workstation);
         }
 
-        static TileEntity FindNearestLinkedContainer(EntityAlive player, List<TileEntity> tileEntities)
+        static List<TileEntity> FindLinkedContainersOrdered(EntityAlive player, List<TileEntity> tileEntities)
         {
-            TileEntity nearest = null;
-            var bestDistanceSq = float.MaxValue;
-            var bestPos = Vector3i.zero;
+            var candidates = new List<LinkedContainerCandidate>();
 
             foreach (var tileEntity in tileEntities)
             {
@@ -51,52 +57,81 @@ namespace WakaLinkCrafting
 
                 var pos = tileEntity.ToWorldPos();
                 var distanceSq = (pos.ToVector3() - player.position).sqrMagnitude;
-                if (nearest != null && !IsBetterCandidate(distanceSq, pos, bestDistanceSq, bestPos)) continue;
-
-                nearest = tileEntity;
-                bestDistanceSq = distanceSq;
-                bestPos = pos;
+                candidates.Add(new LinkedContainerCandidate(tileEntity, pos, distanceSq));
             }
 
-            return nearest;
+            candidates.Sort(CompareCandidates);
+
+            var result = new List<TileEntity>(candidates.Count);
+            foreach (var candidate in candidates)
+            {
+                result.Add(candidate.TileEntity);
+            }
+
+            return result;
         }
 
-        static bool IsBetterCandidate(float distanceSq, Vector3i pos, float bestDistanceSq, Vector3i bestPos)
+        static int CompareCandidates(LinkedContainerCandidate left, LinkedContainerCandidate right)
         {
             const float Epsilon = 0.0001f;
-            if (distanceSq < bestDistanceSq - Epsilon) return true;
-            if (distanceSq > bestDistanceSq + Epsilon) return false;
-            if (pos.x != bestPos.x) return pos.x < bestPos.x;
-            if (pos.y != bestPos.y) return pos.y < bestPos.y;
-            return pos.z < bestPos.z;
+            if (left.DistanceSq < right.DistanceSq - Epsilon) return -1;
+            if (left.DistanceSq > right.DistanceSq + Epsilon) return 1;
+            if (left.Position.x != right.Position.x) return left.Position.x.CompareTo(right.Position.x);
+            if (left.Position.y != right.Position.y) return left.Position.y.CompareTo(right.Position.y);
+            return left.Position.z.CompareTo(right.Position.z);
         }
 
-        static void LogSelectedContainer(EntityAlive player, TileEntity selected)
+        static void LogSelectedContainers(EntityAlive player, List<TileEntity> selected)
         {
-            var pos = selected.ToWorldPos();
             var playerId = player.entityId;
             var now = Time.realtimeSinceStartup;
+            var positions = BuildPositionList(selected);
 
             if (LastLoggedSelection.TryGetValue(playerId, out var last) &&
-                last.Position == pos &&
+                last.Positions == positions &&
                 now - last.Time < 10f)
             {
                 return;
             }
 
-            LastLoggedSelection[playerId] = new SelectionLogState(pos, now);
-            Log.Out($"[WakaLinkCrafting] Remote crafting source for player {playerId}: {LinkedLootList} at {pos}");
+            LastLoggedSelection[playerId] = new SelectionLogState(positions, now);
+            Log.Out($"[WakaLinkCrafting] Remote crafting sources for player {playerId}: {selected.Count} {LinkedLootList} crates, nearest first: {positions}");
+        }
+
+        static string BuildPositionList(List<TileEntity> selected)
+        {
+            var positions = new List<string>(selected.Count);
+            foreach (var tileEntity in selected)
+            {
+                positions.Add(tileEntity.ToWorldPos().ToString());
+            }
+
+            return string.Join(", ", positions);
+        }
+
+        readonly struct LinkedContainerCandidate
+        {
+            public LinkedContainerCandidate(TileEntity tileEntity, Vector3i position, float distanceSq)
+            {
+                TileEntity = tileEntity;
+                Position = position;
+                DistanceSq = distanceSq;
+            }
+
+            public readonly TileEntity TileEntity;
+            public readonly Vector3i Position;
+            public readonly float DistanceSq;
         }
 
         readonly struct SelectionLogState
         {
-            public SelectionLogState(Vector3i position, float time)
+            public SelectionLogState(string positions, float time)
             {
-                Position = position;
+                Positions = positions;
                 Time = time;
             }
 
-            public readonly Vector3i Position;
+            public readonly string Positions;
             public readonly float Time;
         }
     }

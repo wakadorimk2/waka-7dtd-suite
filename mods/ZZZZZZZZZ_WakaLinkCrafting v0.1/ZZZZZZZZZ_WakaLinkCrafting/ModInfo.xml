@@ -2,7 +2,7 @@
 <xml>
   <Name value="ZZZZZZZZZ_WakaLinkCrafting" />
   <DisplayName value="Waka Link Crafting" />
-  <Description value="Adds a linked logistics crate and constrains SCore remote crafting to the nearest linked crate for workbench crafting." />
+  <Description value="Adds linked logistics crates and constrains SCore remote crafting to all linked crates in range for configured workstations, with forges excluded." />
   <Author value="Waka" />
   <Version value="0.1" />
 </xml>
