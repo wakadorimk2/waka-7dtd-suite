@@ -78,6 +78,29 @@ function To-Number {
   return $null
 }
 
+function Test-QuestRewardPatch {
+  param([string]$QuestId, [string]$XPath)
+
+  if ($XPath -notmatch "/quests/quest" -or $XPath -notmatch "casinoCoin") { return $false }
+
+  $directIds = @([regex]::Matches($XPath, "@id='([^']+)'") | ForEach-Object { $_.Groups[1].Value } | Where-Object { $_ -ne "casinoCoin" })
+  if ($directIds.Count -gt 0) {
+    return @($directIds | Where-Object { $_ -eq $QuestId }).Count -gt 0
+  }
+
+  $prefixes = @([regex]::Matches($XPath, "starts-with\(@id,'([^']+)'\)") | ForEach-Object { $_.Groups[1].Value })
+  if ($prefixes.Count -gt 0 -and @($prefixes | Where-Object { $QuestId.StartsWith($_) }).Count -eq 0) {
+    return $false
+  }
+
+  $contains = @([regex]::Matches($XPath, "contains\(@id,'([^']+)'\)") | ForEach-Object { $_.Groups[1].Value })
+  if ($contains.Count -gt 0 -and @($contains | Where-Object { $QuestId.Contains($_) }).Count -eq 0) {
+    return $false
+  }
+
+  return $true
+}
+
 function New-Finding {
   param(
     [string]$Kind,
@@ -112,6 +135,8 @@ $findings = New-Object System.Collections.Generic.List[object]
 $recipes = New-Object System.Collections.ArrayList
 $patchOps = New-Object System.Collections.Generic.List[object]
 $tradeFindings = New-Object System.Collections.Generic.List[object]
+$questRewards = New-Object System.Collections.Generic.List[object]
+$questPatchOps = New-Object System.Collections.Generic.List[object]
 $patchSeq = 0
 
 foreach ($file in $xmlFiles) {
@@ -215,6 +240,23 @@ foreach ($file in $xmlFiles) {
     })
   }
 
+  foreach ($m in [regex]::Matches($text, "(?s)<set\s+[^>]*xpath=`"([^`"]*/quests/quest[^`"]*reward[^`"]*@id='casinoCoin'[^`"]*/@value)`"[^>]*>\s*([^<]+)\s*</set>")) {
+    $xpath = $m.Groups[1].Value
+    $rawValue = $m.Groups[2].Value.Trim()
+    $line = 1 + ([regex]::Matches($text.Substring(0, $m.Index), "`n")).Count
+    $value = To-Number $rawValue
+    if ($null -ne $value) {
+      $questPatchOps.Add([pscustomobject]@{
+        seq = $patchSeq++
+        value = [double]$value
+        mod = $mod
+        file = $file.FullName
+        line = $line
+        xpath = $xpath
+      })
+    }
+  }
+
   foreach ($m in [regex]::Matches($text, "(?s)<setattribute\s+[^>]*xpath=`"([^`"]*item\[@name='[^']+'\]/property\[@name='(EconomicValue|Stacknumber|SellableToTrader|Hidden)'\][^`"]*)`"[^>]*name=`"value`"[^>]*>\s*([^<]+)\s*</setattribute>")) {
     $xpath = $m.Groups[1].Value
     $propertyName = $m.Groups[2].Value
@@ -312,12 +354,32 @@ foreach ($file in $xmlFiles) {
     }
   }
 
-  foreach ($m in [regex]::Matches($text, "(?im)^.*(casinoCoin|Duke|duke|BarteringSelling|BarteringBuying).*$")) {
+  foreach ($m in [regex]::Matches($text, "(?s)<quest\s+[^>]*\bid=`"([^`"]+)`"[^>]*>.*?</quest>")) {
+    $questId = $m.Groups[1].Value
+    $questBody = $m.Value
+    foreach ($rm in [regex]::Matches($questBody, "<reward\s+[^>]*\btype=`"Item`"[^>]*\bid=`"casinoCoin`"[^>]*>")) {
+      $value = To-Number (Get-Attr $rm.Value "value")
+      if ($null -eq $value) { continue }
+      $line = 1 + ([regex]::Matches($text.Substring(0, $m.Index + $rm.Index), "`n")).Count
+      $questRewards.Add([pscustomobject]@{
+        questId = $questId
+        rawValue = [double]$value
+        effectiveValue = [double]$value
+        mod = $mod
+        file = $file.FullName
+        line = $line
+        patchCount = 0
+        patchSource = $null
+      })
+    }
+  }
+
+  foreach ($m in [regex]::Matches($text, "(?im)^.*(Duke|duke|BarteringSelling|BarteringBuying).*$")) {
     $lineText = $m.Value.Trim()
     $line = 1 + ([regex]::Matches($text.Substring(0, $m.Index), "`n")).Count
     $numbers = [regex]::Matches($lineText, "-?\d+(?:\.\d+)?") | ForEach-Object { [double]::Parse($_.Value, [System.Globalization.CultureInfo]::InvariantCulture) }
     $max = ($numbers | Measure-Object -Maximum).Maximum
-    if ($lineText -match "BarteringSelling|BarteringBuying|casinoCoin|Duke|duke") {
+    if ($lineText -match "BarteringSelling|BarteringBuying|Duke|duke") {
       $score = 500 + $(if ($null -ne $max) { [math]::Min($max * 5, 10000) } else { 0 })
       if ($lineText -match "BarteringSelling") { $score += 1500 }
       $tradeFindings.Add((New-Finding -Kind "trade" -Name "line $line" -Mod $mod -File $file.FullName -Line $line -Score $score -Reason "trade currency or barter modifier line" -Data @{
@@ -433,6 +495,29 @@ foreach ($recipe in $recipes) {
   }
 }
 
+foreach ($reward in $questRewards) {
+  foreach ($op in ($questPatchOps | Sort-Object seq)) {
+    if (Test-QuestRewardPatch -QuestId $reward.questId -XPath $op.xpath) {
+      $reward.effectiveValue = [double]$op.value
+      $reward.patchCount++
+      $reward.patchSource = "$($op.mod):$($op.line)"
+    }
+  }
+
+  $rawValue = [double]$reward.rawValue
+  $effectiveValue = [double]$reward.effectiveValue
+  if ($rawValue -lt 5000 -and $effectiveValue -lt 2500 -and $reward.patchCount -eq 0) { continue }
+
+  $score = 500 + [math]::Min($effectiveValue * 2.0, 12000)
+  if ($rawValue -gt $effectiveValue) { $score += [math]::Min(($rawValue - $effectiveValue) / 5.0, 1000) }
+  $findings.Add((New-Finding -Kind "reward" -Name $reward.questId -Mod $reward.mod -File $reward.file -Line $reward.line -Score $score -Reason "effective quest casinoCoin reward" -Data @{
+    rawValue = [math]::Round($rawValue, 2)
+    effectiveValue = [math]::Round($effectiveValue, 2)
+    patchCount = $reward.patchCount
+    patchSource = $reward.patchSource
+  }))
+}
+
 foreach ($finding in $tradeFindings) {
   $findings.Add($finding)
 }
@@ -445,6 +530,7 @@ $payload = [pscustomobject]@{
   fileCount = $xmlFiles.Count
   itemCount = $items.Count
   patchOpCount = $patchOps.Count
+  questPatchOpCount = $questPatchOps.Count
   appliedPatchCount = $appliedPatchCount
   findings = @($topFindings)
   items = @($topItems)
@@ -515,6 +601,7 @@ $html = @'
           <option value="recipe">Recipe</option>
           <option value="patch">Patch</option>
           <option value="trade">Trade</option>
+          <option value="reward">Reward</option>
         </select>
         <select id="category">
           <option value="">All categories</option>
@@ -572,11 +659,12 @@ function details(f) {
   if (f.kind === "recipe") return `out ${fmt(d.outputValue)}, inputs ${fmt(d.knownInputValue)}, margin ${fmt(d.knownMargin)}; ${d.ingredients || ""}`;
   if (f.kind === "patch") return `value ${fmt(d.value)}; ${d.xpath || ""}`;
   if (f.kind === "trade") return d.text || "";
+  if (f.kind === "reward") return `raw ${fmt(d.rawValue)}, effective ${fmt(d.effectiveValue)}, patches ${fmt(d.patchCount)} ${d.patchSource || ""}`;
   return JSON.stringify(d);
 }
 function classify(text, kindValue) {
   const s = String(text || "").toLowerCase();
-  if (kindValue === "trade" || /bartering|duke|casino/.test(s)) return "trade";
+  if (kindValue === "trade" || kindValue === "reward" || /bartering|duke|casino/.test(s)) return "trade";
   if (/affix|token|ticket|badge|currency/.test(s)) return "tokens";
   if (/ammo|bullet|shell|round|arrow|bolt|rocket|grenade|molotov|bundle/.test(s)) return "ammo";
   if (/gun|rifle|pistol|shotgun|smg|weapon|machete|spear|club|bat|knife|bow|crossbow|turret|minigun|flamethrower/.test(s)) return "weapons";
