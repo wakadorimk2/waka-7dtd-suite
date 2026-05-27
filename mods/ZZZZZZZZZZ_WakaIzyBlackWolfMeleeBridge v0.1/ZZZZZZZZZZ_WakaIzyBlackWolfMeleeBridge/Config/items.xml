@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- IZY T4 katana already has perkDeepCuts; add Black Wolf's agility-flurry knife hook. -->
+  <append xpath="/items/item[@name='IZYMeleeT4BladeKatana']/property[@name='Tags']/@value">,perkFlurryOfAgility</append>
+
+  <!-- IZY T4 mace already has perkSkullCrusher; add Black Wolf's strength-flurry sledge hook. -->
+  <append xpath="/items/item[@name='IZYMeleeT4SledghammerSpikeMace']/property[@name='Tags']/@value">,perkFlurryOfStrength</append>
+
+  <!-- IZY pole axe already has perkJavelinMaster; add Black Wolf's spear flurry and max-range impact hook. -->
+  <append xpath="/items/item[@name='IZYMeleeT4SpearPoleAxe']/property[@name='Tags']/@value">,perkFlurryOfPerception,SpearMaxRangeBW</append>
+
+  <!-- IZY Punisher is a stun baton but lacks the generic melee tag used by several Black Wolf checks. -->
+  <append xpath="/items/item[@name='IZYMeleeT4BatonPunisher9000']/property[@name='Tags']/@value">,melee</append>
+
+  <!-- Black Wolf's spear penetration patch is name-limited to vanilla meleeWpnSpear* items; mirror it for IZY Pole Axe. -->
+  <append xpath="/items/item[@name='IZYMeleeT4SpearPoleAxe']/effect_group[1]">
+    <passive_effect name="EntityPenetrationCount" operation="base_add" value="1">
+      <requirement name="ProgressionLevel" progression_name="perkFlurryOfPerception" operation="Equals" value="1"/>
+      <requirement name="ItemHasTags" tags="perkJavelinMaster"/>
+    </passive_effect>
+    <passive_effect name="EntityPenetrationCount" operation="base_add" value="2">
+      <requirement name="ProgressionLevel" progression_name="perkFlurryOfPerception" operation="Equals" value="2"/>
+      <requirement name="ItemHasTags" tags="perkJavelinMaster"/>
+    </passive_effect>
+    <passive_effect name="EntityPenetrationCount" operation="base_add" value="3">
+      <requirement name="ProgressionLevel" progression_name="perkFlurryOfPerception" operation="Equals" value="3"/>
+      <requirement name="ItemHasTags" tags="perkJavelinMaster"/>
+    </passive_effect>
+    <passive_effect name="EntityPenetrationCount" operation="base_add" value="4">
+      <requirement name="ProgressionLevel" progression_name="perkFlurryOfPerception" operation="Equals" value="4"/>
+      <requirement name="ItemHasTags" tags="perkJavelinMaster"/>
+    </passive_effect>
+    <passive_effect name="EntityPenetrationCount" operation="base_add" value="5">
+      <requirement name="ProgressionLevel" progression_name="perkFlurryOfPerception" operation="Equals" value="5"/>
+      <requirement name="ItemHasTags" tags="perkJavelinMaster"/>
+    </passive_effect>
+    <passive_effect name="EntityPenetrationCount" operation="base_add" value="10">
+      <requirement name="ProgressionLevel" progression_name="perkPerceptionMastery" operation="Equals" value="5"/>
+      <requirement name="ItemHasTags" tags="perkJavelinMaster"/>
+    </passive_effect>
+    <passive_effect name="BlockPenetrationFactor" operation="base_set" value="20000">
+      <requirement name="ProgressionLevel" progression_name="perkPenetrator" operation="Equals" value="2"/>
+    </passive_effect>
+    <passive_effect name="BlockPenetrationFactor" operation="base_set" value="30000">
+      <requirement name="ProgressionLevel" progression_name="perkPenetrator" operation="Equals" value="3"/>
+    </passive_effect>
+    <passive_effect name="BlockPenetrationFactor" operation="base_set" value="40000">
+      <requirement name="ProgressionLevel" progression_name="perkPenetrator" operation="Equals" value="4"/>
+    </passive_effect>
+    <passive_effect name="BlockPenetrationFactor" operation="base_set" value="50000">
+      <requirement name="ProgressionLevel" progression_name="perkPenetrator" operation="Equals" value="5"/>
+    </passive_effect>
+  </append>
+
+  <!-- Black Wolf adds these mastery-5 stun-baton effects only to the vanilla stun baton by name. -->
+  <append xpath="/items/item[@name='IZYMeleeT4BatonPunisher9000']/effect_group[3]">
+    <triggered_effect trigger="onSelfPrimaryActionRayHit" action="ModifyCVar" target="other" cvar="stunBatonDuration" operation="set" value="15">
+      <requirement name="ProgressionLevel" progression_name="perkIntellectMastery" operation="Equals" value="5"/>
+      <requirement name="CompareItemMetaFloat" operation="GTE" value="4" key="charge"/>
+    </triggered_effect>
+    <triggered_effect trigger="onSelfSecondaryActionRayHit" action="ModifyCVar" target="other" cvar="stunBatonDuration" operation="set" value="15">
+      <requirement name="ProgressionLevel" progression_name="perkIntellectMastery" operation="Equals" value="5"/>
+      <requirement name="CompareItemMetaFloat" operation="GTE" value="4" key="charge"/>
+    </triggered_effect>
+  </append>
+
+</configs>

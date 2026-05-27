@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="ZZZZZZZZZZ_WakaIzyBlackWolfMeleeBridge" />
+  <DisplayName value="Waka IZY Black Wolf Melee Bridge" />
+  <Description value="Bridges IZY Special Melee T4 weapons into Black Wolf's melee perk tag and item-effect paths without editing either source mod." />
+  <Author value="Waka" />
+  <Version value="0.1" />
+</xml>
