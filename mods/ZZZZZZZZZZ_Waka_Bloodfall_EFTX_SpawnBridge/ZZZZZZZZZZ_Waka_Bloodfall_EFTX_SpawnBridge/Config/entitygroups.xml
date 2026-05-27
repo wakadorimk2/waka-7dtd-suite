@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+    <!-- Blood moon late-game bridge: keep reward and accident enemies light. -->
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS80']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .04
+        zombieDemolitionLootGob, .006
+        zombieBikerBomber, .005
+        zombieDemolitionGiant, .002
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS85']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .04
+        zombieDemolitionLootGob, .006
+        zombieBikerBomber, .005
+        zombieDemolitionGiant, .002
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS91']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .04
+        zombieDemolitionLootGob, .006
+        zombieBikerBomber, .005
+        zombieDemolitionGiant, .002
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS97']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .04
+        zombieDemolitionLootGob, .006
+        zombieBikerBomber, .005
+        zombieDemolitionGiant, .002
+    </csv>
+
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS103']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS109']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS115']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS121']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS127']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS133']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS140']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS147']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .06
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .006
+        zombieDemolitionGiant, .0025
+    </csv>
+
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS153']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS160']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS167']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS174']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS181']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS188']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS195']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='feralHordeStageGS202']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieDemolitionLootGob, .01
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+
+    <!-- Wasteland roaming: daytime stays soldier-led, nights get a little more reward pressure. -->
+    <csv xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieMutated, .015
+        zombieDemolitionLootGob, .006
+        zombieBikerBomber, .004
+        zombieDemolitionGiant, .002
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandDowntown']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .08
+        zombieMutated, .015
+        zombieDemolitionLootGob, .008
+        zombieBikerBomber, .005
+        zombieDemolitionGiant, .002
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .10
+        zombieMutated, .02
+        zombieDemolitionLootGob, .012
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNightNoBears']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .10
+        zombieMutated, .02
+        zombieDemolitionLootGob, .012
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight2']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .10
+        zombieMutated, .02
+        zombieDemolitionLootGob, .015
+        zombieBikerBomber, .01
+        zombieDemolitionGiant, .004
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight2NoBears']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .10
+        zombieMutated, .02
+        zombieDemolitionLootGob, .015
+        zombieBikerBomber, .01
+        zombieDemolitionGiant, .004
+    </csv>
+
+    <!-- High-tier sleepers: stronger loot-goblin visibility than blood moon, still low bomber/giant rates. -->
+    <csv xpath="/entitygroups/entitygroup[@name='sleeperHordeStageGS82']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .07
+        zombieDemolitionLootGob, .015
+        zombieBikerBomber, .008
+        zombieDemolitionGiant, .002
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='sleeperHordeStageGS89']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .085
+        zombieDemolitionLootGob, .02
+        zombieBikerBomber, .01
+        zombieDemolitionGiant, .003
+    </csv>
+    <csv xpath="/entitygroups/entitygroup[@name='sleeperHordeStageGS96']/text()" delim="\n" op="add">
+        zombieSoldierLootGob, .10
+        zombieDemolitionLootGob, .025
+        zombieBikerBomber, .012
+        zombieDemolitionGiant, .004
+    </csv>
+</configs>

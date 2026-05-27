@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZZZZ_Waka_Bloodfall_EFTX_SpawnBridge" />
+    <DisplayName value="Waka Bloodfall EFTX Spawn Bridge" />
+    <Description value="Late-load entitygroups-only bridge that reintroduces EFTX armored and military special zombies into Bloodfall late-game blood moon, wasteland, and high-tier sleeper pools with conservative weights." />
+    <Author value="wakadori" />
+    <Version value="0.1" />
+    <Website value="" />
+</xml>
