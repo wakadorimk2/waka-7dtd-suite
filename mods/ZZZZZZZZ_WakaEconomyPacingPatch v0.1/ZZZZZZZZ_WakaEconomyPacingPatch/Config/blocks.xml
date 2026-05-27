@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
 
-  <!-- SCG turret blocks are functional defenses, not vendor goods. -->
-  <append xpath="/blocks/block[@name='44turretbox']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/blocks/block[@name='44turretcelling']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/blocks/block[@name='vulturehunterturret']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/blocks/block[@name='M2TurretLight']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/blocks/block[@name='M2TurretnoLight']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
+  <!-- SCG turret blocks are defensive salvage: sellable, but poor merchant cargo. -->
+  <set xpath="/blocks/block[@name='44turretbox']/property[@name='EconomicValue']/@value">600</set>
+  <set xpath="/blocks/block[@name='44turretcelling']/property[@name='EconomicValue']/@value">600</set>
+  <set xpath="/blocks/block[@name='vulturehunterturret']/property[@name='EconomicValue']/@value">800</set>
+  <set xpath="/blocks/block[@name='M2TurretLight']/property[@name='EconomicValue']/@value">1200</set>
+  <set xpath="/blocks/block[@name='M2TurretnoLight']/property[@name='EconomicValue']/@value">1000</set>
 
 </configs>
