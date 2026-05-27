@@ -8,7 +8,7 @@
   <setattribute xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']" name="rows">12</setattribute>
   <setattribute xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']" name="cell_width">56</setattribute>
   <setattribute xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']" name="cell_height">56</setattribute>
-  <setattribute xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']/item_stack" name="transform_scale">0.75</setattribute>
+  <setattribute xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']/*[@name='0']" name="transform_scale">0.75</setattribute>
 
   <setattribute xpath="/windows/window[@name='windowVehicleStorage']" name="height">721</setattribute>
   <setattribute xpath="/windows/window[@name='windowVehicleStorage']/grid[@name='queue']" name="cols">12</setattribute>

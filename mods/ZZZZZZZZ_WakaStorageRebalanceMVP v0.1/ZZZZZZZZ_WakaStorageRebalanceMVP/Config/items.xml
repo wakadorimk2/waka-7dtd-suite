@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/items/item[
+    @name='meleeToolRepairT0StoneAxe' or
+    @name='meleeToolRepairT1ClawHammer' or
+    @name='meleeToolRepairT3Nailgun'
+  ]/property[@class='Action1']/property[@name='Allowed_upgrade_items']/@value">,resourceElectricParts</append>
+</configs>
