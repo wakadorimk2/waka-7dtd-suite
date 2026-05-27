@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="ZZZZZZZZZZ_WakaBlackWolfPerkRescale" />
+  <DisplayName value="Waka Black Wolf Perk Rescale" />
+  <Description value="Late-loading Black Wolf perk pacing patch. Spreads Penetrator armor bypass over ten ranks, softens Demolitions Expert scaling, and delays early Boomstick/Strength Mastery bleed pressure." />
+  <Author value="Waka" />
+  <Version value="0.1" />
+</xml>

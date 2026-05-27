@@ -79,6 +79,8 @@
 
 Black Wolf は特定 perk だけでなく、多数の attribute mastery、weapon perk、utility perk、item effect、Localization long desc を横断的に変更している。#6 の実装パスでは、数値を変える対象だけでなく、説明文と実性能が一致しているかも成果物に含める。
 
+追記: `ZZZZZZZZZZ_WakaBlackWolfPerkRescale v0.1` で全 `*BWLongDesc` の rich localization pass を実施。Waka 側の実数値を優先し、抽象的な段階化説明をプレイヤー向けの数値説明へ置換した。
+
 監査対象は以下の優先順にする。
 
 | 優先 | 対象群 | 理由 | 成果物 |
@@ -154,4 +156,48 @@ Ore Processing は baseline 外だが、Black Wolf fast resource handling は残
 - `profiles/Default/modlist.txt`: Black Wolf 主要3系統 enabled、`Durability Overhaul` disabled、`WalkerSim` disabled。
 - `profiles/NotebookServer/modlist.txt`: Black Wolf 主要3系統 enabled、`FER Ore processing factories v2.6` disabled、`Durability Overhaul` disabled、`WalkerSim` disabled。
 - `docs/recipe-economy-balance-v0.2-20260528.md`: special ammo sustain と Black Wolf resource handling は残リスクとして #6-#9 に引き継ぎ済み。
-- XML 実装は未実施のため、`waka-deploy` dry-run と runtime log check は不要。
+- 2026-05-28 の後続 pass で XML 実装済み。詳細は下記 implementation pass を参照。
+
+## 2026-05-28 implementation pass
+
+Implemented in `ZZZZZZZZZZ_WakaBlackWolfPerkRescale v0.1`; third-party Black Wolf folders were not edited.
+
+Implemented target groups:
+
+| Priority | Perks | Implementation note |
+| --- | --- | --- |
+| P0 | Better Barter, Daring Adventurer, Penetrator, Boomstick, Demolitions Expert, Deep Cuts | Set to 10 ranks where applicable. Economy caps keep the existing Waka totals: Better Barter buy 20% / sell 10%, Daring Adventurer TraderStage 40 / QuestBonus 75%. Penetrator keeps full armor bypass at rank 10. Explosive and shotgun spikes are spread later. |
+| P1 | Dead Eye, Gunslinger, Machine Gunner, Archery, Pummel Pete, Skull Crusher, Miner 69r, Javelin Master | Set to 10 ranks with rank N requiring attribute N. Existing Black Wolf two-point progressions are stretched to rank 10; five-point milestone arrays are mapped to ranks 2,4,6,8,10. |
+| P2 | Pack Mule, Grease Monkey, Living off the Land, Physician, Pain Tolerance, Parkour, Lock Picking, Salvage Operations | Set to 10 ranks. Pack Mule respects the 91-slot BagLayer direction by thinning CarryCapacity and lowering the backpack block proc. Utility/economy values are stretched rather than increased. |
+
+Not covered in this pass:
+
+- 3-rank / 4-rank lifestyle perks outside the P0/P1/P2 table.
+- Crafting skills and magazine skills.
+- Full static XPath application simulation against the merged post-load XML.
+
+Validation performed:
+
+- Parsed all XML files in `ZZZZZZZZZZ_WakaBlackWolfPerkRescale v0.1/ZZZZZZZZZZ_WakaBlackWolfPerkRescale/Config` with PowerShell `[xml]`; all parsed successfully.
+- Ran `tools/waka-deploy/deploy.ps1 profiles/Default -DryRun`; no missing MO2 folders and no missing `ModInfo.xml`.
+- Ran local deploy for `profiles/Default`; summary was `Linked: 124`, `Missing: 0`, `NoModInfo: 0`.
+- Fixed notebook-detected missed XPath warnings for Deep Cuts armor bypass, Pain Tolerance final buff hook, and the actual Miner 69r perk name.
+- Deployed `ZZZZZZZZZZ_WakaBlackWolfPerkRescale v0.1` to the notebook dedicated server with `deploy-notebook.ps1 -Mod ... -Apply -Restart`.
+- Notebook latest log `output_log_dedi__2026-05-28__07-52-27.txt` loaded `ZZZZZZZZZZ_WakaBlackWolfPerkRescale (0.1)`, had zero target-mod XML warnings/errors, reached `World.Load: Old Suzeso County`, `StartGame done`, `Server registered`, and `GameServer.LogOn successful`.
+- Fresh client runtime XML log proof is still pending.
+
+## 2026-05-28 localization rewrite pass
+
+Implemented in `ZZZZZZZZZZ_WakaBlackWolfPerkRescale v0.1`; third-party Black Wolf folders were not edited.
+
+Localization policy:
+
+- Keep Black Wolf/vanilla-style direct player wording: weapon or perk subject first, then the numeric bonus.
+- Remove implementation-facing terms such as `stretched`, `attribute-gated`, `milestone`, and `proc` from player-facing `BWLongDesc` text.
+- Match the current Rescale XML values over older Black Wolf text. Deep Cuts no longer mentions armor reduction because this patch only sets block damage, entity damage, and attack speed. Pack Mule now states the 3% backpack block chance applied by the patch.
+- Better Barter and Daring Adventurer descriptions retain the existing Waka economy caps: buy 20% / sell 10%, TraderStage 40, QuestBonus 75%, reward-choice increases at ranks 8 and 10.
+
+Validation performed in this pass:
+
+- Re-read `progression.xml` and `Localization.txt` for `ZZZZZZZZZZ_WakaBlackWolfPerkRescale v0.1`.
+- Checked stale localization terms with `rg "stretched|attribute-gated|milestone|proc|full immunity|ignore .*armor|100% armor|Waka cap"` against the Rescale `Localization.txt`; no hits remained.

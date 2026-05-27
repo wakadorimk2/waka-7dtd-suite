@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Agility Mastery rank 5 arrow bonuses: keep the full-draw reward, but reduce armor bypass and damage. -->
+  <set xpath="//item[@name='ammoArrowStone']/effect_group[2]/passive_effect[@name='EntityDamage'][@tags='perkArchery']/@value">.25</set>
+  <set xpath="//item[@name='ammoArrowStone']/effect_group[2]/passive_effect[@name='TargetArmor'][@tags='perkArchery']/@value">-.20</set>
+  <set xpath="//item[@name='ammoArrowIron']/effect_group[3]/passive_effect[@name='EntityDamage'][@tags='perkArchery']/@value">.50</set>
+  <set xpath="//item[@name='ammoArrowIron']/effect_group[3]/passive_effect[@name='TargetArmor'][@tags='perkArchery']/@value">-.35</set>
+  <set xpath="//item[@name='ammoArrowSteelAP']/effect_group[3]/passive_effect[@name='EntityDamage'][@tags='perkArchery']/@value">.75</set>
+  <set xpath="//item[@name='ammoArrowSteelAP']/effect_group[3]/passive_effect[@name='TargetArmor'][@tags='perkArchery']/@value">-.50</set>
+  <set xpath="//item[@name='ammoArrowFlaming']/effect_group[3]/passive_effect[@name='EntityDamage'][@tags='perkArchery']/@value">.75</set>
+  <set xpath="//item[@name='ammoArrowFlaming']/effect_group[3]/passive_effect[@name='TargetArmor'][@tags='perkArchery']/@value">-.50</set>
+  <set xpath="//item[@name='ammoArrowExploding']/effect_group[3]/passive_effect[@name='EntityDamage'][@tags='perkArchery']/@value">.75</set>
+  <set xpath="//item[@name='ammoArrowExploding']/effect_group[3]/passive_effect[@name='TargetArmor'][@tags='perkArchery']/@value">-.50</set>
+
+</configs>

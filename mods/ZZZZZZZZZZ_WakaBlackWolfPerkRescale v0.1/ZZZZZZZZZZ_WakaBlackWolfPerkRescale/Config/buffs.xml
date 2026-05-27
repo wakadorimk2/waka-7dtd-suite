@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Hard Target jump buff: keep the evade flavor, but remove the stackable full-immunity wall. -->
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[position() &gt;= 1 and position() &lt;= 5]/passive_effect[@name='GeneralDamageResist']/@value">.50</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[position() &gt;= 1 and position() &lt;= 5]/passive_effect[@name='BuffResistance']/@value">.50</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[1]/requirement[@name='RandomRoll']/@value">3</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[2]/requirement[@name='RandomRoll']/@value">5</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[3]/requirement[@name='RandomRoll']/@value">7</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[4]/requirement[@name='RandomRoll']/@value">9</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[5]/requirement[@name='RandomRoll']/@value">12</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[6]/passive_effect[1][@name='GeneralDamageResist']/@value">.03</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[6]/passive_effect[2][@name='GeneralDamageResist']/@value">.05</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[6]/passive_effect[3][@name='GeneralDamageResist']/@value">.07</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[6]/passive_effect[4][@name='GeneralDamageResist']/@value">.09</set>
+  <set xpath="/buffs/buff[@name='buffHardTargetBW']/effect_group[6]/passive_effect[5][@name='GeneralDamageResist']/@value">.12</set>
+
+</configs>
