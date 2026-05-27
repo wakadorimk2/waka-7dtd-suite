@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Keep EFTX AP slugs as specialty finds instead of bulk sustain ammo. -->
+  <set xpath="//lootgroup/item[@name='ammoEftAP20Slug' and @count='10,20']/@count">2,5</set>
+  <set xpath="//lootgroup/item[@name='ammoEftBarricadeSlug' and @count='10,20']/@count">2,5</set>
+
+  <set xpath="//lootgroup/item[@name='ammoEftAP20Slug' and @count='10,25']/@count">3,7</set>
+  <set xpath="//lootgroup/item[@name='ammoEftBarricadeSlug' and @count='10,25']/@count">3,7</set>
+
+  <set xpath="//lootgroup/item[@name='ammoEftBarricadeSlug' and @count='20,45']/@count">4,10</set>
+
+  <set xpath="//lootgroup/item[@name='ammoEftAP20Slug' and @count='50,100']/@count">8,18</set>
+  <set xpath="//lootgroup/item[@name='ammoEftAP20Slug' and @count='100,150']/@count">12,24</set>
+  <set xpath="//lootgroup/item[@name='ammoEftAP20Slug' and @count='50,200']/@count">10,28</set>
+  <set xpath="//lootgroup/item[@name='ammoEftAP20Slug' and @count='100,100']/@count">16,24</set>
+
+  <!-- v0.2: specialty ammo should appear as prep bundles, not sustain piles. -->
+  <set xpath="//lootgroup/item[contains(@name,'BulletHP') or contains(@name,'HIpower') or contains(@name,'Highpower') or contains(@name,'Eft') and (contains(@name,'HP') or contains(@name,'RIP'))]/@count">4,12</set>
+  <set xpath="//lootgroup/item[contains(@name,'BulletAP') or contains(@name,'Armor') or contains(@name,'Eft') and contains(@name,'AP') or @name='ammoJunkTurretAP']/@count">2,8</set>
+  <set xpath="//lootgroup/item[contains(@name,'Slug') or contains(@name,'Flechette') or contains(@name,'Shrapnel')]/@count">2,6</set>
+  <set xpath="//lootgroup/item[@name='ammoEftAP20Slug' or @name='ammoEftBarricadeSlug']/@count">2,5</set>
+
+  <!-- Explosives stay rare and small-stack even in large ammo groups. -->
+  <set xpath="//lootgroup/item[@name='ammoRocketHE' or @name='ammoRocketFrag' or @name='ammoRocketRPGHE' or @name='ammoRocketRPGIncendiary' or @name='ammoEft9340pg7vl']/@count">1</set>
+  <set xpath="//lootgroup/item[@name='thrownGrenade' or @name='thrownGrenadeContact' or @name='thrownAmmoPipeBomb' or @name='thrownDynamite' or @name='thrownTimedCharge']/@count">1,2</set>
+  <set xpath="//lootgroup/item[@name='ammo25mmGrenadeTraining' or @name='ammo25mmGrenadeFRAGS' or @name='ammo25mmGrenadeHE' or @name='ammoEft4046381' or @name='ammoEft4046576' or @name='ammoEft4053vog25' or @name='ammoEftGrenadeAir']/@count">1,3</set>
+  <set xpath="//lootgroup/item[@name='ammoArrowExploding' or @name='ammoCrossbowBoltExploding']/@count">2,5</set>
+
+</configs>
