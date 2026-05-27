@@ -135,10 +135,14 @@
   <set xpath="/items/item[@name='ammoEft50aeHP']//passive_effect[@name='EntityDamage']/@value">115</set>
 
   <remove xpath="/items/item[starts-with(@name,'ammoEft') and (contains(@name,'HP') or contains(@name,'RIP'))]//passive_effect[@name='TargetArmor']"/>
+  <remove xpath="/items/item[starts-with(@name,'ammoEft') and contains(@name,'AP')]/effect_group[1]/passive_effect[@name='TargetArmor']"/>
+  <remove xpath="/items/item[starts-with(@name,'ammoEft') and contains(@name,'AP')]/effect_group[1]/display_value[@name='dTargetArmor']"/>
   <append xpath="/items/item[starts-with(@name,'ammoEft') and contains(@name,'AP')]/effect_group[1]">
     <passive_effect name="TargetArmor" operation="perc_add" value="-.65"/>
     <display_value name="dTargetArmor" value="-.65"/>
   </append>
+  <remove xpath="/items/item[@name='ammoEft50BMGSlap']/effect_group[1]/passive_effect[@name='TargetArmor']"/>
+  <remove xpath="/items/item[@name='ammoEft50BMGSlap']/effect_group[1]/display_value[@name='dTargetArmor']"/>
   <append xpath="/items/item[@name='ammoEft50BMGSlap']/effect_group[1]">
     <passive_effect name="TargetArmor" operation="perc_add" value="-.70"/>
     <display_value name="dTargetArmor" value="-.70"/>
@@ -147,6 +151,8 @@
   <set xpath="/items/item[@name='ammoEftAP20Slug']//passive_effect[@name='TargetArmor' and not(requirement)]/@value">-.80</set>
   <set xpath="/items/item[@name='ammoEftAP20Slug']//display_value[@name='dTargetArmor']/@value">-.80</set>
   <set xpath="/items/item[@name='ammoEftBarricadeSlug']//passive_effect[@name='EntityDamage']/@value">125</set>
+  <remove xpath="/items/item[@name='ammoEftBarricadeSlug']/effect_group[1]/passive_effect[@name='TargetArmor']"/>
+  <remove xpath="/items/item[@name='ammoEftBarricadeSlug']/effect_group[1]/display_value[@name='dTargetArmor']"/>
   <append xpath="/items/item[@name='ammoEftBarricadeSlug']/effect_group[1]">
     <passive_effect name="TargetArmor" operation="perc_add" value="-.80"/>
     <display_value name="dTargetArmor" value="-.80"/>

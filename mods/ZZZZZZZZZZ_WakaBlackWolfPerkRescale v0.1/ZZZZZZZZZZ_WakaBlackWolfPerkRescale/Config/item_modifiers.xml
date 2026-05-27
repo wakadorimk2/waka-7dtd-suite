@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Black Wolf vehicle chassis modifiers: reduce extreme collision damage multipliers. -->
+  <set xpath="/item_modifiers/item_modifier[@name='modVehicleImprovedMotorCycleChassis']//passive_effect[@name='VehicleEntityDamage']/@value">2</set>
+  <set xpath="/item_modifiers/item_modifier[@name='modVehicleImprovedMotorCycleChassis']//passive_effect[@name='VehicleBlockDamage']/@value">5</set>
+  <set xpath="/item_modifiers/item_modifier[@name='modVehicleImprovedCarChassis']//passive_effect[@name='VehicleEntityDamage']/@value">1</set>
+  <set xpath="/item_modifiers/item_modifier[@name='modVehicleImprovedCarChassis']//passive_effect[@name='VehicleBlockDamage']/@value">3</set>
+  <set xpath="/item_modifiers/item_modifier[@name='modVehicleImprovedBirdChassis']//passive_effect[@name='VehicleEntityDamage']/@value">1</set>
+  <set xpath="/item_modifiers/item_modifier[@name='modVehicleImprovedBirdChassis']//passive_effect[@name='VehicleBlockDamage']/@value">3</set>
+
+</configs>
