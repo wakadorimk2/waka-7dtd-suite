@@ -17,25 +17,25 @@
 +ZZZZZZZZ_WakaScourgePurchaseFix v0.1
 +ZZZZZZZ_WakaTooltipSelfFix v0.1
 +ZZZZZZZ_WakaCollectedItemListFix v0.1
-+ZZZZZZZ_WakaBloodfallRecipeFix v0.1
+-ZZZZZZZ_WakaBloodfallRecipeFix v0.1
 +ZZZZZZZ_WakaBiomeChallengeFix v0.1
 +ZZ_WakaEftxChemFix v0.2
 +ZZZZZZZ_WakaSteroidsCarryFix v0.1
 +ZZZZZZZ_WakaDurabilityEquipFix v0.1
-+ZZZ_WakaRamNullGuard v0.1
+-ZZZ_WakaRamNullGuard v0.1
 -Fix_separator
 +ZZZZZZZZ_WakaEconomyPacingPatch v0.1
-+ZZZZZZZ_WakaBloodfallTuning v0.1
-+ZZZZZZZ_WakaRadiatedRegenTuning v0.1
+-ZZZZZZZ_WakaBloodfallTuning v0.1
+-ZZZZZZZ_WakaRadiatedRegenTuning v0.1
 +ZZZZZZZ_WakaAmmoFlowPatch v0.1
 +ZZZZZZZZZZ_WakaAmmoRoleBalance v0.1
-+ZZZZZZZZZZ_Waka_Bloodfall_EFTX_SpawnBridge
+-ZZZZZZZZZZ_Waka_Bloodfall_EFTX_SpawnBridge
 +ZZZZZZ_WakaAmmoRealPrice v0.1
 +ZZZZZZ_WakaSlowCurve v0.1
 +ZZZZZ_WakaSleepWindowAlign v0.1
 +ZZZZZ_WakaSleepWorkstationFreeze v0.1
-+ZZZZZZZ_WakaPerkBoost v0.1
-+ZZZ_WakaRamAffixCurve v0.1
+-ZZZZZZZ_WakaPerkBoost v0.1
+-ZZZ_WakaRamAffixCurve v0.1
 +ZZZZZ_WakaSlayerEZSPatch v0.1
 +ZZZZZZ_WakaQuestProgression v0.3
 +ZZZZZ_WakaQuestDifficultyTuning v0.1

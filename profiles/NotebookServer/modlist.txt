@@ -17,24 +17,24 @@
 +ZZZZZZZZ_WakaScourgePurchaseFix v0.1
 +ZZZZZZZ_WakaTooltipSelfFix v0.1
 +ZZZZZZZ_WakaCollectedItemListFix v0.1
-+ZZZZZZZ_WakaBloodfallRecipeFix v0.1
+-ZZZZZZZ_WakaBloodfallRecipeFix v0.1
 +ZZZZZZZ_WakaBiomeChallengeFix v0.1
 +ZZ_WakaEftxChemFix v0.2
 +ZZZZZZZ_WakaSteroidsCarryFix v0.1
 +ZZZZZZZ_WakaDurabilityEquipFix v0.1
-+ZZZ_WakaRamNullGuard v0.1
+-ZZZ_WakaRamNullGuard v0.1
 -Fix_separator
 +ZZZZZZZZ_WakaEconomyPacingPatch v0.1
-+ZZZZZZZ_WakaBloodfallTuning v0.1
-+ZZZZZZZ_WakaRadiatedRegenTuning v0.1
+-ZZZZZZZ_WakaBloodfallTuning v0.1
+-ZZZZZZZ_WakaRadiatedRegenTuning v0.1
 +ZZZZZZZ_WakaAmmoFlowPatch v0.1
-+ZZZZZZZZZZ_Waka_Bloodfall_EFTX_SpawnBridge
+-ZZZZZZZZZZ_Waka_Bloodfall_EFTX_SpawnBridge
 +ZZZZZZ_WakaAmmoRealPrice v0.1
 +ZZZZZZ_WakaSlowCurve v0.1
 +ZZZZZ_WakaSleepWindowAlign v0.1
 +ZZZZZ_WakaSleepWorkstationFreeze v0.1
-+ZZZZZZZ_WakaPerkBoost v0.1
-+ZZZ_WakaRamAffixCurve v0.1
+-ZZZZZZZ_WakaPerkBoost v0.1
+-ZZZ_WakaRamAffixCurve v0.1
 +ZZZZZ_WakaSlayerEZSPatch v0.1
 +ZZZZZZ_WakaQuestProgression v0.3
 +ZZZZZ_WakaQuestDifficultyTuning v0.1
@@ -72,16 +72,16 @@
 -Guns_separator
 +Knight's Armor Mods
 +Ultra High Performance Concrete
-+FER Ore processing factories v2.6
+-FER Ore processing factories v2.6
 +TurboCharger_and_more
-+Knight's Combat Armors
-+LittleRedSonja Cosmetic Armor System (CAS)
+-Knight's Combat Armors
+-LittleRedSonja Cosmetic Armor System (CAS)
 -Contents_separator
 +Enhanced Zombie Scaling (2.5 Compatible)
-+RAM - Random Affixes Mod
-+Bloodfall - Hardcore Overhaul
+-RAM - Random Affixes Mod
+-Bloodfall - Hardcore Overhaul
 +More Gore (Continued) - Zombie dismemberment and blood effects
-+(TMO) Better Turrets v2.1_v2.5ST
+-(TMO) Better Turrets v2.1_v2.5ST
 +Combat Learning Book Mastery
 +Keep Reloading (v2.0)
 +Damage Numbers
@@ -97,9 +97,9 @@
 +Medical conditions
 +Advanced Sky Manager
 +Sleep Overhaul
-+Durability Overhaul
+-Durability Overhaul
 +Natural Selection
-+WalkerSim
+-WalkerSim
 +Fast Travel
 -サバイバル_separator
 +Additional Research - Add-on Patch v2

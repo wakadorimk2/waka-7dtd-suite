@@ -14,11 +14,6 @@
     <property name="SellableToTrader" value="false"/>
   </append>
 
-  <set xpath="/items/item[@name='affixUnlockToken']/property[@name='EconomicValue']/@value">250</set>
-  <append xpath="/items/item[@name='affixUnlockToken']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-
   <!-- High-stack industrial ingredients are inputs, not merchant cargo. -->
   <append xpath="/items/item[@name='resourceCanisterWithPurifiedWater']">
     <property name="SellableToTrader" value="false"/>
@@ -63,9 +58,6 @@
   </append>
 
   <!-- Pass 2: functional progression currencies are not vendor goods. -->
-  <append xpath="/items/item[@name='affixUpgradeToken']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
   <append xpath="/items/item[@name='scourgeSkillPointBundle']">
     <property name="SellableToTrader" value="false"/>
   </append>
@@ -95,9 +87,5 @@
   <set xpath="/items/item[@name='IZYgunT5HeavyWeaponM134MinigunGatling']/property[@name='EconomicValue']/@value">10000</set>
   <set xpath="/items/item[@name='IZYgunT5HeavyWeaponM2flameThrower']/property[@name='EconomicValue']/@value">10000</set>
   <set xpath="/items/item[@name='IZYgunT5DualSMGsSuperVectors']/property[@name='EconomicValue']/@value">10000</set>
-
-  <append xpath="/items/item[@name='affixExtractionToken']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
 
 </configs>
