@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZZ_WakaToolbelt16Sync" />
+    <DisplayName value="Waka Toolbelt 16 Sync" />
+    <Description value="Keeps Inventory.PUBLIC_SLOTS_PLAYMODE at 16 so dedicated servers can sync CATUI 16-slot toolbelt held item indices. EAC must be off." />
+    <Author value="wakadori" />
+    <Version value="0.1.0" />
+    <Website value="" />
+</xml>
