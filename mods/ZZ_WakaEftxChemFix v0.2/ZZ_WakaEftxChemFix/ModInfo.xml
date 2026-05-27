@@ -2,7 +2,7 @@
 <xml>
     <Name value="ZZ_WakaEftxChemFix" />
     <DisplayName value="Waka EFTX Chemistry Fix" />
-    <Description value="Z2 EFTX IZY chemistry recipe digit-shift fix. Individual NitricAcid count 1 to 160, SulfuricAcid count 1 to 800 (vanilla 1.25x bundle bonus ratio applied so bundles stay the efficient endgame route). Removes circular OxBleach recipe (which required 350 NitricAcid to produce 1 OxBleach while NitricAcid itself requires OxBleach). Bumps the vanilla-style OxBleach recipe count 1 to 2 matching vanilla baseline. v0.2: adds chemistry-strict alternate routes for graphite (black-powder carbon source: graphite+KNO3 to gunpowder) and pyroxylin (nitrocellulose intermediate: pyroxylin to powder/_green/_red directly)." />
+    <Description value="Z2 EFTX IZY chemistry recipe digit-shift fix. Individual NitricAcid count 1 to 160, SulfuricAcid count 1 to 800 (vanilla 1.25x bundle bonus ratio applied so bundles stay the efficient endgame route). Removes circular OxBleach recipe (which required 350 NitricAcid to produce 1 OxBleach while NitricAcid itself requires OxBleach). Bumps the vanilla-style OxBleach recipe count 1 to 2 matching vanilla baseline. v0.2: adds chemistry-strict alternate routes for graphite (black-powder carbon source: graphite+KNO3 to gunpowder x8) and pyroxylin (nitrocellulose intermediate: pyroxylin to powder/_green/_red x8 directly)." />
     <Author value="wakadori" />
     <Version value="0.2" />
     <Website value="" />

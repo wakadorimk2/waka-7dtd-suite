@@ -49,31 +49,38 @@
         sulfuric. Skip-the-intermediate alt for the powder line.
         Graphite is the carbon source of black powder (C 15% / KNO3 75% / S 10%).
         Pair it with potassium nitrate to form a chemistry-station gunpowder
-        route that bypasses the matches-only vanilla path.
+        route that outputs gunpowder x8 and bypasses the matches-only vanilla path.
+        Pyroxylin powder routes output x8 to match their localization.
 
         These are additional same-name recipes (7DTD picks any in the
         crafting UI), so the existing cellulose+nitric+sulfuric route stays.
     -->
+    <set xpath="/recipes/recipe[@name='resourceGunPowder' and @craft_area='chemistryStation']/@count">8</set>
+
     <append xpath="/recipes">
-        <!-- pyroxylin alone -> powder x1 (vanilla equivalent: cellulose+nitric+sulfuric) -->
-        <recipe name="resource_item_other_powder" count="1" craft_time="3" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
+        <!-- pyroxylin alone -> powder x8 (vanilla equivalent: cellulose+nitric+sulfuric) -->
+        <recipe name="resource_item_other_powder" count="8" craft_time="3" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
             <ingredient name="resourcePyroxylin" count="1"/>
         </recipe>
-        <!-- pyroxylin + gunpowder -> powder_green x1 (vanilla: cellulose+gunpowder+nitric+sulfuric) -->
-        <recipe name="resource_item_other_powder_green" count="1" craft_time="5" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
+        <!-- pyroxylin + gunpowder -> powder_green x8 (vanilla: cellulose+gunpowder+nitric+sulfuric) -->
+        <recipe name="resource_item_other_powder_green" count="8" craft_time="5" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
             <ingredient name="resourcePyroxylin" count="1"/>
             <ingredient name="resourceGunPowder" count="1"/>
         </recipe>
-        <!-- pyroxylin + KNO3 -> powder_red x1 (vanilla: cellulose+KNO3+nitric+sulfuric) -->
-        <recipe name="resource_item_other_powder_red" count="1" craft_time="7" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
+        <!-- pyroxylin + KNO3 -> powder_red x8 (vanilla: cellulose+KNO3+nitric+sulfuric) -->
+        <recipe name="resource_item_other_powder_red" count="8" craft_time="7" craft_exp_gain="1" craft_area="chemistryStation" tags="chemStationCrafting">
             <ingredient name="resourcePyroxylin" count="1"/>
             <ingredient name="resourcePotassiumNitratePowder" count="1"/>
         </recipe>
-        <!-- graphite + KNO3 -> gunpowder x10 (matches alt, requires chemistry station) -->
-        <recipe name="resourceGunPowder" count="10" craft_time="50" craft_area="chemistryStation" tags="chemStationCrafting">
+        <!-- graphite + KNO3 -> gunpowder x8 (matches alt, requires chemistry station) -->
+        <recipe name="resourceGunPowder" count="8" craft_time="50" craft_area="chemistryStation" tags="chemStationCrafting">
             <ingredient name="resourceGraphitePowder" count="1"/>
             <ingredient name="resourcePotassiumNitratePowder" count="3"/>
         </recipe>
     </append>
+
+    <set xpath="/recipes/recipe[@name='resource_item_other_powder' and @craft_area='chemistryStation']/@count">8</set>
+    <set xpath="/recipes/recipe[@name='resource_item_other_powder_green' and @craft_area='chemistryStation']/@count">8</set>
+    <set xpath="/recipes/recipe[@name='resource_item_other_powder_red' and @craft_area='chemistryStation']/@count">8</set>
 
 </configs>
