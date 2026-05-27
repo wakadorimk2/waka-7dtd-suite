@@ -10,6 +10,7 @@ Reduce major economy acceleration points without flattening every reward or item
 - Slows Super Corn seed expansion slightly.
 - Halves Better Barter sell-side scaling.
 - Moderates quest Dukes and reward-choice inflation.
+- Caps remaining craftable EFTX shotgun resale outliers.
 - Does not own ammo pricing or ammo loot flow.
 
 ## Dependencies
