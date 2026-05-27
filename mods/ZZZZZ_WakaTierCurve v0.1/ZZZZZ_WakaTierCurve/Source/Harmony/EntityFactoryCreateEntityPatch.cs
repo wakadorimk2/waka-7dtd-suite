@@ -25,8 +25,10 @@ namespace WakaTierCurve.HarmonyPatches
     {
         private static int _callCount;
         private static int _swapCount;
+        private static int _diagnosticSwapLogCount;
         private static float _lastGameStageCheckTime = -999f;
         private static int _cachedGameStage = 1;
+        private const int DiagnosticSwapLogLimit = 40;
 
         [HarmonyPrefix]
         public static void Prefix(EntityCreationData _ecd)
@@ -57,14 +59,32 @@ namespace WakaTierCurve.HarmonyPatches
                 if (newTier <= 0 || newTier == origTier) return;
 
                 if (!TierMapper.TryGetClassId(baseName, newTier, out int newId)) return;
+                if (!TryGetEntityClassName(origId, out string origClassName)) return;
+                if (!TryGetEntityClassName(newId, out string newClassName)) return;
 
+                string origEntityName = _ecd.entityName ?? string.Empty;
                 _ecd.entityClass = newId;
-                System.Threading.Interlocked.Increment(ref _swapCount);
+                _ecd.entityName = newClassName;
+
+                int swapIdx = System.Threading.Interlocked.Increment(ref _swapCount);
+                if (System.Threading.Interlocked.Increment(ref _diagnosticSwapLogCount) <= DiagnosticSwapLogLimit)
+                {
+                    Log.Out($"[WakaTierCurve] EF swap diag #{swapIdx}: origClassName='{origClassName}', origEntityName='{origEntityName}', newClassName='{newClassName}', newEntityName='{_ecd.entityName}'");
+                }
             }
             catch (Exception e)
             {
                 Log.Warning($"[WakaTierCurve] EF Prefix failed: {e.Message}");
             }
+        }
+
+        private static bool TryGetEntityClassName(int classId, out string className)
+        {
+            className = null;
+            if (!EntityClass.list.TryGetValue(classId, out var entityClass)) return false;
+            if (entityClass == null || string.IsNullOrEmpty(entityClass.entityClassName)) return false;
+            className = entityClass.entityClassName;
+            return true;
         }
 
         private static int GetCurrentGameStage()
