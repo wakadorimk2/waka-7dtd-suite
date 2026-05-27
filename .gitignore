@@ -3,6 +3,7 @@
 
 # Repository operating notes.
 !/.gitignore
+!/README.md
 !/AGENTS.md
 !/CLAUDE.md
 !/CURRENT_STATE.md
