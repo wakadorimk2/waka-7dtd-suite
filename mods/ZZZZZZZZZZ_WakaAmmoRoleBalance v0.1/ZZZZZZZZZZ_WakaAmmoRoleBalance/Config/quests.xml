@@ -5,4 +5,12 @@
   <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and @id='ammoEftAP20Slug']/@value">20</set>
   <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and @id='ammoJunkTurretAP']/@value">80</set>
 
+  <!-- v0.2: Slayer rewards can seed specialty ammo, not feed it forever. -->
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and (contains(@id,'BulletHP') or contains(@id,'HIpower') or contains(@id,'Highpower') or contains(@id,'Eft') and (contains(@id,'HP') or contains(@id,'RIP')))]/@value">45</set>
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and (contains(@id,'BulletAP') or contains(@id,'Armor') or contains(@id,'Eft') and contains(@id,'AP') or @id='ammoJunkTurretAP')]/@value">25</set>
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and (contains(@id,'Slug') or contains(@id,'Flechette') or contains(@id,'Shrapnel'))]/@value">16</set>
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and (@id='ammoRocketHE' or @id='ammoRocketFrag' or @id='ammoRocketRPGHE' or @id='ammoRocketRPGIncendiary' or @id='ammoEft9340pg7vl')]/@value">2</set>
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and (@id='thrownGrenade' or @id='thrownGrenadeContact' or @id='thrownAmmoPipeBomb' or @id='thrownDynamite' or @id='thrownTimedCharge')]/@value">3</set>
+  <set xpath="//quest[starts-with(@id, 'waka_zs_quest_')]/reward[@type='Item' and (@id='ammo25mmGrenadeTraining' or @id='ammo25mmGrenadeFRAGS' or @id='ammo25mmGrenadeHE' or @id='ammoEft4046381' or @id='ammoEft4046576' or @id='ammoEft4053vog25' or @id='ammoEftGrenadeAir')]/@value">4</set>
+
 </configs>

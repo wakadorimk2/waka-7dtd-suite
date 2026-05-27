@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+  <!-- Trader AP slug stacks should support planned fights, not replace normal shotgun ammo. -->
+  <set xpath="//trader_item_group/item[@name='ammoEftBarricadeSlug' and @count='50,100']/@count">10,25</set>
+  <set xpath="//trader_item_group/item[@name='ammoEftAP20Slug' and @count='75,150']/@count">15,30</set>
+
+  <!-- v0.2: traders can sell specialty ammo, but not enough to sustain AP/explosive spam. -->
+  <set xpath="//trader_item_group/item[contains(@name,'BulletHP') or contains(@name,'HIpower') or contains(@name,'Highpower') or contains(@name,'Eft') and (contains(@name,'HP') or contains(@name,'RIP'))]/@count">10,30</set>
+  <set xpath="//trader_item_group/item[contains(@name,'BulletAP') or contains(@name,'Armor') or contains(@name,'Eft') and contains(@name,'AP') or @name='ammoJunkTurretAP']/@count">6,18</set>
+  <set xpath="//trader_item_group/item[contains(@name,'Slug') or contains(@name,'Flechette') or contains(@name,'Shrapnel')]/@count">4,12</set>
+  <set xpath="//trader_item_group/item[@name='ammoEftAP20Slug' or @name='ammoEftBarricadeSlug']/@count">4,10</set>
+  <set xpath="//trader_item_group/item[@name='ammoRocketHE' or @name='ammoRocketFrag' or @name='ammoRocketRPGHE' or @name='ammoRocketRPGIncendiary' or @name='ammoEft9340pg7vl']/@count">1</set>
+  <set xpath="//trader_item_group/item[@name='thrownGrenade' or @name='thrownGrenadeContact' or @name='thrownAmmoPipeBomb' or @name='thrownDynamite' or @name='thrownTimedCharge']/@count">1,2</set>
+  <set xpath="//trader_item_group/item[@name='ammo25mmGrenadeTraining' or @name='ammo25mmGrenadeFRAGS' or @name='ammo25mmGrenadeHE' or @name='ammoEft4046381' or @name='ammoEft4046576' or @name='ammoEft4053vog25' or @name='ammoEftGrenadeAir']/@count">1,2</set>
+
+</configs>
