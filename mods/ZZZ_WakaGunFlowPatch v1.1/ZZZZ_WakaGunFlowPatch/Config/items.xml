@@ -169,49 +169,34 @@
 	</append>
 
 	<!-- ================================================================ -->
-	<!-- 柱2: 修理キット搾取経路の遮断                                     -->
+	<!-- 柱2: 修理キット搾取経路の抑制                                     -->
 	<!-- EFTXの6種は EV=400・Stack=25 で1スタック=10kEV→売値30k coins     -->
 	<!-- IZY advance kit は EV=5000・Stack=25 で1スタック125kEV→375k coins -->
-	<!-- Stack を 25→5 に絞り、SellableToTrader=false で売却完全遮断       -->
+	<!-- Stack を 25→5 に絞り、低EVで売却は可能だが主収入にはしない         -->
 	<!-- ================================================================ -->
 
 	<!-- ==================== EFTX 修理キット 6種 ==================== -->
+	<set xpath="//item[@name='resourceLauncherRepairKit']/property[@name='EconomicValue']/@value">80</set>
 	<set xpath="//item[@name='resourceLauncherRepairKit']/property[@name='Stacknumber']/@value">5</set>
-	<append xpath="//item[@name='resourceLauncherRepairKit']">
-		<property name="SellableToTrader" value="false"/>
-	</append>
 
+	<set xpath="//item[@name='resourceMachineGunRepairKit']/property[@name='EconomicValue']/@value">80</set>
 	<set xpath="//item[@name='resourceMachineGunRepairKit']/property[@name='Stacknumber']/@value">5</set>
-	<append xpath="//item[@name='resourceMachineGunRepairKit']">
-		<property name="SellableToTrader" value="false"/>
-	</append>
 
+	<set xpath="//item[@name='resourcePistolRepairKit']/property[@name='EconomicValue']/@value">80</set>
 	<set xpath="//item[@name='resourcePistolRepairKit']/property[@name='Stacknumber']/@value">5</set>
-	<append xpath="//item[@name='resourcePistolRepairKit']">
-		<property name="SellableToTrader" value="false"/>
-	</append>
 
+	<set xpath="//item[@name='resourceRevolverRepairKit']/property[@name='EconomicValue']/@value">80</set>
 	<set xpath="//item[@name='resourceRevolverRepairKit']/property[@name='Stacknumber']/@value">5</set>
-	<append xpath="//item[@name='resourceRevolverRepairKit']">
-		<property name="SellableToTrader" value="false"/>
-	</append>
 
+	<set xpath="//item[@name='resourceRifleRepairKit']/property[@name='EconomicValue']/@value">80</set>
 	<set xpath="//item[@name='resourceRifleRepairKit']/property[@name='Stacknumber']/@value">5</set>
-	<append xpath="//item[@name='resourceRifleRepairKit']">
-		<property name="SellableToTrader" value="false"/>
-	</append>
 
+	<set xpath="//item[@name='resourceShotgunRepairKit']/property[@name='EconomicValue']/@value">80</set>
 	<set xpath="//item[@name='resourceShotgunRepairKit']/property[@name='Stacknumber']/@value">5</set>
-	<append xpath="//item[@name='resourceShotgunRepairKit']">
-		<property name="SellableToTrader" value="false"/>
-	</append>
 
 	<!-- ==================== IZY advance gun repair kit ==================== -->
-	<!-- EV=5000 は T3銃の売値並み。EV=1000 に減額 + Stack=5 + 売却不可。   -->
-	<set xpath="//item[@name='IZYadvancegunrepairkit']/property[@name='EconomicValue']/@value">1000</set>
+	<!-- EV=5000 は T3銃の売値並み。EV=150 に減額 + Stack=5 で低換金。     -->
+	<set xpath="//item[@name='IZYadvancegunrepairkit']/property[@name='EconomicValue']/@value">150</set>
 	<set xpath="//item[@name='IZYadvancegunrepairkit']/property[@name='Stacknumber']/@value">5</set>
-	<append xpath="//item[@name='IZYadvancegunrepairkit']">
-		<property name="SellableToTrader" value="false"/>
-	</append>
 
 </configs>

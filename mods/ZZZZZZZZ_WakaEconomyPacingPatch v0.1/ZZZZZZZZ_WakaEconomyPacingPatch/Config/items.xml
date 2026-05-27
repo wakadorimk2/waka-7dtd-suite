@@ -7,55 +7,24 @@
        is 200; normal farm crops are 10. -->
   <set xpath="/items/item[@name='foodCropGraceCorn']/property[@name='EconomicValue']/@value">20</set>
 
-  <!-- Crafted or functional items should not become Dukes printers. -->
+  <!-- Crafted or functional items should sell, but not become Dukes printers. -->
   <set xpath="/items/item[@name='liquorMoonshine']/property[@name='EconomicValue']/@value">475</set>
   <set xpath="/items/item[@name='liquorMoonshine']/property[@name='Stacknumber']/@value">5</set>
-  <append xpath="/items/item[@name='liquorMoonshine']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
 
-  <!-- High-stack industrial ingredients are inputs, not merchant cargo. -->
-  <append xpath="/items/item[@name='resourceCanisterWithPurifiedWater']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='resourceOFZ30x165mmShell']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='resourcePyroxylin']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='resourceGraphitePowder']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='resourceGraphiteOre']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='resourceOxBleach']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
+  <!-- High-stack industrial ingredients are inputs first; resale is only scrap-value. -->
+  <set xpath="/items/item[@name='resourceCanisterWithPurifiedWater']/property[@name='EconomicValue']/@value">1</set>
+  <set xpath="/items/item[@name='resourceOFZ30x165mmShell']/property[@name='EconomicValue']/@value">25</set>
+  <set xpath="/items/item[@name='resourcePyroxylin']/property[@name='EconomicValue']/@value">2</set>
+  <set xpath="/items/item[@name='resourceGraphitePowder']/property[@name='EconomicValue']/@value">1</set>
+  <set xpath="/items/item[@name='resourceGraphiteOre']/property[@name='EconomicValue']/@value">1</set>
+  <set xpath="/items/item[@name='resourceOxBleach']/property[@name='EconomicValue']/@value">5</set>
 
-  <!-- Pass 1: specialty ammo/fuel and bulk acids should be use-value only. -->
-  <append xpath="/items/item[@name='IZYAmmoHeavyWeaponFlamethrowerNapalmLethalMixture']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='IZYAmmoHeavyWeaponFlamethrowerNapalmStandardMixture']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='ammoRocketIncendiary']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='ammoArrowElectric']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='ammoCrossbowBoltElectric']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='resourceSulfuricAcid']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
-  <append xpath="/items/item[@name='resourceNitricAcid']">
-    <property name="SellableToTrader" value="false"/>
-  </append>
+  <!-- Pass 1: specialty ammo/fuel and bulk acids can sell, but use-value dominates. -->
+  <set xpath="/items/item[@name='ammoRocketIncendiary']/property[@name='EconomicValue']/@value">380</set>
+  <set xpath="/items/item[@name='ammoArrowElectric']/property[@name='EconomicValue']/@value">25</set>
+  <set xpath="/items/item[@name='ammoCrossbowBoltElectric']/property[@name='EconomicValue']/@value">30</set>
+  <set xpath="/items/item[@name='resourceSulfuricAcid']/property[@name='EconomicValue']/@value">1</set>
+  <set xpath="/items/item[@name='resourceNitricAcid']/property[@name='EconomicValue']/@value">1</set>
 
   <!-- Pass 2: functional progression currencies are not vendor goods. -->
   <append xpath="/items/item[@name='scourgeSkillPointBundle']">
@@ -87,5 +56,9 @@
   <set xpath="/items/item[@name='IZYgunT5HeavyWeaponM134MinigunGatling']/property[@name='EconomicValue']/@value">10000</set>
   <set xpath="/items/item[@name='IZYgunT5HeavyWeaponM2flameThrower']/property[@name='EconomicValue']/@value">10000</set>
   <set xpath="/items/item[@name='IZYgunT5DualSMGsSuperVectors']/property[@name='EconomicValue']/@value">10000</set>
+
+  <!-- Pass 6: cap remaining craftable EFTX shotgun resale outliers. -->
+  <set xpath="/items/item[@name='gunAA12gen1']/property[@name='EconomicValue']/@value">10000</set>
+  <set xpath="/items/item[@name='gunstriker12']/property[@name='EconomicValue']/@value">10000</set>
 
 </configs>
