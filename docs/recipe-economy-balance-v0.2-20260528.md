@@ -10,6 +10,8 @@
 - `_analysis/waka-economy-risk-report.html` を Default profile で再生成した。
 - `_analysis/waka-economy-risk-report-notebook.html` を NotebookServer profile で生成し、サーバー側 profile でも同じ経済上位候補を確認した。
 - `ZZZZZZZZ_WakaEconomyPacingPatch` に craftable EFTX shotgun resale cap を追加した。
+- `LittleRedSonja Ammunition Recycling` の bundle 出力を狭く監査し、`casinoCoin` 出力、EFTX/IZY special ammo return、既存 Waka input-cost patch の適用範囲を確認した。
+- `waka-deploy` の Default / NotebookServer dry-run で `Missing: 0` / `NoModInfo: 0` を確認した。
 
 ## Scan Snapshot
 
@@ -35,13 +37,19 @@ The corresponding recipe findings dropped from output value `12000` / known marg
 | Craftable EFTX/IZY T4+ equipment | Many T4 recipes remain visible around the 10k value band. | Maintain / watch | This is expected after the established 10k cap. Revisit only if crafting-to-vendor loops become actual play behavior. |
 | `gunAA12gen1` / `gunstriker12` | Remaining 12k craftable shotgun outliers. | Limited | Implemented 10k cap in WakaEconomyPacingPatch. |
 | Ammo Press + compatibility recipes | Ammo Press and EFT/IZY add-on provide broad special ammo crafting. | Maintain with constraints | Keep because #4 ammo role tuning already reduced AP/explosive dominance. If ammo scarcity still collapses, adjust special ammo recipes or craft areas rather than deleting Ammo Press. |
-| Ammunition Recycling | Mod advertises roughly 80% returns and active XML contains many material bundle outputs, including some compatibility rows that output `casinoCoin`. | Needs targeted audit | Do not remove yet. Next pass should inspect actual active bundle outputs for EFTX/IZY special ammo and patch only casinoCoin/material over-returns if exploitable. |
+| Ammunition Recycling `casinoCoin` bundles | `casinoCoin` bundle outputs exist only inside the `mod_loaded('Vita_EnhancedAmmo')` branch. `Vita_EnhancedAmmo` is not enabled in Default or NotebookServer. | No active patch needed | Do not remove or patch now. If Vita Enhanced Ammo is later added, remove the coin output or make those bundles non-sellable before enabling. |
+| Ammunition Recycling EFTX/IZY special ammo returns | Active EFTX/IZY recycling bundles return materials only, not `casinoCoin`. The high-return concern is already constrained by `ZZZZZZZZZZ_WakaAmmoRoleBalance`, which raises special recycling input counts: HP/RIP to 170, AP/slug/flechette/shrapnel to 220, rocket/grenade/explosive to 285. | Keep with existing restriction | No new Waka patch in this pass. Revisit only if long-play telemetry shows special ammo sustain is still too easy. |
 | POI Scourge StationCosts | Skill point bundle costs 15 tokens; vehicles cost 30/70/200/300/450. WakaQuestProgression grants Scourge Beacon tokens as `tier * 2`. | Maintain / watch | Current beacon token flow means skill points are not immediate spam, and higher vehicles require many high-tier clears. Keep while validating POI Scourge as progression/terrain content. |
 | Scourge skill point bundle | `scourgeSkillPointBundle` is already non-sellable through WakaEconomyPacingPatch. | Maintain | No additional economy patch needed now. |
 | Ore Processing removal | Ore Processing is absent from active modlist. Black Wolf still makes core resource scrap/craft very fast. | Separate #9 follow-up | Ore Processing is closed as excluded. Resource sink concern shifts to Black Wolf fast resource handling plus ammo loops, not Ore Processing itself. |
 
 ## Decision
 
-#8 is partially closed for the simple resale layer: the scanner now reports effective quest rewards, and the last obvious craftable EFTX shotgun resale pair is capped. No broad recipe deletion is recommended in this pass.
+#8 acceptance criteria are covered for the current Waka Lean EFTX World v2 baseline:
 
-The next useful #8/#9 continuation is a narrow Ammunition Recycling audit: identify active bundle outputs that create `casinoCoin` or high-value special-ammo materials, then decide whether to set those bundles non-sellable, remove coin outputs, or increase special-ammo input costs.
+- Recipe gap-fill risk was checked across special ammo, strong gear resale, resource conversion, and progression-bypass candidates.
+- `waka-economy-scan.ps1` was rerun for Default and NotebookServer, and both HTML reports are current.
+- The only confirmed resale outlier was capped in `WakaEconomyPacingPatch`.
+- Ammunition Recycling does not actively create `casinoCoin` in the enabled baseline, and special ammo recycling is already restricted by Waka input-cost patches.
+
+No broad recipe deletion is recommended in this pass. Leave real-play economy drift, especially special ammo sustain and Black Wolf resource handling, as a #12 pre-save check / #6-#9 follow-up rather than keeping #8 open.
