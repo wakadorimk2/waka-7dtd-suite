@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+
+<append xpath="/recipes">
+
+    <recipe name="trapsSkillMagazine" count="1" craft_area="workbench"
+            craft_time="90" always_unlocked="true">
+        <ingredient name="resourcePaper" count="80"/>
+        <ingredient name="resourceGlue" count="5"/>
+        <ingredient name="resourceElectricParts" count="5"/>
+        <ingredient name="resourceResearchData" count="3"/>
+    </recipe>
+
+</append>
+
+</configs>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+    <Name value="ZZZZZZZZ_WakaSCGTrapBookCraft" />
+    <DisplayName value="Waka SCG Trap Book Craft" />
+    <Description value="Adds a medium-cost workbench recipe for SCG's trapsSkillMagazine." />
+    <Author value="Waka" />
+    <Version value="0.1" />
+</xml>
