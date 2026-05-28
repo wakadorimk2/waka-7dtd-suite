@@ -22,7 +22,7 @@
 +ZZZZZZZ_WakaBiomeChallengeFix v0.1
 +ZZ_WakaEftxChemFix v0.2
 +ZZZZZZZ_WakaSteroidsCarryFix v0.1
-+ZZZZZZZ_WakaDurabilityEquipFix v0.1
+-ZZZZZZZ_WakaDurabilityEquipFix v0.1
 -ZZZ_WakaRamNullGuard v0.1
 -Fix_separator
 +ZZZZZZZZ_WakaEconomyPacingPatch v0.1

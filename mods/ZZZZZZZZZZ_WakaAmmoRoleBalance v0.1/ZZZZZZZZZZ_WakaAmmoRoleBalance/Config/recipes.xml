@@ -15,14 +15,11 @@
   </append>
 
   <!-- v0.2 Ammo Press: HP costs more than ball, AP/slug/explosive costs much more. -->
-  <set xpath="//recipe[@craft_area='ammopress' and (contains(@name,'HP') or contains(@name,'HIpower') or contains(@name,'Highpower') or contains(@name,'RIP'))]/ingredient[@name='resourceScrapLead']/@count">18</set>
   <set xpath="//recipe[@craft_area='ammopress' and (contains(@name,'HP') or contains(@name,'HIpower') or contains(@name,'Highpower') or contains(@name,'RIP'))]/ingredient[@name='resource_item_other_powder_red']/@count">20</set>
   <set xpath="//recipe[@craft_area='ammopress' and (contains(@name,'AP') or contains(@name,'Armor'))]/ingredient[@name='resourceScrapLead']/@count">24</set>
   <set xpath="//recipe[@craft_area='ammopress' and (contains(@name,'AP') or contains(@name,'Armor'))]/ingredient[@name='resource_item_other_powder_red']/@count">26</set>
   <set xpath="//recipe[@craft_area='ammopress' and contains(@name,'Slug')]/ingredient[@name='resourceScrapLead']/@count">30</set>
   <set xpath="//recipe[@craft_area='ammopress' and contains(@name,'Slug')]/ingredient[@name='resource_item_other_powder_red']/@count">32</set>
-  <set xpath="//recipe[@craft_area='ammopress' and (contains(@name,'Rocket') or contains(@name,'Grenade') or contains(@name,'Exploding') or starts-with(@name,'thrown'))]/ingredient[@name='resourceScrapLead']/@count">40</set>
-  <set xpath="//recipe[@craft_area='ammopress' and (contains(@name,'Rocket') or contains(@name,'Grenade') or contains(@name,'Exploding') or starts-with(@name,'thrown'))]/ingredient[@name='resource_item_other_powder_red']/@count">45</set>
 
   <append xpath="//recipe[@name='ammo762mmBulletAP' and @craft_area='ammopress']">
     <ingredient name="resourceForgedSteel" count="2"/>
@@ -32,12 +29,6 @@
   </append>
   <append xpath="//recipe[@name='ammo45ACPArmorpiecing' and @craft_area='ammopress']">
     <ingredient name="resourceForgedSteel" count="1"/>
-  </append>
-  <append xpath="//recipe[@name='ammoRocketHE' and @craft_area='ammopress']">
-    <ingredient name="resourceForgedSteel" count="4"/>
-  </append>
-  <append xpath="//recipe[@name='ammoRocketFrag' and @craft_area='ammopress']">
-    <ingredient name="resourceForgedSteel" count="4"/>
   </append>
   <append xpath="//recipe[@name='ammoRocketRPGHE' and @craft_area='ammopress']">
     <ingredient name="resourceForgedSteel" count="4"/>
